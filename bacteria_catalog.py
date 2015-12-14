@@ -19,7 +19,7 @@ class BacteriaCatalog(object):
             nodes_path: path to NCBI nodes.dmp file
             names_path: path to NCBI names.dmp file
 
-        yelds:
+        creates:
             self.primary_names: dictionary with NCBI_id as key and scientific bacteria name as value
             self.bact_id_dict: dictionary with various versions of bacterial names as keys and NCBI_id as value
             self.hash_tree_root: root node of hash tree
@@ -43,14 +43,15 @@ class BacteriaCatalog(object):
             name_data = [name_record(*record) for record in name_data]
             name_data = [record for record in name_data if record.id in node_data]
             name_data = [record for record in name_data if record.name_class not in name_class_exclusions]
+        # rewrite using csv lib
 
         self.primary_names = {record.id: record.name for record in name_data if record.name_class == 'scientific name'}
         self.bact_id_dict = {record.name: record.id for record in name_data}
-        del self.primary_names['2']
+        del self.primary_names['2'] # ???
         
         self.generate_excessive_dictionary(node_data, name_data)
-        del self.bact_id_dict['bacteria']
-        del self.bact_id_dict['Bacteria']
+        del self.bact_id_dict['bacteria'] #???
+        del self.bact_id_dict['Bacteria'] #???
 
         self.generate_hash_tree()
 
@@ -65,8 +66,8 @@ class BacteriaCatalog(object):
         species_shortable_records = [record for record in name_data if record.id in species_ids and \
                                                                        record.name.count(' ') == 1 and \
                                                                        record.name[0].isupper()]
+        # Strain name 
         bact_short_names_dict = {record.name[0] + '. ' + record.name.split(' ')[1]: record.id for record in species_shortable_records}
-
         self.bact_id_dict.update(bact_short_names_dict)
 
     def generate_hash_tree(self):
@@ -90,7 +91,7 @@ class BacteriaCatalog(object):
         Every node is hashed and links to its chilrens
         ===============
 
-        yelds:
+        creates:
             self.hash_tree_root: root node of hash tree            
         """
 
@@ -139,6 +140,7 @@ class BacteriaCatalog(object):
                         bact_name = list_text[i:j]
                 if bact_name:
                     bact_names.append(' '.join(bact_name))
+        # refactor upper code
 
         bact_ids = [self.bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
