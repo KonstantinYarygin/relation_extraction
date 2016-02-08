@@ -4,8 +4,8 @@ import os
 import re
 
 from stanford_wrapper import parse_dependencies
-from nltk import pos_tag
 from itertools import product
+from nltk import pos_tag
 
 
 class SentGraph(nx.DiGraph):
@@ -51,12 +51,13 @@ class SentGraph(nx.DiGraph):
 
 class SentenceProcessor(object):
     """docstring for SentenceProcessor"""
-    def __init__(self, sentence):
+    def __init__(self, sentence, parser_output):
 
         self.sentence = sentence
-        print(self.sentence)
-        parser_output = parse_dependencies(self.sentence)
-        # print(parser_output)
+
+        # self.sentence = self.trim_sentence(sentence)
+        # parser_output = parse_dependencies(self.sentence)
+        # print(parser_output['graph_raw'])
 
         self.tokens = ['ROOT'] + parser_output['tokenized_sent']
         self.tags = ['ROOT'] + [x[1] for x in pos_tag(self.tokens[1:])]
@@ -77,6 +78,26 @@ class SentenceProcessor(object):
         out += '\n'.join(map(str, self.pos_token_tag))
         return(out)
 
+    def trim_sentence(self, sent):
+        patterns = ['\[\s?\d+[(and)\-,\d\s]*\]',
+                    '\[20\d\d\w?\]',
+                    '\[19\d\d\w?\]',
+                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                    '\(\s?\d+[(and)\-,\d\s]*\)',
+                    '\(20\d\d\w?\)',
+                    '\(19\d\d\w?\)',
+                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
+                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
+                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)']
+        match_lists = [re.finditer(pattern, sent, re.IGNORECASE) for pattern in patterns]
+        substrings = [match.group() for match_list in match_lists for match in match_list if match]
+        out_sent = sent
+        for substring in substrings:
+            out_sent = out_sent.replace(substring, '')
+        return(out_sent)
+
     def deploy_graph(self, graph_raw):
         self.Graph = SentGraph()
 
@@ -94,6 +115,7 @@ class SentenceProcessor(object):
                                         'tag': self.pos_to_tag[pos_2]})
 
             self.Graph.add_edge(pos_1, pos_2, {'type': edge_type})
+        # self.Graph.draw()
         self.Graph.remove_conj_edges()
 
     def search_path(self, word_1, word_2):
@@ -105,11 +127,21 @@ class SentenceProcessor(object):
             out['tags'] = [self.pos_to_tag[pos] for pos in out['pos_path']]
         return(out)
 
-# sent = 'Previously, an extensive study in a cohort of 90 infants, receiving the same synbiotic treatment, showed an increase in the number of faecal bifidobacteria and a decrease in the number of Clostridium colonies accompanied by a decrease in faecal pH; no significant changes were found in levels of IgE or the SCFA, acetic acid [184].'
-# sent = SentenceProcessor(sent)
-# print(sent.Graph.nodes())
-# print(sent.Graph.edges())
-# sent.Graph.draw()
-# print(sent.search_path('Clostridium', 'acetic'))
 
-# sent = 'Placebo milk was prepared with the same ingredients as active milk and with a similar nutritional content, color, flavor and taste, although it contained lactic acid, acetic acid and dextrin instead of B.-breve, L.-lactis, S.-thermophilus, GOS and polydextrose.'
+# sent = 'A cellulolytic bacterium that showed 99% 16S rDNA sequence similarity to M.-oxydans has been found to produce an array of cellulolytic-xylanolytic enzymes (filter paper cellulase, alpha-glucosidase, xylanase , and beta-xylosidase)[52].'
+# sent = 'B.-barnesiae does not utilize mannitol, arabinose, glycerol, melezitose, sorbitol, rhamnose or trehalose[1].'
+# sent = 'Protozoa are important hydrogen-producers within the rumen while the methanogenic Archaea utilize the hydrogen for methane production [16],[26].'
+# sent = 'D.-vulgaris typically uses lactate as a substrate and secretes a mixture of formate, hydrogen, acetate and CO2 in the absence of sulfate, while M.-maripaludis consumes acetate, hydrogen and CO2 to produce methane.'
+# # sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Santacruz et al. , 2010 ; Table 1].'
+# sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Table 1].'
+# sent = 'No or weak propionic utilisation was seen in all C.-jejuni strains tested while strong propionic utilisation was seen for all C.-coli strains tested.'
+# sp = SentenceProcessor(sent, {})
+# print(' '.join(sp.tokens))
+# print(' '.join(sp.tags))
+# # sp.Graph.draw()
+# # print([sp.Graph.to_undirected()[node] for node in sp.Graph.nodes()])
+# # edge_types = [x['type'] for x in sp.Graph[sp.word_to_pos['utilize'][0]].values()]
+# # print(edge_types)
+
+# No or weak propionic utilisation was seen in all C.-jejuni strains tested while strong propionic utilisation was seen for all C.-coli strains tested .
+# DT CC JJ JJ NN VBD VBN IN DT NNP NNS VBD IN JJ JJ NN VBD VBN IN PDT NNP NNS VBD .

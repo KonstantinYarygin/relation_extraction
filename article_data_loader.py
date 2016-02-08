@@ -4,6 +4,7 @@ from nltk.tokenize import sent_tokenize
 from itertools import islice
 from lxml import etree
 
+
 class Article(object):
     """General article data
 
@@ -51,7 +52,7 @@ class ArticleCatalog(object):
             self.article_gen = (self.nxml_article_parse(nxml_filepath) for nxml_filepath in nxml_filepathes)
         elif self.type == 'abstract':
             tree = etree.parse(path)
-            root = tree.getroot()
+            root =  tree.getroot()
             pubmed_article_records = (child for child in root)
 
             medline_citation_records = (record.find('MedlineCitation') for record in pubmed_article_records)
@@ -59,7 +60,6 @@ class ArticleCatalog(object):
             self.article_gen = (self.xml_abstracts_parse(record) for record in medline_citation_records)
         else:
             raise Exception("Incorrect path")
-
 
     def __getitem__(self, key):
         """Handling class like iterator with slices"""
@@ -139,3 +139,6 @@ class ArticleCatalog(object):
                           abstract=abstract,
                           full_text=full_text)
         return article
+
+# AC = ArticleCatalog('../data/texts')
+# AC[2]
