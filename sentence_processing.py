@@ -2,13 +2,47 @@ import re
 
 import matplotlib.pyplot as plt
 import networkx as nx
-from nltk import pos_tag
 
-from stanford_wrapper import parse_dependencies
+
+def get_node_relation(dependency_graph, i):
+    try:
+        return dependency_graph.nodes[i]['rel']
+    except IndexError:
+        return None
+
+
+def get_node_head(dependency_graph, i):
+    try:
+        return dependency_graph.nodes[i]['head']
+    except IndexError:
+        return None
+
+
+# todo: test me
+def trim_sentence(sent):
+    patterns = ['\[\s?\d+[(and)\-,\d\s]*\]',
+                '\[20\d\d\w?\]',
+                '\[19\d\d\w?\]',
+                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                '\(\s?\d+[(and)\-,\d\s]*\)',
+                '\(20\d\d\w?\)',
+                '\(19\d\d\w?\)',
+                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
+                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
+                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)']
+    match_lists = [re.finditer(pattern, sent, re.IGNORECASE) for pattern in patterns]
+    substrings = [match.group() for match_list in match_lists for match in match_list if match]
+    out_sent = sent
+    for substring in substrings:
+        out_sent = out_sent.replace(substring, '')
+    return (out_sent)
 
 
 class SentenceGraph(nx.DiGraph):
     """docstring for SentenceGraph"""
+
     def __init__(self):
         nx.DiGraph.__init__(self)
 
@@ -21,15 +55,15 @@ class SentenceGraph(nx.DiGraph):
         try:
             pos_path = nx.dijkstra_path(G, source, target)
         except nx.exception.NetworkXNoPath:
-            return({})
+            return ({})
 
         path_edges = [G[i][j]['type'] for i, j in zip(pos_path[:-1], pos_path[1:])]
-        return({'pos_path': pos_path, 'path_edges': path_edges})
+        return ({'pos_path': pos_path, 'path_edges': path_edges})
 
     def remove_conj_edges(self):
         for i, j in self.edges():
             if self[i][j]['type'].startswith('conj') or \
-               self[i][j]['type'] == 'advcl':
+                            self[i][j]['type'] == 'advcl':
                 self.remove_edge(i, j)
 
     def draw(self):
@@ -42,80 +76,36 @@ class SentenceGraph(nx.DiGraph):
         nx.draw_networkx_labels(G, pos, font_size=10, font_family='sans-serif',
                                 labels=dict([(k, G.node[k]['word']) for k in G.nodes()])
                                 )
-        nx.draw_networkx_edge_labels(G,pos, font_size=10, 
-                                edge_labels=dict([((i, j), G[i][j]['type'])for i, j in G.edges()])
-                                )
+        nx.draw_networkx_edge_labels(G, pos, font_size=10,
+                                     edge_labels=dict([((i, j), G[i][j]['type']) for i, j in G.edges()])
+                                     )
         plt.axis('off')
         plt.show()
 
 
-class SentenceProcessor(object):
-    """docstring for SentenceProcessor"""
-    def __init__(self, sentence):
-        self.sentence = self.trim_sentence(sentence)
-        # todo: replace with stanford
-        parser_output = parse_dependencies(self.sentence)
-        # print(parser_output['graph_raw'])
+class SentenceGraphCreator(object):
+    """docstring for SentenceGraphCreator"""
 
-        self.tokens = ['ROOT'] + parser_output['tokenized_sent']
-        self.tags = ['ROOT'] + [x[1] for x in pos_tag(self.tokens[1:])]
-        self.positions = range(0, len(self.tokens) + 1)
-        self.pos_token_tag = zip(self.positions, self.tokens, self.tags)
+    def __init__(self, stanford_dependency_parser):
+        self.stanford_dependency_parser = stanford_dependency_parser
 
-        self.pos_to_word = dict(zip(self.positions, self.tokens))
-        self.pos_to_tag = dict(zip(self.positions, self.tags))
+    def get_sentence_graph(self, sentence):
+        sentence_trimmed = trim_sentence(sentence)
+        dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence_trimmed)
+        dependency_graph = next(dependency_graph_iterator)
+        nodes = list(range(1, len(dependency_graph.nodes)))
+        edges = [
+            (node, get_node_head(dependency_graph, node), dict(rel=get_node_relation(dependency_graph, node)))
+            for node in dependency_graph.nodes if get_node_head(dependency_graph, node)
+            ]
 
-        self.word_to_pos = {word: [] for word in self.tokens}
-        [self.word_to_pos[word].append(pos) for pos, word in self.pos_to_word.items()]
+        graph = nx.MultiDiGraph()
+        graph.add_nodes_from(nodes)
+        graph.add_edges_from(edges)
 
-        if parser_output['graph_raw']:
-            self.deploy_graph(parser_output['graph_raw'])
+        return graph
 
-    def __repr__(self):
-        out = self.sentence + '\n'
-        out += '\n'.join(map(str, self.pos_token_tag))
-        return(out)
-
-    def trim_sentence(self, sent):
-        patterns = ['\[\s?\d+[(and)\-,\d\s]*\]',
-                    '\[20\d\d\w?\]',
-                    '\[19\d\d\w?\]',
-                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                    '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                    '\(\s?\d+[(and)\-,\d\s]*\)',
-                    '\(20\d\d\w?\)',
-                    '\(19\d\d\w?\)',
-                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
-                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
-                    '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)']
-        match_lists = [re.finditer(pattern, sent, re.IGNORECASE) for pattern in patterns]
-        substrings = [match.group() for match_list in match_lists for match in match_list if match]
-        out_sent = sent
-        for substring in substrings:
-            out_sent = out_sent.replace(substring, '')
-        return(out_sent)
-
-    def deploy_graph(self, graph_raw):
-        self.Graph = SentenceGraph()
-
-        for line in graph_raw:
-            m = re.match('^(.+)\((.+)-(\d+),\s(.+)-(\d+)\)$', line)
-            if not m:
-                continue
-            edge_type, word_1, pos_1, word_2, pos_2 = [m.group(x) for x in range(1, 6)]
-            pos_1 = int(pos_1)
-            pos_2 = int(pos_2)
-
-            self.Graph.add_node(pos_1, {'word': word_1,
-                                        'tag': self.pos_to_tag[pos_1]})
-            self.Graph.add_node(pos_2, {'word': word_2,
-                                        'tag': self.pos_to_tag[pos_2]})
-
-            self.Graph.add_edge(pos_1, pos_2, {'type': edge_type})
-        self.Graph.draw()
-        self.Graph.remove_conj_edges()
-
+    # todo: надо? здесь?
     def search_path(self, word_1, word_2):
         source_pos = self.word_to_pos[word_1][0]
         target_pos = self.word_to_pos[word_2][0]
@@ -123,8 +113,7 @@ class SentenceProcessor(object):
         if out:
             out['path'] = [self.pos_to_word[pos] for pos in out['pos_path']]
             out['tags'] = [self.pos_to_tag[pos] for pos in out['pos_path']]
-        return(out)
-
+        return (out)
 
 # sent = 'A cellulolytic bacterium that showed 99% 16S rDNA sequence similarity to M.-oxydans has been found to produce an array of cellulolytic-xylanolytic enzymes (filter paper cellulase, alpha-glucosidase, xylanase , and beta-xylosidase)[52].'
 # sent = 'B.-barnesiae does not utilize mannitol, arabinose, glycerol, melezitose, sorbitol, rhamnose or trehalose[1].'
@@ -133,7 +122,7 @@ class SentenceProcessor(object):
 # # sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Santacruz et al. , 2010 ; Table 1].'
 # sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Table 1].'
 # sent = 'No or weak propionic utilisation was seen in all C.-jejuni strains tested while strong propionic utilisation was seen for all C.-coli strains tested.'
-# sp = SentenceProcessor(sent, {})
+# sp = SentenceGraphCreator(sent, {})
 # print(' '.join(sp.tokens))
 # print(' '.join(sp.tags))
 # # sp.Graph.draw()
