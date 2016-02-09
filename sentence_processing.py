@@ -1,15 +1,14 @@
-import matplotlib.pyplot as plt
-import networkx as nx
-import os
 import re
 
-from stanford_wrapper import parse_dependencies
-from itertools import product
+import matplotlib.pyplot as plt
+import networkx as nx
 from nltk import pos_tag
 
+from stanford_wrapper import parse_dependencies
 
-class SentGraph(nx.DiGraph):
-    """docstring for SentGraph"""
+
+class SentenceGraph(nx.DiGraph):
+    """docstring for SentenceGraph"""
     def __init__(self):
         nx.DiGraph.__init__(self)
 
@@ -49,14 +48,13 @@ class SentGraph(nx.DiGraph):
         plt.axis('off')
         plt.show()
 
+
 class SentenceProcessor(object):
     """docstring for SentenceProcessor"""
-    def __init__(self, sentence, parser_output):
-
-        self.sentence = sentence
-
-        # self.sentence = self.trim_sentence(sentence)
-        # parser_output = parse_dependencies(self.sentence)
+    def __init__(self, sentence):
+        self.sentence = self.trim_sentence(sentence)
+        # todo: replace with stanford
+        parser_output = parse_dependencies(self.sentence)
         # print(parser_output['graph_raw'])
 
         self.tokens = ['ROOT'] + parser_output['tokenized_sent']
@@ -99,7 +97,7 @@ class SentenceProcessor(object):
         return(out_sent)
 
     def deploy_graph(self, graph_raw):
-        self.Graph = SentGraph()
+        self.Graph = SentenceGraph()
 
         for line in graph_raw:
             m = re.match('^(.+)\((.+)-(\d+),\s(.+)-(\d+)\)$', line)
@@ -115,7 +113,7 @@ class SentenceProcessor(object):
                                         'tag': self.pos_to_tag[pos_2]})
 
             self.Graph.add_edge(pos_1, pos_2, {'type': edge_type})
-        # self.Graph.draw()
+        self.Graph.draw()
         self.Graph.remove_conj_edges()
 
     def search_path(self, word_1, word_2):

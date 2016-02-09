@@ -54,9 +54,7 @@ unique_titles = {}
 print('\t'.join(['title', 'sentence', 'bacteria', 'nutrient']))
 for title, tokenized_sent, bacteria_list, nutrients_list, graph_raw in list(data)[:]:
     # sent = sp.sentence.replace('-RSB-', ']').replace('-LSB-', '[').replace('-RRB-', ')').replace('-LRB-', '(')
-    sp = SentenceProcessor(' '.join(tokenized_sent),
-                           {'tokenized_sent': tokenized_sent,
-                            'graph_raw': graph_raw})
+    sp = SentenceProcessor(' '.join(tokenized_sent))
     pairs = product(bacteria_list, nutrients_list)
     for bact, nutr in pairs:
         try:
