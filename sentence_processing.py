@@ -1,8 +1,9 @@
-import re
+# -*- coding: utf-8 -*-
 
+from nltk.parse.stanford import StanfordDependencyParser
 import matplotlib.pyplot as plt
 import networkx as nx
-
+import re
 
 def get_node_relation(dependency_graph, i):
     try:
@@ -40,7 +41,7 @@ def trim_sentence(sent):
     return (out_sent)
 
 
-class SentenceGraph(nx.DiGraph):
+class SentenceGraph(nx.MultiDiGraph):
     """docstring for SentenceGraph"""
 
     def __init__(self):
@@ -95,14 +96,9 @@ class SentenceGraphCreator(object):
         dependency_graph = next(dependency_graph_iterator)
         nodes = list(range(1, len(dependency_graph.nodes)))
         edges = [
-            (node, get_node_head(dependency_graph, node), dict(rel=get_node_relation(dependency_graph, node)))
+            (node, get_node_head(dependency_graph, node), {'rel': get_node_relation(dependency_graph, node)})
             for node in dependency_graph.nodes if get_node_head(dependency_graph, node)
-            ]
-
-        graph = nx.MultiDiGraph()
-        graph.add_nodes_from(nodes)
-        graph.add_edges_from(edges)
-
+            ]        
         return graph
 
     # todo: надо? здесь?
@@ -115,9 +111,22 @@ class SentenceGraphCreator(object):
             out['tags'] = [self.pos_to_tag[pos] for pos in out['pos_path']]
         return (out)
 
+parser = StanfordDependencyParser(
+    path_to_jar='./stanford_parser/stanford-parser.jar',
+    path_to_models_jar='./stanford_parser/stanford-parser-3.5.2-models.jar',
+    model_path='./stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'
+    )
+
+text = 'I am robot. You are not.'
+dependency_graph_iterator = parser.parse(text)
+for x in dependency_graph_iterator:
+    print(x)
+# sentence_graph = sentence_graph_creator.get_sentence_graph(sentence)
+# sentence = 'B.-barnesiae does not utilize mannitol, arabinose, glycerol, melezitose, sorbitol, rhamnose or trehalose.'
+
 # sent = 'A cellulolytic bacterium that showed 99% 16S rDNA sequence similarity to M.-oxydans has been found to produce an array of cellulolytic-xylanolytic enzymes (filter paper cellulase, alpha-glucosidase, xylanase , and beta-xylosidase)[52].'
-# sent = 'B.-barnesiae does not utilize mannitol, arabinose, glycerol, melezitose, sorbitol, rhamnose or trehalose[1].'
 # sent = 'Protozoa are important hydrogen-producers within the rumen while the methanogenic Archaea utilize the hydrogen for methane production [16],[26].'
+# sent = 'B.-barnesiae does not utilize mannitol, arabinose, glycerol, melezitose, sorbitol, rhamnose or trehalose[1].'
 # sent = 'D.-vulgaris typically uses lactate as a substrate and secretes a mixture of formate, hydrogen, acetate and CO2 in the absence of sulfate, while M.-maripaludis consumes acetate, hydrogen and CO2 to produce methane.'
 # # sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Santacruz et al. , 2010 ; Table 1].'
 # sent = 'Increased Enterobacteriaceae numbers were related to increased ferritin and reduced transferrin , while Bacteroides numbers were related to increased HDL-cholesterol and folic acid levels [Table 1].'
@@ -130,5 +139,4 @@ class SentenceGraphCreator(object):
 # # edge_types = [x['type'] for x in sp.Graph[sp.word_to_pos['utilize'][0]].values()]
 # # print(edge_types)
 
-# No or weak propionic utilisation was seen in all C.-jejuni strains tested while strong propionic utilisation was seen for all C.-coli strains tested .
 # DT CC JJ JJ NN VBD VBN IN DT NNP NNS VBD IN JJ JJ NN VBD VBN IN PDT NNP NNS VBD .

@@ -75,7 +75,7 @@ class BacteriaCatalog(object):
         self.bact_id_dict.update(bact_short_names_dict)
 
 
-    def find_bacteria(self, text):
+    def find(self, text):
         """ Uses previously generated hash tree to search text for bacterial names
 
         input:

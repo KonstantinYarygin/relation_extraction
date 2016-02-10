@@ -1,17 +1,28 @@
-from article_data_loader import ArticleCatalog
+import os
+
+from article_data_loader import get_articles_nxmls, get_article_text
+from sentence import Sentence
 from bacteria_catalog import BacteriaCatalog
-from nutrient_catalog import NutrientCatalog
-from sentence_processing import SentenceGraphCreator
+from nutrients_catalog import NutrientsCatalog
+# from sentence_processing import SentenceGraphCreator
 
-# todo: no relative paths
-article_catalog = ArticleCatalog('../article_data/texts/')
-bacteria_catalog = BacteriaCatalog(verbose=False)
-nutrient_catalog = NutrientCatalog(verbose=False)
+bacteria_catalog = BacteriaCatalog(verbose=True)
+nutrients_catalog = NutrientsCatalog(verbose=True)
 
-for article in article_catalog[:10]:
-    for sentence in article.full_text:
-        bc_out = bacteria_catalog.find_bacteria(sentence)
-        nc_out = nutrient_catalog.find_nutrient(sentence)
-        if bc_out and nc_out:
-            sentence_processor = SentenceGraphCreator(sentence)
-            print(sentence_processor)
+
+def main(articles_directory):
+    nxml_list = get_articles_nxmls(articles_directory)
+    sentences = (Sentence(sentence) for nxml in nxml_list for sentence in get_article_text(nxml))
+    results = []
+    for sentence in sentences:
+        bacteria = bacteria_catalog.find(sentence.text)
+        nutrients = nutrients_catalog.find(sentence.text)
+        if bacteria and nutrients:
+            print(sentence)
+            print(bacteria)
+            print(nutrients)
+            print()
+
+
+
+main('../article_data/texts/')
