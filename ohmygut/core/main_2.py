@@ -1,6 +1,8 @@
-from nltk.stem.lancaster import LancasterStemmer
-from sentence_processing import SentenceGraphCreator
 from itertools import product
+
+from nltk.stem.lancaster import LancasterStemmer
+
+from ohmygut.core.sentence_processing import SentenceGraphCreator
 
 stemmer = LancasterStemmer()
 

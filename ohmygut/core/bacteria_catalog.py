@@ -1,14 +1,13 @@
-import csv
-import re
-
 from collections import namedtuple
-from hash_tree import HashTree
+from ohmygut.core.hash_tree import HashTree
+
 
 class BacteriaCatalog(object):
     """Object holding NCBI ontology"""
+
     def __init__(self, nodes_path='./data/bacteria/taxdump/nodes.dmp',
-                       names_path='./data/bacteria/taxdump/names.dmp',
-                       verbose=True):
+                 names_path='./data/bacteria/taxdump/names.dmp',
+                 verbose=True):
         """Creation of catalog object
 
         input:
@@ -22,7 +21,7 @@ class BacteriaCatalog(object):
         """
         if verbose:
             print('Creating bacterial catalog...')
-        
+
         node_record = namedtuple('node_record', ['id', 'parent_id', 'rank'])
         name_record = namedtuple('name_record', ['id', 'name', 'unique_name', 'name_class'])
 
@@ -32,7 +31,7 @@ class BacteriaCatalog(object):
 
         with open(nodes_path) as nodes:
             node_data = [line.strip('\t|\n').split('\t|\t') for line in nodes.readlines()]
-            node_data = [record[:3] for record in node_data if record[4] == '0'] # 0 - bacteria
+            node_data = [record[:3] for record in node_data if record[4] == '0']  # 0 - bacteria
             node_data = [node_record(*record) for record in node_data]
             node_data = {record.id: record for record in node_data}
 
@@ -43,7 +42,8 @@ class BacteriaCatalog(object):
             name_data = [record for record in name_data if record.name_class not in name_class_exclusions]
         # rewrite using csv lib
 
-        self.scientific_names = {record.id: record.name for record in name_data if record.name_class == 'scientific name'}
+        self.scientific_names = {record.id: record.name for record in name_data if
+                                 record.name_class == 'scientific name'}
         self.bact_id_dict = {record.name: record.id for record in name_data}
         self.remove_bacteria_literally()
 
@@ -53,10 +53,9 @@ class BacteriaCatalog(object):
 
     def remove_bacteria_literally(self):
         """Removes from catalog 'bacteria' (name of kingdom) items =)"""
-        del self.scientific_names['2'] # 2 - NCBI id of 'Bacteria'
+        del self.scientific_names['2']  # 2 - NCBI id of 'Bacteria'
         del self.bact_id_dict['bacteria']
         del self.bact_id_dict['Bacteria']
-
 
     def generate_excessive_dictionary(self, node_data, name_data):
         """Generate variuos types of bacterial names that can occur in text:
@@ -67,12 +66,12 @@ class BacteriaCatalog(object):
         """
         species_ids = {record.id: 0 for record in node_data.values() if record.rank == 'species'}
         species_shortable_records = [record for record in name_data if record.id in species_ids and \
-                                                                       record.name.count(' ') == 1 and \
-                                                                       record.name[0].isupper()]
+                                     record.name.count(' ') == 1 and \
+                                     record.name[0].isupper()]
         # Strain name
-        bact_short_names_dict = {record.name[0] + '. ' + record.name.split(' ')[1]: record.id for record in species_shortable_records}
+        bact_short_names_dict = {record.name[0] + '. ' + record.name.split(' ')[1]: record.id for record in
+                                 species_shortable_records}
         self.bact_id_dict.update(bact_short_names_dict)
-
 
     def find(self, text):
         """ Uses previously generated hash tree to search text for bacterial names
@@ -87,4 +86,4 @@ class BacteriaCatalog(object):
         bact_names = self.hash_tree.search(text)
         bact_ids = [self.bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
-        return(output_list)
+        return output_list

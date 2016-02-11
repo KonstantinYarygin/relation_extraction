@@ -2,11 +2,11 @@
 
 from nltk.parse.stanford import StanfordDependencyParser
 
-from article_data_loader import get_articles_nxmls, get_article_text
-from sentence_processing import SentenceParser
-from nutrients_catalog import NutrientsCatalog
-from bacteria_catalog import BacteriaCatalog
-from sentence import Sentence
+from ohmygut.core.article_data_loader import get_articles_nxmls, get_article_text
+from ohmygut.core.bacteria_catalog import BacteriaCatalog
+from ohmygut.core.nutrients_catalog import NutrientsCatalog
+from ohmygut.core.sentence import Sentence
+from ohmygut.core.sentence_processing import SentenceParser
 
 bacteria_catalog = BacteriaCatalog(verbose=True)
 nutrients_catalog = NutrientsCatalog(verbose=True)
@@ -20,8 +20,8 @@ sentence_parser = SentenceParser(stanford_dependency_parser)
 
 # Здесь лучше сначала просто создать список предложений, а уже в цикле создавать объект нашего класса
 def main(articles_directory):
-    nxml_list = get_articles_nxmls(articles_directory)
-    raw_sentences = (sentence for nxml in nxml_list for sentence in get_article_text(nxml))
+    articles_nxml_list = get_articles_nxmls(articles_directory)
+    raw_sentences = (sentence for nxml in articles_nxml_list for sentence in get_article_text(nxml))
     results = []
     for raw_sentence in raw_sentences:
         sentence = Sentence(raw_sentence)

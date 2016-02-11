@@ -1,4 +1,4 @@
-from hash_tree import HashTree
+from ohmygut.core.hash_tree import HashTree
 
 class NutrientsCatalog(object):
     """Object holding nutrient ontology"""
