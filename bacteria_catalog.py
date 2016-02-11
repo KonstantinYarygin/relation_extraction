@@ -51,7 +51,6 @@ class BacteriaCatalog(object):
 
         self.hash_tree = HashTree(self.bact_id_dict.keys())
 
-
     def remove_bacteria_literally(self):
         """Removes from catalog 'bacteria' (name of kingdom) items =)"""
         del self.scientific_names['2'] # 2 - NCBI id of 'Bacteria'

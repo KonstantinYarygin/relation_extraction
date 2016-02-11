@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from nltk.parse.stanford import StanfordDependencyParser
-
 import matplotlib.pyplot as plt
 import networkx as nx
 import re
@@ -11,13 +9,13 @@ def trim_sentence(sent):
                 '\[20\d\d\w?\]',
                 '\[19\d\d\w?\]',
                 '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
+                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|fig\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
                 '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]'
                 '\(\s?\d+[(and)\-,\d\s]*\)',
                 '\(20\d\d\w?\)',
                 '\(19\d\d\w?\)',
                 '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
-                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|gif\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
+                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|fig\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
                 '\((supplemental|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)']
     match_lists = [re.finditer(pattern, sent, re.IGNORECASE) for pattern in patterns]
     substrings = [match.group() for match_list in match_lists for match in match_list if match]
@@ -40,7 +38,7 @@ class SentenceParser(object):
         edges = [
             (n, dependency_graph._hd(n), {'rel': dependency_graph._rel(n)})
             for n in nodes if dependency_graph._hd(n)
-            ]
+        ]
         
         nx_graph = nx.DiGraph()
         nx_graph.add_nodes_from(nodes)
