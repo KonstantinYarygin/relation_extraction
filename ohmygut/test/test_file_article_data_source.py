@@ -29,7 +29,7 @@ class TestCase(unittest.TestCase):
                    "<p>text<strong> again</strong>!</p>" \
                    "</body>" \
                    "</article>"
-        expected = "text! text again! "
+        expected = "text! text again!"
         actual = get_article_text(text_xml)
         self.assertEqual(expected, actual)
 

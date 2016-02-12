@@ -18,13 +18,13 @@ def get_articles_nxmls(articles_directory):
 def get_article_text(article_nxml):
     root = etree.XML(article_nxml)
 
-    full_text = ''
+    full_text_chunks = []
     for root_child in root.iterchildren():
         if root_child.tag == 'body':
             for element in root_child.iter():
                 if element.tag == 'p':
-                    full_text += ''.join(element.itertext()) + ' '
-
+                    full_text_chunks.append(''.join(element.itertext()))
+    full_text = ' '.join(full_text_chunks)
     return full_text
 
 
