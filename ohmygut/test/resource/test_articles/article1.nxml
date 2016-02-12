@@ -1,0 +1,9 @@
+<!DOCTYPE article> 
+<article>
+<front>blabla</front> 
+<body>
+<p>text!</p> 
+not interesting text 
+<p>text<strong> again</strong>!</p> 
+</body>
+</article>

@@ -4,10 +4,8 @@ from ohmygut.core.sentence import Sentence
 
 
 # Здесь лучше сначала просто создать список предложений, а уже в цикле создавать объект нашего класса
-def main(articles_directory, bacteria_catalog, nutrients_catalog, sentence_parser):
-    articles_nxml_list = get_articles_nxmls(articles_directory)
-    article_texts = map(get_article_text, articles_nxml_list)
-    raw_sentences = []
+def main(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser):
+    articles = article_data_source.get_articles()
     results = []
     for raw_sentence in raw_sentences:
         sentence = Sentence(raw_sentence)

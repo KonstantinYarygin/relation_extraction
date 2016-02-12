@@ -7,15 +7,12 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 
 
 def get_articles_nxmls(articles_directory):
-    articles_folderpathes = (os.path.join(articles_directory, foldername) for foldername in
-                             os.listdir(articles_directory))
-    articles_filepathes = (os.path.join(folderpath, file) for folderpath in articles_folderpathes for file in
-                           os.listdir(folderpath))
-    articles_nxml_pathes = (filepath for filepath in articles_filepathes if filepath.endswith('.nxml'))
-    for articles_nxml_path in articles_nxml_pathes:
-        with open(articles_nxml_path) as f:
-            article_nxml = ''.join(f.readlines())
-        yield (articles_nxml_path, article_nxml)
+    for root, dirs, files in os.walk(articles_directory):
+        for file in files:
+            file_full_path = os.path.join(root, file)
+            with open(file_full_path) as f:
+                article_nxml = ''.join(f.readlines())
+            yield (file_full_path, article_nxml)
 
 
 def get_article_text(article_nxml):
@@ -31,7 +28,7 @@ def get_article_text(article_nxml):
     return full_text
 
 
-class FileArticleDatasource(ArticleDataSource):
+class FileArticleDataSource(ArticleDataSource):
     def __init__(self, articles_folder):
         super().__init__()
         self.articles_directory = articles_folder
