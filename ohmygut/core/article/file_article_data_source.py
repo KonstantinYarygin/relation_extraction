@@ -1,7 +1,9 @@
 import os
-from nltk.tokenize import sent_tokenize
-from nltk.tokenize.stanford import StanfordTokenizer
+
 from lxml import etree
+
+from ohmygut.core.article.article import Article
+from ohmygut.core.article.article_data_source import ArticleDataSource
 
 
 def get_articles_nxmls(articles_directory):
@@ -13,18 +15,31 @@ def get_articles_nxmls(articles_directory):
     for articles_nxml_path in articles_nxml_pathes:
         with open(articles_nxml_path) as f:
             article_nxml = ''.join(f.readlines())
-        yield article_nxml
+        yield (articles_nxml_path, article_nxml)
 
 
 def get_article_text(article_nxml):
     root = etree.XML(article_nxml)
 
-    full_text_chunks = []
+    full_text = ''
     for root_child in root.iterchildren():
         if root_child.tag == 'body':
             for element in root_child.iter():
                 if element.tag == 'p':
-                    full_text_chunks.append(''.join(element.itertext()))
+                    full_text += ''.join(element.itertext()) + ' '
 
-    full_text_sentences = [sent for chunk in full_text_chunks for sent in sent_tokenize(chunk)]
-    return full_text_sentences
+    return full_text
+
+
+class FileArticleDatasource(ArticleDataSource):
+    def __init__(self, articles_folder):
+        super().__init__()
+        self.articles_directory = articles_folder
+
+    def get_articles(self):
+        paths_nxmls = get_articles_nxmls(self.articles_directory)
+        for path_nxml in paths_nxmls:
+            path = path_nxml[0]
+            nxml = path_nxml[1]
+            text = get_article_text(nxml)
+            yield Article(path, text)

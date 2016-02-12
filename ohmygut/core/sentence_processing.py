@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import re
 
+
 def trim_sentence(sent):
     patterns = ['\[\s?\d+[(and)\-,\d\s]*\]',
                 '\[20\d\d\w?\]',
@@ -24,8 +25,10 @@ def trim_sentence(sent):
         out_sent = out_sent.replace(substring, '')
     return (out_sent)
 
+
 class SentenceParser(object):
     """docstring for SentenceParser"""
+
     def __init__(self, stanford_dependency_parser):
         self.stanford_dependency_parser = stanford_dependency_parser
 
@@ -38,8 +41,8 @@ class SentenceParser(object):
         edges = [
             (n, dependency_graph._hd(n), {'rel': dependency_graph._rel(n)})
             for n in nodes if dependency_graph._hd(n)
-        ]
-        
+            ]
+
         nx_graph = nx.DiGraph()
         nx_graph.add_nodes_from(nodes)
         nx_graph.add_edges_from(edges)
@@ -50,6 +53,7 @@ class SentenceParser(object):
         return ParserOutput(nx_graph=nx_graph,
                             words=words,
                             tags=tags)
+
 
 class ParserOutput(object):
     """docstring for SentenceGraph"""
