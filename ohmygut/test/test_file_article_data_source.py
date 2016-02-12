@@ -13,7 +13,7 @@ class TestCase(unittest.TestCase):
         target = FileArticleDataSource(test_articles_directory)
 
         article1_path = os.path.join(test_articles_directory, 'article1.nxml')
-        expected = [Article(article1_path, "text! text again! ")]
+        expected = [Article(article1_path, "text! text again!")]
         actual = target.get_articles()
 
         for expected_article, actual_article in zip(expected, actual):
