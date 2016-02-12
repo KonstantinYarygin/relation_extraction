@@ -1,9 +1,11 @@
-<!DOCTYPE article> 
+<!DOCTYPE article>
 <article>
-<front>blabla</front> 
+<front><article-meta>
+<article-title>A title</article-title>
+</article-meta></front>
 <body>
-<p>text!</p> 
-not interesting text 
-<p>text<strong> again</strong>!</p> 
+<p>text!</p>
+not interesting text
+<p>text<strong> again</strong>!</p>
 </body>
 </article>
