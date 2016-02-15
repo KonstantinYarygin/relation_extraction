@@ -1,16 +1,16 @@
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
-
+from time import time
 
 class NutrientsCatalog(Catalog):
     """Object holding nutrient ontology"""
 
-    def __init__(self, path, verbose=True):
-        self.verbose = verbose
+    def __init__(self, path):
         self.path = path
 
-    def initialize(self):
-        if self.verbose:
+    def initialize(self, verbose=False):
+        t1 = time()
+        if verbose:
             print('Creating nutrients catalog...')
 
         with open(self.path) as nn:
@@ -21,8 +21,12 @@ class NutrientsCatalog(Catalog):
         nutrients = nutrients_upp + nutrients_low
         nutrients = [nutr[:-5] if nutr.endswith(' acid') else nutr for nutr in nutrients]
 
-        self.nutrients = {nutrient: True for nutrient in nutrients}
-        self.hash_tree = HashTree(self.nutrients.keys())
+        self.__nutrients = {nutrient: True for nutrient in nutrients}
+        self.__hash_tree = HashTree(self.__nutrients.keys())
+
+        t2 = time()
+        if verbose:
+            print('Done. Total time: %.2f sec.' % (t2 - t1))
 
     def find(self, sentence):
         """ Uses previously generated hash tree to search sentence for nutrient names
@@ -33,7 +37,7 @@ class NutrientsCatalog(Catalog):
         returns:
             list of nutrient_names
         """
-        nutr_names = self.hash_tree.search(sentence)
+        nutr_names = self.__hash_tree.search(sentence)
         return(nutr_names)
 
 

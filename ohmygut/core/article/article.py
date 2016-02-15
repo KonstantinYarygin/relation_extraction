@@ -2,7 +2,7 @@ class Article(object):
     def __init__(self, title, text):
         super().__init__()
         self.text = text
-        self.path = title
+        self.title = title
 
     def __str__(self):
         return str(self.__dict__)

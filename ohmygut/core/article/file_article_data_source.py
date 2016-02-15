@@ -7,6 +7,8 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 def get_articles_nxmls(articles_directory):
     for root, dirs, files in os.walk(articles_directory):
         for file in files:
+            if not file.endswith('.nxml'):
+                continue
             file_full_path = os.path.join(root, file)
             with open(file_full_path) as f:
                 article_nxml = ''.join(f.readlines())
