@@ -1,4 +1,6 @@
 from collections import namedtuple
+from time import time
+import csv
 
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
@@ -7,15 +9,14 @@ from ohmygut.core.hash_tree import HashTree
 class BacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
 
-    def __init__(self, nodes_path, names_path, verbose=True):
-        self.verbose = verbose
+    def __init__(self, nodes_path, names_path):
         self.names_path = names_path
         self.nodes_path = nodes_path
         self.__scientific_names = None
         self.__bact_id_dict = None
         self.__hash_tree = None
 
-    def initialize(self):
+    def initialize(self, verbose=False):
         """Creation of catalog object
 
         input:
@@ -27,7 +28,8 @@ class BacteriaCatalog(Catalog):
             self.__bact_id_dict: dictionary with various versions of bacterial names as keys and NCBI_id as value
             self.hash_tree_root: root node of hash tree
         """
-        if self.verbose:
+        t1 = time()
+        if verbose:
             print('Creating bacterial catalog...')
 
         node_record = namedtuple('node_record', ['id', 'parent_id', 'rank'])
@@ -37,16 +39,17 @@ class BacteriaCatalog(Catalog):
                                  'genbank acronym': True,
                                  'acronym': True}
 
-        with open(self.nodes_path) as nodes:
-            node_data = [line.strip('\t|\n').split('\t|\t') for line in nodes.readlines()]
-            node_data = [record[:3] for record in node_data if record[4] == '0']  # 0 - bacteria
-            node_data = [node_record(*record) for record in node_data]
+        with open(self.nodes_path) as nodes_dmpfile:
+            node_data = csv.reader((line.replace('\t', '') for line in nodes_dmpfile), delimiter='|')
+            node_data = (record[:3] for record in node_data if record[4] == '0')  # 0 - bacteria
+            node_data = (node_record(*record) for record in node_data)
             node_data = {record.id: record for record in node_data}
 
-        with open(self.names_path) as names:
-            name_data = [line.strip('\t|\n').split('\t|\t') for line in names.readlines()]
-            name_data = [name_record(*record) for record in name_data]
-            name_data = [record for record in name_data if record.id in node_data]
+        with open(self.names_path) as names_dmpfile:
+            name_data = csv.reader((line.replace('\t', '') for line in names_dmpfile), delimiter='|')
+            name_data = (record[:-1] for record in name_data)
+            name_data = (name_record(*record) for record in name_data)
+            name_data = (record for record in name_data if record.id in node_data)
             name_data = [record for record in name_data if record.name_class not in name_class_exclusions]
         # rewrite using csv lib
 
@@ -58,6 +61,10 @@ class BacteriaCatalog(Catalog):
         self.__generate_excessive_dictionary(node_data, name_data)
 
         self.__hash_tree = HashTree(self.__bact_id_dict.keys())
+
+        t2 = time()
+        if verbose:
+            print('Done. Total time: %.2f sec.' % (t2 - t1))
 
     def __remove_bacteria_literally(self):
         """Removes from catalog 'bacteria' (name of kingdom) items =)"""
