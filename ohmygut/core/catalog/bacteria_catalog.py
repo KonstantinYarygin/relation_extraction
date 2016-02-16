@@ -56,10 +56,10 @@ class BacteriaCatalog(Catalog):
         self.__scientific_names = {record.id: record.name for record in name_data if
                                    record.name_class == 'scientific name'}
         self.__bact_id_dict = {record.name: record.id for record in name_data}
-        self.__remove_bacteria_literally()
 
         self.__generate_excessive_dictionary(node_data, name_data)
 
+        self.__remove_bacteria_literally()
         self.__hash_tree = HashTree(self.__bact_id_dict.keys())
 
         t2 = time()
@@ -69,8 +69,15 @@ class BacteriaCatalog(Catalog):
     def __remove_bacteria_literally(self):
         """Removes from catalog 'bacteria' (name of kingdom) items =)"""
         del self.__scientific_names['2']  # 2 - NCBI id of 'Bacteria'
-        del self.__bact_id_dict['bacteria']
         del self.__bact_id_dict['Bacteria']
+        del self.__bact_id_dict['Monera']
+        del self.__bact_id_dict['Procaryotae']
+        del self.__bact_id_dict['Prokaryota']
+        del self.__bact_id_dict['Prokaryotae']
+        del self.__bact_id_dict['bacteria']
+        del self.__bact_id_dict['eubacteria']
+        del self.__bact_id_dict['prokaryote']
+        del self.__bact_id_dict['prokaryotes']
 
     def __generate_excessive_dictionary(self, node_data, name_data):
         """Generate variuos types of bacterial names that can occur in text:
@@ -103,3 +110,6 @@ class BacteriaCatalog(Catalog):
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
         return output_list
+
+    def get_scientific_name(self, ncbi_id):
+        return self.__scientific_names[ncbi_id]

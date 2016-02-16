@@ -56,3 +56,5 @@ class DiseasesCatalog(Catalog):
         output = [(name, self.__disease_dictionary[name]) for name in diseases_names]
         return(output)
 
+    def get_common_name(self, doid_id):
+        return self.__doid_data[doid_id]['name'][0]
