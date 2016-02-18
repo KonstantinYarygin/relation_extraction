@@ -34,7 +34,11 @@ class SentenceParser(object):
 
     def parse_sentence(self, sentence):
         sentence_trimmed = trim_sentence(sentence)
-        dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence_trimmed)
+        try:
+            dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence_trimmed)
+        except OSError:
+            return([])
+        
         dependency_graph = next(dependency_graph_iterator)
 
         nodes = [node for node in dependency_graph.nodes.keys() if node]
