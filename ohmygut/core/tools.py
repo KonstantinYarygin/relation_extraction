@@ -50,10 +50,10 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases):
     return(bacteria_new, nutrients_new, diseases_new)
 
 
-# sentence = 'M. tuberculosis is the cause of tuberculosis and super duper disease, also M. tuberculosis is a propionic acid producer.'
+# sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, also M. tuberculosis is a propionic acid producer.'
 # bacteria = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
 # nutrients = ['propionic']
-# diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'), ('super duper disease', 'a1'), ('duper disease', 'b1')]
+# diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'), ('chronic obstructive syndrome', 'a1'), ('obstructive syndrome', 'b1')]
 
 # print(sentence)
 

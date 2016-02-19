@@ -11,7 +11,7 @@ class Sentence(object):
 
     def __repr__(self):
         out = self.text + '\n'
-        out = 'diseases: ' + str(self.diseases) + '\n'
-        out = 'nutrients: ' + str(self.nutrients) + '\n'
-        out = 'bacteria: ' + str(self.bacteria) + '\n'
+        out += 'diseases: ' + str(self.diseases) + '\n'
+        out += 'nutrients: ' + str(self.nutrients) + '\n'
+        out += 'bacteria: ' + str(self.bacteria) + '\n'
         return out

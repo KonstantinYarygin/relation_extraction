@@ -23,12 +23,19 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
     sentences_titles_tuple = ((sentence, article.title) for article in articles \
                               for sentence in get_sentences(article.text))
     sentences = []
+    n = 0
     for sentence_text, article_title in sentences_titles_tuple:
+        if n == 100:
+            sys.exit()
         bacteria = bacteria_catalog.find(sentence_text)
         nutrients = nutrients_catalog.find(sentence_text)
         diseases = diseases_catalog.find(sentence_text)
 
+        if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+            continue
+
         bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text, bacteria, nutrients, diseases)
+
         if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
             continue
 
@@ -42,10 +49,10 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
                             nutrients=nutrients,
                             diseases=diseases,
                             parse_result=parser_output)
-        result = sentence_analyzer.analyze(sentence)
-        # sentences.append(sentence)
-        # print(sentence)
-        # print()
+        print(sentence)
+        # sentence_analyzer.analyze(sentence)
+        # print('=' * 80)
+        # n += 1
 
     # data = sentences_to_data_frame(sentences)
     # data.to_csv('sentences.csv')
