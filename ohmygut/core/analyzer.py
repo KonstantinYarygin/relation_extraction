@@ -7,20 +7,19 @@ class SentenceAnalyzer(object):
         self.__tokenizer = tokenizer
 
     def analyze(self, sentence):
-        print(sentence.text)
-        print(sentence.diseases)
-        print(sentence.nutrients)
-        print(sentence.bacteria)
-        # print(sentence.parse_result))
-
         self.merge_nodes(sentence)
+
+        bacteria_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'BACTERIUM']
+        nutrients_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'NUTRIENT']
+        diseases_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'DISEASE']
 
     def merge_nodes(self, sentence):
         bacterial_names = [name for name, ncbi_id in sentence.bacteria]
         disease_names = [name for name, doid_id in sentence.diseases]
         nutrient_names = sentence.nutrients
+        entities_list = ['BACTERIUM', 'NUTRIENT', 'DISEASE']
 
-        for entity_name, names_list in zip(['BACTERIA', 'NUTRIENT', 'DISEASE'], [bacterial_names, nutrient_names, disease_names]):
+        for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
             for name in names_list:
                 tokens = self.__tokenizer.tokenize(name)
                 if len(tokens) > 1:
@@ -52,17 +51,19 @@ class SentenceAnalyzer(object):
                     id = list(sentence.parse_result.words.keys())[index]
                     sentence.parse_result.tags[id] = entity_name
 
-    def search_path(self, source, target, undirected=True):
+    def search_path(self, sentence, source, target, undirected=True):
 
         if undirected:
-            G = self.to_undirected()
+            G = sentence.parse_result.nx_graph.to_undirected()
         else:
-            G = self
+            G = sentence.parse_result.nx_graph
 
         try:
             pos_path = nx.dijkstra_path(G, source, target)
         except nx.exception.NetworkXNoPath:
-            return ({})
+            return {}
 
-        path_edges = [G[i][j]['type'] for i, j in zip(pos_path[:-1], pos_path[1:])]
-        return ({'pos_path': pos_path, 'path_edges': path_edges})
+        edge_rels = [G[i][j]['rel'] for i, j in zip(pos_path[:-1], pos_path[1:])]
+        words = [sentence.parse_result.words[i] for i in pos_path]
+        tags = [sentence.parse_result.tags[i] for i in pos_path]
+        return {'edge_rels': edge_rels, 'words': words, 'tags': tags}
