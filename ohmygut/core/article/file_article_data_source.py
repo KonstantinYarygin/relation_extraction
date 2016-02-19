@@ -23,8 +23,16 @@ def get_article_text(article_nxml):
         if root_child.tag == 'body':
             for element in root_child.iter():
                 if element.tag == 'p':
-                    full_text_chunks.append(''.join(element.itertext()))
+                    for subelement in element.iter():
+                        if subelement.tag in set(['italic', 'underline', 'bold', 'p']):
+                            full_text_chunks.append(subelement.text)
+                        full_text_chunks.append(subelement.tail)
+    full_text_chunks = [chunk.strip() for chunk in full_text_chunks if chunk and len(chunk) != 1]
     full_text = ' '.join(full_text_chunks)
+    full_text = full_text.replace(' )', ')')
+    full_text = full_text.replace(' ;', ';')
+    full_text = full_text.replace(' ,', ',')
+    full_text = full_text.replace('\n', ' ')
     return full_text
 
 
