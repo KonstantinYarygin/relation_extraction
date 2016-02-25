@@ -9,9 +9,9 @@ class SentenceAnalyzer(object):
     def analyze(self, sentence):
         self.merge_nodes(sentence)
 
-        bacteria_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'BACTERIUM']
-        nutrients_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'NUTRIENT']
-        diseases_nodes_ids = [id, tag for sentence.parse_result.tags.items() if tag == 'DISEASE']
+        bacteria_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'BACTERIUM']
+        nutrients_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'NUTRIENT']
+        diseases_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'DISEASE']
 
     def merge_nodes(self, sentence):
         bacterial_names = [name for name, ncbi_id in sentence.bacteria]
