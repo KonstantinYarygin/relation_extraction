@@ -41,27 +41,54 @@ class NutrientsCatalog(Catalog):
         return(nutr_names)
 
 
-# class NutrientCatalog(object):
-#     """docstring for NutrientCatalog"""
-#     def __init__(self):
-#         print('Creating nutrients catalog...')
-        
-#         fatty_acids = []
-#         with open('./data/nutrients/unsaturated_fatty_acids.list.txt') as usfa, \
-#              open('./data/nutrients/saturated_fatty_acids.list.txt') as sfa, \
-#              open('./data/nutrients/other_acids.list.txt') as other:
-#             fatty_acids.extend(usfa.readlines())
-#             fatty_acids.extend(sfa.readlines())
-#             fatty_acids.extend(other.readlines())
-#         fatty_acids = [acid.strip() for acid in fatty_acids]
-#         fatty_acids = [acid.split()[0] for acid in fatty_acids]
-#         fatty_acids_low = [acid[0].lower() + acid[1:] for acid in fatty_acids]
-#         fatty_acids_upp = [acid[0].upper() + acid[1:] for acid in fatty_acids]
-#         fatty_acids = fatty_acids_upp + \
-#                       fatty_acids_low + \
-#                       ['iso'+acid for acid in fatty_acids_low] + \
-#                       ['iso-'+acid for acid in fatty_acids_low] + \
-#                       ['Iso'+acid for acid in fatty_acids_low] + \
-#                       ['Iso-'+acid for acid in fatty_acids_low]
-#         self.fatty_acids = {acid: True for acid in fatty_acids}
 
+class NutrientsCatalogNikogosov(Catalog):
+    """Object holding nutrient ontology"""
+
+    def __init__(self, path):
+        self.path = path
+
+    def initialize(self, verbose=False):
+        t1 = time()
+        if verbose:
+            print('Creating nutrients catalog...')
+
+        with open(self.path) as f:
+            f.readline()
+            raw_data = (line.strip('\n').split('\t') for line in f.readlines())
+        self.__nutrients_by_idname = {idname: names.split(';') for idname, names in raw_data}
+        
+        self.__generate_case_names()
+        self.__remove_agar()
+
+        self.__idname_by_nutrient = {name: idname for idname in self.__nutrients_by_idname for name in self.__nutrients_by_idname[idname]}
+        self.__hash_tree = HashTree(self.__idname_by_nutrient.keys())
+
+        t2 = time()
+        if verbose:
+            print('Done. Total time: %.2f sec.' % (t2 - t1))
+
+    def __generate_case_names(self):
+
+        for idname in self.__nutrients_by_idname:
+            names = self.__nutrients_by_idname[idname]
+            case_names = [name[0].upper() + name[1:] for name in names if not name.isupper() and name[0].isalpha()] + \
+                         [name[0].lower() + name[1:] for name in names if not name.isupper() and name[0].isalpha()] + \
+                         [name for name in names if name.isupper() or not name[0].isalpha()]
+            self.__nutrients_by_idname[idname] = case_names
+            
+    def __remove_agar(self):
+        del self.__nutrients_by_idname['Agar-agar']
+
+    def find(self, sentence):
+        """ Uses previously generated hash tree to search sentence for nutrient names
+
+        input:
+            sentence: sentence to search for nutrient names
+
+        returns:
+            list of nutrient_names
+        """
+        nutr_names = self.__hash_tree.search(sentence)
+        output = [(nutrient, self.__idname_by_nutrient[nutrient]) for nutrient in nutr_names]
+        return output

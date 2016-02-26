@@ -10,7 +10,7 @@ from nltk.tokenize import StanfordTokenizer
 
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
 from ohmygut.core.catalog.bacteria_catalog import BacteriaCatalog
-from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalog
+from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalog, NutrientsCatalogNikogosov
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.sentence_processing import SentenceParser
 from ohmygut.core.analyzer import SentenceAnalyzer
@@ -28,16 +28,14 @@ stanford_dependency_parser = StanfordDependencyParser(
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
 bacteria_catalog = BacteriaCatalog(nodes_path=os.path.join(script_dir, '../data/bacteria/taxdump/nodes.dmp'),
-                                   names_path=os.path.join(script_dir, '../data/bacteria/taxdump/names.dmp'),
-                                   tokenizer=stanford_tokenizer)
+                                   names_path=os.path.join(script_dir, '../data/bacteria/taxdump/names.dmp'))
 bacteria_catalog.initialize(verbose=True)
 
-nutrients_catalog = NutrientsCatalog(path=os.path.join(script_dir, '../data/nutrients/natalia_nitrients.txt'),
-									 tokenizer=stanford_tokenizer)
+# nutrients_catalog = NutrientsCatalog(path=os.path.join(script_dir, '../data/nutrients/natalia_nitrients.txt'))
+nutrients_catalog = NutrientsCatalogNikogosov(path=os.path.join(script_dir, '../data/nutrients/nikogosov_nutrients_normalized.tsv'))
 nutrients_catalog.initialize(verbose=True)
 
-diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'),
-								   tokenizer=stanford_tokenizer)
+diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize(verbose=True)
 
 
