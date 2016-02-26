@@ -1,6 +1,8 @@
 import sys
 import os
 
+from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
+
 script_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(script_dir, '..'))
 
@@ -27,8 +29,7 @@ stanford_dependency_parser = StanfordDependencyParser(
     )
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
-bacteria_catalog = BacteriaCatalog(nodes_path=os.path.join(script_dir, '../data/bacteria/taxdump/nodes.dmp'),
-                                   names_path=os.path.join(script_dir, '../data/bacteria/taxdump/names.dmp'))
+bacteria_catalog = GutBacteriaCatalog('../data/bacteria/gut_catalog.csv')
 bacteria_catalog.initialize(verbose=True)
 
 # nutrients_catalog = NutrientsCatalog(path=os.path.join(script_dir, '../data/nutrients/natalia_nitrients.txt'))
