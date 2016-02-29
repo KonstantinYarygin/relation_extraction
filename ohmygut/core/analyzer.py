@@ -73,4 +73,4 @@ class SentenceAnalyzer(object):
         edge_rels = [G[i][j]['rel'] for i, j in zip(pos_path[:-1], pos_path[1:])]
         words = [sentence.parse_result.words[i] for i in pos_path]
         tags = [sentence.parse_result.tags[i] for i in pos_path]
-        return {'edge_rels': edge_rels, 'words': words, 'tags': tags}
+        return {'pos_path': pos_path, 'edge_rels': edge_rels, 'words': words, 'tags': tags}
