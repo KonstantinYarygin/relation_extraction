@@ -7,9 +7,7 @@ class SentenceAnalyzer(object):
         self.__tokenizer = tokenizer
 
     def analyze(self, sentence):
-
         self.merge_nodes(sentence)
-
         bacteria_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'BACTERIUM']
         nutrients_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'NUTRIENT']
         diseases_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'DISEASE']
@@ -22,7 +20,7 @@ class SentenceAnalyzer(object):
     def merge_nodes(self, sentence):
         bacterial_names = [name for name, ncbi_id in sentence.bacteria]
         disease_names = [name for name, doid_id in sentence.diseases]
-        nutrient_names = sentence.nutrients
+        nutrient_names = [name for name, idname in sentence.nutrients]
         entities_list = ['BACTERIUM', 'NUTRIENT', 'DISEASE']
 
         for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
@@ -74,3 +72,7 @@ class SentenceAnalyzer(object):
         words = [sentence.parse_result.words[i] for i in pos_path]
         tags = [sentence.parse_result.tags[i] for i in pos_path]
         return {'edge_rels': edge_rels, 'words': words, 'tags': tags}
+
+
+    def find_patterns(self, path, additional_graph):
+        pass
