@@ -11,6 +11,7 @@ def get_sentences(text):
     # todo: use stanford tokenizer
     return sent_tokenize(text)
 
+# todo: test me
 def remove_entity_overlapping(sentence, bacteria, nutrients, diseases):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}

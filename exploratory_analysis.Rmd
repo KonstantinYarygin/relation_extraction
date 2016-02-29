@@ -39,11 +39,6 @@ data.disease = data[,
                       .fun=function(x) x[,2])),
          by=.(text, article_title)]
 setnames(data.disease, c("text","article_title","disease"))
-
-# merged <- merge(data.bacteria, data[,.(text, article_title)], by=c('text', 'article_title'), all=TRUE)
-# merged <- merge(merged, data.nutrient, by=c('text', 'article_title'), all=TRUE)
-# merged <- merge(merged, data.disease, by=c('text', 'article_title'), all=TRUE)
-# todo: продолжить мержить
 ```
 
 У нас 9 000 статей. Кол-во статей, в которых мы что-то нашли:

@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 # import pandas as pd
-
+import datetime
 import sys
+
+import pandas as pd
 
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import get_sentences, remove_entity_overlapping
+
 
 def sentences_to_data_frame(sentences):
     data_list = map(lambda x: [x.text,
@@ -18,13 +21,14 @@ def sentences_to_data_frame(sentences):
     return data
 
 
-def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer):
+def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser,
+         sentence_analyzer):
     articles = article_data_source.get_articles()
-    sentences_titles_tuple = ((sentence, article.title) for article in articles \
-                              for sentence in get_sentences(article.text))
+    sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
+                                       for sentence in get_sentences(article.text))
     sentences = []
     n = 0
-    for sentence_text, article_title in sentences_titles_tuple:
+    for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
         if n == 100:
             sys.exit()
         bacteria = bacteria_catalog.find(sentence_text)
@@ -48,11 +52,9 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
                             bacteria=bacteria,
                             nutrients=nutrients,
                             diseases=diseases,
-                            parse_result=parser_output)
+                            parse_result=parser_output,
+                            journal=article_journal)
         print(sentence)
-        # sentence_analyzer.analyze(sentence)
-        # print('=' * 80)
-        # n += 1
 
-    # data = sentences_to_data_frame(sentences)
-    # data.to_csv('sentences.csv')
+    data = sentences_to_data_frame(sentences)
+    data.to_csv('sentences%s.csv' % (datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")))

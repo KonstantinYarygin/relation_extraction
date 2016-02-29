@@ -48,6 +48,15 @@ def get_article_title(article_nxml):
     return title
 
 
+def get_article_journal(nxml):
+    root = etree.XML(nxml)
+    journal = ''
+    for element in root.iter():
+        if element.tag == 'journal-title':
+            journal = element.text.lower()
+    return journal
+
+
 class FileArticleDataSource(ArticleDataSource):
     def __init__(self, articles_folder):
         super().__init__()
@@ -58,4 +67,5 @@ class FileArticleDataSource(ArticleDataSource):
         for nxml in nxmls:
             text = get_article_text(nxml)
             title = get_article_title(nxml)
-            yield Article(title, text)
+            journal = get_article_journal(nxml)
+            yield Article(title, text, journal)
