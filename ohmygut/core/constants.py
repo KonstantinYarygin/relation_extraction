@@ -23,3 +23,7 @@ NCBI_NUM_NODES = [0, 2, 4]
 CHUNK_SIZE = 10000
 BACT_KINGDOM_ID_NCBI = 2
 BACT_KINGDOM_ID_NCBI = 2157
+
+
+VERBS = ['degrade', 'utilize', 'produce', 'metabolize','ferment', 'consume', 'hydrolyze', 'require']
+MVERBS = ['have ability', 'has ability', 'able', 'can']

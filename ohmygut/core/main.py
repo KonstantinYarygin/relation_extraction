@@ -25,11 +25,12 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
     sentences = []
     n = 0
     for sentence_text, article_title in sentences_titles_tuple:
-        if n == 100:
+        if n == 1000:
             sys.exit()
         bacteria = bacteria_catalog.find(sentence_text)
         nutrients = nutrients_catalog.find(sentence_text)
-        diseases = diseases_catalog.find(sentence_text)
+        # diseases = diseases_catalog.find(sentence_text)
+        diseases = []
 
         if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
             continue
@@ -39,20 +40,24 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
         if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
             continue
 
-        parser_output = sentence_parser.parse_sentence(sentence_text)
-        if not parser_output:
-            continue
+        print(sentence_text)
+        print(bacteria)
+        print(nutrients)
+        print()
+        n +=1
+        # parser_output = sentence_parser.parse_sentence(sentence_text)
+        # if not parser_output:
+        #     continue
 
-        sentence = Sentence(text=sentence_text,
-                            article_title=article_title,
-                            bacteria=bacteria,
-                            nutrients=nutrients,
-                            diseases=diseases,
-                            parse_result=parser_output)
-        print(sentence)
+        # sentence = Sentence(text=sentence_text,
+        #                     article_title=article_title,
+        #                     bacteria=bacteria,
+        #                     nutrients=nutrients,
+        #                     diseases=diseases,
+        #                     parse_result=parser_output)
+        # print(sentence)
         # sentence_analyzer.analyze(sentence)
-        # print('=' * 80)
-        # n += 1
+        print('=' * 80)
 
     # data = sentences_to_data_frame(sentences)
     # data.to_csv('sentences.csv')
