@@ -1,6 +1,9 @@
 class Sentence(object):
 
-    def __init__(self, text, article_title, bacteria, nutrients, diseases, parse_result):
+    def __init__(self, text, article_title, bacteria, nutrients, diseases, parse_result,
+                 journal):
+        super().__init__()
+        self.journal = journal
         self.text = text
         self.article_title = article_title
         self.parse_result = parse_result

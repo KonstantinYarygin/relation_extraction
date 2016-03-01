@@ -76,3 +76,6 @@ class SentenceAnalyzer(object):
 
     def find_patterns(self, path, additional_graph):
         pass
+
+    def get_tokenizer(self):
+        return self.__tokenizer
