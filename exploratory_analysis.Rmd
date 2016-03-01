@@ -14,7 +14,7 @@ library(stringr)
 library(plyr)
 
 # warning here doesn't matter
-data <- fread('sentences.csv', sep=',')
+data <- fread('~/do/relation_extraction/journals_statistics/sentences_first_with_journals.csv', sep=',')
 str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
@@ -41,6 +41,12 @@ data.disease = data[,
 setnames(data.disease, c("text","article_title","disease"))
 ```
 
+```{r}
+plot_single <- function(){
+  
+}
+```
+
 У нас 9 000 статей. Кол-во статей, в которых мы что-то нашли:
 ```{r}
 length(unique(data$article_title))
@@ -59,6 +65,15 @@ setorder(data.articles, -sentences)
 head(data.articles, 10)
 ```
 
+### Какие есть длины предложений
+```{r, fig.height=7}
+data[,length:=str_length(text)]
+ggplot(data, aes(x=length)) + geom_histogram(binwidth=800) +
+    stat_bin(aes(y = ..count.., 
+                 label = ifelse(..count..!=0, ..count..,'')), 
+             binwidth=800, geom='text', vjust = -1, size=3)
+```
+
 ### Какие бактерии встречаются чаще всего?  
 ``` {r}
 data.bacteria.count <- data.bacteria[,.N,by=bacteria]
@@ -72,7 +87,14 @@ ggplot(data.bacteria.count[0:10], aes(x = reorder(bacteria,-N), y = N)) +
   ylab('count') + 
   theme(text = element_text(size=13), 
         axis.text.x = element_text(angle=10, vjust=1))
-```
+ggplot(data.bacteria.count, aes(x = reorder(bacteria,-N), y = N, group=1)) + 
+  geom_line(color="green", size=1) + 
+  theme_bw() + 
+  xlab('bacteria') + 
+  ylab('count') + geom_hline(yintercept=0) +  
+  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank())
+````
 
 ### Какие нутриенты встречаются чаще всего?  
 
@@ -88,6 +110,13 @@ ggplot(data.nutrient.count[0:10], aes(x = reorder(nutrient,-N), y = N)) +
   ylab('count') + 
   theme(text = element_text(size=13), 
         axis.text.x = element_text(angle=10, vjust=1))
+ggplot(data.nutrient.count, aes(x = reorder(nutrient,-N), y = N, group=1)) + 
+  geom_line(color="green", size=1) + 
+  theme_bw() + 
+  xlab('nutrient') + 
+  ylab('count') + geom_hline(yintercept=0) +  
+  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank())
 ```
 
 ### Какие болезни встречаются чаще всего?  
@@ -103,6 +132,14 @@ ggplot(data.disease.count[0:10], aes(x = reorder(disease,-N), y = N)) +
   ylab('count') + 
   theme(text = element_text(size=13), 
         axis.text.x = element_text(angle=10, vjust=1))
+ggplot(data.disease.count, aes(x = reorder(disease,-N), y = N, group=1)) + 
+  geom_line(color="green", size=1) + 
+  theme_bw() + 
+  xlab('disease') + 
+  ylab('count') + geom_hline(yintercept=0) +  
+  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
 ```
 
 ### Какие пары бактерия-нутриент встречаются чаще всего?  
