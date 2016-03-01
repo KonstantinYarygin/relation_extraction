@@ -13,6 +13,12 @@ from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.core.main import main
 from ohmygut.core.sentence_processing import SentenceParser
 
+
+class MockSentenceParser(SentenceParser):
+    def parse_sentence(self, sentence):
+        return ' '
+
+
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 lancaster_stemmer = LancasterStemmer()
@@ -22,10 +28,12 @@ sentence_analyzer = SentenceAnalyzer(stemmer=lancaster_stemmer, tokenizer=stanfo
 
 stanford_dependency_parser = StanfordDependencyParser(
     path_to_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser.jar'),
-    path_to_models_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser-3.5.2-models.jar'),
+    path_to_models_jar=os.path.join(script_dir,
+                                    '../data/stanford_parser_dependencies/stanford-parser-3.5.2-models.jar'),
     model_path=os.path.join(script_dir, '../data/stanford_parser_dependencies/englishPCFG.ser.gz'),
 )
 sentence_parser = SentenceParser(stanford_dependency_parser)
+mock_sentence_parser = MockSentenceParser(None)
 
 bacteria_catalog = GutBacteriaCatalog(os.path.join('../data/bacteria/gut_catalog.csv'))
 bacteria_catalog.initialize(verbose=True)
@@ -39,4 +47,4 @@ diseases_catalog.initialize(verbose=True)
 
 article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/articles/'))
 
-main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
+main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, mock_sentence_parser, sentence_analyzer)
