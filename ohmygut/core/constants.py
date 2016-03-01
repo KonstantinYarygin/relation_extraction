@@ -57,3 +57,11 @@ BACT_KINGDOM_ID_NCBI = 2157
 
 VERBS = ['degrade', 'utilize', 'produce', 'metabolize','ferment', 'consume', 'hydrolyze', 'require']
 MVERBS = ['have ability', 'has ability', 'able', 'can']
+
+PATH_FIELD_TAG = 'tags'
+PATH_FIELD_REL = 'edge_rels'
+PATH_FIELD_WORD = 'words'
+PATH_FIELD_IND = 'pos_path'
+
+PATH_NUTR_NAME = 'NUTRIENT'
+PATH_BACT_NAME = 'BACTERIUM'
