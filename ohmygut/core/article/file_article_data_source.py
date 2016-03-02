@@ -1,4 +1,5 @@
 import os
+import re
 from lxml import etree
 from ohmygut.core.article.article import Article
 from ohmygut.core.article.article_data_source import ArticleDataSource
@@ -33,6 +34,8 @@ def get_article_text(article_nxml):
     full_text = full_text.replace(' ;', ';')
     full_text = full_text.replace(' ,', ',')
     full_text = full_text.replace('\n', ' ')
+    full_text = re.sub('\s?\([^\d\w]+\)', '', full_text)
+    full_text = re.sub('\s?\[[^\d\w]+\]', '', full_text)
     return full_text
 
 

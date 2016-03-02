@@ -1,6 +1,10 @@
 from itertools import product
 import networkx as nx
 
+from ohmygut.core.constants import VERB_LIST
+from ohmygut.core.pattern_finder import PatternFinder
+
+
 class SentenceAnalyzer(object):
     def __init__(self, stemmer, tokenizer):
         self.__stemmer = stemmer
@@ -14,9 +18,15 @@ class SentenceAnalyzer(object):
         pathes = []
         for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
             pathes.append(self.search_path(sentence, bacterium_node_id, nutrient_node_id))
+        pattern_pathes = []
+        finder = PatternFinder(VERB_LIST, self.__stemmer)
+        for path in pathes:
+            pattern_verb = finder.find_patterns(path, sentence.parse_result.nx_graph, sentence.parse_result.words)
+            if len(pattern_verb) > 0:
+                path['type'] = pattern_verb
+                pattern_pathes.append(path)
+        return (pattern_pathes)
 
-        return(pathes)
-        
     def merge_nodes(self, sentence):
         bacterial_names = [name for name, ncbi_id in sentence.bacteria]
         disease_names = [name for name, doid_id in sentence.diseases]
@@ -72,7 +82,6 @@ class SentenceAnalyzer(object):
         words = [sentence.parse_result.words[i] for i in pos_path]
         tags = [sentence.parse_result.tags[i] for i in pos_path]
         return {'edge_rels': edge_rels, 'words': words, 'tags': tags, 'pos_path': pos_path}
-
 
     def find_patterns(self, path, additional_graph):
         pass
