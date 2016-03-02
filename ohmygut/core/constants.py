@@ -27,7 +27,8 @@ def setup_logging(
 
 setup_logging()
 logger = logging.getLogger(base_logger_name)
-
+pattern_logger = logging.getLogger("pattern_logger")
+large_pattern_logger = logging.getLogger("large_pattern_logger")
 
 CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
 TEMPLATE_CONTIG = '(_genome[\W\d_]*|_contig[\W\d_]*|_cont[0-9]+)'
@@ -65,3 +66,12 @@ PATH_FIELD_IND = 'pos_path'
 
 PATH_NUTR_NAME = 'NUTRIENT'
 PATH_BACT_NAME = 'BACTERIUM'
+
+VERB_LIST = ['consume', 'acquire', 'absorb', 'ingest', 'retain', 'adhere', 'adopt', 'assimilate', 'obtain',
+             'incorporate', 'eat', 'degrade', 'utilize', 'utilise', 'metabolize', 'metabolise', 'ferment',
+             'hydrolyze', 'cleave', 'catabolize', 'digest', 'bind', 'hydrolyse', 'lyse', 'convert', 'oxidize',
+             'destroy', 'eliminate', 'dephosphorylate', 'exploit', 'transform', 'eradicate', 'dissociate',
+             'deactivate', 'neutralize', 'dimerize', 'inactivate', 'phosphorylate', 'heterodimerizes',
+             'produce', 'synthesize', 'synthesise', 'biosynthesize', 'biosynthesise', 'assemble',
+             'create', 'make', 'secrete', 'excrete', 'liberate', 'attach', 'resist', 'transmit', 'disseminate',
+             'solubilize', 'sustain', 'adapt', 'neutralize']
