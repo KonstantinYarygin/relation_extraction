@@ -2,7 +2,8 @@
 title: "OMG exploratory analysis"
 output: html_document
 ---
-*workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow
+*workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow  
+*выводы:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B
 
 ## Data processing
 ```{r}
@@ -13,8 +14,11 @@ library(plyr)
 
 # warning here doesn't matter
 data <- fread('~/do/relation_extraction/journals_statistics/sentences_first_with_journals.csv', sep=',')
-str(data, vec.len=1)
+```
+Структура данных:
+```{r}
 nrow(data)
+str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
 ```{r}
@@ -39,19 +43,26 @@ data.disease = data[,
          by=.(text, article_title)]
 setnames(data.disease, c("text","article_title","disease"))
 ```
-
+Присоединим импакты
 ```{r}
-plot_single <- function(){
-  
-}
-```
-
-У нас 9 000 статей. Кол-во статей, в которых мы что-то нашли:
-```{r}
-length(unique(data$article_title))
+data.impacts <- fread('data/if2015.csv', na.strings = "Not Available")
+setnames(data.impacts, c('journal', 'impact'))
+# оказались дупликаты
+data.impacts <- unique(data.impacts)
+data.impacts$journal <- tolower(data.impacts$journal)
+data <- merge(data, data.impacts, by='journal', all.x = TRUE)
+nrow(data)
 ```
 
 ## Results
+Количество предложений:
+```{r} 
+nrow(data)
+```
+Количество статей, в которых мы что-то нашли:
+```{r}
+length(unique(data$article_title))
+```
 
 ### Из каких статей больше всего предложений?
 ```{r}
@@ -65,12 +76,13 @@ head(data.articles, 10)
 ```
 
 ### Какие есть длины предложений
+Длина в **символах**
 ```{r, fig.height=7}
 data[,length:=str_length(text)]
 ggplot(data, aes(x=length)) + geom_histogram(binwidth=800) +
     stat_bin(aes(y = ..count.., 
                  label = ifelse(..count..!=0, ..count..,'')), 
-             binwidth=800, geom='text', vjust = -1, size=3)
+             binwidth=800, geom='text', vjust = -1, size=3) + theme_bw()
 ```
 
 ### Какие бактерии встречаются чаще всего?  
@@ -91,8 +103,11 @@ ggplot(data.bacteria.count, aes(x = reorder(bacteria,-N), y = N, group=1)) +
   theme_bw() + 
   xlab('bacteria') + 
   ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank())
+  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
 ````
 
 ### Какие нутриенты встречаются чаще всего?  
@@ -114,8 +129,11 @@ ggplot(data.nutrient.count, aes(x = reorder(nutrient,-N), y = N, group=1)) +
   theme_bw() + 
   xlab('nutrient') + 
   ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank())
+  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
 ```
 
 ### Какие болезни встречаются чаще всего?  
@@ -136,9 +154,11 @@ ggplot(data.disease.count, aes(x = reorder(disease,-N), y = N, group=1)) +
   theme_bw() + 
   xlab('disease') + 
   ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_blank(), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank())
-
+  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
+        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank())
 ```
 
 ### Какие пары бактерия-нутриент встречаются чаще всего?  
@@ -152,24 +172,6 @@ setorder(data.bacteria.nutrient.count, -N)
 head(data.bacteria.nutrient.count, 10)
 nrow(data.bacteria.nutrient.count)
 ggplot(data.bacteria.nutrient.count[0:8], aes(x = reorder(paste(bacteria,nutrient,sep = ' + '),-N), 
-                                               y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('pair') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
-```
-
-Без агара:
-
-```{r}
-data.bacteria.nutrient.count.no.agar = 
-  data.bacteria.nutrient.count[nutrient!='agar'&nutrient!='Agar']
-head(data.bacteria.nutrient.count.no.agar, 10)
-nrow(data.bacteria.nutrient.count.no.agar)
-ggplot(data.bacteria.nutrient.count.no.agar[0:8], 
-       aes(x = reorder(paste(bacteria, nutrient, sep = ' + '),-N), 
                                                y = N)) + 
   geom_bar(stat="identity") + 
   theme_bw() + 
@@ -197,11 +199,26 @@ ggplot(data.bacteria.disease.count[0:8], aes(x = reorder(paste(bacteria,disease,
         axis.text.x = element_text(angle=10, vjust=1))
 ```
 
-3. Журналы  
-3.1. Из каких журналов больше всего **предложений**?  
+### Журналы  
+#### Из каких журналов больше всего предложений?  
 ```{r}
-# data.journal.count <- data[,.N, by=journal]
-# setorder(data.journal.count, -N)
-# head(data.journal.count, 10)
+data.journal.count <- data[,.N, by=journal]
+setorder(data.journal.count, -N)
+ggplot(data.journal.count[0:20], aes(x = reorder(journal, N), y = N)) + 
+  geom_bar(stat="identity") + 
+  theme_bw() + 
+  xlab('journal') + 
+  ylab('count') + 
+  theme(text = element_text(size=13), 
+        axis.text.x = element_text(angle=10, vjust=1)) +
+  coord_flip()
 ```
-3.2. Из каких журналов больше всего **фактов**? - здесь нужны 100 отобранных фактов от Кости
+
+#### Какие есть импакты журналов
+```{r}
+ggplot() + aes(unique(data$impact)) + geom_histogram(binwidth=1) +
+    stat_bin(aes(y = ..count.., 
+                 label = ifelse(..count..!=0, ..count..,'')), 
+             binwidth=1, geom='text', vjust = -1, size=3) +
+  xlab("impact") + theme_bw()
+```
