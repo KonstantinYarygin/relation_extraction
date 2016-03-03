@@ -14,6 +14,12 @@ from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.core.main import main
 from ohmygut.core.sentence_processing import SentenceParser
 
+
+class MockSentenceParser(SentenceParser):
+    def parse_sentence(self, sentence):
+        return ' '
+
+
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 lancaster_stemmer = LancasterStemmer()
@@ -27,6 +33,7 @@ stanford_dependency_parser = StanfordDependencyParser(
     model_path=os.path.join(script_dir, '../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
     )
 sentence_parser = SentenceParser(stanford_dependency_parser)
+mock_sentence_parser = MockSentenceParser(None)
 
 bacteria_catalog = GutBacteriaCatalog(os.path.join('../data/bacteria/gut_catalog.csv'))
 bacteria_catalog.initialize(verbose=True)
