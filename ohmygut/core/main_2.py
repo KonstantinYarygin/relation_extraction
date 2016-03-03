@@ -60,7 +60,7 @@ for title, tokenized_sent, bacteria_list, nutrients_list, graph_raw in list(data
     pairs = product(bacteria_list, nutrients_list)
     for bact, nutr in pairs:
         try:
-            path = sp.search_path(bact, nutr)
+            path = search_path(bact, nutr)
         except:
             path = {}
         if path:

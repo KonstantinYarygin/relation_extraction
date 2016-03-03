@@ -27,14 +27,14 @@ class MyTestCase(unittest.TestCase):
     def test_find_bindings(self):
         target = PatternFinder([], LancasterStemmer())
         [sentence_text, G, words, path] = get_text_G_words_path_2()
-        actual = target.find_bindings(sentence_graph=G, sentence_words=words, index=25)
+        actual = find_bindings(sentence_graph=G, sentence_words=words, index=25)
         expected = ['by', 'many', 'produced', 'Lactococcus lactis']
         np.testing.assert_equal(np.array(actual).sort(), np.array(expected).sort())
 
     def test_find_bindings_types(self):
         target = PatternFinder([], LancasterStemmer())
         [sentence_text, G, words, path] = get_text_G_words_path_2()
-        actual = target.find_bindings(sentence_graph=G, sentence_words=words, index=25, types=True)
+        actual = find_bindings(sentence_graph=G, sentence_words=words, index=25, types=True)
         expected = ['case', 'nmod', 'nmod', 'amod']
         np.testing.assert_equal(np.array(actual).sort(), np.array(expected).sort())
 

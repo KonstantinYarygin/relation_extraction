@@ -3,8 +3,14 @@ from ohmygut.core.constants import PATH_NUTR_NAME, PATH_FIELD_TAG, PATH_FIELD_WO
 
 
 # TODO: refactor
-def check_bindings_types(sentence_graph, sentence_words, bact_glob_id):
-    pass
+def find_bindings(sentence_graph, sentence_words, graph_index, types=False):
+    graph = sentence_graph.to_undirected()
+    ind_connected = list(graph[graph_index].keys())
+    if types:
+        connections = [graph[graph_index][i]['rel'] for i in ind_connected]
+    else:
+        connections = [sentence_words[i] for i in ind_connected]
+    return connections
 
 
 class PatternFinder(object):
@@ -21,15 +27,6 @@ class PatternFinder(object):
             return [ind, template]
         else:
             return ind
-
-    def find_bindings(self, sentence_graph, sentence_words, graph_index, types=False):
-        graph = sentence_graph.to_undirected()
-        ind_connected = list(graph[graph_index].keys())
-        if types:
-            connections = [graph[graph_index][i]['rel'] for i in ind_connected]
-        else:
-            connections = [sentence_words[i] for i in ind_connected]
-        return connections
 
     def find_patterns(self, path, sentence_graph=None, sentence_words=None):
         [verb_stem_ids, verbs] = self.find_words(path[PATH_FIELD_WORD], self.verb_list, return_value=True)
@@ -52,11 +49,11 @@ class PatternFinder(object):
                 patterns_verbs.append(('pattern 6', verb_name))
 
         if sentence_graph is not None:
-            bact_by_binding = self.find_words(self.find_bindings(sentence_graph, sentence_words,
-                                                                 path[PATH_FIELD_IND][bact_id]), ['by'])
-            bact_plus_1_by_binding = self.find_words(self.find_bindings(sentence_graph, sentence_words,
-                                                                        path[PATH_FIELD_IND][bact_id + 1]), ['by'])
-            nutr_type_binding = self.find_bindings(sentence_graph, sentence_words,
+            bact_by_binding = self.find_words(find_bindings(sentence_graph, sentence_words,
+                                                            path[PATH_FIELD_IND][bact_id]), ['by'])
+            bact_plus_1_by_binding = self.find_words(find_bindings(sentence_graph, sentence_words,
+                                                                   path[PATH_FIELD_IND][bact_id + 1]), ['by'])
+            nutr_type_binding = find_bindings(sentence_graph, sentence_words,
                                                         path[PATH_FIELD_IND][nutr_id], types=True)
 
             if pattern_4_requirement(dist_nutr_bact, nutr_type_binding):
@@ -70,7 +67,7 @@ class PatternFinder(object):
 
             known_ids = self.find_words(path[PATH_FIELD_WORD], ['known'])
             for known_id in known_ids:
-                known_id_binds = self.find_bindings(sentence_graph, sentence_words, path[PATH_FIELD_IND][known_id])
+                known_id_binds = find_bindings(sentence_graph, sentence_words, path[PATH_FIELD_IND][known_id])
                 [verb_ids, verbs] = self.find_words(known_id_binds, self.verb_list, return_value=True)
                 if pattern_3_requirement(verb_ids):
                     patterns_verbs.append(('pattern 3', verbs))
