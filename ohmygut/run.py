@@ -5,6 +5,7 @@ from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import StanfordTokenizer
 
+from ohmygut.core import constants
 from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
@@ -17,14 +18,14 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 
 lancaster_stemmer = LancasterStemmer()
 stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
-                                                                '../data/stanford_parser_dependencies/stanford-parser.jar'))
+                                                                '../stanford_parser/stanford-parser.jar'))
 sentence_analyzer = SentenceAnalyzer(stemmer=lancaster_stemmer, tokenizer=stanford_tokenizer)
 
 stanford_dependency_parser = StanfordDependencyParser(
-    path_to_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser.jar'),
-    path_to_models_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser-3.5.2-models.jar'),
-    model_path=os.path.join(script_dir, '../data/stanford_parser_dependencies/englishPCFG.ser.gz'),
-)
+    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar'),
+    path_to_models_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser-3.5.2-models.jar'),
+    model_path=os.path.join(script_dir, '../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
+    )
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
 bacteria_catalog = GutBacteriaCatalog(os.path.join('../data/bacteria/gut_catalog.csv'))
