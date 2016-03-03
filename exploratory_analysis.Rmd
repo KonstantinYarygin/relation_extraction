@@ -1,7 +1,5 @@
 ---
 title: "OMG exploratory analysis"
-author: "Vasilyev A."
-date: "February 20, 2016"
 output: html_document
 ---
 *workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow
@@ -16,6 +14,7 @@ library(plyr)
 # warning here doesn't matter
 data <- fread('~/do/relation_extraction/journals_statistics/sentences_first_with_journals.csv', sep=',')
 str(data, vec.len=1)
+nrow(data)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
 ```{r}
@@ -200,4 +199,9 @@ ggplot(data.bacteria.disease.count[0:8], aes(x = reorder(paste(bacteria,disease,
 
 3. Журналы  
 3.1. Из каких журналов больше всего **предложений**?  
+```{r}
+# data.journal.count <- data[,.N, by=journal]
+# setorder(data.journal.count, -N)
+# head(data.journal.count, 10)
+```
 3.2. Из каких журналов больше всего **фактов**? - здесь нужны 100 отобранных фактов от Кости
