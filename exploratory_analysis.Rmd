@@ -1,6 +1,7 @@
 ---
 title: "OMG exploratory analysis"
-output: html_document
+output:
+  html_document: default
 ---
 *workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow  
 *выводы:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B
@@ -13,7 +14,7 @@ library(stringr)
 library(plyr)
 
 # warning here doesn't matter
-data <- fread('~/do/relation_extraction/journals_statistics/sentences_first_with_journals.csv', sep=',')
+data <- fread('~/Downloads/sentences_first_with_journals.csv', sep=',')
 ```
 Структура данных:
 ```{r}
@@ -22,26 +23,24 @@ str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
 ```{r}
+data.sub <- data[1950:2000]
 data.bacteria = data[,
-         unlist(llply(str_match_all(bacteria, 
-                                    '\'([A-z \\.]+)\''), 
-                      .fun=function(x) x[,2])),
+         .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
+           unlist(llply(str_match_all(bacteria, ',\\s(\\d+)\\)'), .fun=function(x) x[,2]))),
          by=.(text, article_title)]
-setnames(data.bacteria, c("text","article_title","bacteria"))
+setnames(data.bacteria, c("text","article_title","bacteria","code"))
 
 data.nutrient = data[,
-         unlist(llply(str_match_all(nutrients, 
-                                    '\'([A-z \\.]+)\''), 
-                      .fun=function(x) x[,2])),
+         unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
          by=.(text, article_title)]
+
 setnames(data.nutrient, c("text","article_title","nutrient"))
 
-data.disease = data[,
-         unlist(llply(str_match_all(diseases, 
-                                    '\'([A-z \\.]+)\''), 
-                      .fun=function(x) x[,2])),
+data.disease = data[,.(unlist(llply(str_match_all(diseases, '\'([^\\)]+)\','), .fun=function(x) x[,2])),
+                      unlist(llply(str_match_all(diseases, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2]))),
          by=.(text, article_title)]
-setnames(data.disease, c("text","article_title","disease"))
+
+setnames(data.disease, c("text","article_title","disease","code"))
 ```
 Присоединим импакты
 ```{r}
