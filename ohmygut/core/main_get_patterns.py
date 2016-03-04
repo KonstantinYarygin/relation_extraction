@@ -10,7 +10,7 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping
 
 def save_parsing_result_xml(sentence, save_path):
     filename = (
-    sentence.article_title.split(' ')[0] + '_%s.pickle' % (datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")))
+    sentence.journal.split(' ')[0] + '_%s.pickle' % (datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")))
     filename = save_path + '/' + filename
     with open(filename, 'wb') as f:
         pickle.dump(sentence, f)
@@ -34,7 +34,6 @@ def main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, 
                                                                   sentence_analyzer.get_tokenizer())
 
         if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
-            print('a test change')
             continue
 
         parser_output = sentence_parser.parse_sentence(sentence_text)
@@ -57,7 +56,14 @@ def main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, 
         print(sentence)
         n += 1
         print("sentence № %i" % n)
+        constants.pattern_logger.info('')
+        constants.large_pattern_logger.info('')
+        constants.pattern_logger.info('total number sentences: %d' % n)
+        constants.large_pattern_logger.info('total number sentences: %d' % n)
+
         save_parsing_result_xml(sentence, save_path)
+
+
 
 
 def log_paths(sentence, paths):
