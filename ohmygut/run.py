@@ -46,5 +46,5 @@ diseases_catalog.initialize(verbose=True)
 
 article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
 
-main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
-#main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
+#main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
+main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
