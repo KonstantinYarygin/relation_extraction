@@ -1,17 +1,16 @@
 import os
-import sys
 
 from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import StanfordTokenizer
 
-from ohmygut.core import constants
 from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.core.main import main
+from ohmygut.core.main_get_patterns import main_get_patterns
 from ohmygut.core.sentence_processing import SentenceParser
 
 
@@ -45,6 +44,7 @@ nutrients_catalog.initialize(verbose=True)
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize(verbose=True)
 
-article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/articles/'))
+article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
 
 main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
+#main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')

@@ -44,39 +44,6 @@ def merge_nodes(sentence):
                 index = list(sentence.parse_result.words.values()).index(name)
                 id = list(sentence.parse_result.words.keys())[index]
                 sentence.parse_result.tags[id] = entity_name
-        for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
-            for name in names_list:
-                # tokens = self.__tokenizer.tokenize(name)
-                # todo: use word_tokenize()
-                tokens = name.split(' ')
-                if len(tokens) > 1:
-                    tokens_ids = []
-                    for token in tokens:
-                        index = list(sentence.parse_result.words.values()).index(token)
-                        tokens_ids.append(list(sentence.parse_result.words.keys())[index])
-                    merged_id = min(tokens_ids)
-                    for i, j in sentence.parse_result.nx_graph.edges()[:]:
-                        if i in tokens_ids and j in tokens_ids:
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                        elif i in tokens_ids:
-                            rel = sentence.parse_result.nx_graph[i][j]['rel']
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                            sentence.parse_result.nx_graph.add_edge(merged_id, j, {'rel': rel})
-                        elif j in tokens_ids:
-                            rel = sentence.parse_result.nx_graph[i][j]['rel']
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                            sentence.parse_result.nx_graph.add_edge(i, merged_id, {'rel': rel})
-                    sentence.parse_result.nx_graph.remove_nodes_from([id for id in tokens_ids if id != merged_id])
-                    sentence.parse_result.words[merged_id] = name
-                    sentence.parse_result.tags[merged_id] = entity_name
-                    for id in tokens_ids:
-                        if id != merged_id:
-                            del sentence.parse_result.words[id]
-                            del sentence.parse_result.tags[id]
-                else:
-                    index = list(sentence.parse_result.words.values()).index(name)
-                    id = list(sentence.parse_result.words.keys())[index]
-                    sentence.parse_result.tags[id] = entity_name
 
 
 def search_path(sentence, source, target, undirected=True):
