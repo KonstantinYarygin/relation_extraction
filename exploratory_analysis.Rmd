@@ -14,7 +14,7 @@ library(stringr)
 library(plyr)
 
 # warning here doesn't matter
-data <- fread('~/Downloads/sentences_first_with_journals.csv', sep=',')
+data <- fread('~/Downloads/sentences17_50_46-01_03_16.csv', sep=',')
 ```
 Структура данных:
 ```{r}
@@ -23,24 +23,26 @@ str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
 ```{r}
-data.sub <- data[1950:2000]
 data.bacteria = data[,
          .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
-           unlist(llply(str_match_all(bacteria, ',\\s(\\d+)\\)'), .fun=function(x) x[,2]))),
+           unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
          by=.(text, article_title)]
-setnames(data.bacteria, c("text","article_title","bacteria","code"))
+setnames(data.bacteria, c("text","article_title","bacteria","bacteria_code"))
 
 data.nutrient = data[,
          unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
          by=.(text, article_title)]
-
 setnames(data.nutrient, c("text","article_title","nutrient"))
 
-data.disease = data[,.(unlist(llply(str_match_all(diseases, '\'([^\\)]+)\','), .fun=function(x) x[,2])),
-                      unlist(llply(str_match_all(diseases, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2]))),
+data.disease = data[,.(unlist(llply(str_match_all(diseases, 
+                                                  '\'([^\\)]+)\','), 
+                                    .fun=function(x) x[,2])),
+                      unlist(llply(str_match_all(diseases, 
+                                                 ',\\s\'([^\\)]+)\''), 
+                                   .fun=function(x) x[,2]))),
          by=.(text, article_title)]
 
-setnames(data.disease, c("text","article_title","disease","code"))
+setnames(data.disease, c("text","article_title","disease","disease_code"))
 ```
 Присоединим импакты
 ```{r}
@@ -86,7 +88,11 @@ ggplot(data, aes(x=length)) + geom_histogram(binwidth=800) +
 
 ### Какие бактерии встречаются чаще всего?  
 ``` {r}
-data.bacteria.count <- data.bacteria[,.N,by=bacteria]
+data.bacteria.count <- data.bacteria[,.N,by=bacteria_code]
+data.bacteria.unique <- data.bacteria[,.(bacteria, bacteria_code)]
+setkey(data.bacteria.unique, bacteria_code)
+data.bacteria.unique <- unique(data.bacteria.unique)
+data.bacteria.count <- merge(data.bacteria.count, data.bacteria.unique, by='bacteria_code')
 setorder(data.bacteria.count, -N)
 head(data.bacteria.count, 10)
 nrow(data.bacteria.count)
@@ -137,7 +143,11 @@ ggplot(data.nutrient.count, aes(x = reorder(nutrient,-N), y = N, group=1)) +
 
 ### Какие болезни встречаются чаще всего?  
 ```{r}
-data.disease.count <- data.disease[,.N,by=disease]
+data.disease.count <- data.disease[,.N,by=disease_code]
+data.disease.unique <- data.disease[,.(disease, disease_code)]
+setkey(data.disease.unique, disease_code)
+data.disease.unique <- unique(data.disease.unique)
+data.disease.count <- merge(data.disease.count, data.disease.unique, by='disease_code')
 setorder(data.disease.count, -N)
 head(data.disease.count, 10)
 nrow(data.disease.count)
@@ -166,7 +176,10 @@ ggplot(data.disease.count, aes(x = reorder(disease,-N), y = N, group=1)) +
 ```{r}
 data.bacteria.nutrient <- merge(data.bacteria, data.nutrient, by = c("text","article_title"))
 data.bacteria.nutrient <- unique(data.bacteria.nutrient)
-data.bacteria.nutrient.count <- data.bacteria.nutrient[,.N,by=c('bacteria','nutrient')]
+data.bacteria.nutrient.count <- data.bacteria.nutrient[,.N,by=c('bacteria_code','nutrient')]
+data.bacteria.nutrient.count <- merge(data.bacteria.nutrient.count, 
+                                      data.bacteria.unique, 
+                                      by='bacteria_code')
 setorder(data.bacteria.nutrient.count, -N)
 head(data.bacteria.nutrient.count, 10)
 nrow(data.bacteria.nutrient.count)
@@ -184,7 +197,10 @@ ggplot(data.bacteria.nutrient.count[0:8], aes(x = reorder(paste(bacteria,nutrien
 ```{r}
 data.bacteria.disease <- merge(data.bacteria, data.disease, by = c("text","article_title"))
 data.bacteria.disease <- unique(data.bacteria.disease)
-data.bacteria.disease.count <- data.bacteria.disease[,.N,by=c('bacteria','disease')]
+data.bacteria.disease.count <- data.bacteria.disease[,.N,by=c('bacteria_code','disease')]
+data.bacteria.disease.count <- merge(data.bacteria.disease.count,
+                                     data.bacteria.unique, 
+                                     by='bacteria_code')
 setorder(data.bacteria.disease.count, -N)
 head(data.bacteria.disease.count, 10)
 nrow(data.bacteria.disease.count)
