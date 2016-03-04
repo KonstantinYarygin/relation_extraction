@@ -36,6 +36,7 @@ class SentenceAnalyzer(object):
         for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
             for name in names_list:
                 # tokens = self.__tokenizer.tokenize(name)
+                # todo: use word_tokenize()
                 tokens = name.split(' ')
                 if len(tokens) > 1:
                     tokens_ids = []
