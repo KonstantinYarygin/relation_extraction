@@ -34,6 +34,7 @@ def main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, 
                                                                   sentence_analyzer.get_tokenizer())
 
         if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+            print('a test change')
             continue
 
         parser_output = sentence_parser.parse_sentence(sentence_text)
