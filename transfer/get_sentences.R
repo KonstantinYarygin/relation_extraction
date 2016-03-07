@@ -1,7 +1,5 @@
 library(data.table)
-library(ggplot2)
 library(stringr)
-library(plyr)
 
 OUT_FILE_NAME <- "sentences_replaced.txt"
 
@@ -40,21 +38,10 @@ data.bacteria[,universal:=paste("BACTERIA", .GRP, sep=""), by=bacteria_code]
 data.nutrient[,universal:=paste("NUTRIENT", .GRP, sep=""), by=nutrient_code]
 data.disease[,universal:=paste("DISEASE", .GRP, sep=""), by=disease_code]
 
-
 bacterias <- unique(data.bacteria[,.(bacteria, universal)])
 nutrients <- unique(data.nutrient[,.(nutrient, universal)])
 diseases <- unique(data.disease[,.(disease, universal)])
 sentences <- unique(data$text)
-
-data.merged <- merge(data.bacteria, data.nutrient, by = c("text","article_title"), all = TRUE)
-data.merged <- merge(data.merged, data.disease, by = c("text","article_title"), all = TRUE)
-
-data.merged$text_replaced <- str_replace_all(data.merged$text, 
-                     data.merged$bacteria, 
-                     rep("BACTERIA", nrow(data.merged)))
-data.merged$text_replaced <- str_replace_all(data.merged$text_replaced, 
-                                            data.merged$nutrient, 
-                                            rep("BACTERIA", nrow(data.merged)))
 
 for (i in 1:nrow(bacterias)){
   bacteria <- bacterias$bacteria[i]
@@ -82,4 +69,10 @@ for (i in 1:nrow(diseases)){
 }
 
 data.sentences <- data.table(sentences)
-write(sentences, OUT_FILE_NAME)
+data.sentences$tag <- paste("s",c(1:nrow(data.sentences)), sep="")
+write.table(data.sentences, 
+            row.names = FALSE, 
+            file = OUT_FILE_NAME,
+            col.names = FALSE, 
+            quote = FALSE, 
+            sep = "\t")
