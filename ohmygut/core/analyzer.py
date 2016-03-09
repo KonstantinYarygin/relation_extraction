@@ -13,6 +13,12 @@ class SentenceAnalyzer(object):
         nutrients_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'NUTRIENT']
         diseases_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'DISEASE']
 
+        pathes = []
+        for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
+            pathes.append(self.search_path(sentence, bacterium_node_id, nutrient_node_id))
+        
+        return pathes
+
     def merge_nodes(self, sentence):
         bacterial_names = [name for name, ncbi_id in sentence.bacteria]
         disease_names = [name for name, doid_id in sentence.diseases]

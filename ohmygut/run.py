@@ -28,19 +28,14 @@ stanford_dependency_parser = StanfordDependencyParser(
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
 bacteria_catalog = BacteriaCatalog(nodes_path=os.path.join(script_dir, '../data/bacteria/taxdump/nodes.dmp'),
-                                   names_path=os.path.join(script_dir, '../data/bacteria/taxdump/names.dmp'),
-                                   tokenizer=stanford_tokenizer)
+                                   names_path=os.path.join(script_dir, '../data/bacteria/taxdump/names.dmp'))
 bacteria_catalog.initialize(verbose=True)
 
-nutrients_catalog = NutrientsCatalog(path=os.path.join(script_dir, '../data/nutrients/natalia_nitrients.txt'),
-									 tokenizer=stanford_tokenizer)
+nutrients_catalog = NutrientsCatalog(path=os.path.join(script_dir, '../data/nutrients/natalia_nitrients.txt'))
 nutrients_catalog.initialize(verbose=True)
 
-diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'),
-								   tokenizer=stanford_tokenizer)
+diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize(verbose=True)
 
 
 article_data_source = FileArticleDataSource(articles_folder = os.path.join(script_dir, '../../article_data/texts/'))
-
-main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
