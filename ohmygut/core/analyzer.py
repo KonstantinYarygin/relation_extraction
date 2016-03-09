@@ -85,7 +85,6 @@ class SentenceAnalyzer(object):
                 pattern_pathes.append(path)
         return pattern_pathes
 
-<<<<<<< HEAD
         pathes = []
         for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
             pathes.append(self.search_path(sentence, bacterium_node_id, nutrient_node_id))
@@ -141,10 +140,9 @@ class SentenceAnalyzer(object):
             pos_path = nx.dijkstra_path(G, source, target)
         except nx.exception.NetworkXNoPath:
             return {}
-=======
+
     def find_patterns(self, path, additional_graph):
         pass
->>>>>>> 2d8b27398b302f38197f398694312a664b485813
 
     def get_tokenizer(self):
         return self.__tokenizer
