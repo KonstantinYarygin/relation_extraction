@@ -1,0 +1,73 @@
+version: 1
+
+disable_existing_loggers: False
+
+formatters:
+    simple:
+        format: "%(asctime)s - %(levelname)s - %(message)s"
+    test_pattern:
+        format: "%(message)s"
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: simple
+        stream: ext://sys.stdout
+
+    info_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: simple
+        filename: ohmygut.log
+        maxBytes: 10485760 # 10MB
+        backupCount: 20
+        encoding: utf8
+
+    pattern_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: test_pattern
+        filename: ohmygut-pattern.log
+        maxBytes: 10485760 # 10MB
+        backupCount: 20
+        encoding: utf8
+
+    large_pattern_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: test_pattern
+        filename: ohmygut-large-pattern.log
+        maxBytes: 10485760 # 10MB
+        backupCount: 20
+        encoding: utf8
+
+    error_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: ERROR
+        formatter: simple
+        filename: ohmygut_errors.log
+        maxBytes: 10485760 # 10MB
+        backupCount: 20
+        encoding: utf8
+
+loggers:
+    brightbox_logger:
+        level: DEBUG
+        handlers: [console, info_file_handler]
+        propagate: no
+
+    pattern_logger:
+        level: DEBUG
+        handlers: [console, pattern_file_handler]
+        propagate: no
+
+    large_pattern_logger:
+        level: DEBUG
+        handlers: [console, large_pattern_file_handler]
+        propagate: no
+
+root:
+    level: INFO
+
+    handlers: [console, info_file_handler, error_file_handler]

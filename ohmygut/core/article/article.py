@@ -1,6 +1,7 @@
 class Article(object):
-    def __init__(self, title, text):
+    def __init__(self, title, text, journal):
         super().__init__()
+        self.journal = journal
         self.text = text
         self.title = title
 
