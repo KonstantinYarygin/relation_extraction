@@ -1,4 +1,8 @@
 import os
+import sys
+
+script_dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(script_dir, '..'))
 
 from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
@@ -6,6 +10,7 @@ from nltk.tokenize import StanfordTokenizer
 
 from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
+from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
@@ -34,7 +39,7 @@ stanford_dependency_parser = StanfordDependencyParser(
 sentence_parser = SentenceParser(stanford_dependency_parser)
 mock_sentence_parser = MockSentenceParser(None)
 
-bacteria_catalog = GutBacteriaCatalog(os.path.join('../data/bacteria/gut_catalog.csv'))
+bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
 bacteria_catalog.initialize(verbose=True)
 
 nutrients_catalog = NutrientsCatalogNikogosov(
@@ -44,7 +49,8 @@ nutrients_catalog.initialize(verbose=True)
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize(verbose=True)
 
-article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
+# article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
+article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
 
-#main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
-main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
+main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
+# main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
