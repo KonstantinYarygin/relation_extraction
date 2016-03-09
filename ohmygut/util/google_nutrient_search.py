@@ -52,9 +52,12 @@ if __name__ == '__main__':
         path=os.path.join(script_dir, '../../data/nutrients/nikogosov_nutrients_normalized.tsv'))
     nutrients_catalog.initialize(verbose=True)
     nutrients = nutrients_catalog.get_simple_list()
+    nutrients.sort()
+    i = 1
     for nutrient in nutrients:
-        list_of_url = get_google_search_urls('osiris therapeutics', 1000)
+        list_of_url = get_google_search_urls(nutrient, 100)
         for url in list_of_url:
-            constants.google_search_nutrient_logger.info("%s\t%s" % (nutrient, url))
+            constants.google_search_nutrient_logger.info("%i\t%s\t%s" % (i, nutrient, url))
         time.sleep(90)
+        i += 1
     constants.logger.info("finish google nutrients")
