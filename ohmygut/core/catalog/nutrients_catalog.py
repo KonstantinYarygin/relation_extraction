@@ -2,7 +2,6 @@ from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
 from time import time
 
-
 class NutrientsCatalog(Catalog):
     """Object holding nutrient ontology"""
 
@@ -39,7 +38,8 @@ class NutrientsCatalog(Catalog):
             list of nutrient_names
         """
         nutr_names = self.__hash_tree.search(sentence)
-        return (nutr_names)
+        return nutr_names
+
 
 
 class NutrientsCatalogNikogosov(Catalog):
@@ -62,7 +62,7 @@ class NutrientsCatalogNikogosov(Catalog):
         self.__nutrients_by_idname = {idname: names.split(';') for idname, names in raw_data}
 
         self.__generate_case_names()
-        self.__remove_agar()
+        self.__remove_trash__instances()
 
         self.__idname_by_nutrient = {name: idname for idname in self.__nutrients_by_idname for name in
                                      self.__nutrients_by_idname[idname]}
@@ -81,8 +81,10 @@ class NutrientsCatalogNikogosov(Catalog):
                          [name for name in names if name.isupper() or not name[0].isalpha()]
             self.__nutrients_by_idname[idname] = case_names
 
-    def __remove_agar(self):
+    def __remove_trash__instances(self):
         del self.__nutrients_by_idname['Agar-agar']
+        del self.__nutrients_by_idname['Protein']
+        del self.__nutrients_by_idname['Pb']
 
     def find(self, sentence):
         """ Uses previously generated hash tree to search sentence for nutrient names
