@@ -2,6 +2,7 @@ from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
 from time import time
 
+
 class NutrientsCatalog(Catalog):
     """Object holding nutrient ontology"""
 
@@ -38,8 +39,7 @@ class NutrientsCatalog(Catalog):
             list of nutrient_names
         """
         nutr_names = self.__hash_tree.search(sentence)
-        return(nutr_names)
-
+        return (nutr_names)
 
 
 class NutrientsCatalogNikogosov(Catalog):
@@ -47,6 +47,9 @@ class NutrientsCatalogNikogosov(Catalog):
 
     def __init__(self, path):
         self.path = path
+        self.__nutrients_by_idname = None
+        self.__idname_by_nutrient = None
+        self.__hash_tree = None
 
     def initialize(self, verbose=False):
         t1 = time()
@@ -57,11 +60,12 @@ class NutrientsCatalogNikogosov(Catalog):
             f.readline()
             raw_data = (line.strip('\n').split('\t') for line in f.readlines())
         self.__nutrients_by_idname = {idname: names.split(';') for idname, names in raw_data}
-        
+
         self.__generate_case_names()
         self.__remove_agar()
 
-        self.__idname_by_nutrient = {name: idname for idname in self.__nutrients_by_idname for name in self.__nutrients_by_idname[idname]}
+        self.__idname_by_nutrient = {name: idname for idname in self.__nutrients_by_idname for name in
+                                     self.__nutrients_by_idname[idname]}
         self.__hash_tree = HashTree(self.__idname_by_nutrient.keys())
 
         t2 = time()
@@ -76,7 +80,7 @@ class NutrientsCatalogNikogosov(Catalog):
                          [name[0].lower() + name[1:] for name in names if not name.isupper() and name[0].isalpha()] + \
                          [name for name in names if name.isupper() or not name[0].isalpha()]
             self.__nutrients_by_idname[idname] = case_names
-            
+
     def __remove_agar(self):
         del self.__nutrients_by_idname['Agar-agar']
 
@@ -92,3 +96,9 @@ class NutrientsCatalogNikogosov(Catalog):
         nutr_names = self.__hash_tree.search(sentence)
         output = [(nutrient, self.__idname_by_nutrient[nutrient]) for nutrient in nutr_names]
         return output
+
+    def get_simple_list(self):
+        nutrients = []
+        for key, value in self.__nutrients_by_idname.items():
+            nutrients.append(value[0])
+        return nutrients
