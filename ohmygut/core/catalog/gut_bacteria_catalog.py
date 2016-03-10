@@ -1,4 +1,3 @@
-
 import re
 from time import time
 
@@ -8,9 +7,8 @@ import pandas as pd
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import TEMPLATE_CONTIG, TEMPLATE_SEP, CLASS_EXCLUSIONS, CHUNK_SIZE, \
     NCBI_COLS_NODES, NCBI_COLS_NAMES, NCBI_NUM_NAMES, NCBI_NUM_NODES, FIELD_NAME, \
-    FIELD_ID, FIELD_RANK, FIELD_PARENT_ID, FIELD_CLASS, RANK_EXCLUSIONS, CLASS_SCIENTIFIC, RANK_SPECIES
+    FIELD_ID, FIELD_RANK, FIELD_PARENT_ID, FIELD_CLASS, RANK_EXCLUSIONS, CLASS_SCIENTIFIC, RANK_SPECIES, plural_dict
 from ohmygut.core.hash_tree import HashTree
-
 
 
 class GutBacteriaCatalog(Catalog):
@@ -56,15 +54,26 @@ class GutBacteriaCatalog(Catalog):
 
         Put all generated forms in self.__bact_id_dict
         """
-        name_data = name_data[(name_data[FIELD_RANK] == RANK_SPECIES) &
-                              (name_data[FIELD_NAME].apply(lambda x: len(x.split())==2)) &
-                              (name_data[FIELD_NAME].apply(lambda x: x[0].isupper()))]
-        #record.name.count(' ') == 1 and record.name[0].isupper()
+        # abbreviation
+        name_data_shortable = name_data[(name_data[FIELD_RANK] == RANK_SPECIES) &
+                                        (name_data[FIELD_NAME].apply(lambda x: len(x.split()) == 2)) &
+                                        (name_data[FIELD_NAME].apply(lambda x: x[0].isupper()))]
         bact_short_names_dict = {record_name[0] + '. ' + record_name.split()[1]: record[FIELD_ID].tolist()[0]
                                  for record_name, record in
-                                 name_data[name_data[FIELD_RANK] == RANK_SPECIES].groupby(FIELD_NAME)}
+                                 name_data_shortable[name_data_shortable[FIELD_RANK] == RANK_SPECIES].groupby(
+                                     FIELD_NAME)}  # todo: check trutrutru
 
         self.__bact_id_dict.update(bact_short_names_dict)
+
+        # plural
+        name_data_plurable = name_data[(name_data[FIELD_RANK] not in ['class', 'order', 'family']) &
+                                       (name_data[FIELD_CLASS] not in ['authority'])]
+        for key in plural_dict.keys():
+            for value in plural_dict[key]:
+                bact_plural_dict = {
+                ''.join(map(lambda x: re.sub(key + '\b', value), record.name.split(' '))): record[FIELD_ID].tolist()[0]
+                for record_name, record in name_data_plurable.groupby(FIELD_NAME)}
+                self.__bact_id_dict.update(bact_plural_dict)
 
     def find(self, sentence):
         """ Uses previously generated hash tree to search sentence for bacterial names

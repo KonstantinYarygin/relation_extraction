@@ -52,8 +52,6 @@ NCBI_NUM_NAMES = [0, 2, 6]
 NCBI_NUM_NODES = [0, 2, 4]
 
 CHUNK_SIZE = 10000
-BACT_KINGDOM_ID_NCBI = 2
-BACT_KINGDOM_ID_NCBI = 2157
 
 
 VERBS = ['degrade', 'utilize', 'produce', 'metabolize','ferment', 'consume', 'hydrolyze', 'require']
@@ -75,3 +73,8 @@ VERB_LIST = ['consume', 'acquire', 'absorb', 'ingest', 'retain', 'adhere', 'adop
              'produce', 'synthesize', 'synthesise', 'biosynthesize', 'biosynthesise', 'assemble',
              'create', 'make', 'secrete', 'excrete', 'liberate', 'attach', 'resist', 'transmit', 'disseminate',
              'solubilize', 'sustain', 'adapt', 'neutralize']
+
+plural_dict = {'a': 'ae', 'us': 'i', 'er': 'i', 'um': 'a',
+               'on': 'a', 'is': 'es', 'al': 'alia',
+               'ar': 'aria', 'e': 'ia', 'u': 'ua',
+               'as': ['ades', 'ads', 'ad']}
