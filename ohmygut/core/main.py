@@ -58,7 +58,8 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
                             bacteria=bacteria,
                             nutrients=nutrients,
                             diseases=diseases,
-                            parse_result=parser_output)
+                            parse_result=parser_output,
+                            journal=article_journal)
         print(sentence)
         n += 1
         print("sentence № %i" % n)

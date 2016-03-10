@@ -66,12 +66,12 @@ class GutBacteriaCatalog(Catalog):
         self.__bact_id_dict.update(bact_short_names_dict)
 
         # plural
-        name_data_plurable = name_data[(name_data[FIELD_RANK] not in ['class', 'order', 'family']) &
-                                       (name_data[FIELD_CLASS] not in ['authority'])]
+        name_data_plurable = name_data[(name_data[FIELD_RANK].isin(['class', 'order', 'family'])) &
+                                       (name_data[FIELD_CLASS].isin(['authority']))]
         for key in plural_dict.keys():
             for value in plural_dict[key]:
                 bact_plural_dict = {
-                ''.join(map(lambda x: re.sub(key + '\b', value), record.name.split(' '))): record[FIELD_ID].tolist()[0]
+                ''.join(map(lambda x: re.sub(key + '\b', value, x), record_name.split())): record[FIELD_ID].tolist()[0]
                 for record_name, record in name_data_plurable.groupby(FIELD_NAME)}
                 self.__bact_id_dict.update(bact_plural_dict)
 
