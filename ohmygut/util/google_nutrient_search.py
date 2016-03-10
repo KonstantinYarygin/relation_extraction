@@ -70,4 +70,4 @@ if __name__ == '__main__':
     with open(output_file_name, 'w') as f:
         f.write('\n'.join(messages))
 
-    send_mail("anatoly.developer@gmail.com", "nutrient google search", files=[output_file_name])
+    send_mail("anatoly.developer@gmail.com", "nutrient google search", body="a file", files=[output_file_name])
