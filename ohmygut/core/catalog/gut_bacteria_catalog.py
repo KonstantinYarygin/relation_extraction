@@ -7,7 +7,7 @@ import pandas as pd
 
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import TEMPLATE_CONTIG, TEMPLATE_SEP, CLASS_EXCLUSIONS, CHUNK_SIZE, \
-    NCBI_COLS_NODES, NCBI_COLS_NAMES, NCBI_NUM_NAMES, NCBI_NUM_NODES, FIELD_NAME, FIELD_UNIQUE_NAME, \
+    NCBI_COLS_NODES, NCBI_COLS_NAMES, NCBI_NUM_NAMES, NCBI_NUM_NODES, FIELD_NAME, \
     FIELD_ID, FIELD_RANK, FIELD_PARENT_ID, FIELD_CLASS, RANK_EXCLUSIONS, CLASS_SCIENTIFIC, RANK_SPECIES
 from ohmygut.core.hash_tree import HashTree
 
@@ -36,10 +36,10 @@ class GutBacteriaCatalog(Catalog):
             print('Creating bacterial catalog...')
 
         gut_names = pd.read_table(self.gut_bact_path, sep=',')
-        self.__scientific_names = {record_id: record[FIELD_UNIQUE_NAME].tolist()[0] for record_id, record in
+        self.__scientific_names = {record_id: record[FIELD_NAME].tolist()[0] for record_id, record in
                                    gut_names[gut_names[FIELD_CLASS] == CLASS_SCIENTIFIC].groupby(FIELD_ID)}
         self.__bact_id_dict = {record_name: record[FIELD_ID].tolist()[0] for record_name, record in
-                               gut_names.groupby(FIELD_UNIQUE_NAME)}
+                               gut_names.groupby(FIELD_NAME)}
 
         self.__generate_excessive_dictionary(name_data=gut_names)
 
@@ -57,12 +57,12 @@ class GutBacteriaCatalog(Catalog):
         Put all generated forms in self.__bact_id_dict
         """
         name_data = name_data[(name_data[FIELD_RANK] == RANK_SPECIES) &
-                              (name_data[FIELD_UNIQUE_NAME].apply(lambda x: len(x.split())==2)) &
-                              (name_data[FIELD_UNIQUE_NAME].apply(lambda x: x[0].isupper()))]
+                              (name_data[FIELD_NAME].apply(lambda x: len(x.split())==2)) &
+                              (name_data[FIELD_NAME].apply(lambda x: x[0].isupper()))]
         #record.name.count(' ') == 1 and record.name[0].isupper()
         bact_short_names_dict = {record_name[0] + '. ' + record_name.split()[1]: record[FIELD_ID].tolist()[0]
                                  for record_name, record in
-                                 name_data[name_data[FIELD_RANK] == RANK_SPECIES].groupby(FIELD_UNIQUE_NAME)}
+                                 name_data[name_data[FIELD_RANK] == RANK_SPECIES].groupby(FIELD_NAME)}
 
         self.__bact_id_dict.update(bact_short_names_dict)
 
