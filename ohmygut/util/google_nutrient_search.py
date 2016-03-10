@@ -31,17 +31,10 @@ def get_google_search_urls(query, results_number=100):
     :param results_number:  a number of results, have to be
     :return:
     """
-    try:
-        opener = urllib.request.build_opener()
-        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        stream = opener.open(
-            'https://www.google.ru/search?q=' + urllib.parse.quote(query) + '&num=%i' % results_number)
-        html = stream.read()
-    except:
-        error = traceback.format_exc(sys.exc_info())
-        constants.logger.error(error)
-        return []
-
+    opener = urllib.request.build_opener()
+    opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+    stream = opener.open('https://www.google.ru/search?q=' + urllib.parse.quote(query) + '&num=%i' % results_number)
+    html = stream.read()
     urls = get_google_search_urls_html(html)
     return urls
 
@@ -55,7 +48,13 @@ if __name__ == '__main__':
     nutrients.sort()
     i = 1
     for nutrient in nutrients:
-        list_of_url = get_google_search_urls(nutrient, 100)
+        try:
+            list_of_url = get_google_search_urls(nutrient, 100)
+        except:
+            error = traceback.format_exc()
+            constants.logger.error(error)
+            constants.google_search_nutrient_logger.info("%i\t%s\t%s" % (i, nutrient, "ERROR"))
+            continue
         for url in list_of_url:
             constants.google_search_nutrient_logger.info("%i\t%s\t%s" % (i, nutrient, url))
         time.sleep(90)
