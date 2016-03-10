@@ -45,8 +45,8 @@ nutrients_catalog.initialize(verbose=True)
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize(verbose=True)
 
-# article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
-article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
+article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
+#article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
 
-main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
-# main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
+#main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, sentence_analyzer)
+main_get_patterns(article_data_source, bacteria_catalog, nutrients_catalog, sentence_parser, sentence_analyzer, '../data/obj/')
