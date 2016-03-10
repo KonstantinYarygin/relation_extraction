@@ -65,12 +65,9 @@ if __name__ == '__main__':
             messages.append(message)
 
         time.sleep(90)
-        i += 1
-        if i == 3:
-            break
     constants.logger.info("finish google nutrients")
 
     with open(output_file_name, 'w') as f:
         f.write('\n'.join(messages))
 
-    send_mail("anatoly.developer@gmail.com", "nutrient google search", "<br/>".join(messages), files=[output_file_name])
+    send_mail("anatoly.developer@gmail.com", "nutrient google search", files=[output_file_name])
