@@ -7,7 +7,7 @@ import pandas as pd
 FIELD_STRAIN = 'strain'
 
 from ohmygut.core.constants import FIELD_NAME, NCBI_COLS_NAMES, NCBI_NUM_NAMES, NCBI_NUM_NODES, NCBI_COLS_NODES, \
-    CLASS_EXCLUSIONS, FIELD_CLASS, FIELD_ID, CHUNK_SIZE, FIELD_PARENT_ID, FIELD_RANK, RANK_EXCLUSIONS, TEMPLATE_CONTIG, \
+    CLASS_EXCLUSIONS, FIELD_CLASS, FIELD_ID, CHUNK_SIZE, FIELD_PARENT_ID, FIELD_RANK, RANK_EXCLUSIONS, \
     CLASS_SCIENTIFIC, RANK_SPECIES
 
 
@@ -16,8 +16,10 @@ def get_parent_ids(id, ncbi_nodes, is_get_child_id=False):
     parents_ids = np.array(id)
     while len(parents_ids) != 0:
         if not is_get_child_id: ids = np.append(ids, parents_ids)
-        if not is_get_child_id: parents_ids = np.unique(ncbi_nodes[ncbi_nodes[FIELD_ID].isin(parents_ids)][FIELD_PARENT_ID].values)
-        if is_get_child_id:  parents_ids = np.unique(ncbi_nodes[ncbi_nodes[FIELD_PARENT_ID].isin(parents_ids)][FIELD_ID].values)
+        if not is_get_child_id: parents_ids = np.unique(
+            ncbi_nodes[ncbi_nodes[FIELD_ID].isin(parents_ids)][FIELD_PARENT_ID].values)
+        if is_get_child_id:  parents_ids = np.unique(
+            ncbi_nodes[ncbi_nodes[FIELD_PARENT_ID].isin(parents_ids)][FIELD_ID].values)
         parents_types = ncbi_nodes[ncbi_nodes[FIELD_ID].isin(parents_ids)][FIELD_RANK].values
         parents_ids = parents_ids[~np.in1d(parents_types, RANK_EXCLUSIONS)]
         if is_get_child_id: ids = np.append(ids, parents_ids)
@@ -30,13 +32,14 @@ def get_species_ids(bact_list, ncbi_names):
     bact_list = pd.merge(bact_list, ncbi_names, how='left', on=[FIELD_NAME], copy=False)
     gut_species_ids = (bact_list[np.isfinite(bact_list[FIELD_ID].values)].drop_duplicates(FIELD_ID)[FIELD_ID].tolist())
     gut_species_ids.sort()
-
     bact_list_unresolved = pd.DataFrame(bact_list[np.isnan(bact_list[FIELD_ID].values)][FIELD_NAME])
+
     unresolved_names = bact_list_unresolved[FIELD_NAME].copy()
     bact_list_unresolved[FIELD_NAME] = bact_list_unresolved[FIELD_NAME].apply(lambda x: x.split(' ')[0])
     bact_list_unresolved = pd.merge(bact_list_unresolved, ncbi_names, how='left', on=[FIELD_NAME], copy=False)
-    gut_classes_ids = bact_list_unresolved[np.isfinite(bact_list_unresolved[FIELD_ID].values)
-                       ].drop_duplicates(FIELD_ID)[FIELD_ID].tolist()
+    gut_classes_ids = \
+    bact_list_unresolved[np.isfinite(bact_list_unresolved[FIELD_ID].values)].drop_duplicates(FIELD_ID)[
+        FIELD_ID].tolist()
     gut_classes_ids.sort()
     return gut_species_ids, gut_classes_ids, unresolved_names
 
