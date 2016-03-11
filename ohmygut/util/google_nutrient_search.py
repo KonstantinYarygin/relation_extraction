@@ -9,6 +9,8 @@ import sys
 from bs4 import BeautifulSoup
 import random
 
+sys.path.append('.')
+
 from ohmygut.core import constants
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.util.sendmail import send_mail
