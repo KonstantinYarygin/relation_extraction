@@ -1,5 +1,4 @@
-from ohmygut.core.constants import PATH_NUTR_NAME, PATH_FIELD_TAG, PATH_FIELD_WORD, PATH_FIELD_REL, PATH_BACT_NAME, \
-    PATH_FIELD_IND
+from ohmygut.core.constants import PATH_NUTR_NAME, PATH_BACT_NAME
 
 
 # TODO: refactor
@@ -14,9 +13,10 @@ def find_bindings(sentence_graph, sentence_words, graph_index, types=False):
 
 
 class PatternFinder(object):
-    def __init__(self, verb_list, stemmer):
+    def __init__(self, stemmer, verb_ontology):
         self.__stemmer = stemmer
-        self.verb_list = verb_list
+        self.__verb_ontology = verb_ontology
+        self.__verb_list = [verb for verb_list in verb_ontology.items() for verb in verb_list]
 
     def find_words(self, words, templates, return_value=False):
         words_stems = [self.__stemmer.stem(word) for word in words]
@@ -29,7 +29,7 @@ class PatternFinder(object):
             return ind
 
     def find_patterns(self, path, sentence_graph=None, sentence_words=None):
-        [verb_stem_ids, verbs] = self.find_words(path[PATH_FIELD_WORD], self.verb_list, return_value=True)
+        [verb_stem_ids, verbs] = self.find_words(path.word, self.verb_list, return_value=True)
         nutr_id = path[PATH_FIELD_TAG].index(PATH_NUTR_NAME)
         bact_id = path[PATH_FIELD_TAG].index(PATH_BACT_NAME)
         dist_nutr_bact = nutr_id - bact_id
@@ -43,7 +43,7 @@ class PatternFinder(object):
                 patterns_verbs.append(('pattern 1', verb_name))
             if pattern_1_1_requirement(dist_nutr_verb, path[PATH_FIELD_REL][verb_id], path[PATH_FIELD_TAG][verb_id]):
                 patterns_verbs.append(('pattern 1.1', verb_name))
-            if pattern_5_requirement(dist_nutr_verb, path[PATH_FIELD_WORD][verb_id]):
+            if pattern_5_requirement(dist_nutr_verb, path.word[verb_id]):
                 patterns_verbs.append(('pattern 5', verb_name))
             if pattern_6_requirement(dist_nutr_verb, path[PATH_FIELD_TAG][verb_id]):
                 patterns_verbs.append(('pattern 6', verb_name))
@@ -65,7 +65,7 @@ class PatternFinder(object):
                 if pattern_2_1_requirement(dist_bact_verb, bact_by_binding, path[PATH_FIELD_TAG][verb_id]):
                     patterns_verbs.append(('pattern 2.1', verb_name))
 
-            known_ids = self.find_words(path[PATH_FIELD_WORD], ['known'])
+            known_ids = self.find_words(path.word, ['known'])
             for known_id in known_ids:
                 known_id_binds = find_bindings(sentence_graph, sentence_words, path[PATH_FIELD_IND][known_id])
                 [verb_ids, verbs] = self.find_words(known_id_binds, self.verb_list, return_value=True)
