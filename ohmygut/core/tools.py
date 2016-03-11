@@ -5,11 +5,9 @@ import os
 
 
 def get_sentences(text):
-    # todo: use stanford tokenizer
     return sent_tokenize(text)
 
 
-# todo: test me
 def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_tokenizer):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
@@ -50,20 +48,10 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_
 
     return (bacteria_new, nutrients_new, diseases_new)
 
-# sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, also M. tuberculosis is a propionic acid producer.'
-# bacteria = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
-# nutrients = ['propionic']
-# diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'), ('chronic obstructive syndrome', 'a1'), ('obstructive syndrome', 'b1')]
 
-# print(sentence)
-
-# print(bacteria)
-# print(nutrients)
-# print(diseases)
-
-# bacteria_new, nutrients_new, diseases_new = remove_entity_overlapping(sentence, bacteria, nutrients, diseases)
-# print()
-
-# print(bacteria_new)
-# print(nutrients_new)
-# print(diseases_new)
+def untokenize(tokens):
+    result = ' '.join(tokens)
+    result = result.replace(' , ', ', ').replace(' .', '.').replace(' !', '!')
+    result = result.replace(' ?', '?').replace(' : ', ': ').replace(' \'', '\'')
+    result = result.replace('( ', '(').replace(' )', ')')
+    return result

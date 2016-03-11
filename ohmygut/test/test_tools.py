@@ -1,6 +1,6 @@
 import unittest
 
-from ohmygut.core.tools import get_sentences
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping
 
 
 class TestCase(unittest.TestCase):
@@ -11,11 +11,32 @@ class TestCase(unittest.TestCase):
         actual = get_sentences(test_text)
         self.assertListEqual(expected, actual)
 
-    def test_get_sentences_tyakht(self):
-        test_text = "Was (Tyakht et al. 2008) shown that xxx. Sentence two."
-        expected = ["Was (Tyakht et al. 2008) shown that xxx.", "Sentence two."]
-        actual = get_sentences(test_text)
-        self.assertListEqual(expected, actual)
+    def test_remove_entity_overlapping(self):
+        sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, also M. tuberculosis is a propionic acid producer.'
+        bacteria = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
+        nutrients = [('propionic', '123')]
+        diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'),
+                    ('chronic obstructive syndrome', 'a1'), ('obstructive syndrome', 'b1')]
+
+        class MockTokenizer():
+            def tokenize(self):
+                tokens = ['M.', 'tuberculosis', 'is', 'the', 'cause', 'of', 'tuberculosis', 'and', 'chronic',
+                          'obstructive',
+                          'syndrome', ',', 'also', 'M.', 'tuberculosis', 'is', 'a', 'propionic', 'acid', 'producer',
+                          '.']
+                return tokens
+
+        bacteria_new, nutrients_new, diseases_new = remove_entity_overlapping(sentence, bacteria, nutrients, diseases,
+                                                                              stanford_tokenizer=MockTokenizer)
+
+        bacteria_expected = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
+        nutrients_expected = [('propionic', '123')]
+        diseases_expected = [('tuberculosis', 'a'), ('chronic obstructive syndrome', 'a1')]
+
+        self.assertListEqual(bacteria_expected, bacteria_new)
+        self.assertListEqual(nutrients_expected, nutrients_new)
+        self.assertListEqual(diseases_expected, diseases_new)
+
 
 if __name__ == '__main__':
     unittest.main()

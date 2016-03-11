@@ -1,43 +1,18 @@
 # -*- coding: utf-8 -*-
-
 import matplotlib.pyplot as plt
 import networkx as nx
 import re
 
 
-def trim_sentence(sent):
-    patterns = ['\[\s?\d+[(and)\-,\d\s]*\]',
-                '\[20\d\d\w?\]',
-                '\[19\d\d\w?\]',
-                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|fig\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]',
-                '\[(supplementary|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\]'
-                '\(\s?\d+[(and)\-,\d\s]*\)',
-                '\(20\d\d\w?\)',
-                '\(19\d\d\w?\)',
-                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(table|tables|tbl|tbl\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
-                '\((supplementary|supp|supp\.|suppl|suppl\.)?\s?(figure|figures|fig|fig\.)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)',
-                '\((supplemental|supp|supp\.|suppl|suppl\.)?\s?(data)\s?[Ss]?\d+([(and)\-,\sS\d]*)?\)']
-    match_lists = [re.finditer(pattern, sent, re.IGNORECASE) for pattern in patterns]
-    substrings = [match.group() for match_list in match_lists for match in match_list if match]
-    out_sent = sent
-    for substring in substrings:
-        out_sent = out_sent.replace(substring, '')
-    return (out_sent)
-
-
 class SentenceParser(object):
-    """docstring for SentenceParser"""
-
     def __init__(self, stanford_dependency_parser):
         self.stanford_dependency_parser = stanford_dependency_parser
 
     def parse_sentence(self, sentence):
-        sentence_trimmed = trim_sentence(sentence)
         try:
-            dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence_trimmed)
+            dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence)
         except OSError:
-            return([])
+            return
         
         dependency_graph = next(dependency_graph_iterator)
 
@@ -60,8 +35,6 @@ class SentenceParser(object):
 
 
 class ParserOutput(object):
-    """docstring for SentenceGraph"""
-
     def __init__(self, nx_graph, words, tags):
         self.nx_graph = nx_graph
         self.words = words
