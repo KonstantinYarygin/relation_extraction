@@ -1,7 +1,12 @@
-from nltk.tokenize import StanfordTokenizer
-from nltk import sent_tokenize
-from itertools import product
 import os
+import pickle
+import re
+from itertools import product
+
+import pandas as pd
+from nltk import sent_tokenize
+
+from ohmygut.core.constants import TRIM_LETTERS_NUMBER
 
 
 def get_sentences(text):
@@ -55,3 +60,31 @@ def untokenize(tokens):
     result = result.replace(' ?', '?').replace(' : ', ': ').replace(' \'', '\'')
     result = result.replace('( ', '(').replace(' )', ')')
     return result
+
+
+def sentences_to_data_frame(sentences):
+    data_list = map(lambda x: [x.text,
+                               x.article_title,
+                               x.journal,
+                               str(x.bacteria),
+                               str(x.nutrients),
+                               str(x.diseases),
+                               ], sentences)
+    data = pd.DataFrame(list(data_list),
+                        columns=['text', 'article_title', 'journal',
+                                 'bacteria', 'nutrients', 'diseases'])
+    return data
+
+
+def serialize_result(sentence, save_path, sentence_number):
+    filename = '%s_%s_%i.pkl' % (sentence.journal[0:TRIM_LETTERS_NUMBER], sentence.article_title[0:TRIM_LETTERS_NUMBER], sentence_number)
+    filename = delete_forbidden_characters(filename)
+    filename = os.path.join(save_path, filename)
+    with open(filename, 'wb') as f:
+        pickle.dump(sentence, f)
+
+
+def delete_forbidden_characters(string):
+    return_string = string.replace(' ', '_')
+    return_string = re.sub('[^\w_\d\.]', '', return_string)
+    return return_string

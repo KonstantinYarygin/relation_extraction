@@ -37,7 +37,6 @@ article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_
 with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
     verb_ontology = eval(''.join(f.readlines()))
 
-
 lancaster_stemmer = LancasterStemmer()
 stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
                                                                 '../stanford_parser/stanford-parser.jar'))

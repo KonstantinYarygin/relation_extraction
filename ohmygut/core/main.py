@@ -1,47 +1,29 @@
 # -*- coding: utf-8 -*-
 import datetime
-import pickle
-
-import pandas as pd
+import os
 
 from ohmygut.core import constants
 from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import pattern_logger, large_pattern_logger
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.tools import get_sentences, remove_entity_overlapping
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentences_to_data_frame, serialize_result
 
 
-def sentences_to_data_frame(sentences):
-    data_list = map(lambda x: [x.text,
-                               x.article_title,
-                               x.journal,
-                               str(x.bacteria),
-                               str(x.nutrients),
-                               str(x.diseases),
-                               str(x.parser_output)
-                               ], sentences)
-    data = pd.DataFrame(list(data_list),
-                        columns=['text', 'article_title', 'journal',
-                                 'bacteria', 'nutrients', 'diseases', 'parser_output'])
-    return data
+def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, tokenizer,
+         pattern_finder, start_number=0):
+    output_dir = "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")
 
-
-def serialize_result(sentence, save_path):
-    filename = (
-        sentence.journal.split(' ')[0] + '_%s.pkl' % (datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")))
-    filename = save_path + '/' + filename
-    with open(filename, 'wb') as f:
-        pickle.dump(sentence, f)
-
-
-def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser,
-         save_path, tokenizer, pattern_finder):
     articles = article_data_source.get_articles()
     sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                        for sentence in get_sentences(article.text))
     sentences = []
-    n = 0
+    sentence_number = start_number
+    for i in range(start_number):
+        next(sentences_titles_journals_tuple)
+
     for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
+        sentence_number += 1
+
         bacteria = bacteria_catalog.find(sentence_text)
         nutrients = nutrients_catalog.find(sentence_text)
         diseases = diseases_catalog.find(sentence_text)
@@ -73,17 +55,17 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
             log_paths(sentence, pathes)
 
         constants.logger.info(sentence)
-        n += 1
-        constants.logger.info("sentence № %i" % n)
+
+        constants.logger.info("sentence № %i" % sentence_number)
         sentences.append(sentence)
         constants.logger.info("=" * 80)
 
-        serialize_result(sentence, save_path)
+        serialize_result(sentence, output_dir, sentence_number)
 
-    constants.pattern_logger.info('total number sentences: %d' % n)
-    constants.large_pattern_logger.info('total number sentences: %d' % n)
+    constants.pattern_logger.info('total number sentences: %d' % sentence_number)
+    constants.large_pattern_logger.info('total number sentences: %d' % sentence_number)
     data = sentences_to_data_frame(sentences)
-    data.to_csv('sentences%s.csv' % (datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")))
+    data.to_csv(os.path.join(output_dir, 'sentences.csv'))
 
 
 def log_paths(sentence, paths):
@@ -107,7 +89,7 @@ def log_paths(sentence, paths):
     large_pattern_logger.info(sentence.parser_output.tags)
     large_pattern_logger.info(sentence.parser_output.nx_graph)
     large_pattern_logger.info([(i, j, sentence.parser_output.nx_graph[i][j]['rel']) for i, j in
-                                         sentence.parser_output.nx_graph.edges()])
+                               sentence.parser_output.nx_graph.edges()])
     large_pattern_logger.info('')
 
     for path in paths:
