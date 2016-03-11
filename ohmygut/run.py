@@ -6,6 +6,7 @@ from nltk.tokenize import StanfordTokenizer
 
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
+from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
@@ -22,8 +23,8 @@ stanford_dependency_parser = StanfordDependencyParser(
 )
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
-bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
-bacteria_catalog.initialize()
+# bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
+# bacteria_catalog.initialize()
 
 nutrients_catalog = NutrientsCatalogNikogosov(
     path=os.path.join(script_dir, '../data/nutrients/nikogosov_nutrients_normalized.tsv'))
@@ -42,5 +43,11 @@ stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
                                                                 '../stanford_parser/stanford-parser.jar'))
 pattern_finder = PatternFinder(lancaster_stemmer, verb_ontology)
 
-main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, "",
-     stanford_tokenizer, pattern_finder)
+
+class MockCatalog(Catalog):
+    def find(self, sentence):
+        return ''
+
+mock_catalog = MockCatalog()
+
+main(article_data_source, mock_catalog, nutrients_catalog, diseases_catalog, sentence_parser, stanford_tokenizer, pattern_finder)

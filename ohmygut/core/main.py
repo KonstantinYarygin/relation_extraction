@@ -12,7 +12,8 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentenc
 def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, tokenizer,
          pattern_finder, start_number=0):
     output_dir = "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")
-
+    os.mkdir(output_dir)
+    constants.logger.info("start number is %i" % start_number)
     articles = article_data_source.get_articles()
     sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                        for sentence in get_sentences(article.text))
@@ -21,6 +22,7 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
     for i in range(start_number):
         next(sentences_titles_journals_tuple)
 
+    constants.logger.info("start looping sentences")
     for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
         sentence_number += 1
 
@@ -54,13 +56,13 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
         if len(pathes) > 0:
             log_paths(sentence, pathes)
 
-        constants.logger.info(sentence)
-
         constants.logger.info("sentence № %i" % sentence_number)
-        sentences.append(sentence)
+        constants.logger.info(sentence)
         constants.logger.info("=" * 80)
 
+        sentences.append(sentence)
         serialize_result(sentence, output_dir, sentence_number)
+    constants.logger.info("finish looping sentences")
 
     constants.pattern_logger.info('total number sentences: %d' % sentence_number)
     constants.large_pattern_logger.info('total number sentences: %d' % sentence_number)
