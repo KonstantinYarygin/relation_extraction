@@ -1,6 +1,6 @@
 import unittest
 
-from ohmygut.core.main import sentences_to_data_frame
+from ohmygut.core.tools import sentences_to_data_frame
 from ohmygut.core.sentence import Sentence
 
 

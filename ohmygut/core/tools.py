@@ -1,15 +1,18 @@
-from nltk.tokenize import StanfordTokenizer
-from nltk import sent_tokenize
-from itertools import product
 import os
+import pickle
+import re
+from itertools import product
+
+import pandas as pd
+from nltk import sent_tokenize
+
+from ohmygut.core.constants import TRIM_LETTERS_NUMBER
 
 
 def get_sentences(text):
-    # todo: use stanford tokenizer
     return sent_tokenize(text)
 
 
-# todo: test me
 def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_tokenizer):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
@@ -50,20 +53,38 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_
 
     return (bacteria_new, nutrients_new, diseases_new)
 
-# sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, also M. tuberculosis is a propionic acid producer.'
-# bacteria = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
-# nutrients = ['propionic']
-# diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'), ('chronic obstructive syndrome', 'a1'), ('obstructive syndrome', 'b1')]
 
-# print(sentence)
+def untokenize(tokens):
+    result = ' '.join(tokens)
+    result = result.replace(' , ', ', ').replace(' .', '.').replace(' !', '!')
+    result = result.replace(' ?', '?').replace(' : ', ': ').replace(' \'', '\'')
+    result = result.replace('( ', '(').replace(' )', ')')
+    return result
 
-# print(bacteria)
-# print(nutrients)
-# print(diseases)
 
-# bacteria_new, nutrients_new, diseases_new = remove_entity_overlapping(sentence, bacteria, nutrients, diseases)
-# print()
+def sentences_to_data_frame(sentences):
+    data_list = map(lambda x: [x.text,
+                               x.article_title,
+                               x.journal,
+                               str(x.bacteria),
+                               str(x.nutrients),
+                               str(x.diseases),
+                               ], sentences)
+    data = pd.DataFrame(list(data_list),
+                        columns=['text', 'article_title', 'journal',
+                                 'bacteria', 'nutrients', 'diseases'])
+    return data
 
-# print(bacteria_new)
-# print(nutrients_new)
-# print(diseases_new)
+
+def serialize_result(sentence, save_path, sentence_number):
+    filename = '%s_%s_%i.pkl' % (sentence.journal[0:TRIM_LETTERS_NUMBER], sentence.article_title[0:TRIM_LETTERS_NUMBER], sentence_number)
+    filename = delete_forbidden_characters(filename)
+    filename = os.path.join(save_path, filename)
+    with open(filename, 'wb') as f:
+        pickle.dump(sentence, f)
+
+
+def delete_forbidden_characters(string):
+    return_string = string.replace(' ', '_')
+    return_string = re.sub('[^\w_\d\.]', '', return_string)
+    return return_string

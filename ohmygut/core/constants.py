@@ -32,8 +32,6 @@ large_pattern_logger = logging.getLogger("large_pattern_logger")
 google_search_nutrient_logger = logging.getLogger("google_search_nutrient_logger")
 
 CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
-TEMPLATE_CONTIG = '(_genome[\W\d_]*|_contig[\W\d_]*|_cont[0-9]+)'
-TEMPLATE_SEP = '[\W_]+'
 RANK_EXCLUSIONS = ['superkingdom', 'kingdom']
 
 FIELD_NAME = 'name'
@@ -41,8 +39,6 @@ FIELD_CLASS = 'class'
 FIELD_ID = 'id'
 FIELD_RANK = 'rank'
 FIELD_PARENT_ID = 'parent_id'
-CLASS_SCIENTIFIC = 'scientific name'
-RANK_SPECIES = 'species'
 
 
 NCBI_COLS_NAMES = [FIELD_ID, FIELD_NAME, FIELD_CLASS]
@@ -53,28 +49,9 @@ NCBI_NUM_NODES = [0, 2, 4]
 
 CHUNK_SIZE = 10000
 
-
-VERBS = ['degrade', 'utilize', 'produce', 'metabolize','ferment', 'consume', 'hydrolyze', 'require']
-MVERBS = ['have ability', 'has ability', 'able', 'can']
-
-PATH_FIELD_TAG = 'tags'
-PATH_FIELD_REL = 'edge_rels'
-PATH_FIELD_WORD = 'words'
-PATH_FIELD_IND = 'pos_path'
-
-PATH_NUTR_NAME = 'NUTRIENT'
-PATH_BACT_NAME = 'BACTERIUM'
-
-VERB_LIST = ['consume', 'acquire', 'absorb', 'ingest', 'retain', 'adhere', 'adopt', 'assimilate', 'obtain',
-             'incorporate', 'eat', 'degrade', 'utilize', 'utilise', 'metabolize', 'metabolise', 'ferment',
-             'hydrolyze', 'cleave', 'catabolize', 'digest', 'bind', 'hydrolyse', 'lyse', 'convert', 'oxidize',
-             'destroy', 'eliminate', 'dephosphorylate', 'exploit', 'transform', 'eradicate', 'dissociate',
-             'deactivate', 'neutralize', 'dimerize', 'inactivate', 'phosphorylate', 'heterodimerizes',
-             'produce', 'synthesize', 'synthesise', 'biosynthesize', 'biosynthesise', 'assemble',
-             'create', 'make', 'secrete', 'excrete', 'liberate', 'attach', 'resist', 'transmit', 'disseminate',
-             'solubilize', 'sustain', 'adapt', 'neutralize']
-
 plural_dict = {'a': 'ae', 'us': 'i', 'er': 'i', 'um': 'a',
                'on': 'a', 'is': 'es', 'al': 'alia',
                'ar': 'aria', 'e': 'ia', 'u': 'ua',
                'as': ['ades', 'ads', 'ad']}
+
+TRIM_LETTERS_NUMBER = 20

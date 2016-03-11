@@ -1,86 +1,94 @@
 from itertools import product
 import networkx as nx
 
-from ohmygut.core.constants import VERB_LIST
-from ohmygut.core.pattern_finder import PatternFinder
+class ShortestPath():
+    def __init__(self, edge_rels, words, tags, nodes_indexes):
+        super().__init__()
+        self.nodes_indexes = nodes_indexes
+        self.tags = tags
+        self.words = words
+        self.edge_rels = edge_rels
+        self.type = None
 
 
-def search_path(sentence, source, target, undirected=True):
+def search_shortest_path(parser_output, source_node_id, target_node_id, undirected=True):
     if undirected:
-        G = sentence.parse_result.nx_graph.to_undirected()
+        G = parser_output.nx_graph.to_undirected()
     else:
-        G = sentence.parse_result.nx_graph
+        G = parser_output.nx_graph
 
     try:
-        pos_path = nx.dijkstra_path(G, source, target)
+        nodes_indexes = nx.dijkstra_path(G, source_node_id, target_node_id)
     except nx.exception.NetworkXNoPath:
-        return {}
+        return
 
-    edge_rels = [G[i][j]['rel'] for i, j in zip(pos_path[:-1], pos_path[1:])]
-    words = [sentence.parse_result.words[i] for i in pos_path]
-    tags = [sentence.parse_result.tags[i] for i in pos_path]
-    return {'edge_rels': edge_rels, 'words': words, 'tags': tags, 'pos_path': pos_path}
+    edge_rels = [G[i][j]['rel'] for i, j in zip(nodes_indexes[:-1], nodes_indexes[1:])]
+    words = [parser_output.words[i] for i in nodes_indexes]
+    tags = [parser_output.tags[i] for i in nodes_indexes]
+    return ShortestPath(edge_rels, words, tags, nodes_indexes)
 
 
-class SentenceAnalyzer(object):
-    def __init__(self, stemmer, tokenizer):
-        self.__stemmer = stemmer
-        self.__tokenizer = tokenizer
+def analyze_sentence(sentence, tokenizer, pattern_finder):
+    bacterial_names = [name for name, ncbi_id in sentence.bacteria]
+    disease_names = [name for name, doid_id in sentence.diseases]
+    nutrient_names = [name for name, idname in sentence.nutrients]
+    parser_output = sentence.parser_output
 
-    def analyze(self, sentence):
-        self.merge_nodes(sentence)
-        bacteria_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'BACTERIUM']
-        nutrients_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'NUTRIENT']
-        diseases_nodes_ids = [id for id, tag in sentence.parse_result.tags.items() if tag == 'DISEASE']
-        pathes = []
-        for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
-            pathes.append(search_path(sentence, bacterium_node_id, nutrient_node_id))
-        pattern_pathes = []
-        finder = PatternFinder(VERB_LIST, self.__stemmer)
-        for path in pathes:
-            pattern_verb = finder.find_patterns(path, sentence.parse_result.nx_graph, sentence.parse_result.words)
-            if len(pattern_verb) > 0:
-                path['type'] = pattern_verb
-                pattern_pathes.append(path)
-        return pattern_pathes
+    merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, parser_output)
+    bacteria_nodes_ids = [id for id, tag in sentence.parser_output.tags.items() if tag == 'BACTERIUM']
+    nutrients_nodes_ids = [id for id, tag in sentence.parser_output.tags.items() if tag == 'NUTRIENT']
+    # diseases_nodes_ids = [id for id, tag in sentence.parser_output.tags.items() if tag == 'DISEASE']
+    shortest_pathes = []
+    for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
+        shortest_path = search_shortest_path(sentence, bacterium_node_id, nutrient_node_id)
+        if not shortest_path:
+            continue
+        pattern_verbs = pattern_finder.find_patterns(shortest_path,
+                                                     sentence.parser_output.nx_graph,
+                                                     sentence.parser_output.words)
+        if pattern_verbs:
+            shortest_path.type = pattern_verbs
 
-    def merge_nodes(self, sentence):
-        bacterial_names = [name for name, ncbi_id in sentence.bacteria]
-        disease_names = [name for name, doid_id in sentence.diseases]
-        nutrient_names = [name for name, idname in sentence.nutrients]
-        entities_list = ['BACTERIUM', 'NUTRIENT', 'DISEASE']
+        shortest_pathes.append(shortest_path)
 
-        for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
-            for name in names_list:
-                tokens = self.__tokenizer.tokenize(name)
-                if len(tokens) > 1:
-                    tokens_ids = []
-                    for token in tokens:
-                        index = list(sentence.parse_result.words.values()).index(token)
-                        tokens_ids.append(list(sentence.parse_result.words.keys())[index])
-                    merged_id = min(tokens_ids)
-                    for i, j in sentence.parse_result.nx_graph.edges()[:]:
-                        if i in tokens_ids and j in tokens_ids:
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                        elif i in tokens_ids:
-                            rel = sentence.parse_result.nx_graph[i][j]['rel']
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                            sentence.parse_result.nx_graph.add_edge(merged_id, j, {'rel': rel})
-                        elif j in tokens_ids:
-                            rel = sentence.parse_result.nx_graph[i][j]['rel']
-                            sentence.parse_result.nx_graph.remove_edge(i, j)
-                            sentence.parse_result.nx_graph.add_edge(i, merged_id, {'rel': rel})
-                    sentence.parse_result.nx_graph.remove_nodes_from([id for id in tokens_ids if id != merged_id])
-                    sentence.parse_result.words[merged_id] = name
-                    sentence.parse_result.tags[merged_id] = entity_name
-                    for id in tokens_ids:
-                        if id != merged_id:
-                            del sentence.parse_result.words[id]
-                            del sentence.parse_result.tags[id]
-                else:
-                    index = list(sentence.parse_result.words.values()).index(name)
-                    id = list(sentence.parse_result.words.keys())[index]
-                    sentence.parse_result.tags[id] = entity_name
+    return shortest_pathes
 
-    def get_tokenizer(self):
-        return self.__tokenizer
+
+def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, parser_output):
+    entities_list = ['BACTERIUM', 'NUTRIENT', 'DISEASE']
+
+    for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names]):
+        for name in names_list:
+            tokens = tokenizer.tokenize(name)
+            if len(tokens) > 1:
+                tokens_ids = []
+                for token in tokens:
+                    index = list(parser_output.words.values()).index(token)
+                    tokens_ids.append(list(parser_output.words.keys())[index])
+                merged_id = min(tokens_ids)
+                for i, j in parser_output.nx_graph.edges()[:]:
+                    if i in tokens_ids and j in tokens_ids:
+                        parser_output.nx_graph.remove_edge(i, j)
+                    elif i in tokens_ids:
+                        rel = parser_output.nx_graph[i][j]['rel']
+                        parser_output.nx_graph.remove_edge(i, j)
+                        parser_output.nx_graph.add_edge(merged_id, j, {'rel': rel})
+                    elif j in tokens_ids:
+                        rel = parser_output.nx_graph[i][j]['rel']
+                        parser_output.nx_graph.remove_edge(i, j)
+                        parser_output.nx_graph.add_edge(i, merged_id, {'rel': rel})
+                parser_output.nx_graph.remove_nodes_from([id for id in tokens_ids if id != merged_id])
+                parser_output.words[merged_id] = name
+                parser_output.tags[merged_id] = entity_name
+                for id in tokens_ids:
+                    if id != merged_id:
+                        del parser_output.words[id]
+                        del parser_output.tags[id]
+            else:
+                index = list(parser_output.words.values()).index(name)
+                id = list(parser_output.words.keys())[index]
+                parser_output.tags[id] = entity_name
+
+
+def get_tokenizer(self):
+    return self.__tokenizer

@@ -6,14 +6,23 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 
 
 def get_articles_nxmls(articles_directory):
+    """
+    Yields articles full nxml in alphabetical order
+    :param articles_directory:
+    :return: generator
+    """
+    pathes = []
     for root, dirs, files in os.walk(articles_directory):
         for file in files:
             if not file.endswith('.nxml'):
                 continue
             file_full_path = os.path.join(root, file)
-            with open(file_full_path) as f:
-                article_nxml = ''.join(f.readlines())
-            yield article_nxml
+            pathes.append(file_full_path)
+    pathes.sort()
+    for file_full_path in pathes:
+        with open(file_full_path) as f:
+            article_nxml = ''.join(f.readlines())
+        yield article_nxml
 
 
 def get_article_text(article_nxml):

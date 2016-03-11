@@ -1,3 +1,4 @@
+from ohmygut.core import constants
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
 from time import time
@@ -51,10 +52,9 @@ class NutrientsCatalogNikogosov(Catalog):
         self.__idname_by_nutrient = None
         self.__hash_tree = None
 
-    def initialize(self, verbose=False):
+    def initialize(self):
         t1 = time()
-        if verbose:
-            print('Creating nutrients catalog...')
+        constants.logger.info('Creating nutrients catalog...')
 
         with open(self.path) as f:
             f.readline()
@@ -69,8 +69,7 @@ class NutrientsCatalogNikogosov(Catalog):
         self.__hash_tree = HashTree(self.__idname_by_nutrient.keys())
 
         t2 = time()
-        if verbose:
-            print('Done. Total time: %.2f sec.' % (t2 - t1))
+        constants.logger.info('Done creating nutrients catalog. Total time: %.2f sec.' % (t2 - t1))
 
     def __generate_case_names(self):
 

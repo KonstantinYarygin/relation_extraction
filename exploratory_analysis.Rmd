@@ -52,7 +52,6 @@ setnames(data.impacts, c('journal', 'impact'))
 data.impacts <- unique(data.impacts)
 data.impacts$journal <- tolower(data.impacts$journal)
 data <- merge(data, data.impacts, by='journal', all.x = TRUE)
-nrow(data)
 ```
 
 ## Results
@@ -80,10 +79,10 @@ head(data.articles, 10)
 Длина в **символах**
 ```{r, fig.height=7}
 data[,length:=str_length(text)]
-ggplot(data, aes(x=length)) + geom_histogram(binwidth=800) +
+ggplot(data, aes(x=length)) + geom_histogram(binwidth=400) +
     stat_bin(aes(y = ..count.., 
                  label = ifelse(..count..!=0, ..count..,'')), 
-             binwidth=800, geom='text', vjust = -1, size=3) + theme_bw()
+             binwidth=400, geom='text', vjust = -1, size=3) + theme_bw()
 ```
 
 ### Какие бактерии встречаются чаще всего?  
@@ -113,7 +112,7 @@ ggplot(data.bacteria.count, aes(x = reorder(bacteria,-N), y = N, group=1)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_blank())
-````
+```
 
 ### Какие нутриенты встречаются чаще всего?  
 
@@ -231,7 +230,7 @@ ggplot(data.journal.count[0:20], aes(x = reorder(journal, N), y = N)) +
 
 #### Какие есть импакты журналов
 ```{r}
-ggplot() + aes(unique(data$impact)) + geom_histogram(binwidth=1) +
+ggplot() + aes(data$impact) + geom_histogram(binwidth=1) +
     stat_bin(aes(y = ..count.., 
                  label = ifelse(..count..!=0, ..count..,'')), 
              binwidth=1, geom='text', vjust = -1, size=3) +
