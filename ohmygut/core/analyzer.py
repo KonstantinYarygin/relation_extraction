@@ -40,7 +40,7 @@ def analyze_sentence(sentence, tokenizer, pattern_finder):
     # diseases_nodes_ids = [id for id, tag in sentence.parser_output.tags.items() if tag == 'DISEASE']
     shortest_pathes = []
     for bacterium_node_id, nutrient_node_id in product(bacteria_nodes_ids, nutrients_nodes_ids):
-        shortest_path = search_shortest_path(sentence, bacterium_node_id, nutrient_node_id)
+        shortest_path = search_shortest_path(sentence.parser_output, bacterium_node_id, nutrient_node_id)
         if not shortest_path:
             continue
         pattern_verbs = pattern_finder.find_patterns(shortest_path,

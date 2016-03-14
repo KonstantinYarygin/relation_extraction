@@ -11,7 +11,9 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentenc
 
 def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, tokenizer,
          pattern_finder, start_number=0):
-    output_dir = "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y")
+    output_dir = os.path.join("result", "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
+    if not os.path.exists('result'):
+        os.mkdir('result')
     os.mkdir(output_dir)
     constants.logger.info("start number is %i" % start_number)
     articles = article_data_source.get_articles()
@@ -67,7 +69,7 @@ def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_cata
     constants.pattern_logger.info('total number sentences: %d' % sentence_number)
     constants.large_pattern_logger.info('total number sentences: %d' % sentence_number)
     data = sentences_to_data_frame(sentences)
-    data.to_csv(os.path.join(output_dir, 'sentences.csv'))
+    data.to_csv(os.path.join(output_dir, 'sentences.csv'), index=False)
 
 
 def log_paths(sentence, paths):
