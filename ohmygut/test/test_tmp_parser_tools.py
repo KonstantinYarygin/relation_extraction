@@ -4,14 +4,15 @@ import networkx as nx
 import numpy as np
 from nltk import LancasterStemmer
 
-from ohmygut.core.pattern_finder import PatternFinder
+from ohmygut.core.analyzer import ShortestPath
+from ohmygut.core.pattern_finder import PatternFinder, find_bindings
 
 
 class MyTestCase(unittest.TestCase):
     def test_find_words(self):
         words = ['ab', 'cd', 'kl', 'mn', 'degrades', 'utilise', 'utilises', 'like', 'produces', 'degraded']
         verb_list = ['produce', 'degrade', 'utilise']
-        target = PatternFinder(verb_list, LancasterStemmer())
+        target = PatternFinder({'verbs': verb_list}, LancasterStemmer())
         expected = [4, 5, 6, 8, 9]
         actual = target.find_words(words, verb_list)
         self.assertEqual(actual, expected)
@@ -19,52 +20,50 @@ class MyTestCase(unittest.TestCase):
     def test_find_words_values(self):
         words = ['ab', 'cd', 'kl', 'mn', 'degrades', 'utilise', 'utilises', 'like', 'produces', 'degraded']
         verb_list = ['produce', 'degrade', 'utilise']
-        target = PatternFinder(verb_list, LancasterStemmer())
+        target = PatternFinder({'verbs': verb_list}, LancasterStemmer())
         expected = [[4, 5, 6, 8, 9], ['degrade', 'utilise', 'utilise', 'produce', 'degrade']]
         actual = target.find_words(words, verb_list, return_value=True)
         self.assertEqual(actual, expected)
 
     def test_find_bindings(self):
-        target = PatternFinder([], LancasterStemmer())
         [sentence_text, G, words, path] = get_text_G_words_path_2()
-        actual = find_bindings(sentence_graph=G, sentence_words=words, index=25)
+        actual = find_bindings(sentence_graph=G, sentence_words=words, graph_index=25)
         expected = ['by', 'many', 'produced', 'Lactococcus lactis']
         np.testing.assert_equal(np.array(actual).sort(), np.array(expected).sort())
 
     def test_find_bindings_types(self):
-        target = PatternFinder([], LancasterStemmer())
         [sentence_text, G, words, path] = get_text_G_words_path_2()
-        actual = find_bindings(sentence_graph=G, sentence_words=words, index=25, types=True)
+        actual = find_bindings(sentence_graph=G, sentence_words=words, graph_index=25, types=True)
         expected = ['case', 'nmod', 'nmod', 'amod']
         np.testing.assert_equal(np.array(actual).sort(), np.array(expected).sort())
 
     def test_find_pattern_1(self):
-        input_path = get_true_sentance_pattern_1()
-        verb_list = ['hydrolyze']
-        target = PatternFinder(verb_list, LancasterStemmer())
+        input_path = get_true_sentence_pattern_1()
+        verb_dict = {'verbs': ['hydrolyze']}
+        target = PatternFinder(verb_dict, LancasterStemmer())
         expected = [('pattern 1', 'hydrolyze')]
         actual = target.find_patterns(input_path)
         self.assertEqual(actual, expected)
 
     def test_find_pattern_1_1(self):
-        input_path = get_true_sentance_pattern_1_1()
-        verb_list = ['utilize']
+        input_path = get_true_sentence_pattern_1_1()
+        verb_list = {'verbs': ['utilize']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 1.1', 'utilize')]
         actual = target.find_patterns(input_path)
         self.assertEqual(actual, expected)
 
     def test_find_pattern_1_false(self):
-        input_path = get_true_sentance_pattern_1()
-        verb_list = ['utilize']
+        input_path = get_true_sentence_pattern_1()
+        verb_list = {'verbs': ['utilize']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = []
         actual = target.find_patterns(input_path)
         self.assertEqual(actual, expected)
 
     def test_find_pattern_1_empty(self):
-        input_path = get_true_sentance_pattern_1()
-        verb_list = []
+        input_path = get_true_sentence_pattern_1()
+        verb_list = {}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = []
         actual = target.find_patterns(input_path)
@@ -72,7 +71,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_2(self):
         [sentence_text, G, words, path] = get_text_G_words_path_2()
-        verb_list = ['produce']
+        verb_list = {'verbs': ['produce']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 2', 'produce')]
         actual = target.find_patterns(path, sentence_graph=G, sentence_words=words)
@@ -80,7 +79,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_2_1(self):
         [sentence_text, G, words, path] = get_text_G_words_path_2_1()
-        verb_list = ['produce', 'utilize']
+        verb_list = {'verbs': ['produce', 'utilize']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 2.1', 'utilize')]
         actual = target.find_patterns(path, sentence_graph=G, sentence_words=words)
@@ -88,7 +87,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_3(self):
         [sentence_text, G, words, path] = get_text_G_words_path_3()
-        verb_list = ['produce', 'utilize']
+        verb_list = {'verbs': ['produce', 'utilize']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 3', ['produce'])]
         actual = target.find_patterns(path, sentence_graph=G, sentence_words=words)
@@ -96,7 +95,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_4(self):
         [sentence_text, G, words, path] = get_text_G_words_path_4()
-        verb_list = ['look']
+        verb_list = {'verbs': ['look']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 4', [])]
         actual = target.find_patterns(path, sentence_graph=G, sentence_words=words)
@@ -104,7 +103,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_5(self):
         input_path = get_true_sentance_pattern_5()
-        verb_list = ['degrade']
+        verb_list = {'verbs': ['degrade']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 5', 'degrade')]
         actual = target.find_patterns(input_path)
@@ -112,7 +111,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_6(self):
         input_path = get_true_sentance_pattern_6()
-        verb_list = ['produce', 'degrade']
+        verb_list = {'verbs': ['produce', 'degrade']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 6', 'produce')]
         actual = target.find_patterns(input_path)
@@ -120,25 +119,25 @@ class MyTestCase(unittest.TestCase):
 
     def test_find_pattern_5_6(self):
         input_path = get_true_sentance_pattern_5_6()
-        verb_list = ['produce', 'degrade']
+        verb_list = {'verbs': ['produce', 'degrade']}
         target = PatternFinder(verb_list, LancasterStemmer())
         expected = [('pattern 6', 'degrade'), ('pattern 5', 'degrade')]
         actual = target.find_patterns(input_path)
         np.testing.assert_equal(np.array(actual).sort(), np.array(expected).sort())
 
 
-def get_true_sentance_pattern_1():
-    return {'edge_rels': ['acl:relcl', 'dobj', 'acl', 'dobj'],
-            'words': ['Actinobacteria', 'have', 'ability', 'hydrolyze', 'cellulose'],
-            'tags': ['BACTERIUM', 'VBP', 'NN', 'VB', 'NUTRIENT'],
-            'pos_path': [1, 2, 3, 4, 5]}
+def get_true_sentence_pattern_1():
+    return ShortestPath(edge_rels=['acl:relcl', 'dobj', 'acl', 'dobj'],
+                 words=['Actinobacteria', 'have', 'ability', 'hydrolyze', 'cellulose'],
+                 tags=['BACTERIUM', 'VBP', 'NN', 'VB', 'NUTRIENT'],
+                 nodes_indexes=[1, 2, 3, 4, 5])
 
 
-def get_true_sentance_pattern_1_1():
-    return {'edge_rels': ['nsubj', 'xcomp', 'dobj', 'conj'],
-            'words': ['E. aphidicola', 'able', 'utilize', 'inositol', 'sorbitol'],
-            'tags': ['BACTERIUM', 'JJ', 'VB', 'JJ', 'NUTRIENT'],
-            'pos_path': [1, 2, 3, 4, 5]}
+def get_true_sentence_pattern_1_1():
+    return ShortestPath(edge_rels=['nsubj', 'xcomp', 'dobj', 'conj'],
+                        words=['E. aphidicola', 'able', 'utilize', 'inositol', 'sorbitol'],
+                        tags=['BACTERIUM', 'JJ', 'VB', 'JJ', 'NUTRIENT'],
+                        nodes_indexes=[1, 2, 3, 4, 5])
 
 
 def get_text_G_words_path_2():
@@ -161,10 +160,10 @@ def get_text_G_words_path_2():
              18: 'studied', 19: 'bacteriocins', 20: 'and', 21: 'is', 22: 'produced',
              23: 'by', 24: 'many', 25: 'strains', 26: 'of', 27: 'Lactococcus lactis'}
 
-    path = {'edge_rels': ['nmod', 'nmod', 'conj', 'nsubj'],
-            'words': ['Lactococcus lactis', 'strains', 'produced', 'one', 'Sugar'],
-            'tags': ['BACTERIUM', 'NNS', 'VBN', 'CD', 'NUTRIENT'],
-            'pos_path': [27, 25, 22, 14, 1]}
+    path = ShortestPath(edge_rels=['nmod', 'nmod', 'conj', 'nsubj'],
+                        words=['Lactococcus lactis', 'strains', 'produced', 'one', 'Sugar'],
+                        tags=['BACTERIUM', 'NNS', 'VBN', 'CD', 'NUTRIENT'],
+                        nodes_indexes=[27, 25, 22, 14, 1])
     return [sentence_text, G, words, path]
 
 
@@ -194,10 +193,10 @@ def get_text_G_words_path_2_1():
              33: 'sugar', 34: 'that', 35: 'can', 36: 'be', 37: 'utilized', 38: 'by', 39: 'Roseburia', 40: 'to',
              41: 'produce', 42: 'byterate'}
 
-    path = {'edge_rels': ['nmod', 'acl:relcl'],
-            'words': ['Roseburia', 'utilized', 'sugar'],
-            'tags': ['BACTERIUM', 'VBN', 'NUTRIENT'],
-            'pos_path': [39, 37, 33]}
+    path = ShortestPath(edge_rels=['nmod', 'acl:relcl'],
+                        words=['Roseburia', 'utilized', 'sugar'],
+                        tags=['BACTERIUM', 'VBN', 'NUTRIENT'],
+                        nodes_indexes=[39, 37, 33])
     return [sentence_text, G, words, path]
 
 
@@ -216,10 +215,10 @@ def get_text_G_words_path_3():
              8: 'substances', 10: 'including', 11: 'bacteriocins', 13: 'lactic', 14: 'acid', 16: 'and',
              17: 'sugar', 18: 'peroxide'}
 
-    path = {'edge_rels': ['compound', 'nsubjpass', 'nmod', 'conj', 'compound'],
-            'words': ['Lactobacillus', 'species', 'known', 'bacteriocins', 'peroxide', 'sugar'],
-            'tags': ['BACTERIUM', 'NNS', 'VBN', 'NNS', 'NN', 'NUTRIENT'],
-            'pos_path': [1, 2, 4, 11, 18, 17]}
+    path = ShortestPath(edge_rels=['compound', 'nsubjpass', 'nmod', 'conj', 'compound'],
+                        words=['Lactobacillus', 'species', 'known', 'bacteriocins', 'peroxide', 'sugar'],
+                        tags=['BACTERIUM', 'NNS', 'VBN', 'NNS', 'NN', 'NUTRIENT'],
+                        nodes_indexes=[1, 2, 4, 11, 18, 17])
     return [sentence_text, G, words, path]
 
 
@@ -230,31 +229,31 @@ def get_text_G_words_path_4():
     G.add_edges_from([(1, 3, {'rel': 'compound'}), (3, 5, {'rel': 'nsubj'}), (4, 5, {'rel': 'advmod'}),
                       (6, 5, {'rel': 'xcomp'})])
     words = {1: 'E. coli', 3: 'sugar', 4: 'always', 5: 'looks', 6: 'good'}
-    path = {'edge_rels': ['compound'],
-            'words': ['E. coli', 'sugar'],
-            'tags': ['BACTERIUM', 'NUTRIENT'],
-            'pos_path': [1, 3]}
+    path = ShortestPath(edge_rels=['compound'],
+                        words=['E. coli', 'sugar'],
+                        tags=['BACTERIUM', 'NUTRIENT'],
+                        nodes_indexes=[1, 3])
     return [sentence_text, G, words, path]
 
 
 def get_true_sentance_pattern_5():
-    return {'edge_rels': ['dep', 'ccomp', 'nsubj'],
-            'words': ['Rikenellaceae', 'fermenters', 'degraders', 'cellulose'],
-            'tags': ['BACTERIUM', 'NNS', 'VBZ', 'NUTRIENT'],
-            'pos_path': [12, 8, 44, 20]}
+    return ShortestPath(edge_rels=['dep', 'ccomp', 'nsubj'],
+                        words=['Rikenellaceae', 'fermenters', 'degraders', 'cellulose'],
+                        tags=['BACTERIUM', 'NNS', 'VBZ', 'NUTRIENT'],
+                        nodes_indexes=[12, 8, 44, 20])
 
 
 def get_true_sentance_pattern_6():
-    return {'edge_rels': ['nsubj', 'dobj', 'compound'],
-            'words': ['E. coli', 'require', 'production', 'sugar'],
-            'tags': ['BACTERIUM', 'VBP', 'NN', 'NUTRIENT'],
-            'pos_path': [1, 4, 6, 5]}
+    return ShortestPath(edge_rels=['nsubj', 'dobj', 'compound'],
+                        words=['E. coli', 'require', 'production', 'sugar'],
+                        tags=['BACTERIUM', 'VBP', 'NN', 'NUTRIENT'],
+                        nodes_indexes=[1, 4, 6, 5])
 
 def get_true_sentance_pattern_5_6():
-    return {'edge_rels': ['dep', 'ccomp', 'nsubj'],
-            'words': ['Rikenellaceae', 'fermenters', 'degraders', 'cellulose'],
-            'tags': ['BACTERIUM', 'NNS', 'NN', 'NUTRIENT'],
-            'pos_path': [12, 8, 44, 20]}
+    return ShortestPath(edge_rels=['dep', 'ccomp', 'nsubj'],
+                        words=['Rikenellaceae', 'fermenters', 'degraders', 'cellulose'],
+                        tags=['BACTERIUM', 'NNS', 'NN', 'NUTRIENT'],
+                        nodes_indexes=[12, 8, 44, 20])
 
 
 def get_graph_info():
