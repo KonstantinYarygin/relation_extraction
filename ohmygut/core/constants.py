@@ -34,24 +34,11 @@ google_search_nutrient_logger = logging.getLogger("google_search_nutrient_logger
 CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
 RANK_EXCLUSIONS = ['superkingdom', 'kingdom']
 
-FIELD_NAME = 'name'
-FIELD_CLASS = 'class'
-FIELD_ID = 'id'
-FIELD_RANK = 'rank'
-FIELD_PARENT_ID = 'parent_id'
-
-
-NCBI_COLS_NAMES = [FIELD_ID, FIELD_NAME, FIELD_CLASS]
-NCBI_COLS_NODES = [FIELD_ID, FIELD_PARENT_ID, FIELD_RANK]
-
-NCBI_NUM_NAMES = [0, 2, 6]
-NCBI_NUM_NODES = [0, 2, 4]
-
 CHUNK_SIZE = 10000
 
-plural_dict = {'a': 'ae', 'us': 'i', 'er': 'i', 'um': 'a',
+plural_dict = {'a': 'ae', 'us': 'i', 'er': 'ers', 'um': 'a',
                'on': 'a', 'is': 'es', 'al': 'alia',
                'ar': 'aria', 'e': 'ia', 'u': 'ua',
-               'as': ['ades', 'ads', 'ad']}
+               'as': 'ads', 'o': 'os'}
 
 TRIM_LETTERS_NUMBER = 20

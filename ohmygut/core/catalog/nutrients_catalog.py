@@ -29,7 +29,7 @@ class NutrientsCatalog(Catalog):
         if verbose:
             print('Done. Total time: %.2f sec.' % (t2 - t1))
 
-    def find(self, sentence):
+    def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for nutrient names
 
         input:
@@ -38,7 +38,7 @@ class NutrientsCatalog(Catalog):
         returns:
             list of nutrient_names
         """
-        nutr_names = self.__hash_tree.search(sentence)
+        nutr_names = self.__hash_tree.search(sentence_text)
         return nutr_names
 
 
@@ -85,7 +85,7 @@ class NutrientsCatalogNikogosov(Catalog):
         del self.__nutrients_by_idname['Protein']
         del self.__nutrients_by_idname['Pb']
 
-    def find(self, sentence):
+    def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for nutrient names
 
         input:
@@ -94,7 +94,7 @@ class NutrientsCatalogNikogosov(Catalog):
         returns:
             list of nutrient_names
         """
-        nutr_names = self.__hash_tree.search(sentence)
+        nutr_names = self.__hash_tree.search(sentence_text)
         output = [(nutrient, self.__idname_by_nutrient[nutrient]) for nutrient in nutr_names]
         return output
 
