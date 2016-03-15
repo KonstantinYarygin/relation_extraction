@@ -69,7 +69,7 @@ class DiseasesCatalog(Catalog):
                                               all_upper: doid_id,
                                               first_capital: doid_id})
 
-    def find(self, sentence):
+    def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for nutrient names
 
         input:
@@ -78,7 +78,7 @@ class DiseasesCatalog(Catalog):
         returns:
             list of nutrient_names
         """
-        diseases_names = self.__hash_tree.search(sentence)
+        diseases_names = self.__hash_tree.search(sentence_text)
         output = [(name, self.__disease_dictionary[name]) for name in diseases_names]
         return (output)
 

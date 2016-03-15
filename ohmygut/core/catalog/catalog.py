@@ -9,5 +9,5 @@ class Catalog(object):
         raise NotImplementedError("Method have to be implemented")
 
     @abc.abstractmethod
-    def find(self, sentence):
+    def find(self, sentence_text):
         raise NotImplementedError("Method have to be implemented")

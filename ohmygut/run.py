@@ -45,7 +45,7 @@ pattern_finder = PatternFinder(lancaster_stemmer, verb_ontology)
 
 
 class MockCatalog(Catalog):
-    def find(self, sentence):
+    def find(self, sentence_text):
         return ''
 
 mock_catalog = MockCatalog()

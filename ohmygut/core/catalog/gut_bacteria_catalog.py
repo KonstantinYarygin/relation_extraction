@@ -75,7 +75,7 @@ class GutBacteriaCatalog(Catalog):
                 for record_name, record in name_data_plurable.groupby(FIELD_NAME)}
                 self.__bact_id_dict.update(bact_plural_dict)
 
-    def find(self, sentence):
+    def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for bacterial names
 
         input:
@@ -83,10 +83,10 @@ class GutBacteriaCatalog(Catalog):
 
         returns:
             list of (bactrium_name, NCBI_id) tuples found in sentence
-            :param sentence:
+            :param sentence_text:
         """
 
-        bact_names = self.__hash_tree.search(sentence)
+        bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
         return output_list
