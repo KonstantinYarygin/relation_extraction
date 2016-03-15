@@ -1,9 +1,9 @@
 
 class PatternFinder(object):
-    def __init__(self, stemmer, verb_ontology):
+    def __init__(self, verb_ontology, stemmer):
         self.__stemmer = stemmer
         self.__verb_ontology = verb_ontology
-        self.__verb_list = [verb for verb_list in verb_ontology.items() for verb in verb_list]
+        self.__verb_list = [verb for verb_list in verb_ontology.values() for verb in verb_list]
 
     def find_words(self, words, templates, return_value=False):
         words_stems = [self.__stemmer.stem(word) for word in words]
@@ -16,7 +16,7 @@ class PatternFinder(object):
             return ind
 
     def find_patterns(self, path, sentence_graph=None, sentence_words=None):
-        [verb_stem_ids, verbs] = self.find_words(path.word, self.__verb_list, return_value=True)
+        [verb_stem_ids, verbs] = self.find_words(path.words, self.__verb_list, return_value=True)
         nutr_id = path.tags.index('NUTRIENT')
         bact_id = path.tags.index('BACTERIUM')
         dist_nutr_bact = nutr_id - bact_id
@@ -30,7 +30,7 @@ class PatternFinder(object):
                 patterns_verbs.append(('pattern 1', verb_name))
             if pattern_1_1_requirement(dist_nutr_verb, path.edge_rels[verb_id], path.tags[verb_id]):
                 patterns_verbs.append(('pattern 1.1', verb_name))
-            if pattern_5_requirement(dist_nutr_verb, path.word[verb_id]):
+            if pattern_5_requirement(dist_nutr_verb, path.words[verb_id]):
                 patterns_verbs.append(('pattern 5', verb_name))
             if pattern_6_requirement(dist_nutr_verb, path.tags[verb_id]):
                 patterns_verbs.append(('pattern 6', verb_name))
@@ -52,7 +52,7 @@ class PatternFinder(object):
                 if pattern_2_1_requirement(dist_bact_verb, bact_by_binding, path.tags[verb_id]):
                     patterns_verbs.append(('pattern 2.1', verb_name))
 
-            known_ids = self.find_words(path.word, ['known'])
+            known_ids = self.find_words(path.words, ['known'])
             for known_id in known_ids:
                 known_id_binds = find_bindings(sentence_graph, sentence_words, path.nodes_indexes[known_id])
                 [verb_ids, verbs] = self.find_words(known_id_binds, self.__verb_list, return_value=True)
