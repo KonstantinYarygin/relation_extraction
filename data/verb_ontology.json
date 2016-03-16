@@ -1,0 +1,7 @@
+{
+'consumption_general': ['consume', 'acquire', 'absorb', 'ingest', 'retain', 'adhere', 'adopt', 'assimilate', 'obtain', 'eat'],
+'metabolize_general': ['degrade', 'utilize', 'utilise', 'metabolize', 'metabolise', 'ferment', 'hydrolyze', 'cleave', 'catabolize', 'digest', 'bind', 'hydrolyse', 'lyse', 'convert', 'destroy', 'eliminate', 'dephosphorylate', 'exploit', 'transform', 'eradicate', 'dissociate', 'deactivate', 'neutralize', 'dimerize', 'inactivate', 'phosphorylate', 'heterodimerizes', 'decarboxylate'],
+'produce_general': ['produce', 'generate', 'synthesize', 'synthesise', 'biosynthesize', 'biosynthesise', 'assemble', 'create', 'make'],
+'secrete_general': ['secrete', 'excrete', 'liberate'],
+'other': ['attach', 'resist', 'transmit', 'disseminate', 'solubilize', 'sustain', 'adapt', 'neutralize', 'require']
+}
