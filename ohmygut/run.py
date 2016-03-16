@@ -6,6 +6,7 @@ from nltk.tokenize import StanfordTokenizer
 
 from ohmygut.core.article.file_article_data_source import FileArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
+from ohmygut.core.article.libgen_txt_article_data_source import LibgenTxtArticleDataSource
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
@@ -35,6 +36,8 @@ diseases_catalog.initialize()
 
 article_data_source = FileArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
 # article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
+# article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../../article_data/libgen/'))
+
 with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
     verb_ontology = eval(''.join(f.readlines()))
 
