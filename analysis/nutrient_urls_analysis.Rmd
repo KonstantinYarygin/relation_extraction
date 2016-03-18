@@ -1,0 +1,64 @@
+# Анализ ссылок на нутриенты
+Данные полученны скриптом, который гуглил каждый нутриент из каталога Никогосова и брал первых 1000 ссылок результата.
+
+Загружаем данные, получаем домены:
+``` {r}
+library(data.table)
+library(urltools)
+library(ggplot2)
+
+data <- fread('~/Downloads/nutrients_urls.txt', sep='\t')
+setnames(data, c('id', 'nutrient', 'url'))
+data[,domain:=domain(url)]
+data.nutrient <- unique(data$nutrient)
+```
+
+### Всего результатов:
+```{r}
+n.all <- nrow(data)
+n.all
+```
+
+### Всего нутриентов:
+```{r}
+n.nutrient <- length(data.nutrient)
+n.nutrient
+```
+По каждому нутриенту нашлось меньше 1000 ссылок
+
+Ссылок по каждому нутриенту в среднем:
+```{r}
+n.all/n.nutrient
+```
+
+### Самые популярные домены:
+```{r}
+data.domain.count <- data[,.N,by=domain]
+setorder(data.domain.count, -N)
+ggplot(data.domain.count[0:10], aes(x = reorder(domain,-N), y = N)) + 
+  geom_bar(stat="identity") + 
+  theme_bw() + 
+  xlab('domain') + 
+  ylab('count') + 
+  theme(text = element_text(size=13), 
+        axis.text.x = element_text(angle=10, vjust=1))
+
+head(data.domain.count, 20)
+```
+
+### Самые популярные домен-нутриент:
+```{r}
+data.domain.nutrient.count <- data[,.N,by=c('domain', 'nutrient')]
+setorder(data.domain.nutrient.count, -N)
+data.domain.nutrient.count[,nutrient_short:=substr(nutrient, 0, 30)]
+head(data.domain.nutrient.count[,.(nutrient_short, domain, N)], 20)
+```
+
+Сохраняем популярность доменов и пар домен-нутриен:
+```{r}
+write.table(data.domain.count, 'domain_url_count.tsv', 
+          row.names = FALSE, sep='\t', quote = FALSE)
+write.table(data.domain.nutrient.count, 'nutrient_domain_url_count.tsv', 
+          row.names = FALSE, sep='\t', quote = FALSE)
+```
+

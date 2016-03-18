@@ -3,8 +3,12 @@ from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.hash_tree import HashTree
 from time import time
 
+
 class NutrientsCatalog(Catalog):
     """Object holding nutrient ontology"""
+
+    def __str__(self):
+        return "nutrients catalog"
 
     def __init__(self, path):
         self.path = path
@@ -40,7 +44,6 @@ class NutrientsCatalog(Catalog):
         """
         nutr_names = self.__hash_tree.search(sentence_text)
         return nutr_names
-
 
 
 class NutrientsCatalogNikogosov(Catalog):

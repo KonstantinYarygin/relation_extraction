@@ -25,6 +25,9 @@ def get_medline_records(medline_file):
 
 
 class MedlineAbstractsArticleDataSource(ArticleDataSource):
+    def __str__(self):
+        return "medline abstracts article data source"
+
     def __init__(self, medline_file):
         super().__init__()
         self.medline_file = medline_file

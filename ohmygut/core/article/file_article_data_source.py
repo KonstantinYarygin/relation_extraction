@@ -69,7 +69,10 @@ def get_article_journal(nxml):
     return journal
 
 
-class FileArticleDataSource(ArticleDataSource):
+class NxmlFreeArticleDataSource(ArticleDataSource):
+    def __str__(self):
+        return "nxml free articles data source"
+
     def __init__(self, articles_folder):
         super().__init__()
         self.articles_directory = articles_folder

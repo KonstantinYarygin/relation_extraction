@@ -6,8 +6,12 @@ from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import plural_dict, logger
 from ohmygut.core.hash_tree import HashTree
 
+
 class GutBacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
+
+    def __str__(self):
+        return "gut bacteria catalog"
 
     def __init__(self, gut_bact_path):
         self.gut_bact_path = gut_bact_path
@@ -57,15 +61,15 @@ class GutBacteriaCatalog(Catalog):
 
         # plural
         name_data_plurable = name_data[(name_data['rank'].isin(['genus']) &
-                                       (name_data['name'].apply(lambda x: len(x.split()) < 2)))]
+                                        (name_data['name'].apply(lambda x: len(x.split()) < 2)))]
         plural_bact_names = {}
         name_data_plurable.apply(lambda x: [plural_bact_names.update({name_var: x['id']}) for name_var in
                                             (re.sub(key + '\\b', plural_dict[key], x['name']) for key in
-                                            plural_dict.keys() if bool(re.search(key + '\\b', x['name'])))],
+                                             plural_dict.keys() if bool(re.search(key + '\\b', x['name'])))],
                                  axis=1)
         self.__bact_id_dict.update(plural_bact_names)
 
-        #cases
+        # cases
         plural_lower_names = {}
         name_data.apply(lambda x: plural_lower_names.update({x['name'].lower(): x['id']}), axis=1)
 

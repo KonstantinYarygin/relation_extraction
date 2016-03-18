@@ -9,65 +9,66 @@ from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentences_to_data_frame, serialize_result
 
 
-def main(article_data_source, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser, tokenizer,
-         pattern_finder, start_number=0):
+def main(article_data_sources,
+         bacteria_catalog, nutrients_catalog, diseases_catalog,
+         sentence_parser, tokenizer, pattern_finder, start_number=0):
     output_dir = os.path.join("result", "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
     if not os.path.exists('result'):
         os.mkdir('result')
     os.mkdir(output_dir)
-    constants.logger.info("start number is %i" % start_number)
-    articles = article_data_source.get_articles()
-    sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
-                                       for sentence in get_sentences(article.text))
+
     sentences = []
-    sentence_number = start_number
-    for i in range(start_number):
-        next(sentences_titles_journals_tuple)
+    data_source_names = list(map(lambda x: str(x), article_data_sources))
+    constants.logger.info("data sources: %s" % data_source_names)
+    for article_data_source in article_data_sources:
+        articles = article_data_source.get_articles()
+        sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
+                                           for sentence in get_sentences(article.text))
 
-    constants.logger.info("start looping sentences")
-    for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
-        sentence_number += 1
+        constants.logger.info("start looping sentences with %s" % str(article_data_source))
+        sentence_number = 0
+        for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
+            sentence_number += 1
 
-        bacteria = bacteria_catalog.find(sentence_text)
-        nutrients = nutrients_catalog.find(sentence_text)
-        diseases = diseases_catalog.find(sentence_text)
+            bacteria = bacteria_catalog.find(sentence_text)
+            nutrients = nutrients_catalog.find(sentence_text)
+            diseases = diseases_catalog.find(sentence_text)
 
-        if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
-            continue
+            if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+                continue
 
-        bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text, bacteria, nutrients, diseases,
-                                                                  tokenizer)
+            bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text, bacteria, nutrients, diseases,
+                                                                      tokenizer)
 
-        if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
-            continue
+            if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+                continue
 
-        parser_output = sentence_parser.parse_sentence(sentence_text)
-        if not parser_output:
-            continue
+            parser_output = sentence_parser.parse_sentence(sentence_text)
+            if not parser_output:
+                continue
 
-        sentence = Sentence(text=sentence_text,
-                            article_title=article_title,
-                            bacteria=bacteria,
-                            nutrients=nutrients,
-                            diseases=diseases,
-                            parser_output=parser_output,
-                            journal=article_journal)
+            sentence = Sentence(text=sentence_text,
+                                article_title=article_title,
+                                bacteria=bacteria,
+                                nutrients=nutrients,
+                                diseases=diseases,
+                                parser_output=parser_output,
+                                journal=article_journal)
 
-        pathes = analyze_sentence(sentence, tokenizer, pattern_finder)
+            pathes = analyze_sentence(sentence, tokenizer, pattern_finder)
 
-        if len(pathes) > 0:
-            log_paths(sentence, pathes)
+            if len(pathes) > 0:
+                log_paths(sentence, pathes)
 
-        constants.logger.info("sentence № %i" % sentence_number)
-        constants.logger.info(sentence)
-        constants.logger.info("=" * 80)
+            constants.logger.info("sentence № %i" % sentence_number)
+            constants.logger.info(sentence)
+            constants.logger.info("=" * 80)
 
-        sentences.append(sentence)
-        serialize_result(sentence, output_dir, sentence_number)
-    constants.logger.info("finish looping sentences")
+            sentences.append(sentence)
+            serialize_result(sentence, output_dir, sentence_number)
+        constants.logger.info("finish looping sentences")
 
-    constants.pattern_logger.info('total number sentences: %d' % sentence_number)
-    constants.large_pattern_logger.info('total number sentences: %d' % sentence_number)
+    constants.pattern_logger.info('total number sentences: %d' % len(sentences))
     data = sentences_to_data_frame(sentences)
     data.to_csv(os.path.join(output_dir, 'sentences.csv'), index=False)
 

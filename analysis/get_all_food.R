@@ -46,4 +46,4 @@ data.sub.plain <- rbind(data.sub.words1, data.sub.words2, data.sub.words3)
 setnames(data.sub.plain, c("group", "word"))
 setorder(data.sub.plain, group)
 
-write.table(data.sub.plain, OUTPUT_FILE_NAME, sep="\t", row.names = FALSE, quote = FALSE)
+write.table(data.sub.plain, OUTPUT_FILE_NAME, sep=";", row.names = FALSE, quote = FALSE)
