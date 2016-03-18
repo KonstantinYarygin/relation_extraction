@@ -1,32 +1,36 @@
 # -*- coding: utf-8 -*-
-import datetime
 import os
 
 from ohmygut.core import constants
 from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import pattern_logger, large_pattern_logger
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentences_to_data_frame, serialize_result
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentences_to_data_frame, serialize_result, \
+    check_if_more_than_one_list_not_empty, get_output_dir_path
 
 
 def main(article_data_sources,
          bacteria_catalog, nutrients_catalog, diseases_catalog,
-         sentence_parser, tokenizer, pattern_finder, start_number=0):
-    output_dir = os.path.join("result", "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
-    if not os.path.exists('result'):
-        os.mkdir('result')
-    os.mkdir(output_dir)
+         sentence_parser, tokenizer, pattern_finder,
+         data_sources_to_skip=0, sentences_to_skip=0):
+
+    output_dir = get_output_dir_path()
 
     sentences = []
     data_source_names = list(map(lambda x: str(x), article_data_sources))
     constants.logger.info("data sources: %s" % data_source_names)
-    for article_data_source in article_data_sources:
+    for i in range(data_sources_to_skip, len(article_data_sources) - 1):
+        article_data_source = article_data_sources[i]
+
         articles = article_data_source.get_articles()
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
-        constants.logger.info("start looping sentences with %s" % str(article_data_source))
-        sentence_number = 0
+        constants.logger.info("start looping sentences with data source №%i %s" % (i, str(article_data_source)))
+        sentence_number = sentences_to_skip
+        for _ in range(sentences_to_skip):
+            next(sentences_titles_journals_tuple)
+
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
             sentence_number += 1
 
@@ -34,13 +38,14 @@ def main(article_data_sources,
             nutrients = nutrients_catalog.find(sentence_text)
             diseases = diseases_catalog.find(sentence_text)
 
-            if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
                 continue
 
-            bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text, bacteria, nutrients, diseases,
+            bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
+                                                                      bacteria, nutrients, diseases,
                                                                       tokenizer)
 
-            if sum(map(bool, [bacteria, nutrients, diseases])) < 2:
+            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
                 continue
 
             parser_output = sentence_parser.parse_sentence(sentence_text)
@@ -66,7 +71,7 @@ def main(article_data_sources,
 
             sentences.append(sentence)
             serialize_result(sentence, output_dir, sentence_number)
-        constants.logger.info("finish looping sentences")
+        constants.logger.info("finish looping sentences with %s" % str(article_data_source))
 
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
     data = sentences_to_data_frame(sentences)
@@ -107,3 +112,5 @@ def log_paths(sentence, paths):
 
     large_pattern_logger.info('=' * 100)
     large_pattern_logger.info('')
+
+

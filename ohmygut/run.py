@@ -53,6 +53,7 @@ stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
 pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
 
+# todo: make a test
 class MockCatalog(Catalog):
     def initialize(self):
         pass
@@ -67,10 +68,8 @@ class MockDataSource(ArticleDataSource):
         for article in articles:
             yield article
 
+article_data_sources = [nxml_article_data_source, libgen_article_data_source]
 
-mock_catalog = MockCatalog()
-
-article_data_sources = [MockDataSource(), MockDataSource()]
 main(article_data_sources,
-     mock_catalog, mock_catalog, mock_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder)
+     bacteria_catalog, nutrients_catalog, diseases_catalog,
+     sentence_parser, stanford_tokenizer, pattern_finder, data_sources_to_skip=1)
