@@ -69,7 +69,7 @@ class GutBacteriaCatalog(Catalog):
         plural_lower_names = {}
         name_data.apply(lambda x: plural_lower_names.update({x['name'].lower(): x['id']}), axis=1)
 
-    def find(self, sentence):
+    def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for bacterial names
 
         input:
@@ -77,10 +77,10 @@ class GutBacteriaCatalog(Catalog):
 
         returns:
             list of (bactrium_name, NCBI_id) tuples found in sentence
-            :param sentence:
+            :param sentence_text:
         """
 
-        bact_names = self.__hash_tree.search(sentence)
+        bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
         return output_list

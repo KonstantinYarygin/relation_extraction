@@ -1,10 +1,15 @@
 from nltk import word_tokenize
 
+
+# TODO: test me
+
 class _TreeNode(object):
     """Hash tree node"""
+
     def __init__(self):
         self.is_end = False
         self.children = {}
+
 
 class HashTree(object):
     """Hash tree - structure for text search
@@ -27,6 +32,7 @@ class HashTree(object):
         Every node is hashed and links to its chilrens
         ===============
     """
+
     def __init__(self, entity_list):
         """Takes all entity names and generates hash tree
 
@@ -46,15 +52,11 @@ class HashTree(object):
             current_node.is_end = True
 
     def search(self, text):
-        """ Uses previously generated hash tree to search text for entity names
-
-        input:
-            text: text to search for entity names
-
-        returns:
-            list of entity_names found in text
         """
-
+        Uses previously generated hash tree to search text for entity names
+        :param text: text to search for entity names
+        :return: list of entity_names found in text
+        """
         list_text = word_tokenize(text)
         entity_names = []
 
@@ -79,4 +81,5 @@ class HashTree(object):
                 if entity_name:
                     entity_names.append(' '.join(entity_name))
         # refactor upper code
-        return(entity_names)
+        return entity_names
+

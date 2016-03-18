@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 import time
 import traceback
 import urllib.parse
 import urllib.request
 
 from bs4 import BeautifulSoup
+
+sys.path.append('.')
 
 from ohmygut.core import constants
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
