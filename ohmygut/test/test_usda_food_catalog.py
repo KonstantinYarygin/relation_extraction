@@ -18,12 +18,13 @@ class TestCase(unittest.TestCase):
         target.initialize()
 
         actual1 = target.find("Whipped cream substitute is very tasty")
-        expected1 = ["whipped cream substitute"]
+        expected1 = ["Whipped cream substitute"]
+
+        self.assertCountEqual(actual1, expected1)
 
         actual2 = target.find("It's appear to be that eggs with whipped cream substitute are very tasty")
         expected2 = ["whipped cream substitute", "eggs"]
 
-        self.assertCountEqual(actual1, expected1)
         self.assertCountEqual(actual2, expected2)
 
 

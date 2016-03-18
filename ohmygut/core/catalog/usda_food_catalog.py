@@ -14,10 +14,11 @@ class UsdaFoodCatalog(Catalog):
         self.__hash_tree = None
 
     def find(self, sentence_text):
-        sentence_text = sentence_text.lower()
         return self.__hash_tree.search(sentence_text)
 
     def initialize(self):
         food_data_frame = pd.read_table(self.food_file_path, sep=";", encoding="utf-8")
-        words = food_data_frame['word'].values
+        words = list(food_data_frame['word'].values)
+        words_capitalized = list(map(lambda x: x.capitalize(), words))
+        words += words_capitalized
         self.__hash_tree = HashTree(words)
