@@ -40,7 +40,7 @@ nutrients_catalog.initialize()
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../data/article 1/'))
+nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../data/articles/'))
 medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
 libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../../article_data/libgen/'))
 
@@ -52,24 +52,8 @@ stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
                                                                 '../data/stanford_parser_dependencies/stanford-parser.jar'))
 pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
-
-# todo: make a test
-class MockCatalog(Catalog):
-    def initialize(self):
-        pass
-
-    def find(self, sentence_text):
-        return [('bacteria', 'code')]
-
-
-class MockDataSource(ArticleDataSource):
-    def get_articles(self):
-        articles = [Article("title", "text", "journal"), Article("title", "text", "journal"), Article("title", "text", "journal")]
-        for article in articles:
-            yield article
-
-article_data_sources = [nxml_article_data_source, libgen_article_data_source]
+article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
 
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, data_sources_to_skip=1)
+     sentence_parser, stanford_tokenizer, pattern_finder)

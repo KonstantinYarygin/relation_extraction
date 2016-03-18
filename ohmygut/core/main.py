@@ -19,14 +19,14 @@ def main(article_data_sources,
     sentences = []
     data_source_names = list(map(lambda x: str(x), article_data_sources))
     constants.logger.info("data sources: %s" % data_source_names)
-    for i in range(data_sources_to_skip, len(article_data_sources) - 1):
+    for i in range(data_sources_to_skip, len(article_data_sources)):
         article_data_source = article_data_sources[i]
 
         articles = article_data_source.get_articles()
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
-        constants.logger.info("start looping sentences with data source №%i %s" % (i, str(article_data_source)))
+        constants.logger.info("start looping sentences with data source №%i %s" % (i+1, str(article_data_source)))
         sentence_number = sentences_to_skip
         for _ in range(sentences_to_skip):
             next(sentences_titles_journals_tuple)
@@ -65,13 +65,12 @@ def main(article_data_sources,
             if len(pathes) > 0:
                 log_paths(sentence, pathes)
 
-            constants.logger.info("sentence № %i" % sentence_number)
-            constants.logger.info(sentence)
+            constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
             constants.logger.info("=" * 80)
 
             sentences.append(sentence)
             serialize_result(sentence, output_dir, sentence_number)
-        constants.logger.info("finish looping sentences with %s" % str(article_data_source))
+        constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
 
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
     data = sentences_to_data_frame(sentences)
@@ -79,6 +78,9 @@ def main(article_data_sources,
 
 
 def log_paths(sentence, paths):
+    # todo: почему не объединять вывод? например:
+    # pattern_logger.info('%s \n %s \n %s \n' % (sentence.text, sentence.bacteria, sentence.nutrients))
+
     pattern_logger.info(sentence.text)
     pattern_logger.info(sentence.bacteria)
     pattern_logger.info(sentence.nutrients)
