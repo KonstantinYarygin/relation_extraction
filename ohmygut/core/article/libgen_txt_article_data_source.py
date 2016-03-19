@@ -21,6 +21,9 @@ def get_libgen_articles(libgen_folder):
 
 
 class LibgenTxtArticleDataSource(ArticleDataSource):
+    def __str__(self):
+        return "libgen article data source"
+
     def __init__(self, libgen_folder):
         super().__init__()
         self.libgen_folder = libgen_folder

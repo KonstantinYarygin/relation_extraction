@@ -6,4 +6,8 @@ class ArticleDataSource(object):
 
     @abc.abstractmethod
     def get_articles(self):
+        """
+
+        :return: a generator which yields article texts
+        """
         raise NotImplementedError("Method have to be implemented")

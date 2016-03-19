@@ -2,7 +2,7 @@ import os
 import unittest
 
 from ohmygut.core.article.article import Article
-from ohmygut.core.article.file_article_data_source import get_article_text, FileArticleDataSource
+from ohmygut.core.article.file_article_data_source import get_article_text, NxmlFreeArticleDataSource
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -10,7 +10,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 class TestCase(unittest.TestCase):
     def test_get_articles(self):
         test_articles_directory = os.path.join(script_dir, 'resource/test_articles')
-        target = FileArticleDataSource(test_articles_directory)
+        target = NxmlFreeArticleDataSource(test_articles_directory)
 
         expected = [Article("A title", "text! text again!")]
         actual = target.get_articles()

@@ -1,3 +1,4 @@
+import datetime
 import os
 import pickle
 import re
@@ -88,3 +89,15 @@ def delete_forbidden_characters(string):
     return_string = string.replace(' ', '_')
     return_string = re.sub('[^\w_\d\.]', '', return_string)
     return return_string
+
+
+def check_if_more_than_one_list_not_empty(elements):
+    return sum(map(bool, elements)) > 1
+
+
+def get_output_dir_path():
+    output_dir = os.path.join("result", "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
+    if not os.path.exists('result'):
+        os.mkdir('result')
+    os.mkdir(output_dir)
+    return output_dir
