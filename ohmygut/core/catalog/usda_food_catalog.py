@@ -17,7 +17,7 @@ class UsdaFoodCatalog(Catalog):
         return self.__hash_tree.search(sentence_text)
 
     def initialize(self):
-        food_data_frame = pd.read_table(self.food_file_path, sep=";", encoding="utf-8")
+        food_data_frame = pd.read_table(self.food_file_path, sep=';', encoding='cp1252')#, encoding="utf-8")
         words = list(food_data_frame['word'].values)
         words_capitalized = list(map(lambda x: x.capitalize(), words))
         words += words_capitalized

@@ -21,9 +21,9 @@ from ohmygut.core.sentence_processing import SentenceParser
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 stanford_dependency_parser = StanfordDependencyParser(
-    path_to_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser.jar'),
-    path_to_models_jar=os.path.join(script_dir, '../data/stanford_parser_dependencies/stanford-parser-3.5.2-models.jar'),
-    model_path=os.path.join(script_dir, '../data/stanford_parser_dependencies/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
+    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar'),
+    path_to_models_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser-3.5.2-models.jar'),
+    model_path=os.path.join(script_dir, '../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
 )
 sentence_parser = SentenceParser(stanford_dependency_parser)
 
@@ -49,7 +49,7 @@ with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
 
 lancaster_stemmer = LancasterStemmer()
 stanford_tokenizer = StanfordTokenizer(path_to_jar=os.path.join(script_dir,
-                                                                '../data/stanford_parser_dependencies/stanford-parser.jar'))
+                                                                '../stanford_parser/stanford-parser.jar'))
 pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
 article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
