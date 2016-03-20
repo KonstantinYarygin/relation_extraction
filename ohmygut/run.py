@@ -40,7 +40,7 @@ nutrients_catalog.initialize()
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../data/articles/'))
+nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../../article_data/texts/'))
 medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
 libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../../article_data/libgen/'))
 
