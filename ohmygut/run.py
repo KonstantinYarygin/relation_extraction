@@ -55,5 +55,5 @@ pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
 
 main(article_data_sources,
-     bacteria_catalog, nutrients_catalog, diseases_catalog,
+     bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
      sentence_parser, stanford_tokenizer, pattern_finder)
