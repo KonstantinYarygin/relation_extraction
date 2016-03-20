@@ -62,13 +62,12 @@ def main(article_data_sources,
                                 parser_output=parser_output,
                                 journal=article_journal)
 
+            constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
+
             pathes = analyze_sentence(sentence, tokenizer, pattern_finder)
 
             if len(pathes) > 0:
                 log_paths(sentence, pathes)
-
-            constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
-            constants.logger.info("=" * 80)
 
             sentences.append(sentence)
             serialize_result(sentence, output_dir, sentence_number)
