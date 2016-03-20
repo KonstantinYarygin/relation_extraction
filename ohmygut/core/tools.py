@@ -14,14 +14,15 @@ def get_sentences(text):
     return sent_tokenize(text)
 
 
-def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_tokenizer):
+def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, food, stanford_tokenizer):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
-    tokens_lists['bacteria'] = [bacterium_name.split(' ') for bacterium_name, ncbi_id in bacteria]
+    tokens_lists['bacteria']  = [bacterium_name.split(' ') for bacterium_name, ncbi_id in bacteria]
     tokens_lists['nutrients'] = [nutrient_name.split(' ') for nutrient_name, idname in nutrients]
-    tokens_lists['diseases'] = [disease_name.split(' ') for disease_name, doid_id in diseases]
+    tokens_lists['diseases']  = [disease_name.split(' ') for disease_name, doid_id in diseases]
+    tokens_lists['food']      = [food_name.split(' ') for food_name, food_group in food]
 
-    entities = ['bacteria', 'nutrients', 'diseases']
+    entities = ['bacteria', 'nutrients', 'diseases', 'food']
 
     tokens_coordinates = {entity: [] for entity in entities}
 
@@ -43,16 +44,20 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_
                     tokens_coordinates[entity_1].remove(entity_1_coordinates)
                 elif intersection == set_2 and intersection != set_1:
                     tokens_coordinates[entity_2].remove(entity_2_coordinates)
+                elif intersection == set_1 and intersection == set_2:
+                    tokens_coordinates[entity_2].remove(entity_2_coordinates)
 
-    bacteria_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
+    bacteria_new  = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
     nutrients_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['nutrients']]
-    diseases_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['diseases']]
+    diseases_new  = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['diseases']]
+    food_new      = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['food']]
 
-    bacteria_new = [(name, dict(bacteria)[name]) for name in bacteria_new]
+    bacteria_new  = [(name, dict(bacteria)[name]) for name in bacteria_new]
     nutrients_new = [(name, dict(nutrients)[name]) for name in nutrients_new]
-    diseases_new = [(name, dict(diseases)[name]) for name in diseases_new]
+    diseases_new  = [(name, dict(diseases)[name]) for name in diseases_new]
+    food_new      = [(name, dict(food)[name]) for name in food_new]
 
-    return (bacteria_new, nutrients_new, diseases_new)
+    return (bacteria_new, nutrients_new, diseases_new, food_new)
 
 
 def untokenize(tokens):
