@@ -71,40 +71,35 @@ def analyze_sentence(sentence, tokenizer, pattern_finder):
 
 
 def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output):
-    entities_list = ['BACTERIUM', 'NUTRIENT', 'DISEASE', 'FOOD']
+    entities_names = ['BACTERIUM', 'NUTRIENT', 'DISEASE', 'FOOD']
+    names_lists = [bacterial_names, nutrient_names, disease_names, food_names]
 
-    for entity_name, names_list in zip(entities_list, [bacterial_names, nutrient_names, disease_names, food_names]):
+    tokenized_sentence = [parser_output.words[i] for i in sorted(parser_output.words.keys())]
+    for entity_name, names_list in zip(entities_names, names_lists):
         for name in names_list:
-            tokens = tokenizer.tokenize(name)
-            if len(tokens) > 1:
-                tokens_ids = []
-                for token in tokens:
-                    index = list(parser_output.words.values()).index(token)
-                    tokens_ids.append(list(parser_output.words.keys())[index])
-                merged_id = min(tokens_ids)
+            name_tokens = tokenizer.tokenize(name)
+            tokens_ids_ranges = []
+            for i in range(len(tokenized_sentence)-len(name_tokens)+1):
+                if name_tokens == tokenized_sentence[i:i+len(name_tokens)]:
+                    tokens_ids_ranges.append(range(i+1,i+len(name_tokens)+1))
+            for _range in tokens_ids_ranges:
+                merged_id = min(_range)
                 for i, j in parser_output.nx_graph.edges()[:]:
-                    if i in tokens_ids and j in tokens_ids:
+                    rel = parser_output.nx_graph[i][j]['rel']
+                    if i in _range and j in _range:
                         parser_output.nx_graph.remove_edge(i, j)
-                    elif i in tokens_ids:
-                        rel = parser_output.nx_graph[i][j]['rel']
+                    elif i in _range:
                         parser_output.nx_graph.remove_edge(i, j)
                         parser_output.nx_graph.add_edge(merged_id, j, {'rel': rel})
-                    elif j in tokens_ids:
-                        rel = parser_output.nx_graph[i][j]['rel']
+                    elif j in _range:
                         parser_output.nx_graph.remove_edge(i, j)
                         parser_output.nx_graph.add_edge(i, merged_id, {'rel': rel})
-                parser_output.nx_graph.remove_nodes_from([id for id in tokens_ids if id != merged_id])
+                parser_output.nx_graph.remove_nodes_from([_id for _id in _range if _id != merged_id])
                 parser_output.words[merged_id] = name
                 parser_output.tags[merged_id] = entity_name
-                for id in tokens_ids:
-                    if id != merged_id:
-                        del parser_output.words[id]
-                        del parser_output.tags[id]
-            else:
-                index = list(parser_output.words.values()).index(name)
-                id = list(parser_output.words.keys())[index]
-                parser_output.tags[id] = entity_name
 
+                [parser_output.words.pop(_id) for _id in _range if _id != merged_id]
+                [parser_output.tags.pop(_id)  for _id in _range if _id != merged_id]
 
 def get_tokenizer(self):
     return self.__tokenizer
