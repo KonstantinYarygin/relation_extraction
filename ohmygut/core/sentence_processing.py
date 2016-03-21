@@ -13,7 +13,7 @@ class SentenceParser(object):
             dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence)
         except OSError:
             return
-        
+
         dependency_graph = next(dependency_graph_iterator)
 
         nodes = [node for node in dependency_graph.nodes.keys() if node]
@@ -54,3 +54,10 @@ class ParserOutput(object):
                                      )
         plt.axis('off')
         plt.show()
+
+    def __str__(self):
+        object_string = ''
+        object_string += str(self.nx_graph.edges()) + '\n'
+        object_string += str(self.words) + '\n'
+        object_string += str(self.tags) + '\n'
+        return(object_string)
