@@ -5,8 +5,9 @@ import re
 
 
 class SentenceParser(object):
-    def __init__(self, stanford_dependency_parser):
+    def __init__(self, stanford_dependency_parser, stanford_tokenizer):
         self.stanford_dependency_parser = stanford_dependency_parser
+        self.stanford_tokenizer = stanford_tokenizer
 
     def parse_sentence(self, sentence):
         try:
@@ -15,19 +16,21 @@ class SentenceParser(object):
             return
 
         dependency_graph = next(dependency_graph_iterator)
+        tokens = self.stanford_tokenizer.tokenize(sentence)
 
-        nodes = [node for node in dependency_graph.nodes.keys() if node]
+        # nodes = [node for node in dependency_graph.nodes.keys() if node]
+        nodes = [i+1 for i in range(len(tokens))]
         edges = [
             (n, dependency_graph._hd(n), {'rel': dependency_graph._rel(n)})
-            for n in nodes if dependency_graph._hd(n)
+            for n in dependency_graph.nodes if n and dependency_graph._hd(n)
             ]
 
         nx_graph = nx.DiGraph()
         nx_graph.add_nodes_from(nodes)
         nx_graph.add_edges_from(edges)
 
-        words = {node: dependency_graph.nodes[node]['word'] for node in nodes}
-        tags = {node: dependency_graph.nodes[node]['tag'] for node in nodes}
+        words = {i+1: token for i, token in enumerate(tokens)}
+        tags = {node: dependency_graph.nodes[node]['tag'] if node in dependency_graph.nodes else 'NO_TAG' for node in nodes}
 
         return ParserOutput(nx_graph=nx_graph,
                             words=words,
