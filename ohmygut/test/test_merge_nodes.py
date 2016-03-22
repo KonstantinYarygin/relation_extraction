@@ -19,6 +19,14 @@ stanford_tokenizer = StanfordTokenizer(
     path_to_jar=os.path.join(script_dir, '../../stanford_parser/stanford-parser.jar')
 )
 
+stanford_dependency_parser = StanfordDependencyParser(
+    path_to_jar=os.path.join(script_dir, '../../stanford_parser/stanford-parser.jar'),
+    path_to_models_jar=os.path.join(script_dir, '../../stanford_parser/stanford-parser-3.5.2-models.jar'),
+    model_path=os.path.join(script_dir, '../../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
+)
+
+sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+
 class TestCase(unittest.TestCase):
     def test_merge_nodes_1(self):
 
@@ -70,12 +78,12 @@ class TestCase(unittest.TestCase):
         food_names      = [name for name, food_group in sentence.food]
 
         merge_nodes(
-            tokenizer = stanford_tokenizer,
-            bacterial_names = bacterial_names,
-            disease_names = disease_names,
-            nutrient_names = nutrient_names,
-            food_names = food_names,
-            parser_output = sentence.parser_output
+            tokenizer=stanford_tokenizer,
+            bacterial_names=bacterial_names,
+            disease_names=disease_names,
+            nutrient_names=nutrient_names,
+            food_names=food_names,
+            parser_output=sentence.parser_output
         )
 
         edges = sentence.parser_output.nx_graph.edges()
@@ -89,6 +97,30 @@ class TestCase(unittest.TestCase):
         self.assertListEqual(edges_expected, edges)
         self.assertEqual(words_expected, words)
         self.assertEqual(tags_expected, tags)
+
+    def test_merge_nodes_3(self):
+
+        sentence_text = 'Intervention trials of breakfast cereals and diabetes CHO, carbohydrate; FRS, fast release starch; GER, gastric emptying rate; GI, glycemic index; GTT, glucose tolerance test; Hb A, glycated hemoglobin; IDDM, insulin dependent diabetes mellitus; NIDDM, non–insulin-dependent diabetes mellitus; RTEC, ready-to-eat breakfast cereal; SRS, slow release starch.'
+        diseases = [('diabetes mellitus', 'DOID:9351'), ('diabetes mellitus', 'DOID:9351')]
+        nutrients = [('starch', 'Starch'), ('glucose', 'Glucose')]
+        bacteria = []
+        food = []
+
+        parser_output = sentence_parser.parse_sentence(sentence_text)
+
+        bacterial_names = [name for name, ncbi_id in bacteria]
+        disease_names   = [name for name, doid_id in diseases]
+        nutrient_names  = [name for name, idname in nutrients]
+        food_names      = [name for name, food_group in food]
+
+        merge_nodes(
+            tokenizer=stanford_tokenizer,
+            bacterial_names=bacterial_names,
+            disease_names=disease_names,
+            nutrient_names=nutrient_names,
+            food_names=food_names,
+            parser_output=parser_output
+        )
 
 if __name__ == '__main__':
     unittest.main()
