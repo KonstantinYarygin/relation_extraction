@@ -76,6 +76,7 @@ def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_
 
     tokenized_sentence = [parser_output.words[i] for i in sorted(parser_output.words.keys())]
     for entity_name, names_list in zip(entities_names, names_lists):
+        names_list = set(names_list)
         for name in names_list:
             name_tokens = tokenizer.tokenize(name)
             tokens_ids_ranges = []
