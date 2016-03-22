@@ -44,7 +44,7 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, food, sta
                     tokens_coordinates[entity_1].remove(entity_1_coordinates)
                 elif intersection == set_2 and intersection != set_1:
                     tokens_coordinates[entity_2].remove(entity_2_coordinates)
-                elif intersection == set_1 and intersection == set_2:
+                elif intersection == set_1 and intersection == set_2 and entity_1 != entity_2:
                     tokens_coordinates[entity_2].remove(entity_2_coordinates)
 
     bacteria_new  = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
