@@ -33,9 +33,9 @@ def analyze_sentence(sentence, tokenizer, pattern_finder):
     disease_names   = [name for name, doid_id in sentence.diseases]
     nutrient_names  = [name for name, idname in sentence.nutrients]
     food_names      = [name for name, food_group in sentence.food]
-    parser_output = sentence.parser_output
 
-    merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output)
+    merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, sentence.parser_output)
+
     bacteria_nodes_ids  = [id for id, tag in sentence.parser_output.tags.items() if tag == 'BACTERIUM']
     nutrients_nodes_ids = [id for id, tag in sentence.parser_output.tags.items() if tag == 'NUTRIENT']
     diseases_nodes_ids  = [id for id, tag in sentence.parser_output.tags.items() if tag == 'DISEASE']
@@ -74,15 +74,17 @@ def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_
     entities_names = ['BACTERIUM', 'NUTRIENT', 'DISEASE', 'FOOD']
     names_lists = [bacterial_names, nutrient_names, disease_names, food_names]
 
-    tokenized_sentence = [parser_output.words[i] for i in sorted(parser_output.words.keys())]
     for entity_name, names_list in zip(entities_names, names_lists):
-        names_list = set(names_list)
         for name in names_list:
+            tokenized_sentence = [parser_output.words[i] for i in sorted(parser_output.words.keys())]
+            tokenized_sentence_ids = sorted(parser_output.words.keys())
+
             name_tokens = tokenizer.tokenize(name)
             tokens_ids_ranges = []
             for i in range(len(tokenized_sentence)-len(name_tokens)+1):
                 if name_tokens == tokenized_sentence[i:i+len(name_tokens)]:
-                    tokens_ids_ranges.append(range(i+1,i+len(name_tokens)+1))
+                    tokens_ids_ranges.append(tokenized_sentence_ids[i:i+len(name_tokens)])
+
             for _range in tokens_ids_ranges:
                 merged_id = min(_range)
                 for i, j in parser_output.nx_graph.edges()[:]:
@@ -99,8 +101,10 @@ def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_
                 parser_output.words[merged_id] = name
                 parser_output.tags[merged_id] = entity_name
 
-                [parser_output.words.pop(_id) for _id in _range if _id != merged_id]
-                [parser_output.tags.pop(_id)  for _id in _range if _id != merged_id]
+                for _id in _range:
+                    if _id != merged_id:
+                        del parser_output.words[_id]
+                        del parser_output.tags[_id]
 
 def get_tokenizer(self):
     return self.__tokenizer
