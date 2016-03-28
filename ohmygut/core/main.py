@@ -27,43 +27,14 @@ def main(article_data_sources,
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
             sentence_number += 1
-
-            # todo: test me
-            bacteria = bacteria_catalog.find(sentence_text)
-            nutrients = nutrients_catalog.find(sentence_text)
-            diseases = diseases_catalog.find(sentence_text)
-            food = food_catalog.find(sentence_text)
-
-            # todo: test me
-            if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
-                    check_if_more_than_one_list_not_empty([bacteria, diseases]) or
-                    check_if_more_than_one_list_not_empty([bacteria, food])):
+            try:
+                sentence = find_sentence(sentence_text, article_title, article_journal,
+                                         bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
+                                         tokenizer, sentence_parser, pattern_finder)
+            except Exception as error:
+                constants.logger.info(error)
+                constants.logger.info("got error in sentence loop; continue")
                 continue
-
-            bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
-                                                                      bacteria, nutrients, diseases,
-                                                                      tokenizer)
-            # todo: test me
-            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
-                continue
-
-            # todo: no need object?
-            parser_output = sentence_parser.parse_sentence(sentence_text)
-            if not parser_output:
-                continue
-
-            paths = analyze_sentence(bacteria, nutrients, diseases, food,
-                                     parser_output, tokenizer, pattern_finder)
-
-            sentence = Sentence(text=sentence_text,
-                                article_title=article_title,
-                                bacteria=bacteria,
-                                nutrients=nutrients,
-                                diseases=diseases,
-                                food=food,
-                                parser_output=parser_output,
-                                journal=article_journal,
-                                shortest_paths=paths)
 
             for writer in writers:
                 writer.write(sentence)
@@ -75,3 +46,47 @@ def main(article_data_sources,
         constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
 
+
+def find_sentence(sentence_text, article_title, article_journal,
+                  bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
+                  tokenizer, sentence_parser, pattern_finder):
+    # todo: test me
+    bacteria = bacteria_catalog.find(sentence_text)
+    nutrients = nutrients_catalog.find(sentence_text)
+    diseases = diseases_catalog.find(sentence_text)
+    food = food_catalog.find(sentence_text)
+
+    # todo: test me
+    if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
+            check_if_more_than_one_list_not_empty([bacteria, diseases]) or
+            check_if_more_than_one_list_not_empty([bacteria, food])):
+        return None
+
+    bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
+                                                              bacteria, nutrients, diseases, food,
+                                                              tokenizer)
+
+    if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
+            check_if_more_than_one_list_not_empty([bacteria, diseases]) or
+            check_if_more_than_one_list_not_empty([bacteria, food])):
+        return None
+
+    # todo: no need to be object?
+    parser_output = sentence_parser.parse_sentence(sentence_text)
+    if not parser_output:
+        return None
+
+    paths = analyze_sentence(bacteria, nutrients, diseases, food,
+                             parser_output, tokenizer, pattern_finder)
+
+    sentence = Sentence(text=sentence_text,
+                        article_title=article_title,
+                        bacteria=bacteria,
+                        nutrients=nutrients,
+                        diseases=diseases,
+                        food=food,
+                        parser_output=parser_output,
+                        journal=article_journal,
+                        shortest_paths=paths)
+
+    return sentence
