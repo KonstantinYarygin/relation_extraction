@@ -10,10 +10,9 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, sentenc
 
 
 def main(article_data_sources,
-         bacteria_catalog, nutrients_catalog, diseases_catalog,
+         bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
          sentence_parser, tokenizer, pattern_finder,
          data_sources_to_skip=0, sentences_to_skip=0):
-
     output_dir = get_output_dir_path()
 
     sentences = []
@@ -23,13 +22,11 @@ def main(article_data_sources,
         article_data_source = article_data_sources[i]
 
         articles = article_data_source.get_articles()
-        # todo: test me
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
-        constants.logger.info("start looping sentences with data source №%i %s" % (i+1, str(article_data_source)))
+        constants.logger.info("start looping sentences with data source №%i %s" % (i + 1, str(article_data_source)))
         sentence_number = sentences_to_skip
-        # todo: test me
         for _ in range(sentences_to_skip):
             next(sentences_titles_journals_tuple)
 
@@ -40,9 +37,12 @@ def main(article_data_sources,
             bacteria = bacteria_catalog.find(sentence_text)
             nutrients = nutrients_catalog.find(sentence_text)
             diseases = diseases_catalog.find(sentence_text)
+            food = food_catalog.find(sentence_text)
 
             # todo: test me
-            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
+            if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
+                        check_if_more_than_one_list_not_empty([bacteria, diseases]) or
+                        check_if_more_than_one_list_not_empty([bacteria, food])):
                 continue
 
             bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
@@ -62,6 +62,7 @@ def main(article_data_sources,
                                 bacteria=bacteria,
                                 nutrients=nutrients,
                                 diseases=diseases,
+                                food=food,
                                 parser_output=parser_output,
                                 journal=article_journal)
 
@@ -91,10 +92,12 @@ def log_paths(sentence, paths):
     pattern_logger.info(sentence.nutrients)
     pattern_logger.info('')
 
-    for path in paths:
-        pattern_logger.info(path.words)
-        pattern_logger.info(path.type)
-        pattern_logger.info('')
+    for pair_type, pathes in paths.items():
+        for path in pathes:
+            pattern_logger.info(pair_type)
+            pattern_logger.info(path.words)
+            # pattern_logger.info(path.type)
+            pattern_logger.info('')
     pattern_logger.info('=' * 100)
     pattern_logger.info('')
 
@@ -109,13 +112,17 @@ def log_paths(sentence, paths):
                                sentence.parser_output.nx_graph.edges()])
     large_pattern_logger.info('')
 
-    for path in paths:
-        large_pattern_logger.info(path.words)
-        large_pattern_logger.info(path.edge_rels)
-        large_pattern_logger.info(path.tags)
-        large_pattern_logger.info(path.nodes_indexes)
-        large_pattern_logger.info(path.type)
-        large_pattern_logger.info('')
+    for pair_type, pathes in paths.items():
+        for path in pathes:
+            large_pattern_logger.info(pair_type)
+            large_pattern_logger.info(path.words)
+            large_pattern_logger.info(path.edge_rels)
+            large_pattern_logger.info(path.tags)
+            large_pattern_logger.info(path.nodes_indexes)
+            # large_pattern_logger.info(path.type)
+            large_pattern_logger.info('')
 
     large_pattern_logger.info('=' * 100)
     large_pattern_logger.info('')
+
+
