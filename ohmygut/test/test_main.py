@@ -41,7 +41,7 @@ class TestCase(unittest.TestCase):
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
         main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, sentence_parser,
-             tokenizer=None, pattern_finder=None, writers=None)
+             tokenizer=None, pattern_finder=None, writers=[])
 
 
 
