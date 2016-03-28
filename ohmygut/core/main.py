@@ -13,7 +13,6 @@ def main(article_data_sources,
          bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
          sentence_parser, tokenizer, pattern_finder,
          data_sources_to_skip=0, sentences_to_skip=0):
-
     output_dir = get_output_dir_path()
 
     sentences = []
@@ -26,7 +25,7 @@ def main(article_data_sources,
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
-        constants.logger.info("start looping sentences with data source №%i %s" % (i+1, str(article_data_source)))
+        constants.logger.info("start looping sentences with data source №%i %s" % (i + 1, str(article_data_source)))
         sentence_number = sentences_to_skip
         for _ in range(sentences_to_skip):
             next(sentences_titles_journals_tuple)
@@ -39,15 +38,14 @@ def main(article_data_sources,
             diseases = diseases_catalog.find(sentence_text)
             food = food_catalog.find(sentence_text)
 
-            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases, food]):
+            if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
+                        check_if_more_than_one_list_not_empty([bacteria, diseases]) or
+                        check_if_more_than_one_list_not_empty([bacteria, food])):
                 continue
 
             bacteria, nutrients, diseases, food = remove_entity_overlapping(sentence_text,
                                                                             bacteria, nutrients, diseases, food,
                                                                             tokenizer)
-
-            if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases, food]):
-                continue
 
             parser_output = sentence_parser.parse_sentence(sentence_text)
             if not parser_output:
@@ -122,5 +120,3 @@ def log_paths(sentence, paths):
 
     large_pattern_logger.info('=' * 100)
     large_pattern_logger.info('')
-
-
