@@ -13,12 +13,18 @@ class UsdaFoodCatalog(Catalog):
         self.food_file_path = food_file_path
         self.__hash_tree = None
 
-    def find(self, sentence_text):
-        return self.__hash_tree.search(sentence_text)
-
     def initialize(self):
-        food_data_frame = pd.read_table(self.food_file_path, sep=";", encoding="utf-8")
-        words = list(food_data_frame['word'].values)
-        words_capitalized = list(map(lambda x: x.capitalize(), words))
-        words += words_capitalized
-        self.__hash_tree = HashTree(words)
+        food_data_frame = pd.read_table(self.food_file_path, sep=';', encoding='cp1252')#, encoding="utf-8")
+        self.__food_dict = {food_group: [] for food_group in food_data_frame['group'].values}
+        for index, record in food_data_frame.iterrows():
+            self.__food_dict[record['group']].append(record['word'].strip())
+            self.__food_dict[record['group']].append(record['word'].strip().capitalize())
+
+        self.__group_by_food_name = {food: group for group, food_list in self.__food_dict.items() for food in food_list}
+
+        self.__hash_tree = HashTree(self.__group_by_food_name.keys())
+
+    def find(self, sentence_text):
+        food_names = self.__hash_tree.search(sentence_text)
+        output = [(name, self.__group_by_food_name[name]) for name in food_names]
+        return output

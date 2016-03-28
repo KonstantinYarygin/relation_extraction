@@ -1,6 +1,7 @@
 from ohmygut.core.article.article import Article
 from ohmygut.core.article.article_data_source import ArticleDataSource
 import os
+import re
 
 
 def get_libgen_articles(libgen_folder):
@@ -17,6 +18,7 @@ def get_libgen_articles(libgen_folder):
         with open(filepath) as f:
             file_lines = [line.strip('\n- ') for line in f.readlines()]
             text = ' '.join(file_lines)
+            text = re.sub('\s+', ' ', text)
         yield {'text': text, 'title': title, 'journal': journal}
 
 
