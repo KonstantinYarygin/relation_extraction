@@ -46,7 +46,7 @@ setnames(data.disease, c("text","article_title","disease","disease_code"))
 ```
 Присоединим импакты
 ```{r}
-data.impacts <- fread('data/if2015.csv', na.strings = "Not Available")
+data.impacts <- fread('../data/if2015.csv', na.strings = "Not Available")
 setnames(data.impacts, c('journal', 'impact'))
 # оказались дупликаты
 data.impacts <- unique(data.impacts)
