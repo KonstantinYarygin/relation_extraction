@@ -23,31 +23,36 @@ def main(article_data_sources,
         article_data_source = article_data_sources[i]
 
         articles = article_data_source.get_articles()
+        # todo: test me
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
         constants.logger.info("start looping sentences with data source №%i %s" % (i+1, str(article_data_source)))
         sentence_number = sentences_to_skip
+        # todo: test me
         for _ in range(sentences_to_skip):
             next(sentences_titles_journals_tuple)
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
             sentence_number += 1
 
+            # todo: test me
             bacteria = bacteria_catalog.find(sentence_text)
             nutrients = nutrients_catalog.find(sentence_text)
             diseases = diseases_catalog.find(sentence_text)
 
+            # todo: test me
             if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
                 continue
 
             bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
                                                                       bacteria, nutrients, diseases,
                                                                       tokenizer)
-
+            # todo: test me
             if not check_if_more_than_one_list_not_empty([bacteria, nutrients, diseases]):
                 continue
 
+            # todo: no need object
             parser_output = sentence_parser.parse_sentence(sentence_text)
             if not parser_output:
                 continue
@@ -114,5 +119,3 @@ def log_paths(sentence, paths):
 
     large_pattern_logger.info('=' * 100)
     large_pattern_logger.info('')
-
-

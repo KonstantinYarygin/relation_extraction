@@ -13,7 +13,7 @@ from ohmygut.core.constants import TRIM_LETTERS_NUMBER
 def get_sentences(text):
     return sent_tokenize(text)
 
-
+# todo: rewrite for any entities number (not only bacteria, nutrients, diseases)
 def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_tokenizer):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
