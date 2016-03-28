@@ -45,3 +45,5 @@ TRIM_LETTERS_NUMBER = 20
 RESULT_DIR_NAME = "result"
 if not os.path.exists(RESULT_DIR_NAME):
         os.mkdir(RESULT_DIR_NAME)
+
+SENTENCE_LENGTH_THRESHOLD = 400

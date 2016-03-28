@@ -2,6 +2,7 @@
 
 from ohmygut.core import constants
 from ohmygut.core.analyzer import analyze_sentence
+from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_if_more_than_one_list_not_empty
 
@@ -47,9 +48,14 @@ def main(article_data_sources,
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
 
 
+# todo: test me
 def find_sentence(sentence_text, article_title, article_journal,
                   bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
                   tokenizer, sentence_parser, pattern_finder):
+
+    if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
+        return None
+
     # todo: test me
     bacteria = bacteria_catalog.find(sentence_text)
     nutrients = nutrients_catalog.find(sentence_text)
