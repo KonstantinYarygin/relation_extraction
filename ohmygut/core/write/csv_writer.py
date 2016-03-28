@@ -6,7 +6,7 @@ import pandas as pd
 from ohmygut.core.constants import RESULT_DIR_NAME
 from ohmygut.core.write.base_writer import BaseWriter
 
-DO_INCLUDE_HEADER = False
+DO_INCLUDE_HEADER = True
 CSV_SEPARATOR = '\t'
 
 
@@ -16,6 +16,10 @@ class CsvWriter(BaseWriter):
         self.csv_path = csv_path
         self.columns = ['text', 'article_title', 'journal',
                         'bacteria', 'nutrients', 'diseases', 'food']
+
+        if DO_INCLUDE_HEADER:
+            header_data = pd.DataFrame(columns=self.columns)
+            header_data.to_csv(self.csv_path, mode='a', header=DO_INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
 
     def write(self, sentence):
         values = [sentence.text,
@@ -29,7 +33,7 @@ class CsvWriter(BaseWriter):
         data = pd.DataFrame([values],
                             columns=self.columns)
 
-        data.to_csv(self.csv_path, mode='a', header=DO_INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
+        data.to_csv(self.csv_path, mode='a', header=False, index=False, sep=CSV_SEPARATOR)
 
 
 def get_csv_path():
