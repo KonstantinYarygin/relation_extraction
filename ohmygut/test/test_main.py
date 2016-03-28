@@ -31,19 +31,18 @@ class MockDataSource(ArticleDataSource):
 class TestCase(unittest.TestCase):
     @patch("ohmygut.core.main.remove_entity_overlapping", return_value=([("bac1","cod1")], [("bac2","cod2")], []) )
     @patch("ohmygut.core.main.analyze_sentence", return_value=["yeah"])
-    @patch("ohmygut.core.main.log_paths")
-    def test_main(self, mock_remove_entity_overlapping, mock_analyze_sentence, mock_log_paths):
+    def test_main(self, mock_remove_entity_overlapping, mock_analyze_sentence):
         article_data_sources = [MockDataSource(), MockDataSource()]
         bacteria_catalog = MockCatalog("a")
         nutrients_catalog = MockCatalog("b")
         diseases_catalog = MockCatalog("c")
-        sentence_parser = SentenceParser(stanford_dependency_parser=None)
+        food_catalog = MockCatalog("d")
+        sentence_parser = SentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
-        main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, sentence_parser,
-             tokenizer=None, pattern_finder=None)
+        main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, sentence_parser,
+             tokenizer=None, pattern_finder=None, writers=None)
 
-        # self.assertEqual(True, False)
 
 
 if __name__ == '__main__':

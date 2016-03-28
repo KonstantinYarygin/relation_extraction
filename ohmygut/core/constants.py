@@ -42,3 +42,6 @@ plural_dict = {'a': 'ae', 'us': 'i', 'er': 'ers', 'um': 'a',
                'as': 'ads', 'o': 'os'}
 
 TRIM_LETTERS_NUMBER = 20
+RESULT_DIR_NAME = "result"
+if not os.path.exists(RESULT_DIR_NAME):
+        os.mkdir(RESULT_DIR_NAME)

@@ -1,26 +1,21 @@
-import datetime
-import os
-import pickle
-import re
 from itertools import product
 
 import pandas as pd
 from nltk import sent_tokenize
 
-from ohmygut.core.constants import TRIM_LETTERS_NUMBER
-
 
 def get_sentences(text):
     return sent_tokenize(text)
 
+
 # todo: rewrite for any entities number (not only bacteria, nutrients, diseases)
-def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_tokenizer):
+def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, food, stanford_tokenizer):
     sentence_tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
-    tokens_lists['bacteria']  = [bacterium_name.split(' ') for bacterium_name, ncbi_id in bacteria]
+    tokens_lists['bacteria'] = [bacterium_name.split(' ') for bacterium_name, ncbi_id in bacteria]
     tokens_lists['nutrients'] = [nutrient_name.split(' ') for nutrient_name, idname in nutrients]
-    tokens_lists['diseases']  = [disease_name.split(' ') for disease_name, doid_id in diseases]
-    tokens_lists['food']      = [food_name.split(' ') for food_name, food_group in food]
+    tokens_lists['diseases'] = [disease_name.split(' ') for disease_name, doid_id in diseases]
+    tokens_lists['food'] = [food_name.split(' ') for food_name, food_group in food]
 
     entities = ['bacteria', 'nutrients', 'diseases', 'food']
 
@@ -47,17 +42,17 @@ def remove_entity_overlapping(sentence, bacteria, nutrients, diseases, stanford_
                 elif intersection == set_1 and intersection == set_2 and entity_1 != entity_2:
                     tokens_coordinates[entity_2].remove(entity_2_coordinates)
 
-    bacteria_new  = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
+    bacteria_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
     nutrients_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['nutrients']]
-    diseases_new  = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['diseases']]
-    food_new      = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['food']]
+    diseases_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['diseases']]
+    food_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['food']]
 
-    bacteria_new  = [(name, dict(bacteria)[name]) for name in bacteria_new]
+    bacteria_new = [(name, dict(bacteria)[name]) for name in bacteria_new]
     nutrients_new = [(name, dict(nutrients)[name]) for name in nutrients_new]
-    diseases_new  = [(name, dict(diseases)[name]) for name in diseases_new]
-    food_new      = [(name, dict(food)[name]) for name in food_new]
+    diseases_new = [(name, dict(diseases)[name]) for name in diseases_new]
+    food_new = [(name, dict(food)[name]) for name in food_new]
 
-    return (bacteria_new, nutrients_new, diseases_new, food_new)
+    return bacteria_new, nutrients_new, diseases_new, food_new
 
 
 def untokenize(tokens):
@@ -82,27 +77,5 @@ def sentences_to_data_frame(sentences):
     return data
 
 
-def serialize_result(sentence, save_path, sentence_number):
-    filename = '%s_%s_%i.pkl' % (sentence.journal[0:TRIM_LETTERS_NUMBER], sentence.article_title[0:TRIM_LETTERS_NUMBER], sentence_number)
-    filename = delete_forbidden_characters(filename)
-    filename = os.path.join(save_path, filename)
-    with open(filename, 'wb') as f:
-        pickle.dump(sentence, f)
-
-
-def delete_forbidden_characters(string):
-    return_string = string.replace(' ', '_')
-    return_string = re.sub('[^\w_\d\.]', '', return_string)
-    return return_string
-
-
 def check_if_more_than_one_list_not_empty(elements):
     return sum(map(bool, elements)) > 1
-
-
-def get_output_dir_path():
-    output_dir = os.path.join("result", "result_%s" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
-    if not os.path.exists('result'):
-        os.mkdir('result')
-    os.mkdir(output_dir)
-    return output_dir

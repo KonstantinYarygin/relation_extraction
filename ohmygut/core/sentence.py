@@ -2,8 +2,9 @@ class Sentence(object):
 
     def __init__(self, text, article_title, journal,
                  bacteria, nutrients, diseases, food,
-                 parser_output):
+                 parser_output, shortest_paths):
         super().__init__()
+        self.shortest_paths = shortest_paths
         self.journal = journal
         self.text = text
         self.article_title = article_title
