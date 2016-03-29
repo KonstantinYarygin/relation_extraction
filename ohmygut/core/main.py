@@ -10,7 +10,7 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_i
 def main(article_data_sources,
          bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
          sentence_parser, tokenizer, pattern_finder, writers,
-         data_sources_to_skip=0, sentences_to_skip=0):
+         data_sources_to_skip=0, sentences_to_skip=0, do_parse=True, do_analyze=True):
     sentences = []
     data_source_names = list(map(lambda x: str(x), article_data_sources))
     constants.logger.info("data sources: %s" % data_source_names)
@@ -27,22 +27,26 @@ def main(article_data_sources,
             next(sentences_titles_journals_tuple)
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
-            sentence_number += 1
+
             try:
                 sentence = find_sentence(sentence_text, article_title, article_journal,
                                          bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-                                         tokenizer, sentence_parser, pattern_finder)
+                                         tokenizer, sentence_parser, pattern_finder, do_parse, do_analyze)
             except Exception as error:
                 constants.logger.info(error)
                 constants.logger.info("got error in sentence loop; continue")
+                continue
+            if not sentence:
                 continue
 
             for writer in writers:
                 writer.write(sentence)
 
+            sentence_number += 1
             constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
             constants.logger.info("=" * 80)
             sentences.append(sentence)
+
 
         constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
@@ -51,7 +55,7 @@ def main(article_data_sources,
 # todo: test me
 def find_sentence(sentence_text, article_title, article_journal,
                   bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-                  tokenizer, sentence_parser, pattern_finder):
+                  tokenizer, sentence_parser, pattern_finder, do_parse=True, do_analyze=True):
 
     if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
         return None
@@ -68,7 +72,7 @@ def find_sentence(sentence_text, article_title, article_journal,
             check_if_more_than_one_list_not_empty([bacteria, food])):
         return None
 
-    bacteria, nutrients, diseases = remove_entity_overlapping(sentence_text,
+    bacteria, nutrients, diseases, food = remove_entity_overlapping(sentence_text,
                                                               bacteria, nutrients, diseases, food,
                                                               tokenizer)
 
@@ -77,13 +81,19 @@ def find_sentence(sentence_text, article_title, article_journal,
             check_if_more_than_one_list_not_empty([bacteria, food])):
         return None
 
-    # todo: no need to be object?
-    parser_output = sentence_parser.parse_sentence(sentence_text)
-    if not parser_output:
-        return None
+    if do_parse:
+        # todo: no need to be object?
+        parser_output = sentence_parser.parse_sentence(sentence_text)
+        if not parser_output:
+            return None
+    else:
+        parser_output = ''
 
-    paths = analyze_sentence(bacteria, nutrients, diseases, food,
-                             parser_output, tokenizer, pattern_finder)
+    if do_parse and do_analyze:
+        paths = analyze_sentence(bacteria, nutrients, diseases, food,
+                                 parser_output, tokenizer, pattern_finder)
+    else:
+        paths = ''
 
     sentence = Sentence(text=sentence_text,
                         article_title=article_title,
