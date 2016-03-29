@@ -45,9 +45,9 @@ nutrients_catalog.initialize()
 diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
 diseases_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../../article_data/texts/'))
-medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../../article_data/abstracts/gut_microbiota.medline.txt'))
-libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../../article_data/libgen/'))
+nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../article_data/texts/'))
+medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../article_data/abstracts/gut_microbiota.medline.txt'))
+libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../article_data/libgen/'))
 
 with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
     verb_ontology = eval(''.join(f.readlines()))
@@ -63,6 +63,9 @@ csv_writer = CsvWriter(csv_path)
 pkl_writer = PklWriter(output_dir)
 log_writer = LogWriter()
 
+
+
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer])
+     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
+     do_parse=False, do_analyze=False)

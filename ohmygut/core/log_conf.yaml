@@ -74,6 +74,12 @@ loggers:
         handlers: [console, google_search_nutrient_handler]
         propagate: no
 
+    ohmygut_logger:
+        level: INFO
+        handlers: [console, info_file_handler]
+        propagate: no
+
+
 root:
     level: INFO
 

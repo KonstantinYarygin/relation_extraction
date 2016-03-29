@@ -6,7 +6,7 @@ import yaml
 
 path_to_constants = os.path.dirname(os.path.abspath(__file__))
 log_config_name = 'log_conf.yaml'
-base_logger_name = 'brightbox_logger'
+base_logger_name = 'ohmygut_logger'
 
 
 def setup_logging(

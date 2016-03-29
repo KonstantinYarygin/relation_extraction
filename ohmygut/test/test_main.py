@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
+from ohmygut.core import constants
 from ohmygut.core.article.article import Article
 from ohmygut.core.article.article_data_source import ArticleDataSource
 from ohmygut.core.catalog.catalog import Catalog
@@ -41,6 +42,7 @@ class TestCase(unittest.TestCase):
         sentence_parser = SentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
+        constants.logger.info("asdasd")
         main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, sentence_parser,
              tokenizer=None, pattern_finder=None, writers=[])
 
