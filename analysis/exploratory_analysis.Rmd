@@ -6,6 +6,31 @@ output:
 *workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow  
 *выводы:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B
 
+```{r lib, echo=FALSE}
+GetHistPlots <- function(data.count, x.variable){
+  setnames(data.count, x.variable, "object")
+  plot1 <- ggplot(data.count[0:10], aes(x = reorder(object, -N), y = N)) + 
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    xlab(x.variable) + 
+    ylab('count') + 
+    theme(text = element_text(size=13), 
+          axis.text.x = element_text(angle=10, vjust=1))
+  plot2 <- ggplot(data.count, aes(x = reorder(object, -N), y = N, group=1)) + 
+    geom_line(color="green", size=1) + 
+    theme_bw() + 
+    xlab(x.variable) + 
+    ylab('count') + geom_hline(yintercept=0) +  
+    theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
+          axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank())
+  #setnames(data.count, "object", x.variable)
+  return(list(plot1=plot1, plot2=plot2))
+}
+```
+
 ## Data processing
 ```{r}
 library(data.table)
@@ -14,38 +39,48 @@ library(stringr)
 library(plyr)
 
 # warning here doesn't matter
-data <- fread('~/Downloads/sentences17_50_46-01_03_16.csv', sep=',')
+data <- fread('~/Downloads/result_17_07_29-28_03_16.csv', sep='\t')
 ```
 Структура данных:
 ```{r}
 nrow(data)
 str(data, vec.len=1)
 ```
-Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем:
-```{r}
-data.bacteria = data[,
+Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем
+```{r, echo=FALSE}
+data.bacteria <- data[,
          .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
            unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
          by=.(text, article_title)]
 setnames(data.bacteria, c("text","article_title","bacteria","bacteria_code"))
 
-data.nutrient = data[,
+data.nutrient <- data[,
          unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
          by=.(text, article_title)]
 setnames(data.nutrient, c("text","article_title","nutrient"))
 
-data.disease = data[,.(unlist(llply(str_match_all(diseases, 
+data.disease <- data[,.(unlist(llply(str_match_all(diseases, 
                                                   '\'([^\\)]+)\','), 
                                     .fun=function(x) x[,2])),
                       unlist(llply(str_match_all(diseases, 
                                                  ',\\s\'([^\\)]+)\''), 
                                    .fun=function(x) x[,2]))),
          by=.(text, article_title)]
-
 setnames(data.disease, c("text","article_title","disease","disease_code"))
+
+data.food <- data[,.(unlist(llply(str_match_all(food, 
+                                                  '\'([^\\)]+)\','), 
+                                    .fun=function(x) x[,2])),
+                      unlist(llply(str_match_all(food, 
+                                                 ',\\s\'([^\\)]+)\''), 
+                                   .fun=function(x) x[,2]))),
+         by=.(text, article_title)]
+setnames(data.food, c("text","article_title","food","foodgroup"))
+
+
 ```
 Присоединим импакты
-```{r}
+```{r, echo=FALSE}
 data.impacts <- fread('../data/if2015.csv', na.strings = "Not Available")
 setnames(data.impacts, c('journal', 'impact'))
 # оказались дупликаты
@@ -95,23 +130,9 @@ data.bacteria.count <- merge(data.bacteria.count, data.bacteria.unique, by='bact
 setorder(data.bacteria.count, -N)
 head(data.bacteria.count, 10)
 nrow(data.bacteria.count)
-ggplot(data.bacteria.count[0:10], aes(x = reorder(bacteria,-N), y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('bacteria') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
-ggplot(data.bacteria.count, aes(x = reorder(bacteria,-N), y = N, group=1)) + 
-  geom_line(color="green", size=1) + 
-  theme_bw() + 
-  xlab('bacteria') + 
-  ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_blank())
+plots <- GetHistPlots(data.bacteria.count, "bacteria")
+plots[[1]]
+plots[[2]]
 ```
 
 ### Какие нутриенты встречаются чаще всего?  
@@ -121,23 +142,9 @@ data.nutrient.count <- data.nutrient[,.N,by=nutrient]
 setorder(data.nutrient.count, -N)
 head(data.nutrient.count, 10)
 nrow(data.nutrient.count)
-ggplot(data.nutrient.count[0:10], aes(x = reorder(nutrient,-N), y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('nutrient') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
-ggplot(data.nutrient.count, aes(x = reorder(nutrient,-N), y = N, group=1)) + 
-  geom_line(color="green", size=1) + 
-  theme_bw() + 
-  xlab('nutrient') + 
-  ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_blank())
+plots <- PlotHist(data.nutrient.count, "nutrient")
+plots[[1]]
+plots[[2]]
 ```
 
 ### Какие болезни встречаются чаще всего?  
@@ -150,23 +157,31 @@ data.disease.count <- merge(data.disease.count, data.disease.unique, by='disease
 setorder(data.disease.count, -N)
 head(data.disease.count, 10)
 nrow(data.disease.count)
-ggplot(data.disease.count[0:10], aes(x = reorder(disease,-N), y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('disease') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
-ggplot(data.disease.count, aes(x = reorder(disease,-N), y = N, group=1)) + 
-  geom_line(color="green", size=1) + 
-  theme_bw() + 
-  xlab('disease') + 
-  ylab('count') + geom_hline(yintercept=0) +  
-  theme(axis.line=element_line(colour = "grey"), axis.text.x=element_blank(), 
-        axis.text.x=element_blank(), axis.ticks.x=element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_blank())
+plots <- PlotHist(data.disease.count, "disease")
+plots[[1]]
+plots[[2]]
+```
+
+### Какая еда встречается чаще всего?
+Еда:
+```{r}
+data.food.count <- data.food[,.N,by=food]
+setorder(data.food.count, -N)
+head(data.food.count, 10)
+nrow(data.food.count)
+plots <- PlotHist(data.food.count, "food")
+plots[[1]]
+plots[[2]]
+```
+Группы:
+```{r}
+data.food.group.count <- data.food[,.N,by=foodgroup]
+setorder(data.food.group.count, -N)
+head(data.food.group.count, 10)
+nrow(data.food.group.count)
+plots <- PlotHist(data.food.group.count, "foodgroup")
+plots[[1]]
+plots[[2]]
 ```
 
 ### Какие пары бактерия-нутриент встречаются чаще всего?  
