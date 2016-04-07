@@ -26,8 +26,32 @@ GetHistPlots <- function(data.count, x.variable){
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.border = element_blank())
-  #setnames(data.count, "object", x.variable)
   return(list(plot1=plot1, plot2=plot2))
+}
+
+MergePlotBactPairs <- function(data.bacteria, data.other, column.other){
+  data.bacteria.other <- merge(data.bacteria, data.other, by = c("text","article_title"))
+  data.bacteria.other <- unique(data.bacteria.other)
+  data.bacteria.other.count <- data.bacteria.other[,.N,by=c('bacteria_code',column.other)]
+  data.bacteria.other.count <- merge(data.bacteria.other.count, 
+                                        data.bacteria.unique, 
+                                        by='bacteria_code')
+  setorder(data.bacteria.other.count, -N)
+  head(data.bacteria.other.count, 10)
+  nrow(data.bacteria.other.count)
+  setnames(data.bacteria.other.count, column.other, "other")
+  plot <- ggplot(data.bacteria.other.count[0:8], aes(x = reorder(paste(bacteria,
+                                                                       other,
+                                                                       sep = ' + '),-N), 
+                                                     y = N)) + 
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    xlab('pair') + 
+    ylab('count') + 
+    theme(text = element_text(size=13), 
+          axis.text.x = element_text(angle=10, vjust=1))
+  setnames(data.bacteria.other.count, "other", column.other)
+  return(list(plot=plot, data.bacteria.other.count=data.bacteria.other.count))
 }
 ```
 
@@ -47,7 +71,7 @@ nrow(data)
 str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем
-```{r, echo=FALSE}
+```{r parsing, echo=FALSE, cache=T}
 data.bacteria <- data[,
          .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
            unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
@@ -74,13 +98,13 @@ data.food <- data[,.(unlist(llply(str_match_all(food,
                       unlist(llply(str_match_all(food, 
                                                  ',\\s\'([^\\)]+)\''), 
                                    .fun=function(x) x[,2]))),
-         by=.(text, article_title)]
-setnames(data.food, c("text","article_title","food","foodgroup"))
+         by=.(text, article_title, journal)]
+setnames(data.food, c("text","article_title","journal","food","foodgroup"))
 
 
 ```
 Присоединим импакты
-```{r, echo=FALSE}
+```{r get-impacts, echo=FALSE}
 data.impacts <- fread('../data/if2015.csv', na.strings = "Not Available")
 setnames(data.impacts, c('journal', 'impact'))
 # оказались дупликаты
@@ -94,6 +118,7 @@ data <- merge(data, data.impacts, by='journal', all.x = TRUE)
 ```{r} 
 nrow(data)
 ```
+
 Количество статей, в которых мы что-то нашли:
 ```{r}
 length(unique(data$article_title))
@@ -111,6 +136,7 @@ head(data.articles, 10)
 ```
 
 ### Какие есть длины предложений
+
 Длина в **символах**
 ```{r, fig.height=7}
 data[,length:=str_length(text)]
@@ -142,7 +168,7 @@ data.nutrient.count <- data.nutrient[,.N,by=nutrient]
 setorder(data.nutrient.count, -N)
 head(data.nutrient.count, 10)
 nrow(data.nutrient.count)
-plots <- PlotHist(data.nutrient.count, "nutrient")
+plots <- GetHistPlots(data.nutrient.count, "nutrient")
 plots[[1]]
 plots[[2]]
 ```
@@ -157,80 +183,73 @@ data.disease.count <- merge(data.disease.count, data.disease.unique, by='disease
 setorder(data.disease.count, -N)
 head(data.disease.count, 10)
 nrow(data.disease.count)
-plots <- PlotHist(data.disease.count, "disease")
+plots <- GetHistPlots(data.disease.count, "disease")
 plots[[1]]
 plots[[2]]
 ```
 
 ### Какая еда встречается чаще всего?
+
 Еда:
 ```{r}
 data.food.count <- data.food[,.N,by=food]
 setorder(data.food.count, -N)
 head(data.food.count, 10)
 nrow(data.food.count)
-plots <- PlotHist(data.food.count, "food")
+plots <- GetHistPlots(data.food.count, "food")
 plots[[1]]
 plots[[2]]
 ```
+
 Группы:
 ```{r}
 data.food.group.count <- data.food[,.N,by=foodgroup]
 setorder(data.food.group.count, -N)
 head(data.food.group.count, 10)
 nrow(data.food.group.count)
-plots <- PlotHist(data.food.group.count, "foodgroup")
+plots <- GetHistPlots(data.food.group.count, "foodgroup")
 plots[[1]]
 plots[[2]]
 ```
+
+Вся встретившаяся еда записана в файл:
+```{r, echo=FALSE}
+food.file <- file.path(getwd(), 'food.csv')
+write.csv(x = data.food, food.file, row.names = F, quote = F)
+food.file
+```
+
 
 ### Какие пары бактерия-нутриент встречаются чаще всего?  
 
 Если в предложении встретилось имя бактерии несколько раз или нутриент несколько раз - считаем это за один раз. Например, если в предложении три раза встретилась бактерия Б1 и два раза встретился нутриент Н1, то считаем это за один случай Б1-Н1.
 ```{r}
-data.bacteria.nutrient <- merge(data.bacteria, data.nutrient, by = c("text","article_title"))
-data.bacteria.nutrient <- unique(data.bacteria.nutrient)
-data.bacteria.nutrient.count <- data.bacteria.nutrient[,.N,by=c('bacteria_code','nutrient')]
-data.bacteria.nutrient.count <- merge(data.bacteria.nutrient.count, 
-                                      data.bacteria.unique, 
-                                      by='bacteria_code')
-setorder(data.bacteria.nutrient.count, -N)
-head(data.bacteria.nutrient.count, 10)
-nrow(data.bacteria.nutrient.count)
-ggplot(data.bacteria.nutrient.count[0:8], aes(x = reorder(paste(bacteria,nutrient,sep = ' + '),-N), 
-                                               y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('pair') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
+bacteria.nutrient <- MergePlotBactPairs(data.bacteria, data.nutrient, "nutrient")
+head(bacteria.nutrient$data.bacteria.other.count, 10)
+nrow(bacteria.nutrient$data.bacteria.other.count)
+bacteria.nutrient$plot
 ```
+
 
 ### Какие пары бактерия-болезнь встречаются чаще всего?  
 ```{r}
-data.bacteria.disease <- merge(data.bacteria, data.disease, by = c("text","article_title"))
-data.bacteria.disease <- unique(data.bacteria.disease)
-data.bacteria.disease.count <- data.bacteria.disease[,.N,by=c('bacteria_code','disease')]
-data.bacteria.disease.count <- merge(data.bacteria.disease.count,
-                                     data.bacteria.unique, 
-                                     by='bacteria_code')
-setorder(data.bacteria.disease.count, -N)
-head(data.bacteria.disease.count, 10)
-nrow(data.bacteria.disease.count)
-ggplot(data.bacteria.disease.count[0:8], aes(x = reorder(paste(bacteria,disease,sep = ' + '),-N), 
-                                               y = N)) + 
-  geom_bar(stat="identity") + 
-  theme_bw() + 
-  xlab('pair') + 
-  ylab('count') + 
-  theme(text = element_text(size=13), 
-        axis.text.x = element_text(angle=10, vjust=1))
+bacteria.disease <- MergePlotBactPairs(data.bacteria, data.disease, "disease")
+head(bacteria.disease$data.bacteria.other.count, 10)
+nrow(bacteria.disease$data.bacteria.other.count)
+bacteria.disease$plot
+```
+
+### Какие пары бактерия-еда встречаются чаще всего?
+```{r}
+bacteria.food <- MergePlotBactPairs(data.bacteria, data.food, "food")
+head(bacteria.food$data.bacteria.other.count, 10)
+nrow(bacteria.food$data.bacteria.other.count)
+bacteria.food$plot
 ```
 
 ### Журналы  
 #### Из каких журналов больше всего предложений?  
-```{r}
+```{r, fig.width=10}
 data.journal.count <- data[,.N, by=journal]
 setorder(data.journal.count, -N)
 ggplot(data.journal.count[0:20], aes(x = reorder(journal, N), y = N)) + 
@@ -251,3 +270,18 @@ ggplot() + aes(data$impact) + geom_histogram(binwidth=1) +
              binwidth=1, geom='text', vjust = -1, size=3) +
   xlab("impact") + theme_bw()
 ```
+
+#### Из каких журналов у нас еда
+```{r journal-food, fig.width=10}
+data.journal.food.count <- data.food[,.N, by=journal]
+setorder(data.journal.food.count, -N)
+ggplot(data.journal.food.count[0:20], aes(x = reorder(journal, N), y = N)) + 
+  geom_bar(stat="identity") + 
+  theme_bw() + 
+  xlab('journal') + 
+  ylab('count') + 
+  theme(text = element_text(size=13), 
+        axis.text.x = element_text(angle=10, vjust=1)) +
+  coord_flip()
+```
+
