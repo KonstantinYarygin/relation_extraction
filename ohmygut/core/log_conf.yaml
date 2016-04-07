@@ -42,12 +42,13 @@ handlers:
         backupCount: 20
         encoding: utf8
 
-    google_search_nutrient_handler:
+    google_search_handler:
         class: logging.FileHandler
         level: DEBUG
         formatter: message_only
-        filename: google_search_nutrient.log
+        filename: google_search.log
         encoding: utf8
+        mode: w
 
     error_file_handler:
         class: logging.handlers.RotatingFileHandler
@@ -69,9 +70,9 @@ loggers:
         handlers: [console, large_pattern_file_handler]
         propagate: no
 
-    google_search_nutrient_logger:
+    google_search_logger:
         level: DEBUG
-        handlers: [console, google_search_nutrient_handler]
+        handlers: [console, google_search_handler]
         propagate: no
 
     ohmygut_logger:

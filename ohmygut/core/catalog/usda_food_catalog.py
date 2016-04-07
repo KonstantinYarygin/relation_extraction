@@ -5,6 +5,9 @@ from ohmygut.core.hash_tree import HashTree
 
 
 class UsdaFoodCatalog(Catalog):
+    def get_list(self):
+        return list(self.__food_data_frame['group'].drop_duplicates()) + list(self.__food_data_frame['word'])
+
     def __str__(self):
         return "usda food catalog"
 
@@ -12,11 +15,14 @@ class UsdaFoodCatalog(Catalog):
         super().__init__()
         self.food_file_path = food_file_path
         self.__hash_tree = None
+        self.__food_dict = None
+        self.__group_by_food_name = None
+        self.__food_data_frame = None
 
     def initialize(self):
-        food_data_frame = pd.read_table(self.food_file_path, sep=';', encoding='cp1252')#, encoding="utf-8")
-        self.__food_dict = {food_group: [] for food_group in food_data_frame['group'].values}
-        for index, record in food_data_frame.iterrows():
+        self.__food_data_frame = pd.read_table(self.food_file_path, sep=';', encoding='cp1252')
+        self.__food_dict = {food_group: [] for food_group in self.__food_data_frame['group'].values}
+        for index, record in self.__food_data_frame.iterrows():
             self.__food_dict[record['group']].append(record['word'].strip())
             self.__food_dict[record['group']].append(record['word'].strip().capitalize())
 

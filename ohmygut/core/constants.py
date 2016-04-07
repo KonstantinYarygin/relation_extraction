@@ -29,7 +29,7 @@ setup_logging()
 logger = logging.getLogger(base_logger_name)
 pattern_logger = logging.getLogger("pattern_logger")
 large_pattern_logger = logging.getLogger("large_pattern_logger")
-google_search_nutrient_logger = logging.getLogger("google_search_nutrient_logger")
+google_search_logger = logging.getLogger("google_search_logger")
 
 CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
 RANK_EXCLUSIONS = ['superkingdom', 'kingdom']

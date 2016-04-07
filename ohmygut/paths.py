@@ -4,7 +4,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 
 data_dir = os.path.join(script_dir, "..", "data")
 
-food_path = os.path.join(data_dir, "food", "food.tsv")
+food_file_path = os.path.join(data_dir, "food", "food.tsv")
 
 stanford_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser.jar")
 stanford_models_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser-3.5.2-models.jar")

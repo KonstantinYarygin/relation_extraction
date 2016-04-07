@@ -8,6 +8,10 @@ import urllib.request
 
 from bs4 import BeautifulSoup
 
+from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
+from ohmygut.core.constants import google_search_logger
+from ohmygut.paths import food_file_path
+
 sys.path.append('.')
 
 from ohmygut.core import constants
@@ -58,33 +62,38 @@ def get_google_search_urls(query, page_number):
     return all_urls
 
 
-if __name__ == '__main__':
-    constants.logger.info("start google nutrients")
-    nutrients_catalog = NutrientsCatalogNikogosov(
-        path=os.path.join(script_dir, '../../data/nutrients/nikogosov_nutrients_normalized.tsv'))
-    nutrients_catalog.initialize()
-    nutrients = nutrients_catalog.get_simple_list()
-    nutrients.sort()
+def do_search(strings_to_search):
+    print("start google search")
     i = 1
     messages = []
-    for nutrient in nutrients:
+    for string in strings_to_search:
         try:
-            list_of_url = get_google_search_urls(nutrient, page_number=10)
+            list_of_url = get_google_search_urls(string, page_number=10)
         except:
             error = traceback.format_exc()
-            constants.logger.error(error)
-            message = "%i\t%s\t%s" % (i, nutrient, "ERROR")
-            constants.google_search_nutrient_logger.info(message)
+            print(error)
+            message = "%i\t%s\t%s" % (i, string, "ERROR")
+            google_search_logger.info(message)
             messages.append(message)
             continue
         for url in list_of_url:
-            message = "%i\t%s\t%s" % (i, nutrient, url)
-            constants.google_search_nutrient_logger.info(message)
+            message = "%i\t%s\t%s" % (i, string, url)
+            google_search_logger.info(message)
             messages.append(message)
-
-    constants.logger.info("finish google nutrients")
+    print("finish google search")
 
     with open(output_file_name, 'w') as f:
         f.write('\n'.join(messages))
 
-    send_mail("anatoly.developer@gmail.com", "nutrient google search", body="a file", files=[output_file_name])
+    send_mail("anatoly.developer@gmail.com",
+              "[text-mining] google search",
+              body="piping hot, sir",
+              files=[output_file_name])
+
+
+if __name__ == '__main__':
+    catalog = UsdaFoodCatalog(food_file_path)
+    catalog.initialize()
+    queries = catalog.get_list()
+    google_search_logger.info("power rangers")
+    do_search(queries)

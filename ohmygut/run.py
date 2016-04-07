@@ -17,7 +17,7 @@ from ohmygut.core.sentence_processing import SentenceParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
-from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_path, \
+from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
     gut_catalog_file_path, nutrients_file_path, diseases_doid_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
     verb_ontollogy_path
 
@@ -35,7 +35,7 @@ stanford_dependency_parser = StanfordDependencyParser(
 
 sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
 
-food_catalog = UsdaFoodCatalog(food_path)
+food_catalog = UsdaFoodCatalog(food_file_path)
 food_catalog.initialize()
 
 bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path)

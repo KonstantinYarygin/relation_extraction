@@ -101,7 +101,7 @@ class NutrientsCatalogNikogosov(Catalog):
         output = [(nutrient, self.__idname_by_nutrient[nutrient]) for nutrient in nutr_names]
         return output
 
-    def get_simple_list(self):
+    def get_list(self):
         nutrients = []
         for key, value in self.__nutrients_by_idname.items():
             nutrients.append(value[0])

@@ -10,6 +10,9 @@ from ohmygut.core.hash_tree import HashTree
 class GutBacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
 
+    def get_list(self):
+        pass
+
     def __str__(self):
         return "gut bacteria catalog"
 
