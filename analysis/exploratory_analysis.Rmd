@@ -215,7 +215,9 @@ plots[[2]]
 Вся встретившаяся еда записана в файл:
 ```{r, echo=FALSE}
 food.file <- file.path(getwd(), 'food.csv')
-write.csv(x = data.food, food.file, row.names = F, quote = F)
+write.table(x = unique(data.food[,.(foodgroup, food)]), 
+            food.file, 
+            row.names = F, quote = F, sep='\t')
 food.file
 ```
 

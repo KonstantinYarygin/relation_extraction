@@ -6,16 +6,14 @@ import traceback
 import urllib.parse
 import urllib.request
 
+import pandas as pd
 from bs4 import BeautifulSoup
 
-from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
 from ohmygut.core.constants import google_search_logger
-from ohmygut.paths import food_file_path
 
 sys.path.append('.')
 
 from ohmygut.core import constants
-from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.util.sendmail import send_mail
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -92,8 +90,7 @@ def do_search(strings_to_search):
 
 
 if __name__ == '__main__':
-    catalog = UsdaFoodCatalog(food_file_path)
-    catalog.initialize()
-    queries = catalog.get_list()
+    data = pd.read_csv('food.csv', sep='\t')
+    queries = list(data['foodgroup']) + list(data['food'])
     google_search_logger.info("power rangers")
     do_search(queries)
