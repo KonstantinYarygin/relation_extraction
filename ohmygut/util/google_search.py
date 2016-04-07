@@ -92,5 +92,4 @@ def do_search(strings_to_search):
 if __name__ == '__main__':
     data = pd.read_csv('food.csv', sep='\t')
     queries = list(data['foodgroup']) + list(data['food'])
-    google_search_logger.info("power rangers")
     do_search(queries)
