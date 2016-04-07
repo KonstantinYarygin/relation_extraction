@@ -10,6 +10,9 @@ from ohmygut.core.tools import untokenize
 
 
 class DiseasesCatalog(Catalog):
+    def get_list(self):
+        pass
+
     def __str__(self):
         return "diseases catalog"
 

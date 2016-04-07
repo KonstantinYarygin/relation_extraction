@@ -17,39 +17,41 @@ from ohmygut.core.sentence_processing import SentenceParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
+from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
+    gut_catalog_file_path, nutrients_file_path, diseases_doid_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
+    verb_ontollogy_path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 stanford_tokenizer = StanfordTokenizer(
-    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar')
+    path_to_jar=stanford_jar_path
 )
 
 stanford_dependency_parser = StanfordDependencyParser(
-    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar'),
-    path_to_models_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser-3.5.2-models.jar'),
-    model_path=os.path.join(script_dir, '../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
+    path_to_jar=stanford_jar_path,
+    path_to_models_jar=stanford_models_jar_path,
+    model_path=stanford_lex_parser_path,
 )
 
 sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
 
-food_catalog = UsdaFoodCatalog(os.path.join(script_dir, '../data/food/food.tsv'))
+food_catalog = UsdaFoodCatalog(food_file_path)
 food_catalog.initialize()
 
-bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
+bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path)
 bacteria_catalog.initialize()
 
-nutrients_catalog = NutrientsCatalogNikogosov(
-    path=os.path.join(script_dir, '../data/nutrients/nikogosov_nutrients_normalized.tsv'))
+nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
 nutrients_catalog.initialize()
 
-diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
+diseases_catalog = DiseasesCatalog(doid_path=diseases_doid_path)
 diseases_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../article_data/texts/'))
-medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../article_data/abstracts/gut_microbiota.medline.txt'))
-libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../article_data/libgen/'))
+nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
+medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
+libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=libgen_texts_dir)
 
-with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
+with open(verb_ontollogy_path) as f:
     verb_ontology = eval(''.join(f.readlines()))
 
 lancaster_stemmer = LancasterStemmer()
@@ -62,8 +64,6 @@ csv_path = get_csv_path()
 csv_writer = CsvWriter(csv_path)
 pkl_writer = PklWriter(output_dir)
 log_writer = LogWriter()
-
-
 
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
