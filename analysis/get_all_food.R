@@ -45,5 +45,6 @@ data.sub.words3 <- data.sub[SciName!="",.(unique(SciName)),by=.(FdGrp_Desc)]
 data.sub.plain <- rbind(data.sub.words1, data.sub.words2, data.sub.words3)
 setnames(data.sub.plain, c("group", "word"))
 setorder(data.sub.plain, group)
+data.sub.plain <- unique(data.sub.plain[,word,by=group])
 
 write.table(data.sub.plain, OUTPUT_FILE_NAME, sep=";", row.names = FALSE, quote = FALSE)
