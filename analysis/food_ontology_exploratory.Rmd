@@ -1,0 +1,125 @@
+---
+title: "Food ontology exploratory"
+output: html_document
+---
+
+```{r, eval=FALSE, include=FALSE}
+# source("https://bioconductor.org/biocLite.R")
+# biocLite("ggtree")
+# biocLite('EBImage')
+# biocLite('fftwtools')
+
+
+maketreelist <- function(df, root=df[1,1]) {
+    if(is.factor(root)) root<-as.character(root)
+    r <- list(name=root)
+    children = df[parent==root]$child
+    if(is.factor(children)) children<-as.character(children)
+    if(length(children)>0) {
+        r$children <- lapply(children, maketreelist, df=df)
+    }
+    r
+}
+## recursion function
+traverse <- function(df1, a, i, innerl){
+    # if(i < (ncol(df1))){
+        alevelinner <- as.character(unique(df1[which(as.character(df1[,i])==a),i+1]))
+        desc <- NULL
+        # if(length(alevelinner) == 1) (newickout <- traverse(alevelinner,i+1,innerl))
+        # else {
+        for(b in alevelinner) desc <- c(desc,traverse(b,i+1,innerl))
+        il <- NULL; if(innerl==TRUE) il <- a
+        (newickout <- paste("(",paste(desc,collapse=","),")",il,sep=""))
+        # }
+    # }
+    # else { (newickout <- a) }
+}
+
+## data.frame to newick function
+df2newick <- function(df, innerlabel=FALSE){
+    alevel <- as.character(unique(df[,1]))
+    newick <- NULL
+    for(x in alevel) newick <- c(newick,traverse(df, x, 1, innerlabel))
+    (newick <- paste("(",paste(newick,collapse=","),");",sep=""))
+}
+df <- data.frame(c("Canada","Canada","Quebec","Quebec","Ontario","Ontario"),
+                 c("Quebec","Ontario","Montreal","Quebec City","Toronto","Ottawa"))
+names(df) <- c("parent","child")
+
+######
+canadalist<-maketreelist(df)
+library(igraph)
+g<-graph.data.frame(df)
+plot(g)
+######
+
+library("phyloseq")
+library(data.table)
+library(treemap)
+library(data.tree)
+library(stringr)
+library(ggtree)
+library(ape)
+data <- fread('~/do/relation_extraction/data/food/food.tsv')
+data$foodid <- paste0("food", 1:nrow(data))
+data$group <- str_replace_all(data$group, '/', ' ')
+data$word <- str_replace_all(data$word, '/', ' ')
+data$pathString <- paste("food", 
+                            data$group, 
+                            data$foodid, 
+                            sep = "/")
+food <- as.Node(data)
+print(food, limit = 20)
+plot(food)
+food.list <- as.list(food)
+food.dend <- as.dendrogram(food)
+food.igraph <- as.igraph.Node(food)
+ggtree(food.dend)
+plot(food.igraph)
+plot(food.dend, center = TRUE)
+library(networkD3)
+acmeNetwork <- ToDataFrameNetwork(food, "name")
+simpleNetwork(acmeNetwork[-3], fontSize = 12)
+
+library(networkD3)
+treeNetwork(food$ToList(unname = TRUE))
+
+
+ToGraphViz
+#data <- rbind(data, unique(data[,.(group="food", word=group)]))
+#setnames(data, c("parent", "child"))
+df <- data
+newick <- df2newick(data.frame(df))
+tr <- read.tree(text=newick)
+ggtree(tr) 
+
+
+newick <- df2newick(df)
+tr <- read.tree(text=newick)
+ggtree(tr) + 
+  #geom_text(aes(x=branch, label="a"), color='firebrick') + 
+  #geom_tiplab(size=3, color="purple") +
+  geom_label(aes(label=label))
+######
+plot_tree()
+
+hclust()
+
+nwk <- system.file("extdata", "sample.nwk", package="ggtree")
+tree <- read.tree(nwk)
+ggtree(tree) + geom_text2(aes(subset=!isTip, label=node), hjust=-.3) + geom_tiplab()
+
+data("esophagus")
+ntaxa(esophagus)
+
+```
+
+#### Сколько слов в каждой группе
+```{r}
+library(data.table)
+data <- fread('~/do/relation_extraction/data/food/food.tsv')
+data.groups <- data[,.N,by=group]
+setorder(data.groups,-N)
+data.groups
+```
+
