@@ -47,9 +47,9 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
     gut_ids = clear_ids_by_rank(gut_names['id'].values, ncbi_nodes)
 
     gut_parent_ids = get_bind_ids(gut_ids['id'].values, ncbi_nodes)
-    gut_child_ids = get_bind_ids(gut_ids['id'].values, ncbi_nodes, is_get_child_id=True)
+    #gut_child_ids = get_bind_ids(gut_ids['id'].values, ncbi_nodes, is_get_child_id=True)
 
-    gut_ids_table = pd.concat([gut_parent_ids, gut_child_ids, gut_ids]).drop_duplicates('id')
+    gut_ids_table = pd.concat([gut_parent_ids, gut_ids]).drop_duplicates('id')
 
     gut_names = ncbi_names[ncbi_names['id'].isin(gut_ids_table['id'].tolist())]
 
