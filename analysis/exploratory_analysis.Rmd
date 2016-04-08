@@ -75,13 +75,13 @@ str(data, vec.len=1)
 data.bacteria <- data[,
          .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
            unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
-         by=.(text, article_title)]
-setnames(data.bacteria, c("text","article_title","bacteria","bacteria_code"))
+         by=.(text, article_title, journal)]
+setnames(data.bacteria, c("text","article_title", "journal", "bacteria","bacteria_code"))
 
 data.nutrient <- data[,
          unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
-         by=.(text, article_title)]
-setnames(data.nutrient, c("text","article_title","nutrient"))
+         by=.(text, article_title, journal)]
+setnames(data.nutrient, c("text","article_title", "journal", "nutrient"))
 
 data.disease <- data[,.(unlist(llply(str_match_all(diseases, 
                                                   '\'([^\\)]+)\','), 
@@ -89,8 +89,8 @@ data.disease <- data[,.(unlist(llply(str_match_all(diseases,
                       unlist(llply(str_match_all(diseases, 
                                                  ',\\s\'([^\\)]+)\''), 
                                    .fun=function(x) x[,2]))),
-         by=.(text, article_title)]
-setnames(data.disease, c("text","article_title","disease","disease_code"))
+         by=.(text, article_title, journal)]
+setnames(data.disease, c("text","article_title", "journal", "disease","disease_code"))
 
 data.food <- data[,.(unlist(llply(str_match_all(food, 
                                                   '\'([^\\)]+)\','), 
@@ -100,9 +100,22 @@ data.food <- data[,.(unlist(llply(str_match_all(food,
                                    .fun=function(x) x[,2]))),
          by=.(text, article_title, journal)]
 setnames(data.food, c("text","article_title","journal","food","foodgroup"))
-
-
 ```
+Почистим данные
+```{r data-cleanup, echo=FALSE}
+data.bacteria.catalog <- fread("../data/bacteria/gut_catalog.csv")
+data.bacteria <- data.bacteria[bacteria_code %in% data.bacteria.catalog$id]
+data.bacteria <- data.bacteria[bacteria_code != 562] # no E. coli
+data.bacteria <- data.bacteria[bacteria_code != 1496] # no Clostridium difficile
+data.bacteria <- data.bacteria[bacteria_code != 590] # no Salmonella
+data.food <- data.food[food != "water"]
+
+data.sentences <- data.table(unique(rbind(data.bacteria[,.(text, article_title, journal)], 
+                                          data.nutrient[,.(text, article_title, journal)],
+                                          data.disease[,.(text, article_title, journal)],
+                                          data.food[,.(text, article_title, journal)])))
+```
+
 Присоединим импакты
 ```{r get-impacts, echo=FALSE}
 data.impacts <- fread('../data/if2015.csv', na.strings = "Not Available")
@@ -110,23 +123,23 @@ setnames(data.impacts, c('journal', 'impact'))
 # оказались дупликаты
 data.impacts <- unique(data.impacts)
 data.impacts$journal <- tolower(data.impacts$journal)
-data <- merge(data, data.impacts, by='journal', all.x = TRUE)
+data.sentences <- merge(data.sentences, data.impacts, by='journal', all.x = TRUE)
 ```
 
 ## Results
 Количество предложений:
 ```{r} 
-nrow(data)
+length(unique(data.sentences$text))
 ```
 
 Количество статей, в которых мы что-то нашли:
 ```{r}
-length(unique(data$article_title))
+length(unique(data.sentences$article_title))
 ```
 
 ### Из каких статей больше всего предложений?
 ```{r}
-data.articles <- data[,length(text), by=article_title]
+data.articles <- data.sentences[,length(text), by=article_title]
 colnames(data.articles) <- c('title', 'sentences')
 # берём первые 60 символов из названия статьи
 data.articles <- data.articles[,.(substr(title, 0, 60), sentences)]
@@ -139,8 +152,8 @@ head(data.articles, 10)
 
 Длина в **символах**
 ```{r, fig.height=7}
-data[,length:=str_length(text)]
-ggplot(data, aes(x=length)) + geom_histogram(binwidth=400) +
+data.sentences[,length:=str_length(text)]
+ggplot(data.sentences, aes(x=length)) + geom_histogram(binwidth=400) +
     stat_bin(aes(y = ..count.., 
                  label = ifelse(..count..!=0, ..count..,'')), 
              binwidth=400, geom='text', vjust = -1, size=3) + theme_bw()
