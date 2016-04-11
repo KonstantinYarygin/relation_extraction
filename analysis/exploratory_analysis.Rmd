@@ -92,9 +92,9 @@ data.disease <- data[,.(unlist(llply(str_match_all(diseases,
          by=.(text, article_title, journal)]
 setnames(data.disease, c("text","article_title", "journal", "disease","disease_code"))
 
-data.food <- data[,.(unlist(llply(str_match_all(food, 
+data.food <- data[,.(tolower(unlist(llply(str_match_all(food, 
                                                   '\'([^\\)]+)\','), 
-                                    .fun=function(x) x[,2])),
+                                    .fun=function(x) x[,2]))),
                       unlist(llply(str_match_all(food, 
                                                  ',\\s\'([^\\)]+)\''), 
                                    .fun=function(x) x[,2]))),
