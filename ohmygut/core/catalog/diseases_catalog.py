@@ -25,7 +25,7 @@ class DiseasesCatalog(Catalog):
     def initialize(self):
         t1 = time()
         constants.logger.info('Creating diseases catalog...')
-
+        # TODO: make a tidy disease dataset and load it here
         with open(self.doid_path) as f:
             raw_data = ''.join(f.readlines()).split('\n\n')
             raw_data = [record.split('\n') for record in raw_data]
