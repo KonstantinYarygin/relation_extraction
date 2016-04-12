@@ -34,20 +34,25 @@ if __name__ == '__main__':
     for sentence in sentences:
         start = time.time()
         i += 1
-        text, bacteria, disease = sentence.split('\t')
-        bacteria_list = bacteria.replace('\n', '').split(';')
-        disease_list = disease.replace('\n', '').split(';')
-        parser_output = parser.parse_sentence(text)
-        analyze_output = analyze_sentence(bacterial_names=bacteria_list, nutrient_names=[],
-                                          disease_names=disease_list, food_names=[],
-                                          parser_output=parser_output, tokenizer=stanford_tokenizer,
-                                          pattern_finder=None)
-        shortest_path = analyze_output['BACTERIUM-DISEASE'][0]
-        tags = shortest_path.tags
-        words = shortest_path.words
-        length = len(shortest_path.nodes_indexes)
-        row = "%s\t%i\t%s\t%s\t%s\t%s\n" % (text, length, bacteria_list, disease_list, words, tags)
-        f.write(row)
+        text = "<no text>"
+        try:
+            text, bacteria, disease = sentence.split('\t')
+            bacteria_list = bacteria.replace('\n', '').split(';')
+            disease_list = disease.replace('\n', '').split(';')
+            parser_output = parser.parse_sentence(text)
+            analyze_output = analyze_sentence(bacterial_names=bacteria_list, nutrient_names=[],
+                                              disease_names=disease_list, food_names=[],
+                                              parser_output=parser_output, tokenizer=stanford_tokenizer,
+                                              pattern_finder=None)
+            shortest_path = analyze_output['BACTERIUM-DISEASE'][0]
+            tags = shortest_path.tags
+            words = shortest_path.words
+            length = len(shortest_path.nodes_indexes)
+            row = "%s\t%i\t%s\t%s\t%s\t%s\n" % (text, length, bacteria_list, disease_list, words, tags)
+            f.write(row)
+
+        except Exception as error:
+            print(error)
         end = time.time()
         print("\nsentence %i of %i, time %f" % (i, sentence_number, end-start))
         print(text)
