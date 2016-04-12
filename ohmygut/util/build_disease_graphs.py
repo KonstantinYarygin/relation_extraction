@@ -31,6 +31,8 @@ if __name__ == '__main__':
     print("start parse sentences")
     i = 0
     sentence_number = len(sentences)
+    # TODO: make try/except
+    # TODO: make universal: analyze not only BACT-DISEASE
     for sentence in sentences:
         start = time.time()
         i += 1
