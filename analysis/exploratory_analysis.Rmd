@@ -110,10 +110,23 @@ data.bacteria <- data.bacteria[bacteria_code != 1496] # no Clostridium difficile
 data.bacteria <- data.bacteria[bacteria_code != 590] # no Salmonella
 data.food <- data.food[food != "water"]
 
-data.sentences <- data.table(unique(rbind(data.bacteria[,.(text, article_title, journal)], 
-                                          data.nutrient[,.(text, article_title, journal)],
-                                          data.disease[,.(text, article_title, journal)],
-                                          data.food[,.(text, article_title, journal)])))
+data.sentences.nutrients <- merge(data.bacteria, data.nutrient, by=c("text", "article_title", "journal"))
+setkey(data.sentences.nutrients, text, article_title, journal, bacteria, nutrient)
+data.sentences.nutrients <- unique(data.sentences.nutrients)
+
+data.sentences.diseases <- merge(data.bacteria, data.disease, by=c("text", "article_title", "journal"))
+setkey(data.sentences.diseases, text, article_title, journal, bacteria, disease)
+data.sentences.diseases <- unique(data.sentences.diseases)
+data.sentences.diseases.short <- data.sentences.diseases[,.(paste(unique(bacteria), collapse = ";"),
+                                                            paste(unique(disease), collapse = ";")),
+                                                         by=c("text", "article_title", "journal")]
+setnames(data.sentences.diseases.short, c("text", "article_title", "journal", "bacteria", "disease"))
+write.table(x = unique(data.sentences.diseases.short[,.(text, bacteria, disease)]), 
+            file = "disease-texts.csv", sep = '\t', quote = F, row.names = F, col.names = F)
+
+data.sentences.food <- merge(data.bacteria, data.food, by=c("text", "article_title", "journal"))
+setkey(data.sentences.food, text, article_title, journal, bacteria, food)
+data.sentences.food <- unique(data.sentences.food)
 ```
 
 Присоединим импакты
@@ -129,7 +142,9 @@ data.sentences <- merge(data.sentences, data.impacts, by='journal', all.x = TRUE
 ## Results
 Количество предложений:
 ```{r} 
-length(unique(data.sentences$text))
+length(unique(c(data.sentences.nutrients$text, 
+                data.sentences.diseases$text, 
+                data.sentences.food$text)))
 ```
 
 Количество статей, в которых мы что-то нашли:
@@ -137,6 +152,20 @@ length(unique(data.sentences$text))
 length(unique(data.sentences$article_title))
 ```
 
+Количество найденных предложений со связью **бактерия-нутриент**:
+```{r}
+length(unique(data.sentences.nutrients$text))
+```
+
+Количество найденных предложений со связью **бактерия-болезнь**:
+```{r}
+length(unique(data.sentences.diseases$text))
+```
+
+Количество найденных предложений со связью **бактерия-еда**:
+```{r}
+length(unique(data.sentences.food$text))
+```
 ### Из каких статей больше всего предложений?
 ```{r}
 data.articles <- data.sentences[,length(text), by=article_title]

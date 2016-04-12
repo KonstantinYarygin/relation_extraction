@@ -1,16 +1,15 @@
 import os
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
+project_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
-data_dir = os.path.join(script_dir, "..", "data")
+data_dir = os.path.join(project_dir, "data")
 
 food_file_path = os.path.join(data_dir, "food", "food.tsv")
 
 stanford_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser.jar")
 stanford_models_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser-3.5.2-models.jar")
 
-stanford_lex_parser_path = os.path.join(data_dir, "stanford_parser",
-                                        "edu", "stanford", "nlp", "models", "lexparser", "englishPCFG.ser.gz")
+stanford_lex_parser_path = os.path.join(data_dir, "stanford_parser", "englishPCFG.ser.gz")
 
 gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_catalog.csv")
 

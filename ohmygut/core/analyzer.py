@@ -29,12 +29,7 @@ def search_shortest_path(parser_output, source_node_id, target_node_id, undirect
     return ShortestPath(edge_rels, words, tags, nodes_indexes)
 
 
-def analyze_sentence(bacteria, nutrients, diseases, food, parser_output, tokenizer, pattern_finder):
-    bacterial_names = [name for name, ncbi_id in bacteria]
-    disease_names = [name for name, doid_id in diseases]
-    nutrient_names = [name for name, idname in nutrients]
-    food_names = [name for name, food_group in food]
-
+def analyze_sentence(bacterial_names, nutrient_names, disease_names, food_names, parser_output, tokenizer, pattern_finder):
     merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output)
 
     bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'BACTERIUM']

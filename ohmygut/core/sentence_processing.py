@@ -60,7 +60,7 @@ class ParserOutput(object):
 
     def __str__(self):
         object_string = ''
-        object_string += str(self.nx_graph.edges()) + '\n'
+        object_string += str(self.nx_graph.adj) + '\n'
         object_string += str(self.words) + '\n'
         object_string += str(self.tags) + '\n'
         return(object_string)
