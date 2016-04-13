@@ -49,21 +49,24 @@ tags <- unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
 
 #verb statistics
 words.vb <- words[as.vector(!is.na(str_match(tags, 'VB')))]
-words.vb[, percent:=.N/nrow(data)*100, by=word]
+words.vb <- words.vb[, .N/nrow(data)*100, by=word]
+names(words.vb) <- c('word', 'percent')
 words.vb <- words.vb[order(-percent)]
 message("The most verb-like words (tag contain VB) in path:")
 head(words.vb, 10)
 
 #noun statistics
 words.nn <- words[as.vector(!is.na(str_match(tags, 'NN')))]
-words.nn[, percent:=.N/nrow(data)*100, by=word]
+words.nn <- words.nn[, .N/nrow(data)*100, by=word]
+names(words.nn) <- c('word', 'percent')
 words.nn <- words.nn[order(-percent)]
 message("The most noun-like words (tag contain NN) in path:")
 head(words.nn, 10)
 
 #adjective statistics
-words.jj <- words[as.vector(! (is.na(str_match(tags, 'JJ'))&is.na(str_match(tag, 'CC'))))]
-words.jj <- words.jj[, percent:=.N/nrow(data)*100, by=word]
+words.jj <- words[as.vector(! (is.na(str_match(tags, 'JJ'))&is.na(str_match(tags, 'CC'))))]
+words.jj <- words.jj[, .N/nrow(data)*100, by=word]
+names(words.jj) <- c('word', 'percent')
 words.jj <- words.jj[order(-percent)]
 message("The most adjective and conjunction -like words (tag contain JJ and CC) in path:")
 head(words.jj, 10)
@@ -71,8 +74,9 @@ head(words.jj, 10)
 #tag statistics
 tags <- data.table(tag=tags[!(tags %in% c("DISEASE", "BACTERIUM"))])
 tags.num <- tags[, .N/nrow(data)*100, by=tags]
+names(tags.num) <- c('tag', 'percent')
 tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
-tags.num <- tags.num[order(-V1)]
+tags.num <- tags.num[order(-percent)]
 message("The most popular tags in path:")
 head(tags.num, 10)
 ```
