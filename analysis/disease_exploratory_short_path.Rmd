@@ -2,10 +2,7 @@
 library(data.table)
 library(ggplot2)
 library(stringr)
-data <- fread('/projects/relation_extraction/sentences/build-graphs-output.csv')
-data.1 <- fread('/projects/relation_extraction/sentences/build-graphs-output-1.csv')
-data.2 <- fread('/projects/relation_extraction/sentences/build-graphs-output-2.csv')
-data <- rbindlist(list(data, data.1, data.2))
+data <- fread('../data/build-graphs-output.csv')
 names(data) <- c('text', 'length', 'bact', 'disease', 'path', 'tags')
 ```
 
@@ -18,7 +15,6 @@ tail(data, 5)
 
 # Length statistics of shortest path
 ```{r}
-ggplot(data)
 ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
   theme_bw() +xlab('number of words between BACT and DISEASE')
   
