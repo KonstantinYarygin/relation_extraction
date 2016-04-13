@@ -4,20 +4,25 @@ library(ggplot2)
 library(stringr)
 data <- fread('../data/build-graphs-output.csv')
 names(data) <- c('text', 'length', 'bact', 'disease', 'path', 'tags')
+tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
+```
 
-PlotHist <- function(data, variable){
+```{r, echo=FALSE}
+PlotHist <- function(data, variable, title){
   setnames(data, variable, "object")
-  ggplot(data[0:10], aes(x = reorder(object, -N), y = N)) + 
+  plot <- ggplot(data[0:10], aes(x = reorder(object, -percent), y = percent)) + 
     geom_bar(stat="identity") + 
     theme_bw() + 
-    xlab(x.variable) + 
+    xlab(variable) + 
     ylab('count') + 
+    ggtitle(title) +
     theme(text = element_text(size=13), 
           axis.text.x = element_text(angle=10, vjust=1))
   setnames(data, "object", variable)
+  plot
 }
-tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
 ```
+
 
 # Structure
 ```{r, echo=FALSE}
@@ -28,7 +33,6 @@ message("Total number of pathes: ", nrow(data))
 ```
 
 # Length statistics of shortest path
-
 ```{r, echo=FALSE}
 length.stat = data[, .N/nrow(data)*100, by=length]
 ggplot(length.stat, aes(x = factor(length-2), y=V1)) + geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
@@ -40,63 +44,140 @@ ggplot(length.stat, aes(x = factor(length-2), y=V1)) + geom_bar(stat='identity',
 # All pathes: word statistics
 ```{r, echo=FALSE}
 #words parsing
-words <- strsplit(data$path, "', '", fixed=T)
-words <- unlist(sapply(words, function(x) {x[-c(1, length(x))]}))
-words <- data.table(word=tolower(words))
+GetWords <- function(data, words.number){
+  if (is.na(words.number)){
+    words <- strsplit(data$path, "', '", fixed=T)
+  } else {
+    words <- strsplit(data[length==words.number+2]$path, "', '", fixed=T)
+  }
+  words <- unlist(lapply(words, function(x) {x[-c(1, length(x))]}))
+  words <- data.table(word=tolower(words))
+  words
+}
+GetWordsStat <- function(words){
+  words.num <- words[, .N/nrow(data)*100, by=word]
+  words.num <- words.num[order(-V1)]
+  names(words.num) <- c('word', 'percent')
+  words.num
+}
+GetVerbStat <- function(words){
+  words.vb <- words[as.vector(!is.na(str_match(tags, 'VB')))]
+  words.vb <- words.vb[!is.na(word)]
+  words.vb <- words.vb[, .N/nrow(data)*100, by=word]
+  names(words.vb) <- c('word', 'percent')
+  words.vb <- words.vb[order(-percent)]
+  words.vb
+}
+GetNounStat <- function(words){
+  words.nn <- words[as.vector(!is.na(str_match(tags, 'NN')))]
+  words.nn <- words.vb[!is.na(word)]
+  words.nn <- words.nn[, .N/nrow(data)*100, by=word]
+  names(words.nn) <- c('word', 'percent')
+  words.nn <- words.nn[order(-percent)]
+  words.nn
+}
+GetAdjectiveStat <- function(words){
+  words.jj <- words[as.vector(! (is.na(str_match(tags, 'JJ'))&is.na(str_match(tags, 'CC'))))]
+  words.jj <- words.vb[!is.na(word)]
+  words.jj <- words.jj[, .N/nrow(data)*100, by=word]
+  names(words.jj) <- c('word', 'percent')
+  words.jj <- words.jj[order(-percent)]
+  words.jj
+}
+GetTagStat <- function(tags){
+  tags <- data.table(tag=tags[!(tags %in% c("DISEASE", "BACTERIUM"))])
+  tags.num <- tags[, .N/nrow(data)*100, by=tags]
+  names(tags.num) <- c('tag', 'percent')
+  tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
+  tags.num <- tags.num[order(-percent)]
+}
+
+words.all <- GetWords(data, NA)
+words1 <- GetWords(data, 1)
+words2 <- GetWords(data, 2)
+words3 <- GetWords(data, 3)
 
 #tags parsing
 tags <- strsplit(data$tags, "', '", fixed=T)
-tag=unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
-```
-
-```{r}
-words.num <- words[, .N/nrow(data)*100, by=word]
-words.num <- words.num[order(-V1)]
-names(words.num) <- c('word', 'percent')
+tags <- unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
 
 #words statistics
+word.stat <- GetWordsStat(words.all)
+word.stat1 <- GetWordsStat(words1)
+word.stat2 <- GetWordsStat(words2)
+word.stat3 <- GetWordsStat(words3)
+
 message("The most popular words in path:")
-head(words.num, 10)
-PlotHist(words.num, word)
+head(word.stat, 10)
+PlotHist(word.stat, "word", "all lengths")
+
+head(word.stat1, 10)
+PlotHist(word.stat1, "word", "one word")
+
+head(word.stat2, 10)
+PlotHist(word.stat2, "word", "two words")
+
+head(word.stat3, 10)
+PlotHist(word.stat3, "word", "three words")
+
 #verb statistics
-words.vb <- words[as.vector(!is.na(str_match(tags, 'VB')))]
-words.vb <- words.vb[, .N/nrow(data)*100, by=word]
-names(words.vb) <- c('word', 'percent')
-words.vb <- words.vb[order(-percent)]
+words.vb <- GetVerbStat(words.all)
+words.vb1 <- GetVerbStat(words1)
+words.vb2 <- GetVerbStat(words2)
+words.vb3 <- GetVerbStat(words3)
+
 message("The most verb-like words (tag contain VB) in path:")
 head(words.vb, 10)
+PlotHist(words.vb, "word", "all lengths")
+
+head(word.stat1, 10)
+PlotHist(words.vb1, "word", "one word")
+
+head(word.stat2, 10)
+PlotHist(words.vb2, "word", "two words")
+
+head(word.stat3, 10)
+PlotHist(words.vb3, "word", "three words")
 
 #noun statistics
-words.nn <- words[as.vector(!is.na(str_match(tags, 'NN')))]
-words.nn <- words.nn[, .N/nrow(data)*100, by=word]
-names(words.nn) <- c('word', 'percent')
-words.nn <- words.nn[order(-percent)]
+words.nn <- GetNounStat(words.all)
+words.nn1 <- GetNounStat(words1)
+words.nn2 <- GetNounStat(words2)
+words.nn3 <- GetNounStat(words3)
+
 message("The most noun-like words (tag contain NN) in path:")
 head(words.nn, 10)
+PlotHist(words.nn, "word", "all lengths")
+
+head(words.nn1, 10)
+PlotHist(words.nn1, "word", "one word")
+
+head(words.nn2, 10)
+PlotHist(words.nn2, "word", "two words")
+
+head(words.nn3, 10)
+PlotHist(words.nn3, "word", "three words")
 
 #adjective statistics
-words.jj <- words[as.vector(! (is.na(str_match(tags, 'JJ'))&is.na(str_match(tags, 'CC'))))]
-words.jj <- words.jj[, .N/nrow(data)*100, by=word]
-names(words.jj) <- c('word', 'percent')
-words.jj <- words.jj[order(-percent)]
+words.jj <- GetAdjectiveStat(words.all)
+words.jj1 <- GetAdjectiveStat(words1)
+words.jj2 <- GetAdjectiveStat(words2)
+words.jj3 <- GetAdjectiveStat(words3)
 message("The most adjective and conjunction -like words (tag contain JJ and CC) in path:")
 head(words.jj, 10)
+PlotHist(words.jj, "word", "all lengths")
+
+head(words.jj1, 10)
+PlotHist(words.jj1, "word", "one word")
+
+head(words.jj2, 10)
+PlotHist(words.jj2, "word", "two words")
+
+head(words.jj3, 10)
+PlotHist(words.jj3, "word", "three words")
 
 #tag statistics
-tags <- data.table(tag=tags[!(tags %in% c("DISEASE", "BACTERIUM"))])
-tags.num <- tags[, .N/nrow(data)*100, by=tags]
-names(tags.num) <- c('tag', 'percent')
-tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
-tags.num <- tags.num[order(-percent)]
+tags.num <- GetTagStat(tags)
 message("The most popular tags in path:")
 head(tags.num, 10)
-
-# lengths hist
-ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
-  theme_bw() +xlab('number of words between BACT and DISEASE')
-```
-
-# Which words appear for 1 word cases
-```{r}
-
 ```
