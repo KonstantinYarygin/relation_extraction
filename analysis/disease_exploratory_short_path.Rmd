@@ -1,4 +1,4 @@
-```{r}
+```{r, echo=FALSE}
 library(data.table)
 library(ggplot2)
 library(stringr)
@@ -7,55 +7,77 @@ data.1 <- fread('/projects/relation_extraction/sentences/build-graphs-output-1.c
 data.2 <- fread('/projects/relation_extraction/sentences/build-graphs-output-2.csv')
 data <- rbindlist(list(data, data.1, data.2))
 names(data) <- c('text', 'length', 'bact', 'disease', 'path', 'tags')
+
+tag.abbs <- fread('/projects/relation_extraction/sentences/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
+
 ```
 
-# Structure, head, tail
-```{r}
-str(data)
-head(data, 5)
-tail(data, 5)
+# Structure
+```{r, echo=FALSE}
+names(data)
+#head(data, 5)
+#tail(data, 5)
+message("Total number of pathes: ", nrow(data))
 ```
 
 # Length statistics of shortest path
-```{r}
-ggplot(data)
-ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
-  theme_bw() +xlab('number of words between BACT and DISEASE')
+```{r, echo=FALSE}
+length.stat = data[, .N/nrow(data)*100, by=length]
+ggplot(length.stat, aes(x = factor(length-2), y=V1)) + geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
+  theme_bw() +xlab('number of words between BACT and DISEASE') +ylab('% of pathes') + 
+  geom_text(aes(label=round(V1, 2)), position=position_dodge(width=0.9), vjust=-0.25)
   
 ```
 
-# Word statistics
-```{r}
+# All pathes: word statistics
+```{r, echo=FALSE}
 #words parsing
 words <- strsplit(data$path, "', '", fixed=T)
 words <- unlist(sapply(words, function(x) {x[-c(1, length(x))]}))
 words <- data.table(word=tolower(words))
 
 #words statistics
-words.num <- words[, .N, by=word]
-words.num <- words.num[order(-N)]
+words.num <- words[, .N/nrow(data)*100, by=word]
+words.num <- words.num[order(-V1)]
+names(words.num) <- c('word', 'percent')
 message("The most popular words in path:")
 head(words.num, 10)
 
 #tags parsing
 tags <- strsplit(data$tags, "', '", fixed=T)
-tag=unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
+tags <- unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
 
 #verb statistics
-words.vb <- words[as.vector(!is.na(str_match(tag, 'VB')))]
-words.vb.num <- words.vb[, .N, by=word]
-words.vb.num <- words.vb.num[order(-N)]
+words.vb <- words[as.vector(!is.na(str_match(tags, 'VB')))]
+words.vb[, percent:=.N/nrow(data)*100, by=word]
+words.vb <- words.vb[order(-percent)]
 message("The most verb-like words (tag contain VB) in path:")
-head(words.vb.num, 10)
+head(words.vb, 10)
 
 #noun statistics
-words.nn <- words[as.vector(!is.na(str_match(tag, 'NN')))]
-words.nn.num <- words.nn[, .N, by=word]
-words.nn.num <- words.nn.num[order(-N)]
-message("The most verb-like words (tag contain NN) in path:")
-head(words.nn.num, 10)
+words.nn <- words[as.vector(!is.na(str_match(tags, 'NN')))]
+words.nn[, percent:=.N/nrow(data)*100, by=word]
+words.nn <- words.nn[order(-percent)]
+message("The most noun-like words (tag contain NN) in path:")
+head(words.nn, 10)
 
+#adjective statistics
+words.jj <- words[as.vector(! (is.na(str_match(tags, 'JJ'))&is.na(str_match(tag, 'CC'))))]
+words.jj <- words.jj[, percent:=.N/nrow(data)*100, by=word]
+words.jj <- words.jj[order(-percent)]
+message("The most adjective and conjunction -like words (tag contain JJ and CC) in path:")
+head(words.jj, 10)
 
-ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
-  theme_bw() +xlab('number of words between BACT and DISEASE')
+#tag statistics
+tags <- data.table(tag=tags[!(tags %in% c("DISEASE", "BACTERIUM"))])
+tags.num <- tags[, .N/nrow(data)*100, by=tags]
+tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
+tags.num <- tags.num[order(-V1)]
+message("The most popular tags in path:")
+head(tags.num, 10)
+```
+
+#One-word length pathes statistics
+```{r, echo=FALSE}
+
 ```
