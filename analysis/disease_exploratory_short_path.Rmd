@@ -1,0 +1,61 @@
+```{r}
+library(data.table)
+library(ggplot2)
+library(stringr)
+data <- fread('/projects/relation_extraction/sentences/build-graphs-output.csv')
+data.1 <- fread('/projects/relation_extraction/sentences/build-graphs-output-1.csv')
+data.2 <- fread('/projects/relation_extraction/sentences/build-graphs-output-2.csv')
+data <- rbindlist(list(data, data.1, data.2))
+names(data) <- c('text', 'length', 'bact', 'disease', 'path', 'tags')
+```
+
+# Structure, head, tail
+```{r}
+str(data)
+head(data, 5)
+tail(data, 5)
+```
+
+# Length statistics of shortest path
+```{r}
+ggplot(data)
+ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
+  theme_bw() +xlab('number of words between BACT and DISEASE')
+  
+```
+
+# Word statistics
+```{r}
+#words parsing
+words <- strsplit(data$path, "', '", fixed=T)
+words <- unlist(sapply(words, function(x) {x[-c(1, length(x))]}))
+words <- data.table(word=tolower(words))
+
+#words statistics
+words.num <- words[, .N, by=word]
+words.num <- words.num[order(-N)]
+message("The most popular words in path:")
+head(words.num, 10)
+
+#tags parsing
+tags <- strsplit(data$tags, "', '", fixed=T)
+tag=unlist(sapply(tags, function(x) {x[-c(1, length(x))]}))
+
+#verb statistics
+words.vb <- words[as.vector(!is.na(str_match(tag, 'VB')))]
+words.vb.num <- words.vb[, .N, by=word]
+words.vb.num <- words.vb.num[order(-N)]
+message("The most verb-like words (tag contain VB) in path:")
+head(words.vb.num, 10)
+
+#noun statistics
+words.nn <- words[as.vector(!is.na(str_match(tag, 'NN')))]
+words.nn.num <- words.nn[, .N, by=word]
+words.nn.num <- words.nn.num[order(-N)]
+message("The most verb-like words (tag contain NN) in path:")
+head(words.nn.num, 10)
+
+
+ggplot(data, aes(x = factor(length-2))) + geom_bar(width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
+  theme_bw() +xlab('number of words between BACT and DISEASE')
+```
