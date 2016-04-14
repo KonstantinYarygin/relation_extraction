@@ -2,24 +2,62 @@
 library(data.table)
 library(ggplot2)
 library(stringr)
-data <- fread('../data/build-graphs-output.csv')
-names(data) <- c('text', 'length', 'bact', 'disease', 'path', 'tags')
+data <- fread('../data/build-graphs-output.csv', select=1:6, col.names = c('text', 'length', 'bact', 'disease', 'path', 'tags'))
 tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
+words <- strsplit(data$path, "', '", fixed=T)
+phrase <- sapply(words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
+phrase <- tolower(phrase)
+data <- cbind(data, phrase)
 ```
 
 ```{r, echo=FALSE}
-PlotHist <- function(data, variable, title){
+PlotHist <- function(data, variable, title, max=10){
   setnames(data, variable, "object")
-  plot <- ggplot(data[0:10], aes(x = reorder(object, -percent), y = percent)) + 
-    geom_bar(stat="identity") + 
-    theme_bw() + 
-    xlab(variable) + 
-    ylab('count') + 
+  plot <- ggplot(data[0:max], aes(x = reorder(object, -percent), y = percent)) + 
+    geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
+    theme_bw() +
+    xlab(variable) +
+    ylab('% of all sentences in subset') + 
     ggtitle(title) +
+    geom_text(aes(label=round(percent, 2)), position=position_dodge(width=0.9), vjust=-0.25) +
     theme(text = element_text(size=13), 
-          axis.text.x = element_text(angle=10, vjust=1))
+           axis.text.x = element_text(angle=10, vjust=1))
   setnames(data, "object", variable)
   plot
+}
+
+GetWordsAndTags <- function(data, words.number){
+  #words parsing
+  if (is.na(words.number)){
+    words <- strsplit(data$path, "', '", fixed=T)
+    tags <- strsplit(data$tags, "', '", fixed=T)
+  } else {
+    words <- strsplit(data[length==words.number+2]$path, "', '", fixed=T)
+    tags <- strsplit(data[length==words.number+2]$tags, "', '", fixed=T)
+  }
+  words <- unlist(lapply(words, function(x) {x[-c(1, length(x))]}))
+  words <- tolower(words)
+  #tags parsing
+  tags <- unlist(lapply(tags, function(x) {x[-c(1, length(x))]}))
+  words.tags <- data.table(cbind(words, tags))
+  setnames(words.tags, c("word", "tag"))
+  words.tags
+}
+GetStat <- function(words, tags.to.match){
+  tags.to.match.str <- paste(tags.to.match, collapse="|")
+  words.match <- words[as.vector(!(is.na(str_match(tag, tags.to.match.str))))]
+  words.match <- words.match[, .N/nrow(words.match)*100, by=word]#
+  names(words.match) <- c('word', 'percent')
+  setorder(words.match, -percent)
+  words.match
+}
+GetTagStat <- function(words){
+  tags <- data.table(tag=words[!(tag %in% c("DISEASE", "BACTERIUM"))]$tag)
+  tags.num <- tags[, .N/nrow(words)*100, by=tag]
+  names(tags.num) <- c('tag', 'percent')
+  tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
+  tags.num <- tags.num[order(-percent)]
+  tags.num
 }
 ```
 
@@ -35,130 +73,159 @@ message("Total number of pathes: ", nrow(data))
 # Length statistics of shortest path
 ```{r, echo=FALSE}
 length.stat = data[, .N/nrow(data)*100, by=length]
-ggplot(length.stat, aes(x = factor(length-2), y=V1)) + geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
-  theme_bw() +xlab('number of words between BACT and DISEASE') +ylab('% of pathes') + 
+ggplot(length.stat, aes(x = factor(length-2), y=V1)) + 
+  geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
+  theme_bw() +
+  xlab('number of words between BACT and DISEASE') +
+  ylab('% of pathes') + 
   geom_text(aes(label=round(V1, 2)), position=position_dodge(width=0.9), vjust=-0.25)
   
 ```
 
-# Words statistics
+# All length: Words statistics
 ```{r, echo=FALSE}
 
-GetWordsAndTags <- function(data, words.number){
-  #words parsing
-  if (is.na(words.number)){
-    words <- strsplit(data$path, "', '", fixed=T)
-    tags <- strsplit(data$tags, "', '", fixed=T)
-  } else {
-    words <- strsplit(data[length==words.number+2]$path, "', '", fixed=T)
-    tags <- strsplit(data[length==words.number+2]$tags, "', '", fixed=T)
-  }
-  words <- unlist(lapply(words, function(x) {x[-c(1, length(x))]}))
-  #tags parsing
-  tags <- unlist(lapply(tags, function(x) {x[-c(1, length(x))]}))
-  words.tags <- data.table(cbind(words, tags))
-  setnames(words.tags, c("word", "tag"))
-  words.tags
-}
-GetStat <- function(words, tags.to.match){
-  words.match <- words[tag %in% tags.to.match]
-  words.match <- words.match[, .N/nrow(words.match)*100, by=word]
-  names(words.match) <- c('word', 'percent')
-  setorder(words.match, -percent)
-  words.match
-}
-GetTagStat <- function(words){
-  tags <- data.table(tag=words[!(tag %in% c("DISEASE", "BACTERIUM"))]$tag)
-  tags.num <- tags[, .N/nrow(words)*100, by=tag]
-  names(tags.num) <- c('tag', 'percent')
-  tags.num <- merge(tags.num, tag.abbs, by=c('tag'), all.x=T)
-  tags.num <- tags.num[order(-percent)]
-  tags.num
-}
-
 words.tags.all <- GetWordsAndTags(data, NA)
-words.tags.1 <- GetWordsAndTags(data, 1)
-words.tags.2 <- GetWordsAndTags(data, 2)
-words.tags.3 <- GetWordsAndTags(data, 3)
 
 #words statistics
 word.stat <- GetStat(words.tags.all, tags.to.match = unique(words.tags.all$tag))
-word.stat1 <- GetStat(words.tags.1, tags.to.match = unique(words.tags.all$tag))
-word.stat2 <- GetStat(words.tags.2, tags.to.match = unique(words.tags.all$tag))
-word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
-
 message("The most popular words in path:")
-head(word.stat, 10)
+head(word.stat, 30)
 PlotHist(word.stat, "word", "all lengths: words")
-
-head(word.stat1, 10)
-PlotHist(word.stat1, "word", "one word: words")
-
-head(word.stat2, 10)
-PlotHist(word.stat2, "word", "two words: words")
-
-head(word.stat3, 10)
-PlotHist(word.stat3, "word", "three words: words")
 
 #verb statistics
 words.vb <- GetStat(words.tags.all, "VB")
-words.vb1 <- GetStat(words.tags.1, "VB")
-words.vb2 <- GetStat(words.tags.2, "VB")
-words.vb3 <- GetStat(words.tags.2, "VB")
-
 message("The most verb-like words (tag contain VB) in path:")
 head(words.vb, 10)
 PlotHist(words.vb, "word", "all lengths: verbs")
 
-head(words.vb1, 10)
-PlotHist(words.vb1, "word", "one word: verbs")
-
-head(words.vb2, 10)
-PlotHist(words.vb2, "word", "two words: verbs")
-
-head(words.vb3, 10)
-PlotHist(words.vb3, "word", "three words: verbs")
-
 #noun statistics
 words.nn <- GetStat(words.tags.all, "NN")
-words.nn1 <- GetStat(words.tags.1, "NN")
-words.nn2 <- GetStat(words.tags.2, "NN")
-words.nn3 <- GetStat(words.tags.3, "NN")
-
 message("The most noun-like words (tag contain NN) in path:")
 head(words.nn, 10)
 PlotHist(words.nn, "word", "all lengths: nouns")
 
-head(words.nn1, 10)
-PlotHist(words.nn1, "word", "one word: nouns")
-
-head(words.nn2, 10)
-PlotHist(words.nn2, "word", "two words: nouns")
-
-head(words.nn3, 10)
-PlotHist(words.nn3, "word", "three words: nouns")
-
 #adjective statistics
 words.jj <- GetStat(words.tags.all, c("JJ", "CC"))
-words.jj1 <- GetStat(words.tags.1, c("JJ", "CC"))
-words.jj2 <- GetStat(words.tags.2, c("JJ", "CC"))
-words.jj3 <- GetStat(words.tags.3, c("JJ", "CC"))
 message("The most adjective and conjunction -like words (tag contain JJ and CC) in path:")
 head(words.jj, 10)
 PlotHist(words.jj, "word", "all lengths: adjective and conj.")
-
-head(words.jj1, 10)
-PlotHist(words.jj1, "word", "one word: adjective and conj.")
-
-head(words.jj2, 10)
-PlotHist(words.jj2, "word", "two words: adjective and conj.")
-
-head(words.jj3, 10)
-PlotHist(words.jj3, "word", "three words: adjective and conj.")
 
 #tag statistics
 tags.num <- GetTagStat(words.tags.all)
 message("The most popular tags in path:")
 head(tags.num, 10)
 PlotHist(tags.num, "tag", "all lengths: tags stat")
+
+data.sub <- data[(phrase!='')&(length>3)]
+phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
+setnames(phrase.count, c("phrase", "percent"))
+setorder(phrase.count, -percent)
+PlotHist(phrase.count, "phrase", "most popular phrases", 12)
+
+```
+
+#One-word length pathes statistics
+```{r}
+
+words.tags.1 <- GetWordsAndTags(data, 1)
+
+#words statistics
+word.stat1 <- GetStat(words.tags.1, tags.to.match = unique(words.tags.all$tag))
+head(word.stat1, 10)
+PlotHist(word.stat1, "word", "one word: words")
+
+#verb statistics
+words.vb1 <- GetStat(words.tags.1, "VB")
+head(words.vb1, 10)
+PlotHist(words.vb1, "word", "one word: verbs")
+
+#noun statistics
+words.nn1 <- GetStat(words.tags.1, "NN")
+head(words.nn1, 10)
+PlotHist(words.nn1, "word", "one word: nouns")
+
+#adjective statistics
+words.jj1 <- GetStat(words.tags.1, c("JJ", "CC"))
+head(words.jj1, 10)
+PlotHist(words.jj1, "word", "one word: adjective and conj.")
+
+data.sub <- data[(phrase!='')&(length==3)]
+phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
+setnames(phrase.count, c("phrase", "percent"))
+setorder(phrase.count, -percent)
+PlotHist(phrase.count, "phrase", "most popular phrases", 12)
+
+```
+
+# Two-word length pathes statistics
+```{r}
+words.tags.2 <- GetWordsAndTags(data, 2)
+
+#words statistics
+word.stat2 <- GetStat(words.tags.2, tags.to.match = unique(words.tags.all$tag))
+
+head(word.stat2, 10)
+PlotHist(word.stat2, "word", "two word: words")
+
+#verb statistics
+words.vb2 <- GetStat(words.tags.2, "VB")
+
+head(words.vb2, 10)
+PlotHist(words.vb2, "word", "two word: verbs")
+
+#noun statistics
+words.nn2 <- GetStat(words.tags.2, "NN")
+
+head(words.nn2, 10)
+PlotHist(words.nn2, "word", "two word: nouns")
+
+#adjective statistics
+words.jj2 <- GetStat(words.tags.2, c("JJ", "CC"))
+
+head(words.jj2, 10)
+PlotHist(words.jj2, "word", "two word: adjective and conj.")
+
+data.sub <- data[(phrase!='')&(length==4)]
+phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
+setnames(phrase.count, c("phrase", "percent"))
+setorder(phrase.count, -percent)
+PlotHist(phrase.count, "phrase", "most popular phrases", 12)
+
+```
+
+# Three-word length pathes statistics
+```{r}
+words.tags.3 <- GetWordsAndTags(data, 3)
+
+#words statistics
+word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
+
+head(word.stat3, 10)
+PlotHist(word.stat3, "word", "three word: words")
+
+#verb statistics
+words.vb3 <- GetStat(words.tags.3, "VB")
+
+head(words.vb3, 10)
+PlotHist(words.vb3, "word", "three word: verbs")
+
+#noun statistics
+words.nn3 <- GetStat(words.tags.3, "NN")
+
+head(words.nn3, 10)
+PlotHist(words.nn3, "word", "three word: nouns")
+
+#adjective statistics
+words.jj3 <- GetStat(words.tags.3, c("JJ", "CC"))
+
+head(words.jj3, 10)
+PlotHist(words.jj3, "word", "three word: adjective and conj.")
+
+data.sub <- data[(phrase!='')&(length==5)]
+phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
+setnames(phrase.count, c("phrase", "percent"))
+setorder(phrase.count, -percent)
+PlotHist(phrase.count, "phrase", "most popular phrases", 12)
+
 ```
