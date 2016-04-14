@@ -67,5 +67,5 @@ log_writer = LogWriter()
 
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
+     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, log_writer],
      do_parse=False, do_analyze=False)
