@@ -25,10 +25,14 @@ class DiseasesCatalog(Catalog):
     def initialize(self):
         t1 = time()
         constants.logger.info('Creating diseases catalog...')
-        # TODO: make a tidy disease dataset and load it here
+
         data = pd.read_csv(self.diseases_csv_path, sep="\t")
         data = data[['id', 'name']]
-        self.disease_dictionary = {item: group["id"].tolist()[0] for item, group in data.groupby("name")}
+        data_dict = data.to_dict("records")
+        for row in data_dict:
+            self.disease_dictionary[row['name']] = row['id']
+        # self.disease_dictionary = {item: group["id"].tolist()[0] for item, group in data.groupby("name")}
+
 
         self.__remove_disease_literally()
 

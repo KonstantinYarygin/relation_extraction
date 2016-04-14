@@ -15,7 +15,7 @@ gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_catalog.csv")
 
 nutrients_file_path = os.path.join(data_dir, "nutrients", "nikogosov_nutrients_normalized.tsv")
 
-diseases_doid_path = os.path.join(data_dir, "diseases", "doid.obo")
+diseases_csv_path = os.path.join(data_dir, "diseases", "diseases.csv")
 
 nxml_articles_dir = os.path.join(data_dir, "article_data", "texts")
 abstracts_dir = os.path.join(data_dir, "article_data", "abstracts", "gut_microbiota.medline.txt")
