@@ -14,7 +14,7 @@ tail(data, 5)
 Подцепим имена групп
 ```{r}
 data <- merge(data, unique(data[,.(id, name)]), by.x = 'group', by.y = 'id', all.x = TRUE)
-setnames(data, c("group", "id", "name", "subset", "obsolete", "groupname"))
+setnames(data, c("group", "id", "name", "obsolete", "groupname"))
 ```
 
 # Сколько болезней в каждой группе
