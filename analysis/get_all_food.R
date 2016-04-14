@@ -46,5 +46,5 @@ data.sub.plain <- rbind(data.sub.words1, data.sub.words2, data.sub.words3)
 setnames(data.sub.plain, c("group", "word"))
 setorder(data.sub.plain, group)
 data.sub.plain <- unique(data.sub.plain[,word,by=group])
-
+data.sub.plain <- data.sub.plain[group!="American Indian/Alaska Native Foods"]
 write.table(data.sub.plain, OUTPUT_FILE_NAME, sep=";", row.names = FALSE, quote = FALSE)
