@@ -24,11 +24,16 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
     nutrient_names = names[1]
     diseases_names = names[2]
     food_names = names[3]
-    parser_output = parser.parse_sentence(text)
-    analyze_output = analyze_sentence(bacterial_names=bacteria_names, nutrient_names=nutrient_names,
-                                      disease_names=diseases_names, food_names=food_names,
-                                      parser_output=parser_output, tokenizer=stanford_tokenizer,
-                                      pattern_finder=None)
+    try:
+        parser_output = parser.parse_sentence(text)
+        analyze_output = analyze_sentence(bacterial_names=bacteria_names, nutrient_names=nutrient_names,
+                                          disease_names=diseases_names, food_names=food_names,
+                                          parser_output=parser_output, tokenizer=stanford_tokenizer,
+                                          pattern_finder=None)
+    except Exception as error:
+        logger.error(error)
+        return [None, None]
+
     end = time.time()
     logger.info("===\nparsed/analyzed: %s, \ntime: %f" % (text, end - start))
     return [parser_output, analyze_output]
@@ -106,6 +111,9 @@ if __name__ == '__main__':
     sentence_number = len(names_dictionary)
     f = open(output_file, 'w')
     for parse_output, analyze_output in parse_analyze_outputs:
+        if parse_output is None or analyze_output is None:
+            continue
+
         paths_found = 0
         for output in analyze_output.items():
             shortest_paths = output[1]
