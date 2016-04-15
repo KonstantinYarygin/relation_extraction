@@ -79,7 +79,7 @@ if __name__ == '__main__':
         nutrient_names = [item[0] for item in value[1]]
         diseases_names = [item[0] for item in value[2]]
         food_names = [item[0] for item in value[3] if item[0] not in ["water", "Water"]]
-        if not check_if_more_than_one_list_not_empty([nutrient_names, diseases_names, food_names]):
+        if not check_if_more_than_one_list_not_empty([bacteria_names, nutrient_names, diseases_names, food_names]):
             continue
 
         names_dictionary[key] = [bacteria_names, nutrient_names, diseases_names, food_names]
