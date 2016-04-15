@@ -31,8 +31,6 @@ class DiseasesCatalog(Catalog):
         data_dict = data.to_dict("records")
         for row in data_dict:
             self.disease_dictionary[row['name']] = row['id']
-        # self.disease_dictionary = {item: group["id"].tolist()[0] for item, group in data.groupby("name")}
-
 
         self.__remove_disease_literally()
 

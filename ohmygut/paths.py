@@ -8,7 +8,6 @@ food_file_path = os.path.join(data_dir, "food", "food.tsv")
 
 stanford_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser.jar")
 stanford_models_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-parser-3.5.2-models.jar")
-
 stanford_lex_parser_path = os.path.join(data_dir, "stanford_parser", "englishPCFG.ser.gz")
 
 gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_catalog.csv")

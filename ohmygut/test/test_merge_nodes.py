@@ -44,7 +44,7 @@ class TestCase(unittest.TestCase):
         )
         words = {1: 'bb', 2: 'aa', 3: 'bb', 4: 'cc', 5: 'dd'}
         tags  = {1: 'T1', 2: 'T2', 3: 'T3', 4: 'T4', 5: 'T5'}
-        parser_output = ParserOutput(nx_graph, words, tags)
+        parser_output = ParserOutput("a text", nx_graph, words, tags)
 
         merge_nodes(
             tokenizer = stanford_tokenizer,

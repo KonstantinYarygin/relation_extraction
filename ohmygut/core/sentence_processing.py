@@ -32,13 +32,15 @@ class SentenceParser(object):
         words = {i+1: token for i, token in enumerate(tokens)}
         tags = {node: dependency_graph.nodes[node]['tag'] if node in dependency_graph.nodes else 'NO_TAG' for node in nodes}
 
-        return ParserOutput(nx_graph=nx_graph,
+        return ParserOutput(text=sentence,
+                            nx_graph=nx_graph,
                             words=words,
                             tags=tags)
 
 
 class ParserOutput(object):
-    def __init__(self, nx_graph, words, tags):
+    def __init__(self, text, nx_graph, words, tags):
+        self.text = text
         self.nx_graph = nx_graph
         self.words = words
         self.tags = tags
