@@ -1,20 +1,13 @@
-# take sentences - one by line
-# build graph
-# save to data frame: sentence \t graph
-# what is the format for a graph?
 import ast
+import multiprocessing
 import os
+import pickle
 import sys
-
 import time
 
-import pickle
-
-import multiprocessing
 import pandas as pd
 from nltk import StanfordTokenizer
 from nltk.parse.stanford import StanfordDependencyParser
-import networkx as nx
 
 from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import logger
