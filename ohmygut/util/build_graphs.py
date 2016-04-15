@@ -26,6 +26,7 @@ from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_
 # a function to run parse/analyze in parallel
 def parse_analyze(parser, stanford_tokenizer, text, names):
     start = time.time()
+    # todo: make more obvious (use dict?)
     bacteria_names = names[0]
     nutrient_names = names[1]
     diseases_names = names[2]
@@ -44,6 +45,8 @@ if __name__ == '__main__':
     output_file = "build-graphs-output.csv"
     file = sys.argv[1]
     sentences_data = pd.read_csv(file, sep='\t')
+    # ast.literal_eval(...) - to parse python lists
+    # .tolist()[0] - to transform pandas Series to list of one str element and take this one element
     sentences_dictionary = {item: [ast.literal_eval(group["bacteria"].tolist()[0]),
                                    ast.literal_eval(group["nutrients"].tolist()[0]),
                                    ast.literal_eval(group["diseases"].tolist()[0]),
@@ -54,7 +57,6 @@ if __name__ == '__main__':
         os.mkdir("out")
 
     stanford_tokenizer = StanfordTokenizer(path_to_jar=stanford_jar_path)
-
     stanford_dependency_parser = StanfordDependencyParser(path_to_jar=stanford_jar_path,
                                                           path_to_models_jar=stanford_models_jar_path,
                                                           model_path=stanford_lex_parser_path)
@@ -64,12 +66,20 @@ if __name__ == '__main__':
     logger.info("start parse sentences")
     names_dictionary = {}
     logger.info("total number of sentences before filter: %i" % len(sentences_dictionary))
-    # prepare names
+    # 1. prepare names
     for key, value in sentences_dictionary.items():
+        # key is sentence text
+        # value[0] is bacteria
+        # value[1] is nutrient
+        # value[2] is disease
+        # value[3] is food
+        # todo: make more obviuos (use a dict?)
+
         # filter:
         # 562 is E. coli
         # 1496 is Clostridium difficile
-        # 590 Salmonella
+        # 590 is Salmonella
+        # todo: make "black lists" of entities
         bacteria_names = [item[0] for item in value[0] if item[1] not in [562,
                                                                           1496,
                                                                           590]]  # item[0] is name, item[1] is code
@@ -83,8 +93,9 @@ if __name__ == '__main__':
             continue
 
         names_dictionary[key] = [bacteria_names, nutrient_names, diseases_names, food_names]
-
     logger.info("total number of sentences after filter: %i" % len(names_dictionary))
+
+    # 2. parse/analyze paralleled
     start = time.time()
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
     logger.info("running parse/analyze with %i threads" % (multiprocessing.cpu_count() - 1))
@@ -97,6 +108,7 @@ if __name__ == '__main__':
     end = time.time()
     logger.info("total parse/analyze time: %f" % (end - start))
 
+    # 3. write the results
     i = 0
     sentence_number = len(names_dictionary)
     f = open(output_file, 'w')
