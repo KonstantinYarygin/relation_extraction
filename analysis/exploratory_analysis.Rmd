@@ -3,10 +3,10 @@ title: "OMG exploratory analysis"
 output:
   html_document: default
 ---
-*workflow:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-workflow  
-*выводы:* https://github.com/KonstantinYarygin/relation_extraction/wiki/exploratory-analysis-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B
+```{r lib-setup, echo=FALSE}
+library(knitr)
+opts_chunk$set(echo=FALSE)
 
-```{r lib, echo=FALSE}
 GetHistPlots <- function(data.count, x.variable){
   setnames(data.count, x.variable, "object")
   plot1 <- ggplot(data.count[0:10], aes(x = reorder(object, -N), y = N)) + 
@@ -63,15 +63,15 @@ library(stringr)
 library(plyr)
 
 # warning here doesn't matter
-data <- fread('~/Downloads/result_17_07_29-28_03_16.csv', sep='\t')
+data <- fread('~/do/data/result/result_18_52_51-14_04_16.csv', sep='\t')
 ```
-Структура данных:
-```{r}
+Количество строк в данных и структура:
+```{r, echo=FALSE}
 nrow(data)
 str(data, vec.len=1)
 ```
 Бактерии, нутриенты и болезни записаны в питоновском формате листа. Распарсим и конвертируем
-```{r parsing, echo=FALSE, cache=T}
+```{r parsing, echo=FALSE}
 data.bacteria <- data[,
          .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
            unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
@@ -101,7 +101,7 @@ data.food <- data[,.(tolower(unlist(llply(str_match_all(food,
          by=.(text, article_title, journal)]
 setnames(data.food, c("text","article_title","journal","food","foodgroup"))
 ```
-Почистим данные
+Почистим данные: убираем E. coli, Clostridium difficile, Salmonella; Water
 ```{r data-cleanup, echo=FALSE}
 data.bacteria.catalog <- fread("../data/bacteria/gut_catalog.csv")
 data.bacteria <- data.bacteria[bacteria_code %in% data.bacteria.catalog$id]
@@ -117,16 +117,14 @@ data.sentences.nutrients <- unique(data.sentences.nutrients)
 data.sentences.diseases <- merge(data.bacteria, data.disease, by=c("text", "article_title", "journal"))
 setkey(data.sentences.diseases, text, article_title, journal, bacteria, disease)
 data.sentences.diseases <- unique(data.sentences.diseases)
-data.sentences.diseases.short <- data.sentences.diseases[,.(paste(unique(bacteria), collapse = ";"),
-                                                            paste(unique(disease), collapse = ";")),
-                                                         by=c("text", "article_title", "journal")]
-setnames(data.sentences.diseases.short, c("text", "article_title", "journal", "bacteria", "disease"))
-write.table(x = unique(data.sentences.diseases.short[,.(text, bacteria, disease)]), 
-            file = "disease-texts.csv", sep = '\t', quote = F, row.names = F, col.names = F)
 
 data.sentences.food <- merge(data.bacteria, data.food, by=c("text", "article_title", "journal"))
 setkey(data.sentences.food, text, article_title, journal, bacteria, food)
 data.sentences.food <- unique(data.sentences.food)
+
+data.sentences <-unique(rbind(data.sentences.nutrients[,.(text, article_title, journal)],
+                data.sentences.diseases[,.(text, article_title, journal)], 
+                data.sentences.food[,.(text, article_title, journal)]))
 ```
 
 Присоединим импакты
@@ -136,38 +134,42 @@ setnames(data.impacts, c('journal', 'impact'))
 # оказались дупликаты
 data.impacts <- unique(data.impacts)
 data.impacts$journal <- tolower(data.impacts$journal)
-data.sentences <- merge(data.sentences, data.impacts, by='journal', all.x = TRUE)
+data <- merge(data, data.impacts, by='journal', all.x = TRUE)
 ```
 
 ## Results
-Количество предложений:
-```{r} 
+Количество уникальный предложений:
+```{r, echo=FALSE} 
 length(unique(c(data.sentences.nutrients$text, 
                 data.sentences.diseases$text, 
                 data.sentences.food$text)))
 ```
 
-Количество статей, в которых мы что-то нашли:
-```{r}
-length(unique(data.sentences$article_title))
+Количество статей, из которых взяты предложения:
+```{r, echo=FALSE}
+length(unique(c(data.sentences.nutrients$article_title, 
+                data.sentences.diseases$article_title, 
+                data.sentences.food$article_title)))
 ```
 
 Количество найденных предложений со связью **бактерия-нутриент**:
-```{r}
+```{r, echo=FALSE}
 length(unique(data.sentences.nutrients$text))
 ```
 
 Количество найденных предложений со связью **бактерия-болезнь**:
-```{r}
+```{r, echo=FALSE}
 length(unique(data.sentences.diseases$text))
 ```
 
 Количество найденных предложений со связью **бактерия-еда**:
-```{r}
+```{r, echo=FALSE}
 length(unique(data.sentences.food$text))
 ```
-### Из каких статей больше всего предложений?
-```{r}
+
+### Из каких статей больше всего найдено предложений?
+
+```{r, echo=FALSE}
 data.articles <- data.sentences[,length(text), by=article_title]
 colnames(data.articles) <- c('title', 'sentences')
 # берём первые 60 символов из названия статьи
@@ -189,6 +191,8 @@ ggplot(data.sentences, aes(x=length)) + geom_histogram(binwidth=400) +
 ```
 
 ### Какие бактерии встречаются чаще всего?  
+Во всех предложениях
+
 ``` {r}
 data.bacteria.count <- data.bacteria[,.N,by=bacteria_code]
 data.bacteria.unique <- data.bacteria[,.(bacteria, bacteria_code)]
@@ -204,6 +208,7 @@ plots[[2]]
 ```
 
 ### Какие нутриенты встречаются чаще всего?  
+Во всех предложениях
 
 ```{r}
 data.nutrient.count <- data.nutrient[,.N,by=nutrient]
@@ -216,6 +221,8 @@ plots[[2]]
 ```
 
 ### Какие болезни встречаются чаще всего?  
+Во всех предложениях
+
 ```{r}
 data.disease.count <- data.disease[,.N,by=disease_code]
 data.disease.unique <- data.disease[,.(disease, disease_code)]
@@ -231,8 +238,7 @@ plots[[2]]
 ```
 
 ### Какая еда встречается чаще всего?
-
-Еда:
+Во всех предложениях
 ```{r}
 data.food.count <- data.food[,.N,by=food]
 setorder(data.food.count, -N)
@@ -266,6 +272,7 @@ food.file
 
 ### Какие пары бактерия-нутриент встречаются чаще всего?  
 
+В рамках одного предложения  
 Если в предложении встретилось имя бактерии несколько раз или нутриент несколько раз - считаем это за один раз. Например, если в предложении три раза встретилась бактерия Б1 и два раза встретился нутриент Н1, то считаем это за один случай Б1-Н1.
 ```{r}
 bacteria.nutrient <- MergePlotBactPairs(data.bacteria, data.nutrient, "nutrient")
@@ -275,7 +282,9 @@ bacteria.nutrient$plot
 ```
 
 
-### Какие пары бактерия-болезнь встречаются чаще всего?  
+### Какие пары бактерия-болезнь встречаются чаще всего? 
+В рамках одного предложения  
+
 ```{r}
 bacteria.disease <- MergePlotBactPairs(data.bacteria, data.disease, "disease")
 head(bacteria.disease$data.bacteria.other.count, 10)
@@ -284,6 +293,8 @@ bacteria.disease$plot
 ```
 
 ### Какие пары бактерия-еда встречаются чаще всего?
+В рамках одного предложения  
+
 ```{r}
 bacteria.food <- MergePlotBactPairs(data.bacteria, data.food, "food")
 head(bacteria.food$data.bacteria.other.count, 10)
