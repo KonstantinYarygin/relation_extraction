@@ -3,6 +3,8 @@ library(data.table)
 library(ggplot2)
 library(stringr)
 source('shortpath_exploratory_helper.R')
+TEXTS.NUM.LIMIT <- 2
+
 data <- fread('../data/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'from', 'to', 
                                                                      'fromtag', 'totag', 'path', 'tags', 
                                                                      'allwords', 'alltags', 'graph'))
@@ -35,31 +37,35 @@ ggplot(length.stat, aes(x = factor(length-2), y=V1)) +
 # All length: Words statistics
 ```{r, echo=FALSE}
 
-words.tags.all <- GetWordsAndTags(data, NA)
+words.tags.all <- GetWordsAndTags(data)
 
 #words statistics
 word.stat <- GetStat(words.tags.all, tags.to.match = unique(words.tags.all$tag))
 message("The most popular words in path:")
-head(word.stat, 30)
-PlotHist(word.stat, "word", "all lengths: words")
+head(word.stat$words.match, 30)
+head(word.stat$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(word.stat$words.match, "word", "all lengths: words")
 
 #verb statistics
 words.vb <- GetStat(words.tags.all, "VB")
 message("The most verb-like words (tag contain VB) in path:")
-head(words.vb, 10)
-PlotHist(words.vb, "word", "all lengths: verbs")
+head(words.vb$words.match, 10)
+head(words.vb$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.vb$words.match, "word", "all lengths: verbs")
 
 #noun statistics
 words.nn <- GetStat(words.tags.all, "NN")
 message("The most noun-like words (tag contain NN) in path:")
-head(words.nn, 10)
-PlotHist(words.nn, "word", "all lengths: nouns")
+head(words.nn$words.match, 10)
+head(words.nn$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.nn$words.match, "word", "all lengths: nouns")
 
 #adjective statistics
 words.jj <- GetStat(words.tags.all, c("JJ", "CC"))
 message("The most adjective and conjunction -like words (tag contain JJ and CC) in path:")
-head(words.jj, 10)
-PlotHist(words.jj, "word", "all lengths: adjective and conj.")
+head(words.jj$words.match, 10)
+head(words.jj$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.jj$words.match, "word", "all lengths: adjective and conj.")
 
 #tag statistics
 tags.num <- GetTagStat(words.tags.all)
@@ -78,27 +84,31 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 #One-word length pathes statistics
 ```{r, echo=FALSE}
 
-words.tags.1 <- GetWordsAndTags(data, 1)
+words.tags.1 <- GetWordsAndTags(data[length==1+2])
 
 #words statistics
 word.stat1 <- GetStat(words.tags.1, tags.to.match = unique(words.tags.all$tag))
-head(word.stat1, 10)
-PlotHist(word.stat1, "word", "one word: words")
+head(word.stat1$words.match, 10)
+head(word.stat1$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(word.stat1$words.match, "word", "one word: words")
 
 #verb statistics
 words.vb1 <- GetStat(words.tags.1, "VB")
-head(words.vb1, 10)
-PlotHist(words.vb1, "word", "one word: verbs")
+head(words.vb1$words.match, 10)
+head(words.vb1$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.vb1$words.match, "word", "one word: verbs")
 
 #noun statistics
 words.nn1 <- GetStat(words.tags.1, "NN")
-head(words.nn1, 10)
-PlotHist(words.nn1, "word", "one word: nouns")
+head(words.nn1$words.match, 10)
+head(words.nn1$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.nn1$words.match, "word", "one word: nouns")
 
 #adjective statistics
 words.jj1 <- GetStat(words.tags.1, c("JJ", "CC"))
-head(words.jj1, 10)
-PlotHist(words.jj1, "word", "one word: adjective and conj.")
+head(words.jj1$words.match, 10)
+head(words.jj1$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.jj1$words.match, "word", "one word: adjective and conj.")
 
 data.sub <- data[(phrase!='')&(length==3)]
 phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
@@ -110,31 +120,31 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 
 # Two-word length pathes statistics
 ```{r, echo=FALSE}
-words.tags.2 <- GetWordsAndTags(data, 2)
+words.tags.2 <- GetWordsAndTags(data[length==2+2])
 
 #words statistics
 word.stat2 <- GetStat(words.tags.2, tags.to.match = unique(words.tags.all$tag))
-
-head(word.stat2, 10)
-PlotHist(word.stat2, "word", "two word: words")
+head(word.stat2$words.match, 10)
+head(word.stat2$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(word.stat2$words.match, "word", "two word: words")
 
 #verb statistics
 words.vb2 <- GetStat(words.tags.2, "VB")
-
-head(words.vb2, 10)
-PlotHist(words.vb2, "word", "two word: verbs")
+head(words.vb2$words.match, 10)
+head(words.vb2$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.vb2$words.match, "word", "two word: verbs")
 
 #noun statistics
 words.nn2 <- GetStat(words.tags.2, "NN")
-
-head(words.nn2, 10)
-PlotHist(words.nn2, "word", "two word: nouns")
+head(words.nn2$words.match, 10)
+head(words.nn2$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.nn2$words.match, "word", "two word: nouns")
 
 #adjective statistics
 words.jj2 <- GetStat(words.tags.2, c("JJ", "CC"))
-
-head(words.jj2, 10)
-PlotHist(words.jj2, "word", "two word: adjective and conj.")
+head(words.jj2$words.match, 10)
+head(words.jj2$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.jj2$words.match, "word", "two word: adjective and conj.")
 
 data.sub <- data[(phrase!='')&(length==4)]
 phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
@@ -146,33 +156,70 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 
 # Three-word length pathes statistics
 ```{r, echo=FALSE}
-words.tags.3 <- GetWordsAndTags(data, 3)
+words.tags.3 <- GetWordsAndTags(data[length==3+2])
 
 #words statistics
 word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
-
-head(word.stat3, 10)
-PlotHist(word.stat3, "word", "three word: words")
+head(word.stat3$words.match, 10)
+head(word.stat3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(word.stat3$words.match, "word", "three word: words")
 
 #verb statistics
 words.vb3 <- GetStat(words.tags.3, "VB")
-
-head(words.vb3, 10)
-PlotHist(words.vb3, "word", "three word: verbs")
+head(words.vb3$words.match, 10)
+head(words.vb3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.vb3$words.match, "word", "three word: verbs")
 
 #noun statistics
 words.nn3 <- GetStat(words.tags.3, "NN")
-
-head(words.nn3, 10)
-PlotHist(words.nn3, "word", "three word: nouns")
+head(words.nn3$words.match, 10)
+head(words.nn3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.nn3$words.match, "word", "three word: nouns")
 
 #adjective statistics
 words.jj3 <- GetStat(words.tags.3, c("JJ", "CC"))
-
-head(words.jj3, 10)
-PlotHist(words.jj3, "word", "three word: adjective and conj.")
+head(words.jj3$words.match, 10)
+head(words.jj3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.jj3$words.match, "word", "three word: adjective and conj.")
 
 data.sub <- data[(phrase!='')&(length==5)]
+phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
+setnames(phrase.count, c("phrase", "percent"))
+setorder(phrase.count, -percent)
+PlotHist(phrase.count, "phrase", "most popular phrases", 12)
+
+```
+
+
+# Four-word length pathes statistics
+```{r, echo=FALSE}
+words.tags.3 <- GetWordsAndTags(data[length==4+2])
+
+#words statistics
+word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
+head(word.stat3$words.match, 10)
+head(word.stat3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(word.stat3$words.match, "word", "four word: words")
+
+#verb statistics
+words.vb3 <- GetStat(words.tags.3, "VB")
+head(words.vb3$words.match, 10)
+head(words.vb3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.vb3$words.match, "word", "four word: verbs")
+
+#noun statistics
+words.nn3 <- GetStat(words.tags.3, "NN")
+head(words.nn3$words.match, 10)
+head(words.nn3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.nn3$words.match, "word", "four word: nouns")
+
+#adjective statistics
+words.jj3 <- GetStat(words.tags.3, c("JJ", "CC"))
+head(words.jj3$words.match, 10)
+head(words.jj3$words.match.text[,.SD[1:TEXTS.NUM.LIMIT],by=word], TEXTS.NUM.LIMIT * 10)
+PlotHist(words.jj3$words.match, "word", "four word: adjective and conj.")
+
+data.sub <- data[(phrase!='')&(length==4+2)]
 phrase.count <- data.sub[,.N/nrow(data.sub)*100,by=phrase]
 setnames(phrase.count, c("phrase", "percent"))
 setorder(phrase.count, -percent)

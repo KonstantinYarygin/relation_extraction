@@ -13,31 +13,22 @@ PlotHist <- function(data, variable, title, max=10){
   plot
 }
 
-GetWordsAndTags <- function(data, words.number){
-  #words parsing
-  if (is.na(words.number)){
-    data[,.(strsplit(path, "', '", fixed=T))]
-    words <- strsplit(data$path, "', '", fixed=T)
-    tags <- strsplit(data$tags, "', '", fixed=T)
-  } else {
-    words <- strsplit(data[length==words.number+2]$path, "', '", fixed=T)
-    tags <- strsplit(data[length==words.number+2]$tags, "', '", fixed=T)
-  }
-  words <- unlist(lapply(words, function(x) {x[-c(1, length(x))]}))
-  words <- tolower(words)
-  #tags parsing
-  tags <- unlist(lapply(tags, function(x) {x[-c(1, length(x))]}))
-  words.tags <- data.table(cbind(words, tags))
-  setnames(words.tags, c("word", "tag"))
-  words.tags
+GetWordsAndTags <- function(data){
+  ExcludeLastAndFirst <- function (x) {x[-c(1, length(x))]}
+  words <- data[,.(strsplit(path, "', '", fixed=T), strsplit(tags, "', '", fixed=T), text)]
+  words <- words[,.(unlist(lapply(V1, ExcludeLastAndFirst)), unlist(lapply(V2, ExcludeLastAndFirst))), by=text]
+  setnames(words, c("text", "word", "tag"))
+  words$word <- tolower(words$word)
+  words
 }
 GetStat <- function(words, tags.to.match){
   tags.to.match.str <- paste(tags.to.match, collapse="|")
   words.match <- words[as.vector(!(is.na(str_match(tag, tags.to.match.str))))]
-  words.match <- words.match[, .N/nrow(words.match)*100, by=word]#
-  names(words.match) <- c('word', 'percent')
-  setorder(words.match, -percent)
-  words.match
+  words.match.text <- unique(words.match[, .(.N/nrow(words.match)*100, text), by=word])
+  setnames(words.match.text, c('word', 'percent', 'text'))
+  setorder(words.match.text, -percent)
+  words.match <- unique(words.match.text[,.(word, percent)])
+  return(list(words.match=words.match, words.match.text=words.match.text))
 }
 GetTagStat <- function(words){
   tags <- data.table(tag=words[!(tag %in% c("DISEASE", "BACTERIUM"))]$tag)
