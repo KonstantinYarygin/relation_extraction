@@ -1,0 +1,228 @@
+```{r, echo=FALSE}
+library(data.table)
+library(ggplot2)
+library(stringr)
+#setwd('/projects/relation_extraction/analysis/')
+data <- fread('/home/vera/Downloads/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'bact', 'disease', 'node1', 'node2', 'path', 'tags', 'graph.words', 'graph.tags', 'graph.edges'))
+data <- data[(node1 %in% c('BACTERIUM', 'DISEASE'))&(node2 %in% c('BACTERIUM', 'DISEASE'))]
+tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
+data$words <- strsplit(data$path, "', '", fixed=T)
+data$words <- sapply(data$words, tolower)
+data$phrase <- sapply(data$words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
+data$phrase <- tolower(data$phrase)
+```
+
+```{r, echo=FALSE}
+GetHeadText <- function(data, templates){
+  ids <- sapply(data$words, function(x) any(x %in% templates))
+  return(list(head(data[ids]$text, 10), head(data[ids]$path, 10),  head(data[ids]$tags, 10),head(data[ids]$graph.words, 10), head(data[ids]$graph.edges, 10)))
+}
+
+template.cause <- c('cause', 'causes', 'caused', 'causing')
+template.protect <- c('protect', 'protected', 'protects', 'protecting', 'protecter')
+template.lower <- c('lower', 'lowers', 'lowered', 'lowering', 'lowest', 'lowly', 'low')
+template.rare <- c('rare', 'rarely', 'rarer', 'rarest')
+template.associate <- c('associated', 'associate', 'associats', 'associating', 'association', 'associations')
+template.abundance <- c('abundance', 'abundant', 'abundances')
+template.due <- c('due', 'dues', 'dued', 'duing')
+template.enrich <- c('enrich', 'enriches', 'enriched', 'enriching')
+template.frequent <- c('frequent', 'frequently')
+template.relevant <- c('relevant')
+template.reduce <- c('reduce', 'reduced', 'reduces', 'reducing', 'reducer')
+template.decrease <- c('decrease', 'decreased', 'decreases', 'decreasing')
+template.prevent <- c('prevent', 'prevents', 'prevented', 'preventing', 'pervention')
+template.absence <- c('absence', 'absent', 'absences')
+template.alleviate <- c('alleviate', 'alleviates', 'alleviating', 'alleviation', 'alleviated', 'alleviations')
+template.treatment <- c('treat', 'treats', 'treated', 'treating', 'treatment', 'treatments')
+template.have <- c('have', 'had', 'has', 'having', "haven't", "hadn't", "hasn't")
+template.level <- c('level', 'levels')
+template.link <- c('link', 'links', 'linked', 'linking')
+template.increase <- c('increase', 'increases', 'increased', 'increasing')
+template.induce <- c('induce', 'induces', 'induced', 'induceing')
+template.promote <- c('promote', 'promotes', 'promoted', 'promoter', 'promoting')
+template.risk <- c('risk', 'risks')
+template.develop <- c('develop', 'develops', 'developed', 'developing', 'development')
+template.responsible <- c('responsible', 'responsibility', 'response', 'responses', 'responed', 'responsing')
+template.higher <- c('higher', 'highers', 'highered', 'highering', 'highest', 'high', 'highly')
+template.common <- c('common', 'commonly')
+template.prevalent <- c('prevalent', 'prevalented', 'prevalents', 'prevalenting')
+template.find <- c('find', 'found', 'finds', 'finding')
+template.show <- c('showed', 'shown', 'showing', 'show')
+template.observe <- c('observe', 'observes','observed', 'observing', 'observation')
+template.report <- c('report', 'reports','reported', 'reporting', 'reporter')
+template.present <- c('present', 'presents','presented', 'presenting')
+```
+
+
+# One word examples
+```{r, echo=FALSE}
+data.one.word=data[length==3]
+```
+
+## COR-
+```{r, echo=FALSE}
+message('COR-: protect')
+GetHeadText(data.one.word, template.protect)
+message('COR-: lower')
+GetHeadText(data.one.word, template.lower)
+message('COR-: rare')
+GetHeadText(data.one.word, template.rare)
+```
+
+## COR?
+```{r, echo=FALSE}
+message('COR?: assosiate')
+GetHeadText(data.one.word, template.associate)
+message('COR?: abundance')
+GetHeadText(data.one.word, template.abundance)
+```
+
+## COR+
+```{r, echo=FALSE}
+message('COR+: cause')
+GetHeadText(data.one.word, template.cause)
+message('COR+: due')
+GetHeadText(data.one.word, template.due)
+message('COR+: enrich')
+GetHeadText(data.one.word, template.enrich)
+message('COR+: frequent')
+GetHeadText(data.one.word, template.frequent)
+message('COR+: relevant')
+GetHeadText(data.one.word, template.relevant)
+```
+
+# Two words examples
+```{r, echo=FALSE}
+data.two.words <- data[length==4]
+```
+
+## COR-
+```{r, echo=FALSE}
+message('COR-: reduce')
+GetHeadText(data.two.words, template.reduce)
+message('COR-: decrease')
+GetHeadText(data.two.words, template.decrease)
+message('COR-: lower')
+GetHeadText(data.two.words, template.lower)
+message('COR-: prevention')
+GetHeadText(data.two.words, template.prevent)
+```
+
+## COR?
+```{r, echo=FALSE}
+message('COR?: assosiate')
+GetHeadText(data.two.words, template.associate)
+message('COR?: treatment')
+GetHeadText(data.two.words, template.treatment)
+message('COR?: abundance')
+GetHeadText(data.two.words, template.abundance)
+message('COR?: level')
+GetHeadText(data.two.words, template.level)
+message('COR?: link')
+GetHeadText(data.two.words, template.link)
+```
+
+## COR+
+```{r, echo=FALSE}
+message('COR+: increase')
+GetHeadText(data.two.words, template.increase)
+message('COR+: induce')
+GetHeadText(data.two.words, template.induce)
+message('COR+: due')
+GetHeadText(data.two.words, template.due)
+message('COR+: higher')
+GetHeadText(data.two.words, template.higher)
+```
+
+# COR bin
+```{r, echo=FALSE}
+message('COR bin: found')
+GetHeadText(data.two.words, template.find)
+message('COR bin: observed')
+GetHeadText(data.two.words, template.observe)
+message('COR bin: reported')
+GetHeadText(data.two.words, template.report)
+message('COR bin: present')
+GetHeadText(data.two.words, template.present)
+```
+
+# Three words examples
+```{r, echo=FALSE}
+data.three.words <- data[length==5]
+```
+
+## COR-
+```{r, echo=FALSE}
+message('COR-: reduce')
+GetHeadText(data.three.words, template.reduce)
+message('COR-: decrease')
+GetHeadText(data.three.words, template.decrease)
+message('COR-: lower')
+GetHeadText(data.three.words, template.lower)
+message('COR-: abscence')
+GetHeadText(data.three.words, template.absence)
+```
+
+## COR?
+```{r, echo=FALSE}
+message('COR?: assosiate')
+GetHeadText(data.three.words, template.associate)
+message('COR?: have')
+GetHeadText(data.three.words, template.have)
+message('COR?: abundance')
+GetHeadText(data.three.words, template.abundance)
+message('COR?: level')
+GetHeadText(data.three.words, template.level)
+message('COR?: link')
+GetHeadText(data.three.words, template.link)
+```
+
+## COR+
+```{r, echo=FALSE}
+message('COR+: increase')
+GetHeadText(data.three.words, template.increase)
+message('COR+: responsible')
+GetHeadText(data.three.words, template.responsible)
+message('COR+: due')
+GetHeadText(data.three.words, template.due)
+message('COR+: higher')
+GetHeadText(data.three.words, template.higher)
+message('COR+: enriched')
+GetHeadText(data.three.words, template.enrich)
+message('COR+: prevalent')
+GetHeadText(data.three.words, template.prevalent)
+```
+
+## COR bin
+```{r, echo=FALSE}
+message('COR bin: found')
+GetHeadText(data.three.words, template.find)
+message('COR bin: shown')
+GetHeadText(data.three.words, template.show)
+message('COR bin: observed')
+GetHeadText(data.three.words, template.observe)
+message('COR bin: reported')
+GetHeadText(data.three.words, template.report)
+```
+
+# All
+## COR-
+```{r, echo=FALSE}
+message('COR-: alleviate')
+GetHeadText(data.three.words, template.alleviate)
+```
+## COR+
+```{r, echo=FALSE}
+message('COR+: promote')
+GetHeadText(data.three.words, template.promote)
+message('COR+: risk')
+GetHeadText(data.three.words, template.risk)
+message('COR+: development')
+GetHeadText(data.three.words, template.develop)
+message('COR+: common')
+GetHeadText(data.three.words, template.common)
+```
+
+
+# Groupp 
+```{r}
