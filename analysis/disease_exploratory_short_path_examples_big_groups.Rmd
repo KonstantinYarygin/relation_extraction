@@ -1,0 +1,165 @@
+```{r, echo=FALSE}
+library(data.table)
+library(ggplot2)
+library(stringr)
+#setwd('/projects/relation_extraction/analysis/')
+data <- fread('/home/vera/Downloads/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'bact', 'disease', 'node1', 'node2', 'path', 'tags', 'graph.words', 'graph.tags', 'graph.edges'))
+data <- data[(node1 %in% c('BACTERIUM', 'DISEASE'))&(node2 %in% c('BACTERIUM', 'DISEASE'))]
+data$words <- strsplit(data$path, "', '", fixed=T)
+data$words <- sapply(data$words, tolower)
+data$phrase <- sapply(data$words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
+data$phrase <- tolower(data$phrase)
+```
+
+```{r, echo=FALSE}
+GetHeadText <- function(data, templates, n=10, group.name){
+  ids <- sapply(data$words, function(x) any(x %in% templates))
+  d <- list(paste(head(data[ids]$bact, n), group.name, head(data[ids]$disease, n)),
+              head(data[ids]$text, n),  
+              head(data[ids]$phrase, n))
+  lapply(1:length(d[[1]]), function(x) {
+  message(d[[1]][x])
+  message(d[[2]][x])
+  message(d[[3]][x])
+  message()
+  })
+}
+
+GetHeadText2 <- function(data, templates.lists, n=10, group.name='') {
+  ids <- lapply(templates.lists, function(template.list) {
+      sapply(data$words, function(x) {(any(x %in% template.list[[1]])) & (any(x %in% template.list[[2]]))})
+    })
+  ids3 <- ids[[1]]
+  if (length(ids)>1) {
+    for (i in 2:length(ids)) {
+      ids3 <- ids3 | ids[[i]]
+    }
+  }
+  
+  d <- list(paste(head(data[ids3]$bact, n), group.name, head(data[ids3]$disease, n)),
+              head(data[ids3]$text, n),  
+              head(data[ids3]$phrase, n))
+  lapply(1:length(d[[1]]), function(x) {
+  message(d[[1]][x])
+  message(d[[2]][x])
+  message(d[[3]][x])
+  message()
+  })
+  }
+
+template.cause <- c('cause', 'causes', 'caused', 'causing')
+template.protect <- c('protect', 'protected', 'protects', 'protecting', 'protecter')
+template.associate <- c('associated', 'associate', 'associates', 'associating', 'association', 'associations')
+template.abundance <- c('abundance', 'abundant', 'abundances')
+template.due <- c('due', 'dues', 'dued', 'duing')
+template.enrich <- c('enrich', 'enriches', 'enriched', 'enriching')
+template.reduce <- c('reduce', 'reduced', 'reduces', 'reducing', 'reducer')
+template.decrease <- c('decrease', 'decreased', 'decreases', 'decreasing')
+template.prevent <- c('prevent', 'prevents', 'prevented', 'preventing', 'pervention')
+template.absence <- c('absence', 'absent', 'absences')
+template.alleviate <- c('alleviate', 'alleviates', 'alleviating', 'alleviation', 'alleviated', 'alleviations')
+template.link <- c('link', 'links', 'linked', 'linking')
+template.increase <- c('increase', 'increases', 'increased', 'increasing')
+template.induce <- c('induce', 'induces', 'induced', 'induceing')
+template.common <- c('common', 'commonly')
+template.prevalent <- c('prevalent', 'prevalented', 'prevalents', 'prevalenting')
+template.present <- c('present', 'presents','presented', 'presenting', 'presence')
+
+
+######################################
+#templates for groups
+######################################
+template.1.prevent <- c(template.prevent, template.protect, template.absence)
+template.1.cause <- c(template.induce, template.cause, template.due)
+template.1.increase <- c(template.enrich, 'increased', template.prevalent, template.common, 'high')
+template.1.decrease <- c('reduced', 'decreased', 'low')
+
+template.2.prevent <- list(list(template.reduce, c('risk', 'risks')), 
+                           list(c('colonization', 'colonize', 'colonizes'), template.prevent))
+template.2.cause <- list(list(template.associate, c('toxin', 'toxins')), 
+                         list(template.abundance, template.cause),
+                         list(c('colonization', 'colonize', 'colonizes'), template.link))
+template.2.increase <- list(list(template.associate, template.increase), 
+                            list(template.associate, template.present), 
+                            list(template.abundance, template.increase), 
+                            list(template.increase, template.link), 
+                            list(template.increase, template.due))
+template.2.decrease <- list(list(template.associate, template.decrease), 
+                            list(template.associate, template.reduce), 
+                            list(template.associate, c('loss')), 
+                            list(template.abundance, template.decrease), 
+                            list(template.decrease, template.link), 
+                            list(template.decrease, template.due))
+template.2.treat <- list(list(template.reduce, c(' symptom', 'symptoms')), 
+                            list(c('help', 'helps', 'facilitate', 'facilitates'), template.alleviate), 
+                            list(template.alleviate, c(' symptom', 'symptoms')))
+
+######################################
+#templates to delete
+######################################
+template.bact <- c('species', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member', 
+                   'phylum','phylums', 'class', 'classes','order', 'orders', 'family',
+                   'families', 'genus', 'genuses', 'members', 'member','microbiota', 
+                   'microbiom', 'bacteria', 'bacterium', 'community', 'communities', 'pathogen', 'pathogens')
+template.samples <- c('patient', 'patients', 'child', 'children', 'subject','subjects','cohort', 'cohorts',
+                   'site','sites', 'counts', 'count','group', 'groups', 'samples',
+                   'sample', 'genus', 'genuses', 'members', 'member','microbiota', 
+                   'microbiom', 'bacteria', 'bacterium', 'community', 'communities')
+template.disease <- c('DISEASE', 'disease', 'diseases', 'infection', 'infections')
+template.verbs <- c('considered',  'consider', 'considers', 'considering', 'observe', 'observes', 'observed', 'observing', 
+                    'find',  'found',  'finds',  'finding', 'report', 'reports', 'reported', 'reporting', 
+                    'development', 'corresponding', 'suffering', 'shown')	
+templete.delete <- c(template.bact, template.samples, template.disease, template.verbs)
+```
+
+```{r, echo=FALSE}
+data$words <- lapply(data$words, function(x) {x[!(x %in% templete.delete)]})
+data$length <- lapply(data$words,  length)
+```
+
+# One word templates
+```{r, echo=FALSE}
+data.one.word=data[length==3]
+```
+## Prevent
+```{r, echo=FALSE}
+d <- GetHeadText(data.one.word, template.1.prevent, 20, 'PREVENTS')
+```
+## Cause
+```{r, echo=FALSE}
+tmp <-GetHeadText(data.one.word, template.1.cause, 20, 'CAUSES')
+```
+## Increased
+```{r, echo=FALSE}
+tmp <-GetHeadText(data.one.word, template.1.increase, 20, 'IS INCREASED WITH')
+```
+## Decreased
+```{r, echo=FALSE}
+tmp <-GetHeadText(data.one.word, template.1.decrease, 20, 'IS DECREASED WHEN')
+```
+
+# Two words templates
+```{r, echo=FALSE}
+data.two.words=data[length==4]
+```
+## Prevent
+```{r, echo=FALSE}
+tmp <-GetHeadText2(data.two.words, template.2.prevent, 20, 'PREVENTS')
+```
+## Cause
+```{r, echo=FALSE}
+tmp <-GetHeadText2(data.two.words, template.2.cause, 20, 'CAUSES')
+```
+## Increased
+```{r, echo=FALSE}
+tmp <-GetHeadText2(data.two.words, template.2.increase, 20, 'IS INCREASED WHEN')
+```
+## Decreased
+```{r, echo=FALSE}
+tmp <-GetHeadText2(data.two.words, template.2.decrease, 20, 'IS DECREASED WHEN')
+```
+## Treat
+```{r, echo=FALSE}
+tmp <-GetHeadText2(data.two.words, template.2.treat, 20, 'TREATS')
+```
+
