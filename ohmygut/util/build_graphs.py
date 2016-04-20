@@ -32,6 +32,8 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
                                           pattern_finder=None)
     except Exception as error:
         logger.error(error)
+        end = time.time()
+        logger.info("===\nparsed/analyzed error: %s, \ntime: %f" % (text, end - start))
         return [None, None]
 
     end = time.time()
