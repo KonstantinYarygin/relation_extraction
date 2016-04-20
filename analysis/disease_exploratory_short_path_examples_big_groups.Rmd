@@ -2,9 +2,13 @@
 library(data.table)
 library(ggplot2)
 library(stringr)
+library(jsonlite)
 #setwd('/projects/relation_extraction/analysis/')
 data <- fread('/home/vera/Downloads/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'bact', 'disease', 'node1', 'node2', 'path', 'tags', 'graph.words', 'graph.tags', 'graph.edges'))
 data <- data[(node1 %in% c('BACTERIUM', 'DISEASE'))&(node2 %in% c('BACTERIUM', 'DISEASE'))]
+#data$graph.edges <- gsub("([0-9]+)", '"\\1"', data$graph.edges, perl = T)
+#data$graph.edges <- gsub("'", '"', data$graph.edges)
+#data$graph.edges.1 <- lapply(data$graph.edges, fromJSON)
 data$words <- strsplit(data$path, "', '", fixed=T)
 data$words <- sapply(data$words, tolower)
 data$phrase <- sapply(data$words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
@@ -27,7 +31,7 @@ GetHeadText <- function(data, templates, n=10, group.name){
 
 GetHeadText2 <- function(data, templates.lists, n=10, group.name='') {
   ids <- lapply(templates.lists, function(template.list) {
-      sapply(data$words, function(x) {(any(x %in% template.list[[1]])) & (any(x %in% template.list[[2]]))})
+      sapply(data$words, function(x) {(any(x[1] %in% template.list[[1]])) & (any(x[2] %in% template.list[[2]]))})
     })
   ids3 <- ids[[1]]
   if (length(ids)>1) {
@@ -48,19 +52,19 @@ GetHeadText2 <- function(data, templates.lists, n=10, group.name='') {
   }
 
 template.cause <- c('cause', 'causes', 'caused', 'causing')
-template.protect <- c('protect', 'protected', 'protects', 'protecting', 'protecter')
-template.associate <- c('associated', 'associate', 'associates', 'associating', 'association', 'associations')
+template.protect <- c('protect', 'protected', 'protects', 'protecting')
+template.associate <- c('associated', 'associate', 'associates', 'associating')
 template.abundance <- c('abundance', 'abundant', 'abundances')
 template.due <- c('due', 'dues', 'dued', 'duing')
 template.enrich <- c('enrich', 'enriches', 'enriched', 'enriching')
-template.reduce <- c('reduce', 'reduced', 'reduces', 'reducing', 'reducer')
+template.reduce <- c('reduce', 'reduced', 'reduces', 'reducing')
 template.decrease <- c('decrease', 'decreased', 'decreases', 'decreasing')
 template.prevent <- c('prevent', 'prevents', 'prevented', 'preventing', 'pervention')
 template.absence <- c('absence', 'absent', 'absences')
 template.alleviate <- c('alleviate', 'alleviates', 'alleviating', 'alleviation', 'alleviated', 'alleviations')
 template.link <- c('link', 'links', 'linked', 'linking')
 template.increase <- c('increase', 'increases', 'increased', 'increasing')
-template.induce <- c('induce', 'induces', 'induced', 'induceing')
+template.induce <- c('induce', 'induces', 'induced', 'inducing')
 template.common <- c('common', 'commonly')
 template.prevalent <- c('prevalent', 'prevalented', 'prevalents', 'prevalenting')
 template.present <- c('present', 'presents','presented', 'presenting', 'presence')
@@ -76,18 +80,18 @@ template.1.decrease <- c('reduced', 'decreased', 'low')
 
 template.2.prevent <- list(list(template.reduce, c('risk', 'risks')), 
                            list(c('colonization', 'colonize', 'colonizes'), template.prevent))
-template.2.cause <- list(list(template.associate, c('toxin', 'toxins')), 
+template.2.cause <- list(list(c('toxin', 'toxins'), template.associate),  
                          list(template.abundance, template.cause),
+                         list(c('colonization', 'colonize', 'colonizes'), template.cause)
                          list(c('colonization', 'colonize', 'colonizes'), template.link))
-template.2.increase <- list(list(template.associate, template.increase), 
-                            list(template.associate, template.present), 
-                            list(template.abundance, template.increase), 
+template.2.increase <- list(list(template.increase, template.associate), 
+                            list(template.increase, template.abundance), 
                             list(template.increase, template.link), 
                             list(template.increase, template.due))
-template.2.decrease <- list(list(template.associate, template.decrease), 
-                            list(template.associate, template.reduce), 
-                            list(template.associate, c('loss')), 
-                            list(template.abundance, template.decrease), 
+template.2.decrease <- list(list(template.decrease, template.associate), 
+                            list(template.reduce, template.associate), 
+                            list(c('loss'), template.associate), 
+                            list(template.decrease, template.abundance), 
                             list(template.decrease, template.link), 
                             list(template.decrease, template.due))
 template.2.treat <- list(list(template.reduce, c(' symptom', 'symptoms')), 
