@@ -38,6 +38,7 @@ def get_bind_ids(ids, ncbi_nodes, is_get_child_id=False):
 
 
 def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_path, output_csv_path):
+    SINTETIC_ID = 1000000000
     gut_names = pd.read_table(gut_bact_list_path, names=['name'], sep=',')
     ncbi_names_iter = pd.read_table(names_ncbi_path, names=['id', 'name', 'class'], usecols=[0, 2, 6], header=None,
                                     chunksize=CHUNK_SIZE)
@@ -47,10 +48,11 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
 
     gut_names_first = gut_names['name'].apply(lambda x: str.split(x, ' ')[0])
     gut_names = pd.merge(gut_names, ncbi_names[['name', 'id']], how='left', on='name')
+    gut_names_unknown = gut_names[np.isnan(gut_names['id'])].copy()
     gut_names.loc[np.isnan(gut_names['id']), 'name'] = gut_names_first[np.isnan(gut_names['id'])]
     gut_names = pd.merge(gut_names[['name']], ncbi_names, how='left', on='name')
-    gut_names_unknown = gut_names[np.isnan(gut_names['id'])].copy()
-    gut_names_unknown['id'] = 1000000000
+    gut_names_unknown = pd.concat([gut_names_unknown, gut_names[np.isnan(gut_names['id'])].copy()])
+    gut_names_unknown['id'] = range(SINTETIC_ID, SINTETIC_ID + len(gut_names_unknown))
     gut_names_unknown['class'] = 'unknown'
     gut_names_unknown['rank'] = 'unknown'
 
@@ -71,7 +73,7 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
     gut_names.to_csv(output_csv_path, index=False)
 
 
-output_csv_path = '../data/bacteria/gut_catalog.csv'
+output_csv_path = '../data/bacteria/gut_catalog_1.csv'
 gut_bact_list_path = '../data/bacteria/bact_names_pull_new_base.csv'  # '../data/bacteria/HITdb_taxonomy_qiime.txt'
 
 names_path = '../data/bacteria/taxdump/names.dmp'
