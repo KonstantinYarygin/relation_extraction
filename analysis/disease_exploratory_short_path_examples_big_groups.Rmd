@@ -1,24 +1,21 @@
 ```{r, echo=FALSE}
 library(data.table)
 library(ggplot2)
-library(stringr)
-library(jsonlite)
+library(stringr)library(jsonlite)
 #setwd('/projects/relation_extraction/analysis/')
-data <- fread('/home/vera/Downloads/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'bact', 'disease', 'node1', 'node2', 'path', 'tags', 'graph.words', 'graph.tags', 'graph.edges'))
-data <- data[(node1 %in% c('BACTERIUM', 'DISEASE'))&(node2 %in% c('BACTERIUM', 'DISEASE'))]
+source('shortpath_exploratory_helper.R')
+data <- ReadGraphData('../data/build-graphs-output-17Apr.csv')
+data <- data[(fromtag %in% c('BACTERIUM', 'DISEASE'))&(totag %in% c('BACTERIUM', 'DISEASE'))]
+data <- PrepareWordsAndPhrases(data)
 #data$graph.edges <- gsub("([0-9]+)", '"\\1"', data$graph.edges, perl = T)
 #data$graph.edges <- gsub("'", '"', data$graph.edges)
 #data$graph.edges.1 <- lapply(data$graph.edges, fromJSON)
-data$words <- strsplit(data$path, "', '", fixed=T)
-data$words <- sapply(data$words, tolower)
-data$phrase <- sapply(data$words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
-data$phrase <- tolower(data$phrase)
 ```
 
 ```{r, echo=FALSE}
 GetHeadText <- function(data, templates, n=10, group.name){
   ids <- sapply(data$words, function(x) any(x %in% templates))
-  d <- list(paste(head(data[ids]$bact, n), group.name, head(data[ids]$disease, n)),
+  d <- list(paste(head(data[ids]$from, n), group.name, head(data[ids]$to, n)),
               head(data[ids]$text, n),  
               head(data[ids]$phrase, n))
   lapply(1:length(d[[1]]), function(x) {
@@ -40,7 +37,7 @@ GetHeadText2 <- function(data, templates.lists, n=10, group.name='') {
     }
   }
   
-  d <- list(paste(head(data[ids3]$bact, n), group.name, head(data[ids3]$disease, n)),
+  d <- list(paste(head(data[ids3]$from, n), group.name, head(data[ids3]$to, n)),
               head(data[ids3]$text, n),  
               head(data[ids3]$phrase, n))
   lapply(1:length(d[[1]]), function(x) {
@@ -80,18 +77,18 @@ template.1.decrease <- c('reduced', 'decreased', 'low')
 
 template.2.prevent <- list(list(template.reduce, c('risk', 'risks')), 
                            list(c('colonization', 'colonize', 'colonizes'), template.prevent))
-template.2.cause <- list(list(c('toxin', 'toxins'), template.associate),  
+template.2.cause <- list(list(c('toxin', 'toxins'), template.associate),
                          list(template.abundance, template.cause),
                          list(c('colonization', 'colonize', 'colonizes'), template.cause)
                          list(c('colonization', 'colonize', 'colonizes'), template.link))
-template.2.increase <- list(list(template.increase, template.associate), 
-                            list(template.increase, template.abundance), 
+template.2.increase <- list(list(template.increase, template.associate),
+                            list(template.increase, template.abundance),
                             list(template.increase, template.link), 
                             list(template.increase, template.due))
-template.2.decrease <- list(list(template.decrease, template.associate), 
-                            list(template.reduce, template.associate), 
-                            list(c('loss'), template.associate), 
-                            list(template.decrease, template.abundance), 
+template.2.decrease <- list(list(template.decrease, template.associate),
+                            list(template.reduce, template.associate),
+                            list(c('loss'), template.associate),
+                            list(template.decrease, template.abundance),
                             list(template.decrease, template.link), 
                             list(template.decrease, template.due))
 template.2.treat <- list(list(template.reduce, c(' symptom', 'symptoms')), 
@@ -101,24 +98,11 @@ template.2.treat <- list(list(template.reduce, c(' symptom', 'symptoms')),
 ######################################
 #templates to delete
 ######################################
-template.bact <- c('species', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member', 
-                   'phylum','phylums', 'class', 'classes','order', 'orders', 'family',
-                   'families', 'genus', 'genuses', 'members', 'member','microbiota', 
-                   'microbiom', 'bacteria', 'bacterium', 'community', 'communities', 'pathogen', 'pathogens')
-template.samples <- c('patient', 'patients', 'child', 'children', 'subject','subjects','cohort', 'cohorts',
-                   'site','sites', 'counts', 'count','group', 'groups', 'samples',
-                   'sample', 'genus', 'genuses', 'members', 'member','microbiota', 
-                   'microbiom', 'bacteria', 'bacterium', 'community', 'communities')
-template.disease <- c('DISEASE', 'disease', 'diseases', 'infection', 'infections')
-template.verbs <- c('considered',  'consider', 'considers', 'considering', 'observe', 'observes', 'observed', 'observing', 
-                    'find',  'found',  'finds',  'finding', 'report', 'reports', 'reported', 'reporting', 
-                    'development', 'corresponding', 'suffering', 'shown')	
-templete.delete <- c(template.bact, template.samples, template.disease, template.verbs)
+template.delete <- GetDeleteTemplates()
 ```
 
 ```{r, echo=FALSE}
-data$words <- lapply(data$words, function(x) {x[!(x %in% templete.delete)]})
-data$length <- lapply(data$words,  length)
+data <- DeleteWords(data, template.delete)
 ```
 
 # One word templates
