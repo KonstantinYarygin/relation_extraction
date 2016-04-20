@@ -2,23 +2,23 @@ import re
 from time import time
 import pandas as pd
 
-from ohmygut.core.catalog.bact_catalog_helper import generate_short_names, generate_plyral, sci_names
+from ohmygut.core.catalog.bact_catalog_helper import sci_names, generate_short_names, generate_plyral
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import plural_dict, logger
 from ohmygut.core.hash_tree import HashTree
 
 
-class GutBacteriaCatalog(Catalog):
+class AllBacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
 
     def get_list(self):
         pass
 
     def __str__(self):
-        return "gut bacteria catalog"
+        return "all bacteria catalog"
 
-    def __init__(self, gut_bact_path):
-        self.gut_bact_path = gut_bact_path
+    def __init__(self, all_bact_path):
+        self.all_bact_path = all_bact_path
         self.__scientific_names = None
         self.__bact_id_dict = None
         self.__hash_tree = None
@@ -33,13 +33,13 @@ class GutBacteriaCatalog(Catalog):
             self.hash_tree_root: root node of hash tree
         """
         t1 = time()
-        logger.info('Creating bacterial catalog...')
+        logger.info('Creating all bacterial catalog...')
 
-        gut_names = pd.read_table(self.gut_bact_path, sep=',')
-        gut_names_scientific = sci_names(table_names=gut_names)
-        self.__scientific_names = gut_names_scientific.set_index('id').T.to_dict('records')[0]
-        self.__bact_id_dict = gut_names[['name', 'id']].set_index('name').T.to_dict('records')[0]
-        self.__generate_excessive_dictionary(gut_names)
+        names = pd.read_table(self.all_bact_path, sep=',')
+        names_scientific = sci_names(table_names=names)
+        self.__scientific_names = names_scientific.set_index('id').T.to_dict('records')[0]
+        self.__bact_id_dict = names[['name', 'id']].set_index('name').T.to_dict('records')[0]
+        self.__generate_excessive_dictionary(names)
         self.__hash_tree = HashTree(self.__bact_id_dict.keys())
 
         t2 = time()

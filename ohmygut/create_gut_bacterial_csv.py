@@ -1,6 +1,3 @@
-import os
-import string
-
 import numpy as np
 import pandas as pd
 
@@ -37,6 +34,11 @@ def get_bind_ids(ids, ncbi_nodes, is_get_child_id=False):
     return pd.DataFrame({'id': new_ids, 'rank': ranks})
 
 
+def create_all_bact_catalog(nodes_ncbi_path):
+    ids = get_bind_ids([2], nodes_ncbi_path, is_get_child_id=True)
+    return ids
+
+
 def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_path, output_csv_path):
     SINTETIC_ID = 1000000000
     gut_names = pd.read_table(gut_bact_list_path, names=['name'], sep=',')
@@ -45,6 +47,10 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
     ncbi_nodes = pd.read_table(nodes_ncbi_path, names=['id', 'parent_id', 'rank'], usecols=[0, 2, 4], header=None)
     ncbi_names = pd.concat([chunk[~(chunk['class'].isin(CLASS_EXCLUSIONS))]
                             for chunk in ncbi_names_iter])
+
+    ids_all = create_all_bact_catalog(ncbi_nodes)
+    names_all = ncbi_names[ncbi_names['id'].isin(ids_all['id'].tolist())]
+    names_all = pd.merge(names_all, ids_all, how='left', on='id', copy=False).drop_duplicates('name')
 
     gut_names_first = gut_names['name'].apply(lambda x: str.split(x, ' ')[0])
     gut_names = pd.merge(gut_names, ncbi_names[['name', 'id']], how='left', on='name')
@@ -71,9 +77,11 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
     gut_names = pd.merge(gut_names, gut_ids_table, how='left', on='id', copy=False).drop_duplicates('name')
     gut_names = pd.concat([gut_names, gut_names_unknown])
     gut_names.to_csv(output_csv_path, index=False)
+    names_all.to_csv(output_csv_path_all, index=False)
 
 
-output_csv_path = '../data/bacteria/gut_catalog_1.csv'
+output_csv_path = '../data/bacteria/gut_catalog.csv'
+output_csv_path_all = '../data/bacteria/all_catalog.csv'
 gut_bact_list_path = '../data/bacteria/bact_names_pull_new_base.csv'  # '../data/bacteria/HITdb_taxonomy_qiime.txt'
 
 names_path = '../data/bacteria/taxdump/names.dmp'

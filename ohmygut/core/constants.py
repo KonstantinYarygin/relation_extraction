@@ -32,7 +32,7 @@ large_pattern_logger = logging.getLogger("large_pattern_logger")
 google_search_logger = logging.getLogger("google_search_logger")
 
 CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
-RANK_EXCLUSIONS = ['superkingdom', 'kingdom']
+RANK_EXCLUSIONS = ['superkingdom', 'kingdom', 'no rank']
 
 CHUNK_SIZE = 10000
 

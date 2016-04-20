@@ -1045,7 +1045,6 @@ scientific name,186806,Eubacteriaceae,family
 authority,186806,Eubacteriaceae Ludwig et al. 2010,family
 scientific name,186807,Peptococcaceae,family
 authority,186807,Peptococcaceae Rogosa 1971,family
-scientific name,186813,unclassified Clostridiales,no rank
 scientific name,186822,Paenibacillaceae,family
 authority,186822,Paenibacillaceae De Vos et al. 2010,family
 scientific name,186826,Lactobacillales,order
@@ -1231,7 +1230,6 @@ includes,423477,Veillonella sp. NVG 84cf,species
 includes,423477,Veillonella sp. NVG 88cf,species
 authority,424536,Catabacteriaceae Lau et al. 2007,family
 scientific name,424536,Catabacteriaceae,family
-scientific name,433334,unclassified Erysipelotrichaceae,no rank
 scientific name,436515,Variovorax boronicumulans,genus
 authority,436515,Variovorax boronicumulans Miwa et al. 2008,genus
 scientific name,437897,Megamonas funiformis,species
@@ -1273,7 +1271,6 @@ authority,536633,Blautia glucerasea corrig. Furuya et al. 2010,species
 synonym,536633,Blautia glucerasei,species
 misspelling,536633,Clostridium glucerasei,species
 includes,536633,Clostridium sp. HFTH-1,species
-scientific name,538999,Clostridiales incertae sedis,no rank
 scientific name,541000,Ruminococcaceae,family
 authority,541000,Ruminococcaceae Rainey 2010,family
 scientific name,543314,Clostridiales Family XIII. Incertae Sedis,family
@@ -1381,7 +1378,6 @@ authority,1297617,Intestinimonas butyriciproducens Klaring et al. 2013,species
 includes,1297617,Pseudoflavonifractor sp. 2-1.1,species
 includes,1297617,Pseudoflavonifractor sp. SRB-521-5-I,species
 misspelling,1297617,Pseudoflavonifractor sp. SRB521,species
-scientific name,1344959,Citrobacter freundii complex,no rank
 scientific name,1392389,Intestinimonas,genus
 synonym,1392389,Intestinimonas Klaring et al. 2013,genus
 scientific name,1407607,Fusicatenibacter,genus

@@ -1,4 +1,4 @@
-PlotHist <- function(data, variable, title, max=10){
+PlotHist <- function(data, variable, title, max=10, scale.f=NULL){
   setnames(data, variable, "object")
   plot <- ggplot(data[0:max], aes(x = reorder(object, -percent), y = percent)) + 
     geom_bar(stat='identity', width=.5, fill=rgb(0.6, 0.6, 0.6, alpha=0.7)) + 
@@ -10,6 +10,9 @@ PlotHist <- function(data, variable, title, max=10){
     theme(text = element_text(size=13), 
           axis.text.x = element_text(angle=10, vjust=1))
   setnames(data, "object", variable)
+  if (!is.null(scale.f)) {
+    plot <- plot + geom_text(aes(label=scale.f * percent/100), position=position_dodge(0.9), vjust=1.25)
+  }
   plot
 }
 
@@ -40,7 +43,7 @@ GetTagStat <- function(words){
 }
 
 GetDeleteTemplates <- function(){
-  template.bact <- c('species', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member', 
+  template.bact <- c('species', 'spp', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member', 
                      'phylum','phylums', 'class', 'classes','order', 'orders', 'family',
                      'families', 'genus', 'genuses', 'members', 'member','microbiota', 
                      'microbiom', 'bacteria', 'bacterium', 'community', 'communities', 'pathogen', 'pathogens')
@@ -57,7 +60,7 @@ GetDeleteTemplates <- function(){
 }
 
 DeleteWords <- function(data.graph, template.delete){
-  data.graph$words <- lapply(data.graph$words, function(x) {x[!(x %in% template.delete)]})
+  data.graph$words <- lapply(data.graph$words, function(x) {x[(x %in% template.delete)]})
   data.graph$length <- lapply(data.graph$words, length)
   data.graph
 }

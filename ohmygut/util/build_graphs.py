@@ -28,8 +28,7 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
         parser_output = parser.parse_sentence(text)
         analyze_output = analyze_sentence(bacterial_names=bacteria_names, nutrient_names=nutrient_names,
                                           disease_names=diseases_names, food_names=food_names,
-                                          parser_output=parser_output, tokenizer=stanford_tokenizer,
-                                          pattern_finder=None)
+                                          parser_output=parser_output, tokenizer=stanford_tokenizer)
     except Exception as error:
         logger.error(error)
         return [None, None]

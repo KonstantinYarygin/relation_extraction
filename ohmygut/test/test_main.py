@@ -49,9 +49,9 @@ class TestCase(unittest.TestCase):
     def test_find_sentence_very_long(self):
         sentence_text = "a very long" * SENTENCE_LENGTH_THRESHOLD * 2
         expected = None
-        actual = find_sentence(sentence_text, article_title='', article_journal='',
-                               bacteria_catalog=None, nutrients_catalog=None, diseases_catalog=None, food_catalog=None,
-                               tokenizer=None, sentence_parser=None, pattern_finder=None)
+        actual = find_sentence(sentence_text, article_title='', article_journal='', bacteria_catalog=None,
+                               nutrients_catalog=None, diseases_catalog=None, food_catalog=None, tokenizer=None,
+                               sentence_parser=None, sentence_analyzer=None)
 
         self.assertEqual(actual, expected)
 
