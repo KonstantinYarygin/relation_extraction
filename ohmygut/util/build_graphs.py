@@ -1,3 +1,4 @@
+import argparse
 import ast
 import multiprocessing
 import os
@@ -39,8 +40,14 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
 
 
 if __name__ == '__main__':
-    output_file = "build-graphs-output.csv"
-    file = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--sentences', action='store', help='Path to raw sentences file file')
+    parser.add_argument('-o', '--output', action='store', help='Path to output file', default="build-graphs-output.csv")
+
+    args = parser.parse_args()
+    file = str(args.sentences)
+    output_file = str(args.output)
+
     sentences_data = pd.read_csv(file, sep='\t')
     # ast.literal_eval(...) - to parse python lists
     # .tolist()[0] - to transform pandas Series to list of one str element and take this one element
