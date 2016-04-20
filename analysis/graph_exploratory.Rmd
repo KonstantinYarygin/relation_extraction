@@ -5,9 +5,7 @@ library(stringr)
 source('shortpath_exploratory_helper.R')
 TEXTS.NUM.LIMIT <- 2
 
-data <- fread('../data/build-graphs-output-17Apr.csv', col.names = c('text', 'length', 'from', 'to', 
-                                                                     'fromtag', 'totag', 'path', 'tags', 
-                                                                     'allwords', 'alltags', 'graph'))
+data <- ReadGraphData('../data/build-graphs-output-17Apr.csv')
 data <- data[fromtag=="BACTERIUM" & totag=="FOOD"]
 tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
 words <- strsplit(data$path, "', '", fixed=T)
