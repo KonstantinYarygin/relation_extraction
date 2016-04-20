@@ -47,7 +47,6 @@ def main(article_data_sources,
             constants.logger.info("=" * 80)
             sentences.append(sentence)
 
-
         constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
     constants.pattern_logger.info('total number sentences: %d' % len(sentences))
 

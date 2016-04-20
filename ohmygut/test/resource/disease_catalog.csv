@@ -1,0 +1,4 @@
+id	name	group	obsolete
+DOID:0001816	angiosarcoma	DOID:1115	false
+DOID:0001816	hemangiosarcoma foo	DOID:1115	false
+DOID:0002116	pterygium	DOID:10124	false

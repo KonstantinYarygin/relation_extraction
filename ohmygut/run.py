@@ -18,8 +18,8 @@ from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
 from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
-    gut_catalog_file_path, nutrients_file_path, diseases_doid_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
-    verb_ontollogy_path
+    gut_catalog_file_path, nutrients_file_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
+    verb_ontollogy_path, diseases_csv_path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -44,7 +44,7 @@ bacteria_catalog.initialize()
 nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
 nutrients_catalog.initialize()
 
-diseases_catalog = DiseasesCatalog(doid_path=diseases_doid_path)
+diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
 diseases_catalog.initialize()
 
 nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
@@ -67,5 +67,5 @@ log_writer = LogWriter()
 
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
+     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, log_writer],
      do_parse=False, do_analyze=False)
