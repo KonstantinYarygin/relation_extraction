@@ -6,6 +6,8 @@ library(stringr)library(jsonlite)
 source('shortpath_exploratory_helper.R')
 data <- ReadGraphData('../data/build-graphs-output-17Apr.csv')
 data <- data[(fromtag %in% c('BACTERIUM', 'DISEASE'))&(totag %in% c('BACTERIUM', 'DISEASE'))]
+data <- PrepareWords(data)
+data <- PreparePhrases(data)
 data <- PrepareWordsAndPhrases(data)
 #data$graph.edges <- gsub("([0-9]+)", '"\\1"', data$graph.edges, perl = T)
 #data$graph.edges <- gsub("'", '"', data$graph.edges)

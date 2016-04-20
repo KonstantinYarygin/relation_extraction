@@ -16,12 +16,13 @@ PlotHist <- function(data, variable, title, max=10, scale.f=NULL){
   plot
 }
 
-GetWordsAndTags <- function(data){
+GetWordsAndTags <- function(data, template.delete = ""){
   ExcludeLastAndFirst <- function (x) {x[-c(1, length(x))]}
   words <- data[,.(strsplit(path, "', '", fixed=T), strsplit(tags, "', '", fixed=T), text)]
   words <- words[,.(unlist(lapply(V1, ExcludeLastAndFirst)), unlist(lapply(V2, ExcludeLastAndFirst))), by=text]
   setnames(words, c("text", "word", "tag"))
   words$word <- tolower(words$word)
+  words <- words[!(word %in% template.delete)]
   words
 }
 GetStat <- function(words, tags.to.match){
@@ -43,7 +44,7 @@ GetTagStat <- function(words){
 }
 
 GetDeleteTemplates <- function(){
-  template.bact <- c('species', 'spp', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member', 
+  template.bact <- c('species', 'spp', 'strain', 'strains', 'specie', 'BACTERIUM', 'OTU', 'members','member',
                      'phylum','phylums', 'class', 'classes','order', 'orders', 'family',
                      'families', 'genus', 'genuses', 'members', 'member','microbiota', 
                      'microbiom', 'bacteria', 'bacterium', 'community', 'communities', 'pathogen', 'pathogens')
@@ -60,8 +61,8 @@ GetDeleteTemplates <- function(){
 }
 
 DeleteWords <- function(data.graph, template.delete){
-  data.graph$words <- lapply(data.graph$words, function(x) {x[(x %in% template.delete)]})
-  data.graph$length <- lapply(data.graph$words, length)
+  data.graph$words <-sapply(data.graph$words, function(x) {x[!(x %in% template.delete)]})
+  data.graph$length <- sapply(data.graph$words, length)
   data.graph
 }
 
@@ -71,10 +72,14 @@ ReadGraphData <- function(path){
                          'allwords', 'alltags', 'graph'))
 }
 
-PrepareWordsAndPhrases <- function(data.graph){
+PrepareWords <- function(data.graph){
   data.graph$words <- strsplit(data.graph$path, "', '", fixed=T)
   data.graph$words <- sapply(data.graph$words, tolower)
-  data.graph$phrase <- sapply(data.graph$words, 
+  data.graph
+}
+
+PreparePhrases <- function(data.graph){
+  data.graph$phrase <- sapply(data.graph$words,
                               function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
   data.graph$phrase <- tolower(data.graph$phrase)
   data.graph

@@ -1,3 +1,4 @@
+import argparse
 import ast
 import multiprocessing
 import os
@@ -7,13 +8,12 @@ import time
 
 import pandas as pd
 from nltk import StanfordTokenizer
-from nltk.parse.stanford import StanfordDependencyParser
 
 from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import logger
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import SpacySentenceParser
 from ohmygut.core.tools import check_if_more_than_one_list_not_empty
-from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path
+from ohmygut.paths import stanford_jar_path
 
 
 # a function to run parse/analyze in parallel
@@ -31,6 +31,8 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
                                           parser_output=parser_output, tokenizer=stanford_tokenizer)
     except Exception as error:
         logger.error(error)
+        end = time.time()
+        logger.info("===\nparsed/analyzed error: %s, \ntime: %f" % (text, end - start))
         return [None, None]
 
     end = time.time()
@@ -39,8 +41,14 @@ def parse_analyze(parser, stanford_tokenizer, text, names):
 
 
 if __name__ == '__main__':
-    output_file = "build-graphs-output.csv"
-    file = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--sentences', action='store', help='Path to raw sentences file file')
+    parser.add_argument('-o', '--output', action='store', help='Path to output file', default="build-graphs-output.csv")
+
+    args = parser.parse_args()
+    file = str(args.sentences)
+    output_file = str(args.output)
+
     sentences_data = pd.read_csv(file, sep='\t')
     # ast.literal_eval(...) - to parse python lists
     # .tolist()[0] - to transform pandas Series to list of one str element and take this one element
@@ -54,11 +62,7 @@ if __name__ == '__main__':
         os.mkdir("out")
 
     stanford_tokenizer = StanfordTokenizer(path_to_jar=stanford_jar_path)
-    stanford_dependency_parser = StanfordDependencyParser(path_to_jar=stanford_jar_path,
-                                                          path_to_models_jar=stanford_models_jar_path,
-                                                          model_path=stanford_lex_parser_path)
-
-    parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+    parser = SpacySentenceParser()
 
     logger.info("start parse sentences")
     names_dictionary = {}

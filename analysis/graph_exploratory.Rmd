@@ -6,12 +6,12 @@ source('shortpath_exploratory_helper.R')
 TEXTS.NUM.LIMIT <- 2
 
 data <- ReadGraphData('../data/build-graphs-output-17Apr.csv')
-data <- data[fromtag=="BACTERIUM" & totag=="FOOD"]
+data <- data[(fromtag %in% c('BACTERIUM', 'DISEASE'))&(totag %in% c('BACTERIUM', 'DISEASE'))]
 tag.abbs <- fread('../data/stanford_abbs.csv', select=c(2, 3), col.names=c('tag', 'definition'))
-words <- strsplit(data$path, "', '", fixed=T)
-phrase <- sapply(words, function(x) {ifelse(length(x)>2, paste(x[2:(length(x)-1)], collapse=' '), '')})
-phrase <- tolower(phrase)
-data <- cbind(data, phrase)
+data <- PrepareWords(data)
+template.delete <- GetDeleteTemplates()
+data <- DeleteWords(data, template.delete)
+data <- PreparePhrases(data)
 ```
 
 # Structure
@@ -35,7 +35,7 @@ ggplot(length.stat, aes(x = factor(length-2), y=V1)) +
 # All length: Words statistics
 ```{r, echo=FALSE}
 
-words.tags.all <- GetWordsAndTags(data)
+words.tags.all <- GetWordsAndTags(data, template.delete)
 
 #words statistics
 word.stat <- GetStat(words.tags.all, tags.to.match = unique(words.tags.all$tag))
@@ -82,7 +82,7 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 #One-word length pathes statistics
 ```{r, echo=FALSE}
 
-words.tags.1 <- GetWordsAndTags(data[length==1+2])
+words.tags.1 <- GetWordsAndTags(data[length==1+2], template.delete)
 
 #words statistics
 word.stat1 <- GetStat(words.tags.1, tags.to.match = unique(words.tags.all$tag))
@@ -118,7 +118,7 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 
 # Two-word length pathes statistics
 ```{r, echo=FALSE}
-words.tags.2 <- GetWordsAndTags(data[length==2+2])
+words.tags.2 <- GetWordsAndTags(data[length==2+2], template.delete)
 
 #words statistics
 word.stat2 <- GetStat(words.tags.2, tags.to.match = unique(words.tags.all$tag))
@@ -154,7 +154,7 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 
 # Three-word length pathes statistics
 ```{r, echo=FALSE}
-words.tags.3 <- GetWordsAndTags(data[length==3+2])
+words.tags.3 <- GetWordsAndTags(data[length==3+2], template.delete)
 
 #words statistics
 word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
@@ -191,7 +191,7 @@ PlotHist(phrase.count, "phrase", "most popular phrases", 12)
 
 # Four-word length pathes statistics
 ```{r, echo=FALSE}
-words.tags.3 <- GetWordsAndTags(data[length==4+2])
+words.tags.3 <- GetWordsAndTags(data[length==4+2], template.delete)
 
 #words statistics
 word.stat3 <- GetStat(words.tags.3, tags.to.match = unique(words.tags.all$tag))
