@@ -7,13 +7,12 @@ import time
 
 import pandas as pd
 from nltk import StanfordTokenizer
-from nltk.parse.stanford import StanfordDependencyParser
 
 from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import logger
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import SpacySentenceParser
 from ohmygut.core.tools import check_if_more_than_one_list_not_empty
-from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path
+from ohmygut.paths import stanford_jar_path
 
 
 # a function to run parse/analyze in parallel
@@ -55,11 +54,7 @@ if __name__ == '__main__':
         os.mkdir("out")
 
     stanford_tokenizer = StanfordTokenizer(path_to_jar=stanford_jar_path)
-    stanford_dependency_parser = StanfordDependencyParser(path_to_jar=stanford_jar_path,
-                                                          path_to_models_jar=stanford_models_jar_path,
-                                                          model_path=stanford_lex_parser_path)
-
-    parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+    parser = SpacySentenceParser()
 
     logger.info("start parse sentences")
     names_dictionary = {}

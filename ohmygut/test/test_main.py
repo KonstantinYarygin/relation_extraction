@@ -7,7 +7,7 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.main import main, find_sentence
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import StanfordSentenceParser
 
 
 class MockCatalog(Catalog):
@@ -39,7 +39,7 @@ class TestCase(unittest.TestCase):
         nutrients_catalog = MockCatalog("b")
         diseases_catalog = MockCatalog("c")
         food_catalog = MockCatalog("d")
-        sentence_parser = SentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
+        sentence_parser = StanfordSentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
         constants.logger.info("asdasd")

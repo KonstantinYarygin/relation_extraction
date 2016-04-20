@@ -1,10 +1,41 @@
 # -*- coding: utf-8 -*-
+import abc
 import matplotlib.pyplot as plt
 import networkx as nx
 import re
 
+import spacy
+
 
 class SentenceParser(object):
+    __metaclass__ = abc.ABCMeta
+
+    @abc.abstractmethod
+    def parse_sentence(self, sentence):
+        raise NotImplementedError("Method have to be implemented")
+
+
+class SpacySentenceParser(SentenceParser):
+    def __init__(self):
+        self.nlp = spacy.load('en')
+
+    def parse_sentence(self, sentence):
+        tokens = self.nlp(sentence)
+        edges = []
+        words = {token.i: token.orth_ for token in tokens}
+        tags = {token.i: token.tag_ for token in tokens}
+
+        for token in tokens:
+            edges.append((token.i, token.head.i, {'rel': token.dep_}))
+
+        nx_graph = nx.DiGraph()
+        nx_graph.add_nodes_from(words.keys())
+        nx_graph.add_edges_from(edges)
+        parser_output = ParserOutput(sentence, nx_graph, words, tags)
+        return parser_output
+
+
+class StanfordSentenceParser(SentenceParser):
     def __init__(self, stanford_dependency_parser, stanford_tokenizer):
         self.stanford_dependency_parser = stanford_dependency_parser
         self.stanford_tokenizer = stanford_tokenizer
@@ -18,7 +49,6 @@ class SentenceParser(object):
         dependency_graph = next(dependency_graph_iterator)
         tokens = self.stanford_tokenizer.tokenize(sentence)
 
-        # nodes = [node for node in dependency_graph.nodes.keys() if node]
         nodes = [i+1 for i in range(len(tokens))]
         edges = [
             (n, dependency_graph._hd(n), {'rel': dependency_graph._rel(n)})
@@ -45,7 +75,7 @@ class ParserOutput(object):
         self.words = words
         self.tags = tags
 
-    def draw(self):
+    def draw(self, path_to_save=None):
         G = self.nx_graph.to_undirected()
         pos = nx.spring_layout(G)
 
@@ -58,7 +88,10 @@ class ParserOutput(object):
                                      edge_labels=dict(((i, j), G[i][j]['rel']) for i, j in G.edges())
                                      )
         plt.axis('off')
-        plt.show()
+        if not path_to_save:
+            plt.show()
+        else:
+            plt.savefig(path_to_save, dpi=300)
 
     def __str__(self):
         object_string = ''

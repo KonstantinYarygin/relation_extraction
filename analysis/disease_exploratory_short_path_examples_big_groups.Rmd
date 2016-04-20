@@ -5,7 +5,8 @@ library(stringr)
 source('shortpath_exploratory_helper.R')
 data <- ReadGraphData('../data/build-graphs-output-17Apr.csv')
 data <- data[(fromtag %in% c('BACTERIUM', 'DISEASE'))&(totag %in% c('BACTERIUM', 'DISEASE'))]
-data <- PrepareWordsAndPhrases(data)
+data <- PrepareWords(data)
+data <- PreparePhrases(data)
 ```
 
 ```{r, echo=FALSE}

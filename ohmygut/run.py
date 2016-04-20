@@ -13,7 +13,7 @@ from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
 from ohmygut.core.main import main
 from ohmygut.core.pattern_finder import PatternFinder
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import StanfordSentenceParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
@@ -33,7 +33,7 @@ stanford_dependency_parser = StanfordDependencyParser(
     model_path=stanford_lex_parser_path,
 )
 
-sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
 
 food_catalog = UsdaFoodCatalog(food_file_path)
 food_catalog.initialize()

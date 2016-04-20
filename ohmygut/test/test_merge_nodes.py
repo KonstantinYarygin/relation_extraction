@@ -12,7 +12,7 @@ from nltk.tag import StanfordPOSTagger
 from nltk.stem.lancaster import LancasterStemmer
 from ohmygut.core.analyzer import merge_nodes
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.sentence_processing import SentenceParser, ParserOutput
+from ohmygut.core.sentence_processing import StanfordSentenceParser, ParserOutput
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 stanford_tokenizer = StanfordTokenizer(
@@ -25,7 +25,7 @@ stanford_dependency_parser = StanfordDependencyParser(
     model_path=os.path.join(script_dir, '../../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
 )
 
-sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
 
 class TestCase(unittest.TestCase):
     def test_merge_nodes_1(self):
