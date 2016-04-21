@@ -1,12 +1,8 @@
 from time import time
 
 import pandas as pd
-
-from ohmygut.core.catalog.catalog import Catalog
-from ohmygut.core.constants import logger
-from ohmygut.core.catalog.bact_catalog_helper import generate_short_names, generate_plyral, sci_names
 from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
-from ohmygut.core.constants import plural_dict, logger
+from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 BACTERIA_TAG = 'BACTERIA'

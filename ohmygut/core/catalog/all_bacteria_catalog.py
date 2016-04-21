@@ -1,11 +1,7 @@
-import re
 from time import time
 
 import pandas as pd
 
-from ohmygut.core.catalog.catalog import Catalog
-from ohmygut.core.constants import logger
-from ohmygut.core.catalog.bact_catalog_helper import sci_names, generate_short_names, generate_plyral
 from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
 from ohmygut.core.constants import plural_dict, logger

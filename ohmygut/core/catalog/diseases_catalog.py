@@ -2,12 +2,10 @@ import re
 from time import time
 
 import pandas as pd
-from nltk.tokenize import word_tokenize
 
 from ohmygut.core import constants
 from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.hash_tree import HashTree
-from ohmygut.core.tools import untokenize
 
 DISEASE_TAG = 'DISEASE'
 

@@ -75,6 +75,7 @@ def create_gut_bacterial_df(nodes_ncbi_path, names_ncbi_path, gut_bact_list_path
     gut_names = pd.concat([gut_names, gut_names_unknown])
     gut_names = generate_excessive_dictionary_bact(gut_names)
     gut_names = gut_names.drop_duplicates(subset=['name'])
+    gut_names['id'] = gut_names['id'].astype(int)
     return gut_names
 
 

@@ -24,6 +24,7 @@ def create_bacterial_df(nodes_ncbi_path, names_ncbi_path):
 
     names_all_bact = generate_excessive_dictionary_bact(names_all_bact)
     names_all_bact = names_all_bact.drop_duplicates(subset=['name'])
+    names_all_bact['id'] = names_all_bact['id'].astype(int)
     return names_all_bact
 
 

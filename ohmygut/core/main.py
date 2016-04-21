@@ -99,9 +99,9 @@ class SentenceFinder(object):
         diseases = collections_by_tag[DISEASE_TAG]
         food = collections_by_tag[FOOD_TAG]
 
-        # separate all several-words-names by dash (-)
+        # separate all several-words-names by underscope (_)
         for entity in bacteria.entities + nutrients.entities + diseases.entities + food.entities:
-            dashed_name = entity.name.replace(' ', '-')
+            dashed_name = entity.name.replace(' ', '_')
             sentence_text = sentence_text.replace(entity.name, dashed_name)
             entity.name = dashed_name
 
