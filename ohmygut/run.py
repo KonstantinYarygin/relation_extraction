@@ -4,7 +4,6 @@ from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import StanfordTokenizer
 
-from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import NxmlFreeArticleDataSource
 from ohmygut.core.article.libgen_txt_article_data_source import LibgenTxtArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
@@ -15,7 +14,7 @@ from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
 from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
 from ohmygut.core.main import main, SentenceFinder
 from ohmygut.core.pattern_finder import PatternFinder
-from ohmygut.core.sentence_processing import StanfordSentenceParser
+from ohmygut.core.sentence_processing import SpacySentenceParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
@@ -51,9 +50,9 @@ nutrients_catalog.initialize()
 diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
 diseases_catalog.initialize()
 
-sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
-sentence_analyzer = SentenceAnalyzer(stanford_tokenizer, all_bacteria_catalog)
-sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog)
+# sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
+sentence_parser = SpacySentenceParser()
+sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, all_bacteria_catalog)
 
 nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
 medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)

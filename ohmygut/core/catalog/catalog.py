@@ -31,6 +31,9 @@ class Entity(object):
         self.code = code
         self.name = name
 
+    def __repr__(self):
+        return "%s;%s" % (self.name, self.code)
+
 
 class EntityCollection(object):
     def __init__(self, entities, tag):
@@ -40,3 +43,8 @@ class EntityCollection(object):
 
     def get_tag(self):
         return self.tag
+
+    def __repr__(self):
+        return ("%s" % str(self.entities)).replace('[', '').replace(']', '')
+
+

@@ -1,6 +1,5 @@
 from nltk import StanfordTokenizer
 
-from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.sentence_processing import SpacySentenceParser
 from ohmygut.paths import stanford_jar_path
 
@@ -17,5 +16,5 @@ sentence = "B.-vulgatus protects against Escherichia coli-induced colitis in gno
 
 stanford_tokenizer = StanfordTokenizer(path_to_jar=stanford_jar_path)
 parser = SpacySentenceParser()
-parser_output = parser.parse_sentence(sentence)
+parser_output = parser.parse_sentence(sentence, entities='')
 parser_output.draw("path.png")

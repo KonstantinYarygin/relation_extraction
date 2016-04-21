@@ -1,8 +1,13 @@
 from itertools import product, combinations
 import networkx as nx
 
+from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
+from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
+from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
+from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
 
-class ShortestPath():
+
+class ShortestPath:
     def __init__(self, edge_rels, words, tags, nodes_indexes):
         super().__init__()
         self.nodes_indexes = nodes_indexes
@@ -29,54 +34,39 @@ def search_shortest_path(parser_output, source_node_id, target_node_id, undirect
     return ShortestPath(edge_rels, words, tags, nodes_indexes)
 
 
-class SentenceAnalyzer():
+def analyze_sentence(parser_output):
+    bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == BACTERIA_TAG]
+    nutrients_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == NUTRIENT_TAG]
+    diseases_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == DISEASE_TAG]
+    food_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == FOOD_TAG]
 
-    def __init__(self, tokenizer, all_bacteria_catalog):
-        super().__init__()
-        self.tokenizer = tokenizer
-        self.all_bacteria_catalog = all_bacteria_catalog
+    tag_nodeids_tuples = zip((BACTERIA_TAG, NUTRIENT_TAG, DISEASE_TAG, FOOD_TAG),
+                             (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids)
+                             )
 
-    def analyze_sentence(self, bacterial_names, nutrient_names, disease_names, food_names, parser_output):
-        all_bacterial_names = self.all_bacteria_catalog.find(parser_output.text)
-        bacterial_names = all_bacterial_names + bacterial_names
-        bacterial_names = [name for name, id in bacterial_names]
-        nutrient_names = [name for name, id in nutrient_names]
-        disease_names = [name for name, id in disease_names]
-        food_names = [name for name, group in food_names]
-        merge_nodes(self.tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output)
+    shortest_pathes = {}
+    for entity_1, entity_2 in combinations(tag_nodeids_tuples, 2):
+        tag_1, nodes_ids_1 = entity_1
+        tag_2, nodes_ids_2 = entity_2
+        pair_tag = '-'.join([tag_1, tag_2])
+        shortest_pathes[pair_tag] = []
 
-        bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'BACTERIUM']
-        nutrients_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'NUTRIENT']
-        diseases_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'DISEASE']
-        food_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'FOOD']
+        for node_id_1, node_id_2 in product(nodes_ids_1, nodes_ids_2):
 
-        tag_nodeids_tuples = zip(('BACTERIUM', 'NUTRIENT', 'DISEASE', 'FOOD'),
-                                 (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids)
-                                 )
+            shortest_path = search_shortest_path(parser_output, node_id_1, node_id_2)
+            if not shortest_path:
+                continue
 
-        shortest_pathes = {}
-        for entity_1, entity_2 in combinations(tag_nodeids_tuples, 2):
-            tag_1, nodes_ids_1 = entity_1
-            tag_2, nodes_ids_2 = entity_2
-            pair_tag = '-'.join([tag_1, tag_2])
-            shortest_pathes[pair_tag] = []
+            # THIS CODE ONLY FOR FURTHER ANALYSIS
+            # pattern_verbs = pattern_finder.find_patterns(shortest_path,
+            #                                              sentence.parser_output.nx_graph,
+            #                                              sentence.parser_output.words)
+            # if pattern_verbs:
+            #     shortest_path.type = pattern_verbs
 
-            for node_id_1, node_id_2 in product(nodes_ids_1, nodes_ids_2):
+            shortest_pathes[pair_tag].append(shortest_path)
 
-                shortest_path = search_shortest_path(parser_output, node_id_1, node_id_2)
-                if not shortest_path:
-                    continue
-
-                # THIS CODE ONLY FOR FURTHER ANALYSIS
-                # pattern_verbs = pattern_finder.find_patterns(shortest_path,
-                #                                              sentence.parser_output.nx_graph,
-                #                                              sentence.parser_output.words)
-                # if pattern_verbs:
-                #     shortest_path.type = pattern_verbs
-
-                shortest_pathes[pair_tag].append(shortest_path)
-
-        return shortest_pathes
+    return shortest_pathes
 
 
 def merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output):
