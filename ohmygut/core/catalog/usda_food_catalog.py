@@ -1,7 +1,9 @@
 import pandas as pd
 
-from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.hash_tree import HashTree
+
+FOOD_TAG = 'FOOD'
 
 
 class UsdaFoodCatalog(Catalog):
@@ -32,5 +34,5 @@ class UsdaFoodCatalog(Catalog):
 
     def find(self, sentence_text):
         food_names = self.__hash_tree.search(sentence_text)
-        output = [(name, self.__group_by_food_name[name]) for name in food_names]
-        return output
+        entities = EntityCollection([Entity(name, self.__group_by_food_name[name], FOOD_TAG) for name in food_names])
+        return entities

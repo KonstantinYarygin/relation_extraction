@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from ohmygut.core import constants
+from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
+from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
+from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
+from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_if_more_than_one_list_not_empty
@@ -72,22 +76,28 @@ class SentenceFinder(object):
         food = food_catalog.find(sentence_text)
 
         # todo: test me
-        if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
-                    check_if_more_than_one_list_not_empty([bacteria, diseases]) or
-                    check_if_more_than_one_list_not_empty([bacteria, food])):
+        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+                check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+                check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
             return None
 
-        bacteria, nutrients, diseases, food = remove_entity_overlapping(sentence_text,
-                                                                        bacteria, nutrients, diseases, food,
-                                                                        self.tokenizer)
+        entity_collections = remove_entity_overlapping(sentence_text,
+                                                       [bacteria, nutrients, diseases, food],
+                                                       self.tokenizer)
 
-        if not (check_if_more_than_one_list_not_empty([bacteria, nutrients]) or
-                    check_if_more_than_one_list_not_empty([bacteria, diseases]) or
-                    check_if_more_than_one_list_not_empty([bacteria, food])):
+        # put entity collections to dict by tag
+        collections_by_tag = {collection.tag: [collection] for collection in entity_collections}
+        bacteria = collections_by_tag[BACTERIA_TAG]
+        nutrients = collections_by_tag[NUTRIENT_TAG]
+        diseases = collections_by_tag[DISEASE_TAG]
+        food = collections_by_tag[FOOD_TAG]
+
+        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+                check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+                check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
             return None
 
         if self.do_parse:
-            # todo: no need to be object?
             parser_output = self.sentence_parser.parse_sentence(sentence_text)
             if not parser_output:
                 return None

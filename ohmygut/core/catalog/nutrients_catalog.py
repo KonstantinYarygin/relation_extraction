@@ -1,8 +1,10 @@
 from ohmygut.core import constants
-from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.hash_tree import HashTree
 from time import time
 
+
+NUTRIENT_TAG = 'NUTRIENT'
 
 class NutrientsCatalog(Catalog):
     """Object holding nutrient ontology"""
@@ -98,8 +100,10 @@ class NutrientsCatalogNikogosov(Catalog):
             list of nutrient_names
         """
         nutr_names = self.__hash_tree.search(sentence_text)
-        output = [(nutrient, self.__idname_by_nutrient[nutrient]) for nutrient in nutr_names]
-        return output
+        entities = EntityCollection([Entity(nutrient,
+                                            self.__idname_by_nutrient[nutrient],
+                                            NUTRIENT_TAG) for nutrient in nutr_names])
+        return entities
 
     def get_list(self):
         nutrients = []

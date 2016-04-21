@@ -1,10 +1,15 @@
 import os
 import unittest
 
+from ohmygut.core.catalog.catalog import Entity, EntityCollection
+from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
+from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
+from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.tools import get_sentences, remove_entity_overlapping, delete_forbidden_characters, serialize_result
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 class TestCase(unittest.TestCase):
     def test_get_sentences(self):
@@ -14,13 +19,33 @@ class TestCase(unittest.TestCase):
         actual = get_sentences(test_text)
         self.assertListEqual(expected, actual)
 
-    def test_remove_entity_overlapping_1(self):
-        sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, also M. tuberculosis is a propionic acid producer.'
-        bacteria = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
-        nutrients = [('propionic', '123')]
-        diseases = [('tuberculosis', 'a'), ('tuberculosis', 'a'), ('tuberculosis', 'a'),
-                    ('chronic obstructive syndrome', 'a1'), ('obstructive syndrome', 'b1')]
-        food = []
+    def test_remove_entity_overlapping_empty(self):
+        sentence = 'There is really nothing'
+
+        class MockTokenizer():
+            def tokenize(self):
+                tokens = ['There', 'is', 'really', 'nothing']
+                return tokens
+
+        output = remove_entity_overlapping(sentence, [EntityCollection([], 'tag1'), EntityCollection([], 'tag2')],
+                                           stanford_tokenizer=MockTokenizer)
+
+        expected = [EntityCollection([], 'tag1'), EntityCollection([], 'tag2')]
+
+        self.assertCountEqual(expected[0].entities, output[0].entities)
+        self.assertCountEqual(expected[1].entities, output[1].entities)
+
+    def test_remove_entity_overlapping_2(self):
+        sentence = 'M. tuberculosis is the cause of tuberculosis and chronic obstructive syndrome, ' \
+                   'also M. tuberculosis is a propionic acid producer.'
+        bacteria = EntityCollection([Entity('M. tuberculosis', '111', BACTERIA_TAG),
+                                     Entity('M. tuberculosis', '111', BACTERIA_TAG)], tag=BACTERIA_TAG)
+        nutrients = EntityCollection([Entity('propionic', '123', NUTRIENT_TAG)], NUTRIENT_TAG)
+        diseases = EntityCollection([Entity('tuberculosis', 'a', DISEASE_TAG),
+                                     Entity('tuberculosis', 'a', DISEASE_TAG),
+                                     Entity('tuberculosis', 'a', DISEASE_TAG),
+                                     Entity('chronic obstructive syndrome', 'a1', DISEASE_TAG),
+                                     Entity('obstructive syndrome', 'b1', DISEASE_TAG)], DISEASE_TAG)
 
         class MockTokenizer():
             def tokenize(self):
@@ -30,22 +55,23 @@ class TestCase(unittest.TestCase):
                           '.']
                 return tokens
 
-        bacteria_new, nutrients_new, diseases_new, food_new = remove_entity_overlapping(
-            sentence, bacteria, nutrients, diseases, food, stanford_tokenizer=MockTokenizer
-        )
+        output = remove_entity_overlapping(sentence, [bacteria, nutrients, diseases],
+                                           stanford_tokenizer=MockTokenizer)
 
-        bacteria_expected = [('M. tuberculosis', '111'), ('M. tuberculosis', '111')]
-        nutrients_expected = [('propionic', '123')]
-        diseases_expected = [('tuberculosis', 'a'), ('chronic obstructive syndrome', 'a1')]
-        food_expected = []
+        expected = [EntityCollection([bacteria.entities[0], bacteria.entities[1]], BACTERIA_TAG),
+                    EntityCollection([diseases.entities[1], diseases.entities[3]], DISEASE_TAG),
+                    EntityCollection([nutrients.entities[0]], NUTRIENT_TAG)]
 
-        self.assertListEqual(bacteria_expected, bacteria_new)
-        self.assertListEqual(nutrients_expected, nutrients_new)
-        self.assertListEqual(diseases_expected, diseases_new)
-        self.assertListEqual(food_expected, food_new)
+        self.assertCountEqual(expected[0].entities, output[0].entities)
+        self.assertCountEqual(expected[1].entities, output[1].entities)
+        self.assertCountEqual(expected[2].entities, output[2].entities)
 
-    def test_remove_entity_overlapping_2(self):
-        sentence = 'Intervention trials of breakfast cereals and diabetes CHO, carbohydrate; FRS, fast release starch; GER, gastric emptying rate; GI, glycemic index; GTT, glucose tolerance test; Hb A, glycated hemoglobin; IDDM, insulin dependent diabetes mellitus; NIDDM, non–insulin-dependent diabetes mellitus; RTEC, ready-to-eat breakfast cereal; SRS, slow release starch.'
+    def test_remove_entity_overlapping_3(self):
+        sentence = 'Intervention trials of breakfast cereals and diabetes CHO, carbohydrate; ' \
+                   'FRS, fast release starch; GER, gastric emptying rate; GI, glycemic index; ' \
+                   'GTT, glucose tolerance test; Hb A, glycated hemoglobin; IDDM, insulin dependent ' \
+                   'diabetes mellitus; NIDDM, non–insulin-dependent diabetes mellitus; RTEC, ' \
+                   'ready-to-eat breakfast cereal; SRS, slow release starch.'
         diseases = [('diabetes mellitus', 'DOID:9351'), ('diabetes mellitus', 'DOID:9351')]
         nutrients = [('starch', 'Starch'), ('glucose', 'Glucose')]
         bacteria = []
@@ -53,7 +79,13 @@ class TestCase(unittest.TestCase):
 
         class MockTokenizer():
             def tokenize(self):
-                tokens = ['Intervention', 'trials', 'of', 'breakfast', 'cereals', 'and', 'diabetes', 'CHO', ',', 'carbohydrate', ';', 'FRS', ',', 'fast', 'release', 'starch', ';', 'GER', ',', 'gastric', 'emptying', 'rate', ';', 'GI', ',', 'glycemic', 'index', ';', 'GTT', ',', 'glucose', 'tolerance', 'test', ';', 'Hb', 'A', ',', 'glycated', 'hemoglobin', ';', 'IDDM', ',', 'insulin', 'dependent', 'diabetes', 'mellitus', ';', 'NIDDM', ',', 'non', '--', 'insulin-dependent', 'diabetes', 'mellitus', ';', 'RTEC', ',', 'ready-to-eat', 'breakfast', 'cereal', ';', 'SRS', ',', 'slow', 'release', 'starch', '.']
+                tokens = ['Intervention', 'trials', 'of', 'breakfast', 'cereals', 'and', 'diabetes', 'CHO', ',',
+                          'carbohydrate', ';', 'FRS', ',', 'fast', 'release', 'starch', ';', 'GER', ',', 'gastric',
+                          'emptying', 'rate', ';', 'GI', ',', 'glycemic', 'index', ';', 'GTT', ',', 'glucose',
+                          'tolerance', 'test', ';', 'Hb', 'A', ',', 'glycated', 'hemoglobin', ';', 'IDDM', ',',
+                          'insulin', 'dependent', 'diabetes', 'mellitus', ';', 'NIDDM', ',', 'non', '--',
+                          'insulin-dependent', 'diabetes', 'mellitus', ';', 'RTEC', ',', 'ready-to-eat', 'breakfast',
+                          'cereal', ';', 'SRS', ',', 'slow', 'release', 'starch', '.']
                 return tokens
 
         bacteria_new, nutrients_new, diseases_new, food_new = remove_entity_overlapping(
@@ -69,33 +101,6 @@ class TestCase(unittest.TestCase):
         self.assertListEqual(diseases_expected, diseases_new)
         self.assertListEqual(food_expected, food_new)
 
-    def test_delete_forbidden_characters(self):
-        string = "Abbb ###\\ sss22_% 4 asd."
-        expected = "Abbb__sss22__4_asd."
-        actual = delete_forbidden_characters(string)
-
-        self.assertEqual(expected, actual)
-
-    def test_serialize_result(self):
-        sentence = Sentence(
-            text="text of the sentence",
-            article_title="Article Title456789012\\",
-            journal="Science-Nature",
-            bacteria=None,
-            nutrients=None,
-            diseases=None,
-            food=None,
-            parser_output=None
-        )
-        expected_file_name = os.path.join(script_dir, "ScienceNature_Article_Title4567890_2.pkl")
-        try:
-            os.remove(expected_file_name)
-        except:
-            pass
-
-        serialize_result(sentence, script_dir, 2)
-        if_exists = os.path.exists(expected_file_name)
-        self.assertEqual(if_exists, True)
 
 if __name__ == '__main__':
     unittest.main()
