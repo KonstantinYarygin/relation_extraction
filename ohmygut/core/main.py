@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import sys
+from traceback import format_exc
 
 from ohmygut.core import constants
 from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
@@ -29,12 +31,15 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
 
+            # sentence = sentence_finder.find_sentence(sentence_text, article_title, article_journal,
+            #                                              gut_bacteria_catalog,
+            #                                              nutrients_catalog, diseases_catalog, food_catalog)
             try:
                 sentence = sentence_finder.find_sentence(sentence_text, article_title, article_journal,
                                                          gut_bacteria_catalog,
                                                          nutrients_catalog, diseases_catalog, food_catalog)
-            except Exception as error:
-                constants.logger.info(error)
+            except Exception:
+                constants.logger.info(format_exc())
                 constants.logger.info("got error in sentence loop; continue")
                 continue
             if not sentence:
@@ -53,8 +58,9 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
 
 
 class SentenceFinder(object):
-    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, do_parse=True, do_analyze=True):
+    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog, do_parse=True, do_analyze=True):
         super().__init__()
+        self.all_bacteria_catalog = all_bacteria_catalog
         self.do_analyze = do_analyze
         self.do_parse = do_parse
         self.sentence_analyzer = sentence_analyzer
@@ -81,12 +87,14 @@ class SentenceFinder(object):
                 check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
             return None
 
+        all_bacteria = self.all_bacteria_catalog.find(sentence_text)
+        bacteria.entities = bacteria.entities + all_bacteria.entities
         entity_collections = remove_entity_overlapping(sentence_text,
                                                        [bacteria, nutrients, diseases, food],
                                                        self.tokenizer)
 
         # put entity collections to dict by tag
-        collections_by_tag = {collection.tag: [collection] for collection in entity_collections}
+        collections_by_tag = {collection.tag: collection for collection in entity_collections}
         bacteria = collections_by_tag[BACTERIA_TAG]
         nutrients = collections_by_tag[NUTRIENT_TAG]
         diseases = collections_by_tag[DISEASE_TAG]

@@ -53,7 +53,7 @@ diseases_catalog.initialize()
 
 sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
 sentence_analyzer = SentenceAnalyzer(stanford_tokenizer, all_bacteria_catalog)
-sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, sentence_analyzer)
+sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog)
 
 nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
 medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)

@@ -79,5 +79,5 @@ class DiseasesCatalog(Catalog):
         diseases_names = self.hash_tree.search(sentence_text)
         entities = EntityCollection([Entity(name,
                                             self.disease_dictionary[name],
-                                            DISEASE_TAG) for name in diseases_names])
+                                            DISEASE_TAG) for name in diseases_names], DISEASE_TAG)
         return entities

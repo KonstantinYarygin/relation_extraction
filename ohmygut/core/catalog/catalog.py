@@ -22,8 +22,11 @@ class Catalog(object):
 
 
 class Entity(object):
-    def __init__(self, name, code, tag):
+    def __init__(self, name, code, tag, additional_tags=None):
         super().__init__()
+        if additional_tags is None:
+            additional_tags = []
+        self.additional_tags = additional_tags
         self.tag = tag
         self.code = code
         self.name = name

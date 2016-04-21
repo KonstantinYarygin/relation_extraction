@@ -102,7 +102,7 @@ class NutrientsCatalogNikogosov(Catalog):
         nutr_names = self.__hash_tree.search(sentence_text)
         entities = EntityCollection([Entity(nutrient,
                                             self.__idname_by_nutrient[nutrient],
-                                            NUTRIENT_TAG) for nutrient in nutr_names])
+                                            NUTRIENT_TAG) for nutrient in nutr_names], NUTRIENT_TAG)
         return entities
 
     def get_list(self):
