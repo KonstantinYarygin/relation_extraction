@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-pip install spacy
-python -m spacy.en.download
+pip3 install spacy
+python3 -m spacy.en.download
