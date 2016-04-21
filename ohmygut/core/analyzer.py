@@ -38,7 +38,6 @@ class SentenceAnalyzer():
 
     def analyze_sentence(self, bacterial_names, nutrient_names, disease_names, food_names, parser_output):
         all_bacterial_names = self.all_bacteria_catalog.find(parser_output.text)
-        # TODO: сделать чтобы только имена передались
         bacterial_names = all_bacterial_names + bacterial_names
         bacterial_names = [name for name, id in bacterial_names]
         nutrient_names = [name for name, id in nutrient_names]

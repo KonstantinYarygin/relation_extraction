@@ -22,3 +22,7 @@ abstracts_dir = os.path.join(data_dir, "article_data", "abstracts", "gut_microbi
 libgen_texts_dir = os.path.join(data_dir, "article_data", "libgen")
 
 verb_ontollogy_path = os.path.join(data_dir, 'verb_ontology.json')
+
+gut_bact_list_path = os.path.join(data_dir, "bacteria", "bact_names_pull_new_base.csv")  # '../data/bacteria/HITdb_taxonomy_qiime.txt'
+names_path = os.path.join("data", "bacteria", "taxdump", "names.dmp")
+nodes_path = os.path.join("data", "bacteria", "taxdump", "nodes.dmp")

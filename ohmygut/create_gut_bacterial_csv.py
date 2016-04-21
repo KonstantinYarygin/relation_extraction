@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from ohmygut.paths import gut_bact_list_path, names_path, nodes_path
+
 FIELD_STRAIN = 'strain'
 
 from ohmygut.core.constants import CLASS_EXCLUSIONS, CHUNK_SIZE, RANK_EXCLUSIONS
@@ -82,10 +84,6 @@ def create_gut_bacterial_csv(nodes_ncbi_path, names_ncbi_path, gut_bact_list_pat
 
 output_csv_path = '../data/bacteria/gut_catalog.csv'
 output_csv_path_all = '../data/bacteria/all_catalog.csv'
-gut_bact_list_path = '../data/bacteria/bact_names_pull_new_base.csv'  # '../data/bacteria/HITdb_taxonomy_qiime.txt'
-
-names_path = '../data/bacteria/taxdump/names.dmp'
-nodes_path = '../data/bacteria/taxdump/nodes.dmp'
 
 if __name__ == '__main__':
     create_gut_bacterial_csv(nodes_path, names_path, gut_bact_list_path, output_csv_path)
