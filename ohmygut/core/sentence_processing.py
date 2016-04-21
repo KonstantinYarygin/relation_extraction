@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import re
 
-import spacy
+#import spacy
 
 
 class SentenceParser(object):
@@ -15,24 +15,24 @@ class SentenceParser(object):
         raise NotImplementedError("Method have to be implemented")
 
 
-class SpacySentenceParser(SentenceParser):
-    def __init__(self):
-        self.nlp = spacy.load('en')
-
-    def parse_sentence(self, sentence):
-        tokens = self.nlp(sentence)
-        edges = []
-        words = {token.i: token.orth_ for token in tokens}
-        tags = {token.i: token.tag_ for token in tokens}
-
-        for token in tokens:
-            edges.append((token.i, token.head.i, {'rel': token.dep_}))
-
-        nx_graph = nx.DiGraph()
-        nx_graph.add_nodes_from(words.keys())
-        nx_graph.add_edges_from(edges)
-        parser_output = ParserOutput(sentence, nx_graph, words, tags)
-        return parser_output
+# class SpacySentenceParser(SentenceParser):
+#     def __init__(self):
+#         self.nlp = spacy.load('en')
+#
+#     def parse_sentence(self, sentence):
+#         tokens = self.nlp(sentence)
+#         edges = []
+#         words = {token.i: token.orth_ for token in tokens}
+#         tags = {token.i: token.tag_ for token in tokens}
+#
+#         for token in tokens:
+#             edges.append((token.i, token.head.i, {'rel': token.dep_}))
+#
+#         nx_graph = nx.DiGraph()
+#         nx_graph.add_nodes_from(words.keys())
+#         nx_graph.add_edges_from(edges)
+#         parser_output = ParserOutput(sentence, nx_graph, words, tags)
+#         return parser_output
 
 
 class StanfordSentenceParser(SentenceParser):

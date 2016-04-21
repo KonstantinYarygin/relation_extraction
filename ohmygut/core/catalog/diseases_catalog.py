@@ -31,40 +31,10 @@ class DiseasesCatalog(Catalog):
         data_dict = data.to_dict("records")
         for row in data_dict:
             self.disease_dictionary[row['name']] = row['id']
-
-        self.__remove_disease_literally()
-
-        self.__add_all_cases_of_cases()
-
         self.hash_tree = HashTree(self.disease_dictionary.keys())
 
         t2 = time()
         constants.logger.info('Done creating diseases catalog. Total time: %.2f sec.' % (t2 - t1))
-
-    def __remove_disease_literally(self):
-        """Removes 'disease' item from catalog"""
-        try:
-            del self.disease_dictionary['disease']
-        except:
-            pass
-
-    def __add_all_cases_of_cases(self):
-        for name, doid_id in list(self.disease_dictionary.items())[:]:
-            word_list = word_tokenize(name)
-            is_abbreviation_list = [word.isupper() for word in word_list]
-
-            first_capital = untokenize(
-                [word_list[0].capitalize() if not is_abbreviation_list[0] else word_list[0]] + word_list[1:])
-            all_capital = untokenize([word.capitalize() if not is_abbreviation else word for word, is_abbreviation in
-                                      zip(word_list, is_abbreviation_list)])
-            all_lower = untokenize([word.lower() if not is_abbreviation else word for word, is_abbreviation in
-                                    zip(word_list, is_abbreviation_list)])
-            all_upper = name.upper()
-
-            self.disease_dictionary.update({all_lower: doid_id,
-                                            all_capital: doid_id,
-                                            all_upper: doid_id,
-                                            first_capital: doid_id})
 
     def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for nutrient names

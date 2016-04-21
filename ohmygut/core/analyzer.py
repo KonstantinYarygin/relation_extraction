@@ -38,12 +38,12 @@ class SentenceAnalyzer():
 
     def analyze_sentence(self, bacterial_names, nutrient_names, disease_names, food_names, parser_output):
         all_bacterial_names = self.all_bacteria_catalog.find(parser_output.text)
-        # TODO: сделать чтобы только имена передались
         bacterial_names = all_bacterial_names + bacterial_names
         bacterial_names = [name for name, id in bacterial_names]
         nutrient_names = [name for name, id in nutrient_names]
         disease_names = [name for name, id in disease_names]
         food_names = [name for name, group in food_names]
+
         merge_nodes(self.tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output)
 
         bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'BACTERIUM']
