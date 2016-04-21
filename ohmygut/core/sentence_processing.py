@@ -50,6 +50,7 @@ class StanfordSentenceParser(SentenceParser):
         self.stanford_dependency_parser = stanford_dependency_parser
         self.stanford_tokenizer = stanford_tokenizer
 
+    # TODO: remake to work with entities: should put BACT, NUT, etc. tags in graph like Spacy parser do
     def parse_sentence(self, sentence, entities):
         try:
             dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence)
