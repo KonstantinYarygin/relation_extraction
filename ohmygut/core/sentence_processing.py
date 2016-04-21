@@ -4,35 +4,45 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import re
 
-#import spacy
+import spacy
 
 
 class SentenceParser(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def parse_sentence(self, sentence):
+    def parse_sentence(self, sentence, entities):
         raise NotImplementedError("Method have to be implemented")
 
 
-# class SpacySentenceParser(SentenceParser):
-#     def __init__(self):
-#         self.nlp = spacy.load('en')
-#
-#     def parse_sentence(self, sentence):
-#         tokens = self.nlp(sentence)
-#         edges = []
-#         words = {token.i: token.orth_ for token in tokens}
-#         tags = {token.i: token.tag_ for token in tokens}
-#
-#         for token in tokens:
-#             edges.append((token.i, token.head.i, {'rel': token.dep_}))
-#
-#         nx_graph = nx.DiGraph()
-#         nx_graph.add_nodes_from(words.keys())
-#         nx_graph.add_edges_from(edges)
-#         parser_output = ParserOutput(sentence, nx_graph, words, tags)
-#         return parser_output
+class SpacySentenceParser(SentenceParser):
+    def __init__(self):
+        self.nlp = spacy.load('en')
+
+    def parse_sentence(self, sentence, entities):
+        tokens = self.nlp(sentence)
+        edges = []
+        words = {token.i: token.orth_ for token in tokens}
+        tags = {token.i: token.tag_ for token in tokens}
+        indexes = []
+        # replacing tags with BACTERIA, NUTRIENT, etc.
+        for i, entity in enumerate(entities):
+            for j, word in words.items():
+                if entity.name == word:
+                    index = (j, i)
+                    if index not in indexes:
+                        indexes.append(index)
+        for token_index, entity_index in indexes:
+            tags[token_index] = entities[entity_index].tag
+
+        for token in tokens:
+            edges.append((token.i, token.head.i, {'rel': token.dep_}))
+
+        nx_graph = nx.DiGraph()
+        nx_graph.add_nodes_from(words.keys())
+        nx_graph.add_edges_from(edges)
+        parser_output = ParserOutput(sentence, nx_graph, words, tags)
+        return parser_output
 
 
 class StanfordSentenceParser(SentenceParser):
@@ -40,7 +50,8 @@ class StanfordSentenceParser(SentenceParser):
         self.stanford_dependency_parser = stanford_dependency_parser
         self.stanford_tokenizer = stanford_tokenizer
 
-    def parse_sentence(self, sentence):
+    # TODO: remake to work with entities: should put BACT, NUT, etc. tags in graph like Spacy parser do
+    def parse_sentence(self, sentence, entities):
         try:
             dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence)
         except OSError:

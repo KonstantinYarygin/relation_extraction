@@ -1,10 +1,17 @@
+import re
 from time import time
 
 import pandas as pd
 
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import logger
+from ohmygut.core.catalog.bact_catalog_helper import sci_names, generate_short_names, generate_plyral
+from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
+from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
+from ohmygut.core.constants import plural_dict, logger
 from ohmygut.core.hash_tree import HashTree
+
+ALL_BACTERIA_TAG = 'ALL_BACTERIA'
 
 
 class AllBacteriaCatalog(Catalog):
@@ -43,7 +50,6 @@ class AllBacteriaCatalog(Catalog):
         t2 = time()
         logger.info('Done creating bacterial catalog. Total time: %.2f sec.' % (t2 - t1))
 
-
     def find(self, sentence_text):
         """ Uses previously generated hash tree to search sentence for bacterial names
 
@@ -58,7 +64,11 @@ class AllBacteriaCatalog(Catalog):
         bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
-        return output_list
+        entities = EntityCollection([Entity(name,
+                                            code,
+                                            BACTERIA_TAG,
+                                            [ALL_BACTERIA_TAG]) for name, code in output_list], BACTERIA_TAG)
+        return entities
 
     def get_scientific_name(self, ncbi_id):
         return self.__scientific_names[ncbi_id]

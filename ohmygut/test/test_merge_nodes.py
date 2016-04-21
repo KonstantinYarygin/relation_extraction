@@ -1,17 +1,12 @@
-import unittest
-import pickle
 import os
+import pickle
+import unittest
 
-from time import time
 import networkx as nx
-
 from nltk.parse.stanford import StanfordDependencyParser
 from nltk.tokenize import StanfordTokenizer
-from nltk.tag import StanfordPOSTagger
 
-from nltk.stem.lancaster import LancasterStemmer
 from ohmygut.core.analyzer import merge_nodes
-from ohmygut.core.sentence import Sentence
 from ohmygut.core.sentence_processing import StanfordSentenceParser, ParserOutput
 
 script_dir = os.path.dirname(os.path.realpath(__file__))

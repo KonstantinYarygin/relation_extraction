@@ -5,10 +5,11 @@ import pandas as pd
 from nltk.tokenize import word_tokenize
 
 from ohmygut.core import constants
-from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.hash_tree import HashTree
 from ohmygut.core.tools import untokenize
 
+DISEASE_TAG = 'DISEASE'
 
 class DiseasesCatalog(Catalog):
     def get_list(self):
@@ -46,6 +47,7 @@ class DiseasesCatalog(Catalog):
             list of nutrient_names
         """
         diseases_names = self.hash_tree.search(sentence_text)
-        output = [(name, self.disease_dictionary[name]) for name in diseases_names]
-        return output
-
+        entities = EntityCollection([Entity(name,
+                                            self.disease_dictionary[name],
+                                            DISEASE_TAG) for name in diseases_names], DISEASE_TAG)
+        return entities
