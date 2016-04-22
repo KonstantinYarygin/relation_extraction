@@ -81,6 +81,41 @@ GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
   return(list(bacteria = data.bacteria, nutrient = data.nutrient, disease = data.disease, food = data.food))
 }
 
+
+GetBacteriaNutrientDiseaseFoodOldFormat <- function(raw.sentences){
+  data.bacteria <- raw.sentences[,
+                        .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
+                          unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
+                        by=.(text, article_title, journal)]
+  setnames(data.bacteria, c("text","article_title", "journal", "bacteria","bacteria_code"))
+
+  data.nutrient <- raw.sentences[,
+                        unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
+                        by=.(text, article_title, journal)]
+  setnames(data.nutrient, c("text","article_title", "journal", "nutrient"))
+
+  data.disease <- raw.sentences[,.(unlist(llply(str_match_all(diseases,
+                                                     '\'([^\\)]+)\','),
+                                       .fun=function(x) x[,2])),
+                          unlist(llply(str_match_all(diseases,
+                                                     ',\\s\'([^\\)]+)\''),
+                                       .fun=function(x) x[,2]))),
+                       by=.(text, article_title, journal)]
+  setnames(data.disease, c("text","article_title", "journal", "disease","disease_code"))
+
+  data.food <- raw.sentences[,.(tolower(unlist(llply(str_match_all(food,
+                                                          '\'([^\\)]+)\','),
+                                            .fun=function(x) x[,2]))),
+                       unlist(llply(str_match_all(food,
+                                                  ',\\s\'([^\\)]+)\''),
+                                    .fun=function(x) x[,2]))),
+                    by=.(text, article_title, journal)]
+  setnames(data.food, c("text","article_title","journal","food","foodgroup"))
+
+  return(list(bacteria = data.bacteria, nutrient = data.nutrient, disease = data.disease, food = data.food))
+}
+
+
 CleanBacteriaData <- function(data.bacteria){
   # data.bacteria.catalog <- fread("../data/bacteria/gut_catalog.csv")
   # data.bacteria <- data.bacteria[bacteria_code %in% data.bacteria.catalog$id]
