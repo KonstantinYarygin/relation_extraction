@@ -16,7 +16,7 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_i
 
 
 def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, writers,
-         sentence_finder, data_sources_to_skip=0, sentences_to_skip=0, ):
+         sentence_finder, data_sources_to_skip=0, sentences_to_skip=0):
     sentences = []
     data_source_names = list(map(lambda x: str(x), article_data_sources))
     constants.logger.info("data sources: %s" % data_source_names)
@@ -24,6 +24,7 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
         article_data_source = article_data_sources[i]
 
         articles = article_data_source.get_articles()
+        # todo: sort to be able to continue
         sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
                                            for sentence in get_sentences(article.text))
 
@@ -31,6 +32,7 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
         sentence_number = sentences_to_skip
         for _ in range(sentences_to_skip):
             next(sentences_titles_journals_tuple)
+        sentences_to_skip = 0
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
             try:
@@ -48,7 +50,7 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
                 writer.write(sentence)
 
             sentence_number += 1
-            constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
+            constants.logger.info("sentence № %i, data source № %i\n%s" % (sentence_number, i, sentence))
             constants.logger.info("=" * 80)
             sentences.append(sentence)
 

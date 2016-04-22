@@ -1,3 +1,4 @@
+import argparse
 import os
 
 from nltk.parse.stanford import StanfordDependencyParser
@@ -22,56 +23,64 @@ from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_
     gut_catalog_file_path, nutrients_file_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
     verb_ontollogy_path, diseases_csv_path, all_catalog_file_path
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-dss', action='store', help='number of data sources to skip', default=0)
+    parser.add_argument('-ss', action='store', help='number of sentences to skip', default=0)
 
-stanford_tokenizer = StanfordTokenizer(
-    path_to_jar=stanford_jar_path
-)
+    args = parser.parse_args()
+    data_sources_to_skip_number = int(args.dss)
+    sentences_to_skip_number = int(args.ss)
 
-stanford_dependency_parser = StanfordDependencyParser(
-    path_to_jar=stanford_jar_path,
-    path_to_models_jar=stanford_models_jar_path,
-    model_path=stanford_lex_parser_path,
-)
+    script_dir = os.path.dirname(os.path.realpath(__file__))
 
+    stanford_tokenizer = StanfordTokenizer(
+        path_to_jar=stanford_jar_path
+    )
 
-food_catalog = UsdaFoodCatalog(food_file_path)
-food_catalog.initialize()
+    stanford_dependency_parser = StanfordDependencyParser(
+        path_to_jar=stanford_jar_path,
+        path_to_models_jar=stanford_models_jar_path,
+        model_path=stanford_lex_parser_path,
+    )
 
-all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
-all_bacteria_catalog.initialize()
+    food_catalog = UsdaFoodCatalog(food_file_path)
+    food_catalog.initialize()
 
-gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path)
-gut_bacteria_catalog.initialize()
+    all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
+    all_bacteria_catalog.initialize()
 
-nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
-nutrients_catalog.initialize()
+    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path)
+    gut_bacteria_catalog.initialize()
 
-diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
-diseases_catalog.initialize()
+    nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
+    nutrients_catalog.initialize()
 
-# sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
-sentence_parser = SpacySentenceParser()
-sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, all_bacteria_catalog)
+    diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
+    diseases_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
-medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
-libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=libgen_texts_dir)
+    # sentence_parser = StanfordSentenceParser(stanford_dependency_parser, stanford_tokenizer)
+    sentence_parser = SpacySentenceParser()
+    sentence_finder = SentenceFinder(stanford_tokenizer, sentence_parser, all_bacteria_catalog)
 
-with open(verb_ontollogy_path) as f:
-    verb_ontology = eval(''.join(f.readlines()))
+    nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
+    medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
+    libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=libgen_texts_dir)
 
-lancaster_stemmer = LancasterStemmer()
-pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
+    with open(verb_ontollogy_path) as f:
+        verb_ontology = eval(''.join(f.readlines()))
 
-article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
+    lancaster_stemmer = LancasterStemmer()
+    pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
-output_dir = get_output_dir_path()
-csv_path = get_csv_path()
-csv_writer = CsvWriter(csv_path)
-pkl_writer = PklWriter(output_dir)
-log_writer = LogWriter()
+    article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
 
+    output_dir = get_output_dir_path()
+    csv_path = get_csv_path()
+    csv_writer = CsvWriter(csv_path)
+    pkl_writer = PklWriter(output_dir)
+    log_writer = LogWriter()
 
-main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     writers=[csv_writer, log_writer], sentence_finder=sentence_finder)
+    main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
+         writers=[csv_writer, log_writer], sentence_finder=sentence_finder,
+         data_sources_to_skip=data_sources_to_skip_number, sentences_to_skip=sentences_to_skip_number)

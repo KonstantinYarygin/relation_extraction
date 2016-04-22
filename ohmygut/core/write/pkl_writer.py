@@ -33,6 +33,6 @@ class PklWriter(BaseWriter):
 
 
 def get_output_dir_path():
-    output_dir = os.path.join(RESULT_DIR_NAME, "result_%s" % datetime.datetime.now().strftime("%d%b%Y-%H-%M-%S"))
+    output_dir = os.path.join(RESULT_DIR_NAME, "pickled_%s" % datetime.datetime.now().strftime("%d%b%Y-%H-%M-%S"))
     os.mkdir(output_dir)
     return output_dir

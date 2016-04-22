@@ -60,5 +60,5 @@ class CsvWriter(BaseWriter):
 
 def get_csv_path():
     path = os.path.join(RESULT_DIR_NAME,
-                        "result_%s.csv" % datetime.datetime.now().strftime("%H_%M_%S-%d_%m_%y"))
+                        "result_%s.csv" % datetime.datetime.now().strftime("%d%b%Y-%H-%M-%S"))
     return path
