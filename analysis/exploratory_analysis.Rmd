@@ -16,8 +16,8 @@ library(stringr)
 library(plyr)
 source('exploratory_helper.R')
 
-# warning here doesn't matter
-data <- fread('~/do/data/result/result_18_52_51-14_04_16.csv', sep='\t')
+# warning about bumping is ok
+data <- unique(fread('~/do/data/result/result_01_02_45-22_04_16.csv', sep='\t', select=1:7))
 ```
 Количество строк в данных и структура:
 ```{r, echo=FALSE}
@@ -32,7 +32,7 @@ data.nutrient <- parsed$nutrient
 data.disease <- parsed$disease
 data.food <- parsed$food
 ```
-Почистим данные: убираем E. coli, Clostridium difficile, Salmonella; Water, pie
+Почистим данные: убираем E. coli, Clostridium difficile, Salmonella; Water, pie, bf
 ```{r data-cleanup, echo=FALSE}
 data.bacteria <- CleanBacteriaData(data.bacteria)
 data.food <- CleanFoodData(data.food)

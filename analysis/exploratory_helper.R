@@ -46,31 +46,34 @@ MergePlotBactPairs <- function(data.bacteria, data.other, column.other){
 }
 
 GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
-  data.bacteria <- raw.sentences[,
-                        .(unlist(llply(str_match_all(bacteria, '\'([^\\)]+)\''), .fun=function(x) x[,2])),
-                          unlist(llply(str_match_all(bacteria, '(\\d+)\\)'), .fun=function(x) x[,2]))),
+  data.bacteria <- raw.sentences[bacteria != '',
+                        .(unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                       .fun=function(x) x[1])),
+                          unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                       .fun=function(x) x[2]))),
                         by=.(text, article_title, journal)]
   setnames(data.bacteria, c("text","article_title", "journal", "bacteria","bacteria_code"))
   
-  data.nutrient <- raw.sentences[,
-                        unlist(llply(str_match_all(nutrients, ',\\s\'([^\\)]+)\''), .fun=function(x) x[,2])),
+  data.nutrient <- raw.sentences[nutrients != '',
+                                 .(unlist(llply(strsplit(unlist(strsplit(nutrients, ', ')), ';'), 
+                                                .fun=function(x) x[1])),
+                                   unlist(llply(strsplit(unlist(strsplit(nutrients, ', ')), ';'), 
+                                                .fun=function(x) x[2]))),
                         by=.(text, article_title, journal)]
-  setnames(data.nutrient, c("text","article_title", "journal", "nutrient"))
+  setnames(data.nutrient, c("text","article_title", "journal", "nutrient_name", "nutrient"))
   
-  data.disease <- raw.sentences[,.(unlist(llply(str_match_all(diseases, 
-                                                     '\'([^\\)]+)\','), 
-                                       .fun=function(x) x[,2])),
-                          unlist(llply(str_match_all(diseases, 
-                                                     ',\\s\'([^\\)]+)\''), 
-                                       .fun=function(x) x[,2]))),
-                       by=.(text, article_title, journal)]
+  data.disease <- raw.sentences[diseases!='',.(unlist(llply(strsplit(unlist(strsplit(diseases, ', ')), ';'), 
+                                                            .fun=function(x) x[1])),
+                                               unlist(llply(strsplit(unlist(strsplit(diseases, ', ')), ';'), 
+                                                            .fun=function(x) x[2]))),
+                                by=.(text, article_title, journal)]
   setnames(data.disease, c("text","article_title", "journal", "disease","disease_code"))
   
-  data.food <- raw.sentences[,.(tolower(unlist(llply(str_match_all(food, 
-                                                          '\'([^\\)]+)\','), 
+  data.food <- raw.sentences[food!='',.(tolower(unlist(llply(str_match_all(food, 
+                                                          '(\\w+);'), 
                                             .fun=function(x) x[,2]))),
                        unlist(llply(str_match_all(food, 
-                                                  ',\\s\'([^\\)]+)\''), 
+                                                  ';([\\w ]+)'), 
                                     .fun=function(x) x[,2]))),
                     by=.(text, article_title, journal)]
   setnames(data.food, c("text","article_title","journal","food","foodgroup"))
@@ -79,8 +82,8 @@ GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
 }
 
 CleanBacteriaData <- function(data.bacteria){
-  data.bacteria.catalog <- fread("../data/bacteria/gut_catalog.csv")
-  data.bacteria <- data.bacteria[bacteria_code %in% data.bacteria.catalog$id]
+  # data.bacteria.catalog <- fread("../data/bacteria/gut_catalog.csv")
+  # data.bacteria <- data.bacteria[bacteria_code %in% data.bacteria.catalog$id]
   data.bacteria <- data.bacteria[bacteria_code != 562] # no E. coli
   data.bacteria <- data.bacteria[bacteria_code != 1496] # no Clostridium difficile
   data.bacteria <- data.bacteria[bacteria_code != 590] # no Salmonella
@@ -90,5 +93,6 @@ CleanBacteriaData <- function(data.bacteria){
 CleanFoodData <- function(data.food){
   data.food <- data.food[food != "water"]
   data.food <- data.food[food != "pie"]
+  data.food <- data.food[food != "bf"]
   data.food
 }
