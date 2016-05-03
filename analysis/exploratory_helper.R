@@ -17,6 +17,7 @@ GetHistPlots <- function(data.count, x.variable){
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.border = element_blank())
+  setnames(data.count, "object", x.variable)
   return(list(plot1=plot1, plot2=plot2))
 }
 

@@ -1,0 +1,35 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+
+# from all the stuff below give me ?name and ?type and ...
+SELECT DISTINCT ?name, ?type, ?typename, ?subject, ?subjectname WHERE {{
+	SELECT DISTINCT ?name, ?type, ?typename, ?subject, ?subjectname WHERE {
+		# it means: get all food (?food) which has ingredient (?ing_link)
+		?food dbo:ingredient ?ing_link .
+
+		# from ingredient (?ing_link) get property rdfs:label (?name )
+		?ing_link rdfs:label ?name .
+
+		# if ingredient ?ing_link has any types, include it all (?type)
+		OPTIONAL {
+                  ?ing_link rdf:type ?type .
+                  OPTIONAL { ?type rdfs:label ?typename . FILTER langMatches(lang(?typename),'en') }
+		}
+
+		# if ingredient ?ing_link has any subjects, include it all
+		OPTIONAL {
+                  ?ing_link dct:subject ?subject .
+                  OPTIONAL { ?subject rdfs:label ?subjectname . FILTER langMatches(lang(?subjectname),'en')}
+		}
+
+		# get only english
+		FILTER langMatches(lang(?name),'en')
+	}
+	ORDER BY ?name
+}}
