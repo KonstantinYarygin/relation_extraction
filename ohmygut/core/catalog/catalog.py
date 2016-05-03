@@ -34,6 +34,9 @@ class Entity(object):
     def __repr__(self):
         return "%s;%s" % (self.name, self.code)
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
 
 class EntityCollection(object):
     def __init__(self, entities, tag):
