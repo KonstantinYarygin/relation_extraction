@@ -80,7 +80,7 @@ def create_gut_bacterial_df(nodes_ncbi_path, names_ncbi_path, gut_bact_list_path
 
 
 output_csv_path = '../data/bacteria/gut_bact_catalog.csv'
-gut_bact_list_path = '../data/bacteria/bact_names_pull_new_base.csv'
+gut_bact_list_path = '../data/bacteria/bacteria_hitdb_3_may.csv'
 
 names_path = '../data/bacteria/taxdump/names.dmp'
 nodes_path = '../data/bacteria/taxdump/nodes.dmp'
