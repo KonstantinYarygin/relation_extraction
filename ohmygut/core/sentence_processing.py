@@ -78,6 +78,11 @@ class StanfordSentenceParser(SentenceParser):
                             tags=tags)
 
 
+class DoNothingParser(SentenceParser):
+    def parse_sentence(self, sentence, entities):
+        return ParserOutput(text=sentence, nx_graph=nx.DiGraph(), words=[""], tags=[""])
+
+
 class ParserOutput(object):
     def __init__(self, text, nx_graph, words, tags):
         self.text = text

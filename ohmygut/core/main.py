@@ -3,7 +3,6 @@ import sys
 from traceback import format_exc
 
 from ohmygut.core import constants
-from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG
 from ohmygut.core.catalog.catalog import EntityCollection
 from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
@@ -59,8 +58,9 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
 
 
 class SentenceFinder(object):
-    def __init__(self, tokenizer, sentence_parser, all_bacteria_catalog, do_parse=True, do_analyze=True):
+    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog, do_parse=True, do_analyze=True):
         super().__init__()
+        self.sentence_analyzer = sentence_analyzer
         self.all_bacteria_catalog = all_bacteria_catalog
         self.do_analyze = do_analyze
         self.do_parse = do_parse
@@ -68,9 +68,8 @@ class SentenceFinder(object):
         self.tokenizer = tokenizer
 
     # todo: test me
-    def get_sentence(self, sentence_text, article_title, article_journal, bacteria_catalog, nutrients_catalog,
-                     diseases_catalog,
-                     food_catalog):
+    def get_sentence(self, sentence_text, article_title, article_journal,
+                     bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog):
 
         if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
             return None
@@ -81,11 +80,13 @@ class SentenceFinder(object):
         diseases = diseases_catalog.find(sentence_text)
         food = food_catalog.find(sentence_text)
 
-        # todo: test me
-        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        if len(bacteria.entities) == 0:
             return None
+        # todo: test me
+        # if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+        #             check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+        #             check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        #     return None
 
         all_bacteria = self.all_bacteria_catalog.find(sentence_text)
         bacteria.entities = bacteria.entities + all_bacteria.entities
@@ -113,10 +114,12 @@ class SentenceFinder(object):
 
         # ======= refactor
 
-        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        if len(bacteria.entities) == 0:
             return None
+        # if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+        #             check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+        #             check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        #     return None
 
         if self.do_parse:
             parser_output = self.sentence_parser.parse_sentence(sentence_text, bacteria.entities +
@@ -129,7 +132,7 @@ class SentenceFinder(object):
             parser_output = ''
 
         if self.do_parse and self.do_analyze:
-            paths = analyze_sentence(parser_output)
+            paths = self.sentence_analyzer.analyze_sentence(parser_output)
         else:
             paths = ''
 
