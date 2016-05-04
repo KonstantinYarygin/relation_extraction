@@ -36,9 +36,9 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
 
         for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
             try:
-                sentence = sentence_finder.find_sentence(sentence_text, article_title, article_journal,
-                                                         gut_bacteria_catalog,
-                                                         nutrients_catalog, diseases_catalog, food_catalog)
+                sentence = sentence_finder.get_sentence(sentence_text, article_title, article_journal,
+                                                        gut_bacteria_catalog,
+                                                        nutrients_catalog, diseases_catalog, food_catalog)
             except Exception:
                 constants.logger.info(format_exc())
                 constants.logger.info("got error in sentence loop; continue")
@@ -68,9 +68,9 @@ class SentenceFinder(object):
         self.tokenizer = tokenizer
 
     # todo: test me
-    def find_sentence(self, sentence_text, article_title, article_journal, bacteria_catalog, nutrients_catalog,
-                      diseases_catalog,
-                      food_catalog):
+    def get_sentence(self, sentence_text, article_title, article_journal, bacteria_catalog, nutrients_catalog,
+                     diseases_catalog,
+                     food_catalog):
 
         if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
             return None
