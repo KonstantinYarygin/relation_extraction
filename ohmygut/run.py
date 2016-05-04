@@ -9,6 +9,7 @@ from ohmygut.core.article.file_article_data_source import NxmlFreeArticleDataSou
 from ohmygut.core.article.libgen_txt_article_data_source import LibgenTxtArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
 from ohmygut.core.catalog.all_bacteria_catalog import AllBacteriaCatalog
+from ohmygut.core.catalog.dbpedia_food_catalog import DbpediaFoodCatalog
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
@@ -21,7 +22,7 @@ from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
 from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
     gut_catalog_file_path, nutrients_file_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
-    verb_ontollogy_path, diseases_csv_path, all_catalog_file_path
+    verb_ontollogy_path, diseases_csv_path, all_catalog_file_path, dbpedia_food_file_path
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -46,6 +47,9 @@ if __name__ == '__main__':
 
     food_catalog = UsdaFoodCatalog(food_file_path)
     food_catalog.initialize()
+
+    dbpedia_food_catalog = DbpediaFoodCatalog(dbpedia_food_file_path)
+    dbpedia_food_catalog.initialize()
 
     all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
     all_bacteria_catalog.initialize()
@@ -81,6 +85,6 @@ if __name__ == '__main__':
     pkl_writer = PklWriter(output_dir)
     log_writer = LogWriter()
 
-    main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
+    main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, dbpedia_food_catalog,
          writers=[csv_writer, log_writer], sentence_finder=sentence_finder,
          data_sources_to_skip=data_sources_to_skip_number, sentences_to_skip=sentences_to_skip_number)

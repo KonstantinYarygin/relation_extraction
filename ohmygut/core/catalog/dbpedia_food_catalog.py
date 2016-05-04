@@ -1,13 +1,10 @@
 from time import time
 
-import pandas as pd
-
-from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Entity, EntityCollection
+from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
 from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
-
-DBPEDIA_FOOD_TAG = 'DBPEDIA_FOOD'
 
 
 class DbpediaFoodCatalog(Catalog):
@@ -24,7 +21,7 @@ class DbpediaFoodCatalog(Catalog):
         self.__food = None
 
     def initialize(self):
-        t1= time()
+        t1 = time()
         logger.info('Creating dbpedia food catalog...')
         with open(self.dbpedia_tidy_food_file_path) as file:
             food = file.read().splitlines()
@@ -37,5 +34,5 @@ class DbpediaFoodCatalog(Catalog):
 
     def find(self, sentence_text):
         food_names = self.__hash_tree.search(sentence_text)
-        entities = EntityCollection([Entity(name, '', DBPEDIA_FOOD_TAG) for name in food_names], DBPEDIA_FOOD_TAG)
+        entities = EntityCollection([Entity(name, 'nogroup', FOOD_TAG) for name in food_names], FOOD_TAG)
         return entities
