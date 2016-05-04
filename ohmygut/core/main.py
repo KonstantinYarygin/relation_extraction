@@ -58,12 +58,10 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
 
 
 class SentenceFinder(object):
-    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog, do_parse=True, do_analyze=True):
+    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog):
         super().__init__()
         self.sentence_analyzer = sentence_analyzer
         self.all_bacteria_catalog = all_bacteria_catalog
-        self.do_analyze = do_analyze
-        self.do_parse = do_parse
         self.sentence_parser = sentence_parser
         self.tokenizer = tokenizer
 
@@ -80,13 +78,13 @@ class SentenceFinder(object):
         diseases = diseases_catalog.find(sentence_text)
         food = food_catalog.find(sentence_text)
 
-        if len(bacteria.entities) == 0:
-            return None
-        # todo: test me
-        # if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-        #             check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-        #             check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        # if len(bacteria.entities) == 0:
         #     return None
+        # todo: test me
+        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+            return None
 
         all_bacteria = self.all_bacteria_catalog.find(sentence_text)
         bacteria.entities = bacteria.entities + all_bacteria.entities
@@ -114,27 +112,19 @@ class SentenceFinder(object):
 
         # ======= refactor
 
-        if len(bacteria.entities) == 0:
-            return None
-        # if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-        #             check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-        #             check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        # if len(bacteria.entities) == 0:
         #     return None
+        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
+                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
+                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+            return None
 
-        if self.do_parse:
-            parser_output = self.sentence_parser.parse_sentence(sentence_text, bacteria.entities +
-                                                                nutrients.entities +
-                                                                diseases.entities +
-                                                                food.entities)
-            if not parser_output:
-                return None
-        else:
-            parser_output = ''
+        parser_output = self.sentence_parser.parse_sentence(sentence_text, bacteria.entities +
+                                                            nutrients.entities +
+                                                            diseases.entities +
+                                                            food.entities)
 
-        if self.do_parse and self.do_analyze:
-            paths = self.sentence_analyzer.analyze_sentence(parser_output)
-        else:
-            paths = ''
+        paths = self.sentence_analyzer.analyze_sentence(parser_output)
 
         sentence = Sentence(text=sentence_text,
                             article_title=article_title,

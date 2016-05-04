@@ -5,7 +5,7 @@ from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import StanfordTokenizer
 
-from ohmygut.core.analyzer import DoNothingSentenceAnalyzer
+from ohmygut.core.analyzer import DoNothingSentenceAnalyzer, SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import NxmlFreeArticleDataSource
 from ohmygut.core.article.libgen_txt_article_data_source import LibgenTxtArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
@@ -74,7 +74,8 @@ if __name__ == '__main__':
     do_nothing_parser = DoNothingParser()
 
     do_nothing_analyzer = DoNothingSentenceAnalyzer()
-    sentence_finder = SentenceFinder(stanford_tokenizer, do_nothing_parser, do_nothing_analyzer, all_bacteria_catalog)
+    analyzer = SentenceAnalyzer()
+    sentence_finder = SentenceFinder(stanford_tokenizer, spacy_sentence_parser, analyzer, all_bacteria_catalog)
 
     nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
     medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
@@ -94,7 +95,7 @@ if __name__ == '__main__':
     pkl_writer = PklWriter(output_dir)
     log_writer = LogWriter()
 
-    main(article_data_sources, gut_bacteria_catalog, do_nothing_catalog_nutrient,
-         do_nothing_catalog_disease, do_nothing_catalog_food,
+    main(article_data_sources, gut_bacteria_catalog, nutrients_catalog,
+         diseases_catalog, dbpedia_food_catalog,
          writers=[csv_writer, log_writer], sentence_finder=sentence_finder,
          data_sources_to_skip=data_sources_to_skip_number, sentences_to_skip=sentences_to_skip_number)
