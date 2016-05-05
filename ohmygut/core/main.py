@@ -13,7 +13,8 @@ from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
 from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_if_more_than_one_list_not_empty
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_if_more_than_one_list_not_empty, \
+    memory_usage_psutil
 
 
 def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, writers,
@@ -52,6 +53,7 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
                 writer.write(sentence)
 
             sentence_number += 1
+            constants.logger.info("memory usage: %f" % memory_usage_psutil())
             constants.logger.info("sentence № %i, data source № %i\n%s" % (sentence_number, i, sentence))
             constants.logger.info("=" * 80)
 

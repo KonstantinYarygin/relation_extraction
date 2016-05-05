@@ -1,3 +1,4 @@
+import os
 from itertools import product
 
 import pandas as pd
@@ -182,3 +183,11 @@ def sentences_to_data_frame(sentences):
 
 def check_if_more_than_one_list_not_empty(elements):
     return sum(map(bool, elements)) > 1
+
+
+def memory_usage_psutil():
+    # return the memory usage in MB
+    import psutil
+    process = psutil.Process(os.getpid())
+    mem = process.memory_info()[0] / float(2 ** 20)
+    return mem
