@@ -1,3 +1,5 @@
+library(plyr)
+
 GetHistPlots <- function(data.count, x.variable){
   setnames(data.count, x.variable, "object")
   plot1 <- ggplot(data.count[0:10], aes(x = reorder(object, -N), y = N)) + 
@@ -46,14 +48,19 @@ MergePlotBactPairs <- function(data.bacteria, data.other, column.other){
   return(list(plot=plot, data.bacteria.other.count=data.bacteria.other.count))
 }
 
-GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
+GetBacteria <- function(raw.sentences){
   data.bacteria <- raw.sentences[bacteria != '',
-                        .(unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
-                                       .fun=function(x) x[1])),
-                          unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
-                                       .fun=function(x) x[2]))),
-                        by=.(text, article_title, journal)]
+                                 .(unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                                .fun=function(x) x[1])),
+                                   unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                                .fun=function(x) x[2]))),
+                                 by=.(text, article_title, journal)]
   setnames(data.bacteria, c("text","article_title", "journal", "bacteria","bacteria_code"))
+  data.bacteria
+}
+
+GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
+  data.bacteria <- GetBacteria(raw.sentences)
   
   data.nutrient <- raw.sentences[nutrients != '',
                                  .(unlist(llply(strsplit(unlist(strsplit(nutrients, ', ')), ';'), 

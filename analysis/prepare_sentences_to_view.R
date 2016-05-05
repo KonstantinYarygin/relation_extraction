@@ -1,0 +1,20 @@
+library(data.table)
+library(xlsx)
+library(stringr)
+source("exploratory_helper.R")
+data1 <- fread("~/do/data/result/result_04May2016-19-17-05.csv")
+data2 <- fread("~/do/data/result/result_05May2016-12-58-01.csv")
+data <- unique(rbind(data1, data2))
+  
+data.bacteria <- GetBacteria(data)
+data.bacteria$text <- str_replace_all(data.bacteria$text, ";", ",")
+data.bacteria$article_title <- str_replace_all(data.bacteria$article_title, ";", ",")
+data.bacteria$journal <- str_replace_all(data.bacteria$journal, ";", ",")
+data.bacteria[,{
+  file <- paste0(.SD$bacteria[1], '.csv')
+  file <- str_replace_all(file, "/", "_")
+  # message(file)
+  path <- file.path('result_view', file)
+  message(path)
+  write.table(.SD, file = path, row.names = F, col.names = T, quote = F, sep = ';')
+}, by=bacteria_code]
