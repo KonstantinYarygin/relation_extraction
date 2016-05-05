@@ -13,7 +13,7 @@ from ohmygut.core.catalog.all_bacteria_catalog import AllBacteriaCatalog
 from ohmygut.core.catalog.dbpedia_food_catalog import DbpediaFoodCatalog
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog, DISEASE_TAG
 from ohmygut.core.catalog.do_nothing_catalog import DoNothingCatalog
-from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
+from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog, BACTERIA_TAG
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov, NUTRIENT_TAG
 from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog, FOOD_TAG
 from ohmygut.core.main import main, SentenceFinder
@@ -75,7 +75,8 @@ if __name__ == '__main__':
 
     do_nothing_analyzer = DoNothingSentenceAnalyzer()
     analyzer = SentenceAnalyzer()
-    sentence_finder = SentenceFinder(stanford_tokenizer, spacy_sentence_parser, analyzer, all_bacteria_catalog)
+    sentence_finder = SentenceFinder(stanford_tokenizer, spacy_sentence_parser, analyzer, all_bacteria_catalog,
+                                     [BACTERIA_TAG], [FOOD_TAG, NUTRIENT_TAG, DISEASE_TAG])
 
     nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
     medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)

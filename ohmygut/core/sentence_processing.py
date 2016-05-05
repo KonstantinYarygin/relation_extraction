@@ -10,16 +10,12 @@ class SentenceParser(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def parse_sentence(self, sentence, entities):
+    def parse_sentence(self, sentence, entities, tokens):
         raise NotImplementedError("Method have to be implemented")
 
 
 class SpacySentenceParser(SentenceParser):
-    def __init__(self):
-        self.nlp = spacy.load('en')
-
-    def parse_sentence(self, sentence, entities):
-        tokens = self.nlp(sentence)
+    def parse_sentence(self, sentence, entities, tokens):
         edges = []
         words = {token.i: token.orth_ for token in tokens}
         tags = {token.i: token.tag_ for token in tokens}
@@ -50,7 +46,7 @@ class StanfordSentenceParser(SentenceParser):
         self.stanford_tokenizer = stanford_tokenizer
 
     # TODO: remake to work with entities: should put BACT, NUT, etc. tags in graph like Spacy parser do
-    def parse_sentence(self, sentence, entities):
+    def parse_sentence(self, sentence, entities, tokens):
         try:
             dependency_graph_iterator = self.stanford_dependency_parser.raw_parse(sentence)
         except OSError:
@@ -79,7 +75,7 @@ class StanfordSentenceParser(SentenceParser):
 
 
 class DoNothingParser(SentenceParser):
-    def parse_sentence(self, sentence, entities):
+    def parse_sentence(self, sentence, entities, tokens):
         return ParserOutput(text=sentence, nx_graph=nx.DiGraph(), words=[""], tags=[""])
 
 

@@ -2,6 +2,8 @@
 import sys
 from traceback import format_exc
 
+import spacy
+
 from ohmygut.core import constants
 from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG
 from ohmygut.core.catalog.catalog import EntityCollection
@@ -16,9 +18,9 @@ from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_i
 
 def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, writers,
          sentence_finder, data_sources_to_skip=0, sentences_to_skip=0):
-    sentences = []
     data_source_names = list(map(lambda x: str(x), article_data_sources))
     constants.logger.info("data sources: %s" % data_source_names)
+    total_sentence_number = 0
     for i in range(data_sources_to_skip, len(article_data_sources)):
         article_data_source = article_data_sources[i]
 
@@ -40,6 +42,7 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
                                                         nutrients_catalog, diseases_catalog, food_catalog)
             except Exception:
                 constants.logger.info(format_exc())
+                constants.logger.info("sentence with error: %s" % sentence_text)
                 constants.logger.info("got error in sentence loop; continue")
                 continue
             if not sentence:
@@ -51,19 +54,23 @@ def main(article_data_sources, gut_bacteria_catalog, nutrients_catalog, diseases
             sentence_number += 1
             constants.logger.info("sentence № %i, data source № %i\n%s" % (sentence_number, i, sentence))
             constants.logger.info("=" * 80)
-            sentences.append(sentence)
 
+        total_sentence_number += sentence_number
         constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
-    constants.pattern_logger.info('total number sentences: %d' % len(sentences))
+    constants.pattern_logger.info('total number sentences: %i' % total_sentence_number)
 
 
 class SentenceFinder(object):
-    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog):
+    def __init__(self, tokenizer, sentence_parser, sentence_analyzer, all_bacteria_catalog,
+                 tags_to_search, tags_optional_to_search):
         super().__init__()
+        self.tags_optional = set(tags_optional_to_search)
+        self.tags = set(tags_to_search)
         self.sentence_analyzer = sentence_analyzer
         self.all_bacteria_catalog = all_bacteria_catalog
         self.sentence_parser = sentence_parser
         self.tokenizer = tokenizer
+        self.nlp = spacy.load('en')
 
     # todo: test me
     def get_sentence(self, sentence_text, article_title, article_journal,
@@ -78,19 +85,18 @@ class SentenceFinder(object):
         diseases = diseases_catalog.find(sentence_text)
         food = food_catalog.find(sentence_text)
 
-        # if len(bacteria.entities) == 0:
-        #     return None
-        # todo: test me
-        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        entities_collections = [bacteria, nutrients, diseases, food]
+        tags_in_sentence = set([collection.tag for collection in entities_collections if len(collection.entities) > 0])
+
+        if not self.check_if_tags(tags_in_sentence):
             return None
+
+        tokens = self.nlp(sentence_text)
+        tokens_words = [token.orth_ for token in tokens]
 
         all_bacteria = self.all_bacteria_catalog.find(sentence_text)
         bacteria.entities = bacteria.entities + all_bacteria.entities
-        entity_collections = remove_entity_overlapping(sentence_text,
-                                                       [bacteria, nutrients, diseases, food],
-                                                       self.tokenizer)
+        entity_collections = remove_entity_overlapping([bacteria, nutrients, diseases, food], tokens_words)
 
         # ======= todo: refactor
         # put entity collections to dict by tag
@@ -112,17 +118,13 @@ class SentenceFinder(object):
 
         # ======= refactor
 
-        # if len(bacteria.entities) == 0:
-        #     return None
-        if not (check_if_more_than_one_list_not_empty([bacteria.entities, nutrients.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, diseases.entities]) or
-                    check_if_more_than_one_list_not_empty([bacteria.entities, food.entities])):
+        if not self.check_if_tags(tags_in_sentence):
             return None
 
         parser_output = self.sentence_parser.parse_sentence(sentence_text, bacteria.entities +
                                                             nutrients.entities +
                                                             diseases.entities +
-                                                            food.entities)
+                                                            food.entities, tokens)
 
         paths = self.sentence_analyzer.analyze_sentence(parser_output)
 
@@ -137,3 +139,10 @@ class SentenceFinder(object):
                             shortest_paths=paths)
 
         return sentence
+
+    def check_if_tags(self, tags_in_sentence):
+        if not self.tags.issubset(tags_in_sentence):
+            return False
+        if len(self.tags_optional) != 0 and not any(tag_optional in tags_in_sentence for tag_optional in self.tags_optional):
+            return False
+        return True

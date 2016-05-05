@@ -14,7 +14,7 @@ def get_sentences(text):
 def remove_entity_overlapping_old(sentence, bacteria, nutrients, diseases, food, stanford_tokenizer):
     # add all_catalog here
     # search for all bacterias
-    sentence_tokens = stanford_tokenizer.tokenize(sentence)
+    tokens = stanford_tokenizer.tokenize(sentence)
     tokens_lists = {}
     tokens_lists['bacteria'] = [bacterium_name.split(' ') for bacterium_name, ncbi_id in bacteria]
     tokens_lists['nutrients'] = [nutrient_name.split(' ') for nutrient_name, idname in nutrients]
@@ -27,8 +27,8 @@ def remove_entity_overlapping_old(sentence, bacteria, nutrients, diseases, food,
 
     for entity in entities:
         for tokens_list in tokens_lists[entity]:
-            for i in range(len(sentence_tokens) - len(tokens_list) + 1):
-                if sentence_tokens[i:i + len(tokens_list)] == tokens_list:
+            for i in range(len(tokens) - len(tokens_list) + 1):
+                if tokens[i:i + len(tokens_list)] == tokens_list:
                     if (i, i + len(tokens_list)) not in tokens_coordinates[entity]:
                         tokens_coordinates[entity].append((i, i + len(tokens_list)))
                         break
@@ -46,10 +46,10 @@ def remove_entity_overlapping_old(sentence, bacteria, nutrients, diseases, food,
                 elif intersection == set_1 and intersection == set_2 and entity_1 != entity_2:
                     tokens_coordinates[entity_2].remove(entity_2_coordinates)
 
-    bacteria_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
-    nutrients_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['nutrients']]
-    diseases_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['diseases']]
-    food_new = [' '.join(sentence_tokens[i:j]) for i, j in tokens_coordinates['food']]
+    bacteria_new = [' '.join(tokens[i:j]) for i, j in tokens_coordinates['bacteria']]
+    nutrients_new = [' '.join(tokens[i:j]) for i, j in tokens_coordinates['nutrients']]
+    diseases_new = [' '.join(tokens[i:j]) for i, j in tokens_coordinates['diseases']]
+    food_new = [' '.join(tokens[i:j]) for i, j in tokens_coordinates['food']]
 
     bacteria_new = [(name, dict(bacteria)[name]) for name in bacteria_new]
     nutrients_new = [(name, dict(nutrients)[name]) for name in nutrients_new]
@@ -59,15 +59,13 @@ def remove_entity_overlapping_old(sentence, bacteria, nutrients, diseases, food,
     return bacteria_new, nutrients_new, diseases_new, food_new
 
 
-def remove_entity_overlapping(sentence, entity_collections, stanford_tokenizer):
+def remove_entity_overlapping(entity_collections, tokens_words):
     """
 
-    :param sentence: a text
+    :param tokens_words:
     :param entity_collections: format - [ EntityCollection, EntityCollection, ... ]
-    :param stanford_tokenizer:
     :return: sorted by tag [ EntityCollection, EntityCollection, ... ]
     """
-    sentence_tokens = stanford_tokenizer.tokenize(sentence)
 
     # tokenizing names
     tokenized_entities_names = []
@@ -87,11 +85,11 @@ def remove_entity_overlapping(sentence, entity_collections, stanford_tokenizer):
             entity = entity_and_words[0]
             entity_words = entity_and_words[1]
             words_number = len(entity_words)
-            # now sliding window of length `words_number` over sentence_tokens
-            for i in range(len(sentence_tokens) - words_number + 1):
+            # now sliding window of length `words_number` over tokens
+            for i in range(len(tokens_words) - words_number + 1):
                 begin = i
                 end = i + words_number
-                sentence_words = sentence_tokens[begin:end]
+                sentence_words = tokens_words[begin:end]
                 if entity_words == sentence_words:
                     coordinates = (begin, end)
                     if coordinates not in coordinates_tmp:
