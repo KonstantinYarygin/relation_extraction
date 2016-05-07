@@ -1,7 +1,7 @@
 import pandas as pd
 
 from analysis.obo import Parser
-from ohmygut.catalog_creation_helper import remove_literally, all_cases_of_cases
+from catalog_preparation.catalog_creation_helper import remove_literally, all_cases_of_cases
 
 
 def parse_obo(obo_path):

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from ohmygut.catalog_creation_helper import remove_literally, all_cases_of_cases
+from catalog_preparation.catalog_creation_helper import remove_literally, all_cases_of_cases
 
 food_file_path = '../data/food/food.tsv'
 output_csv_path = '../data/food/food_catalog.csv'

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from ohmygut.catalog_creation_helper import generate_excessive_dictionary_bact
+from catalog_preparation.catalog_creation_helper import generate_excessive_dictionary_bact
 
 FIELD_STRAIN = 'strain'
 

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from ohmygut.catalog_creation_helper import remove_literally, all_cases_of_cases
+from catalog_preparation.catalog_creation_helper import remove_literally, all_cases_of_cases
 
 nutrient_file_path = '../data/nutrients/nikogosov_nutrients_normalized.tsv'
 output_csv_path = '../data/nutrients/nutrients_catalog.csv'
