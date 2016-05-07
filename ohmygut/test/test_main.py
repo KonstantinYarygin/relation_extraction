@@ -43,7 +43,7 @@ class TestCase(unittest.TestCase):
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
         constants.logger.info("asdasd")
-        main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, sentence_parser,
+        main(article_data_sources, sentence_parser,
              tokenizer=None, pattern_finder=None, writers=[])
 
     def test_find_sentence_very_long(self):

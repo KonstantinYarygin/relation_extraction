@@ -147,7 +147,7 @@ def remove_entity_overlapping(entity_collections, tokens_words):
                     entities_coordinates_to_keep[entity_2_tag].remove(entity_2_coordinates)
 
     # now initializing new EntityCollections
-    entities_collections_by_tag = {entity_tag: EntityCollection([], entity_tag) for entity_tag in entities_tags}
+    entities_collections_by_tag = {entity_tag: EntityCollection([], "aname", entity_tag) for entity_tag in entities_tags}
     for entity_tag, entities_coordinates in entities_coordinates_to_keep.items():
         for entity_and_coordinates in entities_coordinates:
             entities_collections_by_tag[entity_tag].entities.append(entity_and_coordinates[0])

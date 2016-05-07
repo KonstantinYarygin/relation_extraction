@@ -14,6 +14,8 @@ stanford_lex_parser_path = os.path.join(data_dir, "stanford_parser", "englishPCF
 gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_bact_catalog.csv")
 all_catalog_file_path = os.path.join(data_dir, "bacteria", "all_bact_catalog.csv")
 
+prebiotics_file_path = os.path.join(data_dir, "prebiotic", "prebiotics_tidy.csv")
+
 nutrients_file_path = os.path.join(data_dir, "nutrients", "nutrients_catalog.csv")
 
 diseases_csv_path = os.path.join(data_dir, "diseases", "diseases_catalog.csv")

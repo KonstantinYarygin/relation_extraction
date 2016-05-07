@@ -39,8 +39,9 @@ class Entity(object):
 
 
 class EntityCollection(object):
-    def __init__(self, entities, tag):
+    def __init__(self, entities, unique_name, tag):
         super().__init__()
+        self.unique_name = unique_name
         self.tag = tag
         self.entities = entities
 

@@ -16,7 +16,8 @@ from ohmygut.core.catalog.do_nothing_catalog import DoNothingCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog, BACTERIA_TAG
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov, NUTRIENT_TAG
 from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog, FOOD_TAG
-from ohmygut.core.main import main, SentenceFinder
+from ohmygut.core.main import main
+from ohmygut.core.sentence_finder import SentenceFinder
 from ohmygut.core.pattern_finder import PatternFinder
 from ohmygut.core.sentence_processing import SpacySentenceParser, DoNothingParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
@@ -84,7 +85,5 @@ if __name__ == '__main__':
     pkl_writer = PklWriter(output_dir)
     log_writer = LogWriter()
 
-    main(article_data_sources, gut_bacteria_catalog, do_nothing_catalog_nutrient,
-         do_nothing_catalog_disease, do_nothing_catalog_food,
-         writers=[csv_writer, log_writer], sentence_finder=sentence_finder,
+    main(article_data_sources, writers=[csv_writer, log_writer], sentence_finder=sentence_finder,
          data_sources_to_skip=data_sources_to_skip_number, sentences_to_skip=sentences_to_skip_number)

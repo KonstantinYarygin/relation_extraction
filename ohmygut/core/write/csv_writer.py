@@ -6,7 +6,7 @@ import pandas as pd
 from ohmygut.core.constants import RESULT_DIR_NAME
 from ohmygut.core.write.base_writer import BaseWriter
 
-DO_INCLUDE_HEADER = True
+INCLUDE_HEADER = True
 CSV_SEPARATOR = '\t'
 
 
@@ -14,16 +14,20 @@ class CsvWriter(BaseWriter):
     def __init__(self, csv_path):
         super().__init__()
         self.csv_path = csv_path
-        self.columns = ['text', 'article_title', 'journal',
-                        'bacteria', 'nutrients', 'diseases', 'food',
-                        'length', 'from', 'to', 'tagfrom', 'tagto', 'words', 'tags', 'allwords', 'alltags', 'graph']
-
-        if DO_INCLUDE_HEADER:
-            header_data = pd.DataFrame(columns=self.columns)
-            header_data.to_csv(self.csv_path, mode='a', header=DO_INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
 
     def write(self, sentence):
         rows = []
+        columns_part_1 = ['text', 'article_title', 'journal']
+        columns_part_2_entities = []
+        for collection in sentence.entities_collections:
+            columns_part_2_entities.append(collection.tag.lower())
+        columns_part_3 = ['length', 'from', 'to', 'tagfrom', 'tagto', 'words', 'tags', 'allwords', 'alltags', 'graph']
+
+        columns = columns_part_1 + columns_part_2_entities + columns_part_3
+        if INCLUDE_HEADER:
+            header_data = pd.DataFrame(columns=columns)
+            header_data.to_csv(self.csv_path, mode='a', header=INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
+
         for paths in sentence.shortest_paths.values():
             for path in paths:
                 tags = path.tags
@@ -36,11 +40,11 @@ class CsvWriter(BaseWriter):
                 row = [
                     sentence.text,
                     sentence.article_title,
-                    sentence.journal,
-                    str(sentence.bacteria),
-                    str(sentence.nutrients),
-                    str(sentence.diseases),
-                    str(sentence.food),
+                    sentence.journal]
+                for collection in sentence.entities_collections:
+                    row.append(str(collection))
+
+                row = row + [
                     length,
                     name_from,
                     name_to,
@@ -52,8 +56,7 @@ class CsvWriter(BaseWriter):
                     sentence.parser_output.tags,
                     sentence.parser_output.nx_graph.adj]
                 rows.append(row)
-        data = pd.DataFrame(rows,
-                            columns=self.columns)
+        data = pd.DataFrame(rows, columns=columns)
 
         data.to_csv(self.csv_path, mode='a', header=False, index=False, sep=CSV_SEPARATOR)
 

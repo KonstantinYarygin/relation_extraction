@@ -5,7 +5,7 @@ from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
 from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
 from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
-from ohmygut.core.main import SentenceFinder
+from ohmygut.core.sentence_finder import SentenceFinder
 
 
 class TestCase(unittest.TestCase):

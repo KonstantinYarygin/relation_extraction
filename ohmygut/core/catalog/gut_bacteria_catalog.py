@@ -6,6 +6,8 @@ from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 BACTERIA_TAG = 'BACTERIA'
+BACTERIA_COLLECTION = "BACTERIA_COLLECTION"
+
 
 class GutBacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
@@ -57,7 +59,9 @@ class GutBacteriaCatalog(Catalog):
         bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
-        entities = EntityCollection([Entity(name, code, BACTERIA_TAG) for name, code in output_list], BACTERIA_TAG)
+
+        entities = EntityCollection([Entity(name, code, BACTERIA_TAG) for name, code in output_list],
+                                    BACTERIA_COLLECTION, BACTERIA_TAG)
         return entities
 
     def get_scientific_name(self, ncbi_id):
