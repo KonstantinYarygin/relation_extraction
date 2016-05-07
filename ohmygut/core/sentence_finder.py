@@ -83,6 +83,7 @@ class SentenceFinder(object):
         if not self.check_if_tags(tags_in_sentence):
             return None
 
+        tokens = self.nlp(sentence_text)
         parser_output = self.sentence_parser.parse_sentence(sentence_text, all_entities_list, tokens)
 
         paths = self.sentence_analyzer.analyze_sentence(parser_output)

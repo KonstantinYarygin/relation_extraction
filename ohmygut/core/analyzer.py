@@ -4,6 +4,7 @@ import networkx as nx
 from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
 from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
+from ohmygut.core.catalog.prebiotics_catalog import PREBIOTIC_TAG
 from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
 
 
@@ -40,10 +41,10 @@ class SentenceAnalyzer:
         nutrients_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == NUTRIENT_TAG]
         diseases_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == DISEASE_TAG]
         food_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == FOOD_TAG]
+        prebiotic_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == PREBIOTIC_TAG]
 
-        tag_nodeids_tuples = zip((BACTERIA_TAG, NUTRIENT_TAG, DISEASE_TAG, FOOD_TAG),
-                                 (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids)
-                                 )
+        tag_nodeids_tuples = zip((BACTERIA_TAG, NUTRIENT_TAG, DISEASE_TAG, FOOD_TAG, PREBIOTIC_TAG),
+                                 (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids, prebiotic_nodes_ids))
 
         shortest_pathes = {}
         for entity_1, entity_2 in combinations(tag_nodeids_tuples, 2):
