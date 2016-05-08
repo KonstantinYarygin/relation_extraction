@@ -33,4 +33,5 @@ if __name__ == '__main__':
     prebiotics_final = prebiotics_final + prebiotic_upper
 
     prebiotics_df = pd.DataFrame({"name": prebiotics_final})
+    prebiotics_df = prebiotics_df['name'].drop_duplicates()
     prebiotics_df.to_csv(output_csv_path, index=False, header=False)
