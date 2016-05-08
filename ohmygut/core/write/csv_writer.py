@@ -11,25 +11,24 @@ CSV_SEPARATOR = '\t'
 
 
 class CsvWriter(BaseWriter):
-    def __init__(self, csv_path):
+    def __init__(self, csv_path, tags):
         super().__init__()
+        self.tags = tags
         self.csv_path = csv_path
-        self.header_included = False
+        columns_part_1 = ['text', 'article_title', 'journal']
+        columns_part_2_entities = []
+        # order is important
+        for tag in self.tags:
+            columns_part_2_entities.append(tag.lower())
+        columns_part_3 = ['length', 'from', 'to', 'tagfrom', 'tagto', 'words', 'tags', 'allwords', 'alltags', 'graph']
+        self.columns = columns_part_1 + columns_part_2_entities + columns_part_3
+
+        if INCLUDE_HEADER:
+            header_data = pd.DataFrame(columns=self.columns)
+            header_data.to_csv(self.csv_path, mode='a', header=INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
 
     def write(self, sentence):
         rows = []
-        columns_part_1 = ['text', 'article_title', 'journal']
-        columns_part_2_entities = []
-        for collection in sentence.entities_collections:
-            columns_part_2_entities.append(collection.tag.lower())
-        columns_part_3 = ['length', 'from', 'to', 'tagfrom', 'tagto', 'words', 'tags', 'allwords', 'alltags', 'graph']
-
-        columns = columns_part_1 + columns_part_2_entities + columns_part_3
-        if INCLUDE_HEADER and not self.header_included:
-            header_data = pd.DataFrame(columns=columns)
-            header_data.to_csv(self.csv_path, mode='a', header=INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
-            self.header_included = True
-
         for paths in sentence.shortest_paths.values():
             for path in paths:
                 tags = path.tags
@@ -43,8 +42,19 @@ class CsvWriter(BaseWriter):
                     sentence.text,
                     sentence.article_title,
                     sentence.journal]
-                for collection in sentence.entities_collections:
-                    row.append(str(collection))
+
+                # tags follow the same order as columns
+                for tag in self.tags:
+                    tagged_collection_list = [collection for collection in sentence.entities_collections
+                                              if collection.tag == tag]
+                    if len(tagged_collection_list) > 1:
+                        raise Exception("found more than one collection by tag: tags not unique error")
+
+                    if len(tagged_collection_list) == 0:
+                        row.append("")
+
+                    if len(tagged_collection_list) == 1:
+                        row.append(str(tagged_collection_list[0]))
 
                 row = row + [
                     length,
@@ -58,9 +68,8 @@ class CsvWriter(BaseWriter):
                     sentence.parser_output.tags,
                     sentence.parser_output.nx_graph.adj]
                 rows.append(row)
-        data = pd.DataFrame(rows, columns=columns)
+        data = pd.DataFrame(rows, columns=self.columns)
 
-        # todo: header writes also!
         data.to_csv(self.csv_path, mode='a', header=False, index=False, sep=CSV_SEPARATOR)
 
 

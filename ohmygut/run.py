@@ -84,9 +84,13 @@ if __name__ == '__main__':
 
     do_nothing_analyzer = DoNothingSentenceAnalyzer()
     analyzer = SentenceAnalyzer()
+
+    tags_required = [BACTERIA_TAG]
+    tags_optional = [PREBIOTIC_TAG, DIET_TAG, FOOD_TAG]
+    tags_to_exclude = [ALL_BACTERIA_TAG]
     sentence_finder = SentenceFinder([gut_bacteria_catalog, prebiotics_catalog, diets_catalog, mixed_food_catalog],
                                      spacy_sentence_parser, analyzer,
-                                     [BACTERIA_TAG], [PREBIOTIC_TAG, DIET_TAG, FOOD_TAG], [ALL_BACTERIA_TAG])
+                                     tags_required, tags_optional, tags_to_exclude)
 
     nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
     medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
@@ -102,7 +106,7 @@ if __name__ == '__main__':
 
     output_dir = get_output_dir_path()
     csv_path = get_csv_path()
-    csv_writer = CsvWriter(csv_path)
+    csv_writer = CsvWriter(csv_path, tags_required + tags_optional)
     pkl_writer = PklWriter(output_dir)
     log_writer = LogWriter()
 
