@@ -1,26 +1,20 @@
 inulin
 fructooligossacharides
-FOS
 galacto-oligosaccharide
 galactooligosaccharide
 Trans-galactooligosaccharide
 transgalacto-oligo-saccharides
 tGOS
-GOS
 resistant starch
 lactulose
 Larch arabinogalactin
-LAG
 pectin
 beta-glucan
 Xylooligosaccharides
 xylo-oligosaccharides
-XOS
 oligofructose
 Oligofructose-Enriched Inulin
-OEI
 Mannan Oligosaccharides
-MOS
 GOS-Lu
 GOS-La
 Fiber
@@ -28,9 +22,7 @@ Fibre
 Nondigestible oligosaccharides
 pyrodextrins
 Resistant starch
-IMO
 isomalto-oligosaccharides
-SOS
 soya-oligosaccharides
 Arabinoxylan
 Polydextrose
@@ -39,13 +31,10 @@ Chitin
 Alginate acids
 inulins
 fructooligossacharide
-FO
 galacto-oligosaccharides
 galactooligosaccharides
 Trans-galactooligosaccharides
 transgalacto-oligo-saccharide
-tGO
-GO
 resistant starches
 lactuloses
 Larch arabinogalactins
@@ -54,12 +43,10 @@ pectins
 beta-glucans
 Xylooligosaccharideses
 xylo-oligosaccharide
-XO
 oligofructoses
 Oligofructose-Enriched Inulins
 OEIS
 Mannan Oligosaccharideses
-MO
 GOS-Lus
 GOS-Las
 Fibers
@@ -69,56 +56,41 @@ pyrodextrin
 Resistant starches
 IMOES
 isomalto-oligosaccharide
-SO
 soya-oligosaccharide
 Arabinoxylans
 Polydextroses
 Dextrins
 Chitins
 Alginate acidss
-fos
 trans-galactooligosaccharide
 tgos
-gos
 larch arabinogalactin
-lag
 xylooligosaccharides
-xos
 oligofructose-enriched inulin
-oei
 mannan oligosaccharides
-mos
 gos-lu
 gos-la
 fiber
 fibre
 nondigestible oligosaccharides
-imo
-sos
 arabinoxylan
 polydextrose
 dextrin
 chitin
 alginate acids
-fo
 trans-galactooligosaccharides
-tgo
-go
 larch arabinogalactins
 lags
 xylooligosaccharideses
-xo
 oligofructose-enriched inulins
 oeis
 mannan oligosaccharideses
-mo
 gos-lus
 gos-las
 fibers
 fibres
 nondigestible oligosaccharideses
 imoes
-so
 arabinoxylans
 polydextroses
 dextrins
@@ -126,55 +98,41 @@ chitins
 alginate acidss
 Inulin
 Fructooligossacharides
-Fos
 Galacto-oligosaccharide
 Galactooligosaccharide
 Transgalacto-oligo-saccharides
 Tgos
-Gos
 Lactulose
-Lag
 Pectin
 Beta-glucan
 Xylo-oligosaccharides
-Xos
 Oligofructose
 Oligofructose-enriched inulin
-Oei
 Mannan oligosaccharides
-Mos
 Gos-lu
 Gos-la
 Pyrodextrins
-Imo
 Isomalto-oligosaccharides
-Sos
 Soya-oligosaccharides
 Inulins
 Fructooligossacharide
-Fo
 Galacto-oligosaccharides
 Galactooligosaccharides
 Transgalacto-oligo-saccharide
-Tgo
-Go
 Lactuloses
 Lags
 Pectins
 Beta-glucans
 Xylo-oligosaccharide
-Xo
 Oligofructoses
 Oligofructose-enriched inulins
 Oeis
 Mannan oligosaccharideses
-Mo
 Gos-lus
 Gos-las
 Pyrodextrin
 Imoes
 Isomalto-oligosaccharide
-So
 Soya-oligosaccharide
 INULIN
 FRUCTOOLIGOSSACHARIDES
@@ -212,7 +170,6 @@ GALACTO-OLIGOSACCHARIDES
 GALACTOOLIGOSACCHARIDES
 TRANS-GALACTOOLIGOSACCHARIDES
 TRANSGALACTO-OLIGO-SACCHARIDE
-TGO
 RESISTANT STARCHES
 LACTULOSES
 LARCH ARABINOGALACTINS
@@ -236,3 +193,11 @@ POLYDEXTROSES
 DEXTRINS
 CHITINS
 ALGINATE ACIDSS
+FOS
+GOS
+LAG
+XOS
+OEI
+MOS
+IMO
+TGO

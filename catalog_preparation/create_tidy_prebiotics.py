@@ -32,6 +32,17 @@ if __name__ == '__main__':
     prebiotic_upper = [prebiotic.upper() for prebiotic in prebiotics_final]
     prebiotics_final = prebiotics_final + prebiotic_upper
 
+    # remove 2-letters words
+    prebiotics_final = [prebiotic for prebiotic in prebiotics_final if len(prebiotic) > 2]
+
+    # capitalize all 3-letters words
+    prebiotics_3_letter_capitalized = [prebiotic.upper() for prebiotic in prebiotics_final if len(prebiotic) == 3]
+    prebiotics_final = [prebiotic for prebiotic in prebiotics_final if len(prebiotic) != 3]
+    prebiotics_final = prebiotics_final + prebiotics_3_letter_capitalized
+
+    # remove SOS
+    prebiotics_final = [prebiotic for prebiotic in prebiotics_final if prebiotic.lower() != 'sos']
+
     prebiotics_df = pd.DataFrame({"name": prebiotics_final})
     prebiotics_df = prebiotics_df['name'].drop_duplicates()
     prebiotics_df.to_csv(output_csv_path, index=False, header=False)
