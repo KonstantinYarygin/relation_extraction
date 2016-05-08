@@ -1,7 +1,6 @@
 import spacy
 
-from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG
-from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
+from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD, logger
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import remove_entity_overlapping
 
@@ -20,9 +19,7 @@ class SentenceFinder(object):
         self.sentence_parser = sentence_parser
         self.nlp = spacy.load('en')
 
-    # todo: test me
     def get_sentence(self, sentence_text, article_title, article_journal):
-
         if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
             return None
 
@@ -39,7 +36,9 @@ class SentenceFinder(object):
         tokens = self.nlp(sentence_text)
         tokens_words = [token.orth_ for token in tokens]
 
+        logger.info("entities before remove overlapping: %s" % str(entities_collections))
         entities_collections = remove_entity_overlapping(entities_collections, tokens_words)
+        logger.info("entities after remove overlapping: %s" % str(entities_collections))
 
         # separate all several-words-names by underscope (_)
         for collection in entities_collections:
@@ -59,6 +58,7 @@ class SentenceFinder(object):
         entities_collections = [collection for collection in entities_collections if len(collection.entities) > 0]
         tags_in_sentence = set([collection.tag for collection in entities_collections if len(collection.entities) > 0])
 
+        logger.info("entities after excluding: %s" % str(entities_collections))
         if not self.check_if_tags(tags_in_sentence):
             return None
 
