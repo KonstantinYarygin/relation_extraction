@@ -14,6 +14,7 @@ class CsvWriter(BaseWriter):
     def __init__(self, csv_path):
         super().__init__()
         self.csv_path = csv_path
+        self.header_included = False
 
     def write(self, sentence):
         rows = []
@@ -24,9 +25,10 @@ class CsvWriter(BaseWriter):
         columns_part_3 = ['length', 'from', 'to', 'tagfrom', 'tagto', 'words', 'tags', 'allwords', 'alltags', 'graph']
 
         columns = columns_part_1 + columns_part_2_entities + columns_part_3
-        if INCLUDE_HEADER:
+        if INCLUDE_HEADER and not self.header_included:
             header_data = pd.DataFrame(columns=columns)
             header_data.to_csv(self.csv_path, mode='a', header=INCLUDE_HEADER, index=False, sep=CSV_SEPARATOR)
+            self.header_included = True
 
         for paths in sentence.shortest_paths.values():
             for path in paths:
