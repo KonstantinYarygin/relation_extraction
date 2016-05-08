@@ -56,6 +56,7 @@ class GutBacteriaCatalog(Catalog):
             :param sentence_text:
         """
 
+        # todo: it should return these bacteria and also bacteria found in all_bacteria_catalog
         bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))

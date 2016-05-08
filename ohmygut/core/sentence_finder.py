@@ -1,7 +1,6 @@
 import spacy
 
 from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG, ALL_BACTERIA_COLLECTION
-from ohmygut.core.catalog.catalog import EntityCollection
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG, BACTERIA_COLLECTION
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
@@ -9,6 +8,7 @@ from ohmygut.core.tools import remove_entity_overlapping
 
 
 class SentenceFinder(object):
+    # todo: make catalog_list and optional_catalog_list
     def __init__(self, tokenizer, sentence_parser, sentence_analyzer,
                  tags_to_search, tags_optional_to_search, catalog_list):
         super().__init__()
@@ -38,11 +38,12 @@ class SentenceFinder(object):
 
         tokens = self.nlp(sentence_text)
         tokens_words = [token.orth_ for token in tokens]
+        # todo: make tag unique!
         collections_by_name = {collection.unique_name: collection for collection in entities_collections}
 
         # ======= todo: refactor
-        # todo: make tag unique!
-        # todo: make it as a separate step - like preprocessing
+
+        # todo: this will move to gut_bacteria_catalog.find()
         if BACTERIA_COLLECTION in collections_by_name and ALL_BACTERIA_COLLECTION in collections_by_name:
             bacteria = collections_by_name[BACTERIA_COLLECTION]
             bacteria_names = set([entity.name for entity in bacteria.entities])
@@ -68,6 +69,7 @@ class SentenceFinder(object):
             sentence_text = sentence_text.replace(entity.name, dashed_name)
             entity.name = dashed_name
 
+        # todo: make tags_to_exclude argument
         if BACTERIA_TAG in collections_by_tag:
             # clean bacterias: ALL_BACTERIA_TAG means it's not in gut catalog
             bacteria = collections_by_tag[BACTERIA_TAG]

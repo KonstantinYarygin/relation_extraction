@@ -58,6 +58,7 @@ class CsvWriter(BaseWriter):
                 rows.append(row)
         data = pd.DataFrame(rows, columns=columns)
 
+        # todo: header writes also!
         data.to_csv(self.csv_path, mode='a', header=False, index=False, sep=CSV_SEPARATOR)
 
 
