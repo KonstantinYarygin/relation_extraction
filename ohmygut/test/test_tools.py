@@ -6,7 +6,7 @@ from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
 from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.tools import get_sentences, remove_entity_overlapping
+from ohmygut.core.tools import get_sentences, remove_entity_overlapping, remove_pmc_from_pmcid
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -80,6 +80,12 @@ class TestCase(unittest.TestCase):
     #     self.assertListEqual(diseases_expected, diseases_new)
     #     self.assertListEqual(food_expected, food_new)
 
+    def test_remove_pmc_from_pmcid(self):
+        actual = remove_pmc_from_pmcid("PMC123456")
+        self.assertEqual(actual, "123456")
+
+
 
 if __name__ == '__main__':
     unittest.main()
+

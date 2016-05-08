@@ -1,4 +1,5 @@
 import os
+import re
 from itertools import product
 
 import pandas as pd
@@ -191,3 +192,7 @@ def memory_usage_psutil():
     process = psutil.Process(os.getpid())
     mem = process.memory_info()[0] / float(2 ** 20)
     return mem
+
+
+def remove_pmc_from_pmcid(pmc):
+    return re.sub("PMC", "", pmc)

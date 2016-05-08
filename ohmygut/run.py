@@ -102,7 +102,9 @@ if __name__ == '__main__':
     lancaster_stemmer = LancasterStemmer()
     pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
-    article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
+    article_data_sources = [#nxml_article_data_source,
+                            #libgen_article_data_source,
+                            medline_article_data_source]
 
     output_dir = get_output_dir_path()
     csv_path = get_csv_path()

@@ -1,7 +1,7 @@
 class Article(object):
-    # todo: add pmid
-    def __init__(self, title, text, journal):
+    def __init__(self, title, text, journal, pmc):
         super().__init__()
+        self.pmc = pmc
         self.journal = journal
         self.text = text
         self.title = title
