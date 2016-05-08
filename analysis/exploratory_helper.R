@@ -59,7 +59,18 @@ GetBacteria <- function(raw.sentences){
   data.bacteria
 }
 
-GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
+GetPrebiotics <- function(raw.sentences){
+  data.prebiotics <- raw.sentences[prebiotic != '',
+                                 .(unlist(llply(strsplit(unlist(strsplit(prebiotic, ', ')), ';'), 
+                                                .fun=function(x) x[1])),
+                                   unlist(llply(strsplit(unlist(strsplit(prebiotic, ', ')), ';'), 
+                                                .fun=function(x) x[2]))),
+                                 by=.(text, article_title, journal)]
+  setnames(data.prebiotics, c("text","article_title", "journal", "prebiotic","prebiotic_id"))
+  data.prebiotics
+}
+
+ParseRawSentences <- function(raw.sentences){
   data.bacteria <- GetBacteria(raw.sentences)
   
   data.nutrient <- raw.sentences[nutrients != '',
