@@ -50,10 +50,13 @@ class SentenceFinder(object):
 
         # remove bad entities
         for collection in entities_collections:
-            bad_entities = [x for x in collection.entities if ALL_BACTERIA_TAG in x.additional_tags]
+            bad_entities = [x for x in collection.entities
+                            if any(y in self.tags_to_exclude for y in x.additional_tags) or
+                            x.tag in self.tags_to_exclude]
             for entity in bad_entities:
                 collection.entities.remove(entity)
 
+        entities_collections = [collection for collection in entities_collections if len(collection.entities) > 0]
         tags_in_sentence = set([collection.tag for collection in entities_collections if len(collection.entities) > 0])
 
         if not self.check_if_tags(tags_in_sentence):

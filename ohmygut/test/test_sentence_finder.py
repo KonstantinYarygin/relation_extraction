@@ -17,8 +17,11 @@ class MockSentenceParser(SentenceParser):
 
 
 class MockCatalog(Catalog):
-    def __init__(self, name, entities_number):
+    def __init__(self, name, entities_number, additional_tags=None):
         super().__init__()
+        if additional_tags is None:
+            additional_tags = []
+        self.additional_tags = additional_tags
         self.entities_number = entities_number
         self.name = name
 
@@ -28,7 +31,8 @@ class MockCatalog(Catalog):
     def find(self, sentence_text):
         entities = []
         for i in range(self.entities_number):
-            entities.append(Entity("name%i%i" % (i, self.name), "code%i%i" % (i, self.name), "tag%i" % self.name))
+            entities.append(Entity("name%i%i" % (i, self.name), "code%i%i" % (i, self.name), "tag%i" % self.name,
+                                   self.additional_tags))
         return EntityCollection(entities,
                                 "tag%i" % self.name)
 
@@ -59,12 +63,14 @@ class TestCase(unittest.TestCase):
     def test_get_sentence(self):
         catalog1 = MockCatalog(1, 2)
         catalog2 = MockCatalog(2, 1)
+        catalog3 = MockCatalog(3, 1)
+        catalog4 = MockCatalog(4, 1, ["tag4add"])
         analyzer = SentenceAnalyzer()
-        target = SentenceFinder(catalog_list=[catalog1, catalog2],
+        target = SentenceFinder(catalog_list=[catalog1, catalog2, catalog3, catalog4],
                                 sentence_parser=SpacySentenceParser(),
                                 sentence_analyzer=analyzer, tags_to_search=["tag1"],
-                                tags_optional_to_search=["tag2"])
-        text = "The name01 is the same as name11, but not name02"
+                                tags_optional_to_search=["tag2"], tags_to_exclude=["tag3", "tag4add"])
+        text = "The name01 is the same as name11, but not name02, and name03 and name04 as well"
         title = "title"
         journal = "journal"
         actual = target.get_sentence(text, title, journal)
@@ -77,3 +83,4 @@ class TestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
