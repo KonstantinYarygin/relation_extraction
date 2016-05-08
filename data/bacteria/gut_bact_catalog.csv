@@ -1,11 +1,23 @@
 class,id,name,rank
-scientific name,547,enterobacters,genus
-synonym,838,xylanibacters,genus
-scientific name,2172,methanobrevibacters,genus
-scientific name,39948,dialisters,genus
-scientific name,204475,gemmigers,genus
-scientific name,459786,oscillibacters,genus
-scientific name,1407607,fusicatenibacters,genus
+scientific name,830,butyrivibrios,genus
+synonym,1678,bifidibacteria,genus
+scientific name,1678,bifidobacteria,genus
+scientific name,1730,eubacteria,genus
+scientific name,33024,phascolarctobacteria,genus
+misspelling,135858,catenabacteria,genus
+scientific name,135858,catenibacteria,genus
+scientific name,216851,faecalibacteria,genus
+scientific name,1508657,ruminiclostridia,genus
+synonym,816,capsulares,genus
+scientific name,158846,megamonads,genus
+scientific name,1263,ruminococci,genus
+synonym,1279,aurococci,genus
+scientific name,1279,staphylococci,genus
+scientific name,1301,streptococci,genus
+scientific name,1357,lactococci,genus
+scientific name,1578,lactobacilli,genus
+synonym,1578,paralactobacilli,genus
+scientific name,33042,coprococci,genus
 synonym,547,cloacae,genus
 misspelling,561,escherchiae,genus
 scientific name,561,escherichiae,genus
@@ -26,25 +38,13 @@ scientific name,1501226,romboutsiae,genus
 scientific name,1506577,tyzzerellae,genus
 scientific name,1573534,faecalitaleae,genus
 scientific name,1573535,holdemanellae,genus
-scientific name,830,butyrivibrios,genus
-scientific name,158846,megamonads,genus
-synonym,1678,bifidibacteria,genus
-scientific name,1678,bifidobacteria,genus
-scientific name,1730,eubacteria,genus
-scientific name,33024,phascolarctobacteria,genus
-misspelling,135858,catenabacteria,genus
-scientific name,135858,catenibacteria,genus
-scientific name,216851,faecalibacteria,genus
-scientific name,1508657,ruminiclostridia,genus
-scientific name,1263,ruminococci,genus
-synonym,1279,aurococci,genus
-scientific name,1279,staphylococci,genus
-scientific name,1301,streptococci,genus
-scientific name,1357,lactococci,genus
-scientific name,1578,lactobacilli,genus
-synonym,1578,paralactobacilli,genus
-scientific name,33042,coprococci,genus
-synonym,816,capsulares,genus
+scientific name,547,enterobacters,genus
+synonym,838,xylanibacters,genus
+scientific name,2172,methanobrevibacters,genus
+scientific name,39948,dialisters,genus
+scientific name,204475,gemmigers,genus
+scientific name,459786,oscillibacters,genus
+scientific name,1407607,fusicatenibacters,genus
 synonym,562,b. coli,species
 synonym,562,e. coli,species
 scientific name,821,b. vulgatus,species
@@ -455,13 +455,25 @@ scientific name,1647988,akkermansiaceae,family
 unknown,1000000000,lachnoclostridium hathewayi,unknown
 unknown,1000000001,anoxystipes fissicatena,unknown
 unknown,1000000002,anoxystipes,unknown
-scientific name,547,Enterobacters,genus
-synonym,838,Xylanibacters,genus
-scientific name,2172,Methanobrevibacters,genus
-scientific name,39948,Dialisters,genus
-scientific name,204475,Gemmigers,genus
-scientific name,459786,Oscillibacters,genus
-scientific name,1407607,Fusicatenibacters,genus
+scientific name,830,Butyrivibrios,genus
+synonym,1678,Bifidibacteria,genus
+scientific name,1678,Bifidobacteria,genus
+scientific name,1730,Eubacteria,genus
+scientific name,33024,Phascolarctobacteria,genus
+misspelling,135858,Catenabacteria,genus
+scientific name,135858,Catenibacteria,genus
+scientific name,216851,Faecalibacteria,genus
+scientific name,1508657,Ruminiclostridia,genus
+synonym,816,Capsulares,genus
+scientific name,158846,Megamonads,genus
+scientific name,1263,Ruminococci,genus
+synonym,1279,Aurococci,genus
+scientific name,1279,Staphylococci,genus
+scientific name,1301,Streptococci,genus
+scientific name,1357,Lactococci,genus
+scientific name,1578,Lactobacilli,genus
+synonym,1578,Paralactobacilli,genus
+scientific name,33042,Coprococci,genus
 synonym,547,Cloacae,genus
 misspelling,561,Escherchiae,genus
 scientific name,561,Escherichiae,genus
@@ -482,25 +494,13 @@ scientific name,1501226,Romboutsiae,genus
 scientific name,1506577,Tyzzerellae,genus
 scientific name,1573534,Faecalitaleae,genus
 scientific name,1573535,Holdemanellae,genus
-scientific name,830,Butyrivibrios,genus
-scientific name,158846,Megamonads,genus
-synonym,1678,Bifidibacteria,genus
-scientific name,1678,Bifidobacteria,genus
-scientific name,1730,Eubacteria,genus
-scientific name,33024,Phascolarctobacteria,genus
-misspelling,135858,Catenabacteria,genus
-scientific name,135858,Catenibacteria,genus
-scientific name,216851,Faecalibacteria,genus
-scientific name,1508657,Ruminiclostridia,genus
-scientific name,1263,Ruminococci,genus
-synonym,1279,Aurococci,genus
-scientific name,1279,Staphylococci,genus
-scientific name,1301,Streptococci,genus
-scientific name,1357,Lactococci,genus
-scientific name,1578,Lactobacilli,genus
-synonym,1578,Paralactobacilli,genus
-scientific name,33042,Coprococci,genus
-synonym,816,Capsulares,genus
+scientific name,547,Enterobacters,genus
+synonym,838,Xylanibacters,genus
+scientific name,2172,Methanobrevibacters,genus
+scientific name,39948,Dialisters,genus
+scientific name,204475,Gemmigers,genus
+scientific name,459786,Oscillibacters,genus
+scientific name,1407607,Fusicatenibacters,genus
 synonym,562,B. coli,species
 synonym,562,E. coli,species
 scientific name,821,B. vulgatus,species
