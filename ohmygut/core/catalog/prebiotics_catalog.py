@@ -8,6 +8,9 @@ PREBIOTIC_TAG = "PREBIOTIC"
 
 
 class PrebioticsCatalog(Catalog):
+    def get_list(self):
+        pass
+
     def __init__(self, tidy_csv_path):
         super().__init__()
         self.tidy_csv_path = tidy_csv_path
