@@ -1,11 +1,6 @@
 from itertools import product, combinations
-import networkx as nx
 
-from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
-from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
-from ohmygut.core.catalog.nutrients_catalog import NUTRIENT_TAG
-from ohmygut.core.catalog.prebiotics_catalog import PREBIOTIC_TAG
-from ohmygut.core.catalog.usda_food_catalog import FOOD_TAG
+import networkx as nx
 
 
 class ShortestPath:
@@ -36,15 +31,12 @@ def search_shortest_path(parser_output, source_node_id, target_node_id, undirect
 
 
 class SentenceAnalyzer:
-    def analyze_sentence(self, parser_output):
-        bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == BACTERIA_TAG]
-        nutrients_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == NUTRIENT_TAG]
-        diseases_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == DISEASE_TAG]
-        food_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == FOOD_TAG]
-        prebiotic_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == PREBIOTIC_TAG]
-
-        tag_nodeids_tuples = zip((BACTERIA_TAG, NUTRIENT_TAG, DISEASE_TAG, FOOD_TAG, PREBIOTIC_TAG),
-                                 (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids, prebiotic_nodes_ids))
+    def analyze_sentence(self, parser_output, tags):
+        tag_nodeids_tuples = []
+        for sentence_tag in tags:
+            nodes_ids = [id for id, tag in parser_output.tags.items() if tag == sentence_tag]
+            nodes_ids_tuple = tuple([sentence_tag, nodes_ids])
+            tag_nodeids_tuples.append(nodes_ids_tuple)
 
         shortest_pathes = {}
         for entity_1, entity_2 in combinations(tag_nodeids_tuples, 2):
@@ -72,7 +64,7 @@ class SentenceAnalyzer:
 
 
 class DoNothingSentenceAnalyzer(SentenceAnalyzer):
-    def analyze_sentence(self, parser_output):
+    def analyze_sentence(self, parser_output, tags):
         return {'mock': [ShortestPath([""], [""], [""], [""])]}
 
 

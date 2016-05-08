@@ -58,7 +58,7 @@ if __name__ == '__main__':
     all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
     all_bacteria_catalog.initialize()
 
-    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path)
+    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path, all_bacteria_catalog)
     gut_bacteria_catalog.initialize()
 
     # nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
@@ -80,9 +80,8 @@ if __name__ == '__main__':
 
     do_nothing_analyzer = DoNothingSentenceAnalyzer()
     analyzer = SentenceAnalyzer()
-    sentence_finder = SentenceFinder(stanford_tokenizer, spacy_sentence_parser, analyzer,
-                                     [BACTERIA_TAG], [PREBIOTIC_TAG],
-                                     [gut_bacteria_catalog, all_bacteria_catalog, prebiotics_catalog])
+    sentence_finder = SentenceFinder([gut_bacteria_catalog, prebiotics_catalog], spacy_sentence_parser, analyzer,
+                                     [BACTERIA_TAG], [PREBIOTIC_TAG])
 
     nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
     medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)

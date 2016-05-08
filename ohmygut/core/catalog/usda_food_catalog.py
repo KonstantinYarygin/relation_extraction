@@ -2,13 +2,13 @@ from time import time
 
 import pandas as pd
 
-from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Entity, EntityCollection
 from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 FOOD_TAG = 'FOOD'
-FOOD_COLLECTION = "FOOD_COLLECTION"
+
 
 class UsdaFoodCatalog(Catalog):
     def get_list(self):
@@ -42,5 +42,5 @@ class UsdaFoodCatalog(Catalog):
     def find(self, sentence_text):
         food_names = self.__hash_tree.search(sentence_text)
         entities = EntityCollection([Entity(name, self.__group_by_food_name[name], FOOD_TAG) for name in food_names],
-                                    FOOD_COLLECTION, FOOD_TAG)
+                                    FOOD_TAG)
         return entities

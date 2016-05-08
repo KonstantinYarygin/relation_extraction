@@ -64,8 +64,7 @@ if __name__ == '__main__':
 
     do_nothing_analyzer = DoNothingSentenceAnalyzer()
     analyzer = SentenceAnalyzer()
-    sentence_finder = SentenceFinder(stanford_tokenizer, do_nothing_parser, do_nothing_analyzer, all_bacteria_catalog,
-                                     [BACTERIA_TAG], [])
+    sentence_finder = SentenceFinder([], do_nothing_parser, do_nothing_analyzer, all_bacteria_catalog, [BACTERIA_TAG])
 
     nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
     medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)

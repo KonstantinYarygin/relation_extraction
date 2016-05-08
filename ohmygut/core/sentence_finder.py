@@ -1,23 +1,23 @@
 import spacy
 
-from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG, ALL_BACTERIA_COLLECTION
-from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG, BACTERIA_COLLECTION
+from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import remove_entity_overlapping
 
 
 class SentenceFinder(object):
-    # todo: make catalog_list and optional_catalog_list
-    def __init__(self, tokenizer, sentence_parser, sentence_analyzer,
-                 tags_to_search, tags_optional_to_search, catalog_list):
+    def __init__(self, catalog_list, sentence_parser, sentence_analyzer, tags_to_search, tags_optional_to_search,
+                 tags_to_exclude=None):
         super().__init__()
+        if tags_to_exclude is None:
+            tags_to_exclude = []
+        self.tags_to_exclude = tags_to_exclude
         self.catalog_list = catalog_list
         self.tags_optional = set(tags_optional_to_search)
         self.tags = set(tags_to_search)
         self.sentence_analyzer = sentence_analyzer
         self.sentence_parser = sentence_parser
-        self.tokenizer = tokenizer
         self.nlp = spacy.load('en')
 
     # todo: test me
@@ -38,57 +38,37 @@ class SentenceFinder(object):
 
         tokens = self.nlp(sentence_text)
         tokens_words = [token.orth_ for token in tokens]
-        # todo: make tag unique!
-        collections_by_name = {collection.unique_name: collection for collection in entities_collections}
-
-        # ======= todo: refactor
-
-        # todo: this will move to gut_bacteria_catalog.find()
-        if BACTERIA_COLLECTION in collections_by_name and ALL_BACTERIA_COLLECTION in collections_by_name:
-            bacteria = collections_by_name[BACTERIA_COLLECTION]
-            bacteria_names = set([entity.name for entity in bacteria.entities])
-            all_bacteria = collections_by_name[ALL_BACTERIA_COLLECTION]
-            all_bacteria.entities = [entity for entity in all_bacteria.entities if entity.name not in bacteria_names]
-            bacteria.entities.extend(all_bacteria.entities)
-
-            # remove ALL_BACTERIA entities: we dont need it
-            del collections_by_name[ALL_BACTERIA_COLLECTION]
-            entities_collections = [collection for collection in entities_collections if collection.unique_name != ALL_BACTERIA_COLLECTION]
 
         entities_collections = remove_entity_overlapping(entities_collections, tokens_words)
-        # todo: a problem with name and tag!
-        collections_by_tag = {collection.tag: collection for collection in entities_collections}
-        entities_lists = [collection.entities for collection in entities_collections]
-        all_entities_list = []
-        for entity_list in entities_lists:
-            all_entities_list = all_entities_list + entity_list
 
         # separate all several-words-names by underscope (_)
-        for entity in all_entities_list:
-            dashed_name = entity.name.replace(' ', '_')
-            sentence_text = sentence_text.replace(entity.name, dashed_name)
-            entity.name = dashed_name
+        for collection in entities_collections:
+            for entity in collection.entities:
+                dashed_name = entity.name.replace(' ', '_')
+                sentence_text = sentence_text.replace(entity.name, dashed_name)
+                entity.name = dashed_name
 
-        # todo: make tags_to_exclude argument
-        if BACTERIA_TAG in collections_by_tag:
-            # clean bacterias: ALL_BACTERIA_TAG means it's not in gut catalog
-            bacteria = collections_by_tag[BACTERIA_TAG]
-            bad_bacteria = [x for x in bacteria.entities if ALL_BACTERIA_TAG in x.additional_tags]
-            for bad_bact in bad_bacteria:
-                bacteria.entities.remove(bad_bact)
-            # clean_bacteria = EntityCollection(good_bacteria, BACTERIA_TAG)
-            # collections_by_tag[BACTERIA_TAG] = clean_bacteria
+        # remove bad entities
+        for collection in entities_collections:
+            bad_entities = [x for x in collection.entities if ALL_BACTERIA_TAG in x.additional_tags]
+            for entity in bad_entities:
+                collection.entities.remove(entity)
 
         tags_in_sentence = set([collection.tag for collection in entities_collections if len(collection.entities) > 0])
-        # ======= end refactor
 
         if not self.check_if_tags(tags_in_sentence):
             return None
 
         tokens = self.nlp(sentence_text)
+
+        # entities list for parser
+        all_entities_list = []
+        for collection in entities_collections:
+            all_entities_list.extend(collection.entities)
+
         parser_output = self.sentence_parser.parse_sentence(sentence_text, all_entities_list, tokens)
 
-        paths = self.sentence_analyzer.analyze_sentence(parser_output)
+        paths = self.sentence_analyzer.analyze_sentence(parser_output, tags_in_sentence)
 
         sentence = Sentence(text=sentence_text,
                             article_title=article_title,

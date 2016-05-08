@@ -8,7 +8,7 @@ class DoNothingCatalog(Catalog):
         self.tag = tag
 
     def find(self, sentence_text):
-        return EntityCollection([], self.tag)
+        return EntityCollection([])
 
     def get_list(self):
         return []

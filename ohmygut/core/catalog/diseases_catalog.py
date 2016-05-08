@@ -9,6 +9,7 @@ from ohmygut.core.hash_tree import HashTree
 
 DISEASE_TAG = 'DISEASE'
 
+
 class DiseasesCatalog(Catalog):
     def get_list(self):
         pass
@@ -47,5 +48,5 @@ class DiseasesCatalog(Catalog):
         diseases_names = self.hash_tree.search(sentence_text)
         entities = EntityCollection([Entity(name,
                                             self.disease_dictionary[name],
-                                            DISEASE_TAG) for name in diseases_names], DISEASE_TAG)
+                                            DISEASE_TAG) for name in diseases_names])
         return entities

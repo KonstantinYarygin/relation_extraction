@@ -4,11 +4,11 @@ import pandas as pd
 
 from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
-from ohmygut.core.constants import plural_dict, logger
+from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 ALL_BACTERIA_TAG = 'ALL_BACTERIA'
-ALL_BACTERIA_COLLECTION = "ALL_BACTERIA_COLLECTION"
+
 
 class AllBacteriaCatalog(Catalog):
     """Object holding NCBI ontology"""
@@ -64,8 +64,7 @@ class AllBacteriaCatalog(Catalog):
         entities = EntityCollection([Entity(name,
                                             code,
                                             BACTERIA_TAG,
-                                            [ALL_BACTERIA_TAG]) for name, code in output_list],
-                                    ALL_BACTERIA_COLLECTION, BACTERIA_TAG)
+                                            [ALL_BACTERIA_TAG]) for name, code in output_list], BACTERIA_TAG)
         return entities
 
     def get_scientific_name(self, ncbi_id):

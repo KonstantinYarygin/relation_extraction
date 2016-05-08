@@ -34,5 +34,5 @@ class DbpediaFoodCatalog(Catalog):
 
     def find(self, sentence_text):
         food_names = self.__hash_tree.search(sentence_text)
-        entities = EntityCollection([Entity(name, 'nogroup', FOOD_TAG) for name in food_names], FOOD_TAG)
+        entities = EntityCollection([Entity(name, 'nogroup', FOOD_TAG) for name in food_names])
         return entities
