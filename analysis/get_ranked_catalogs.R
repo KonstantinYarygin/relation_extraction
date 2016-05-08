@@ -41,8 +41,8 @@ data.prebiotics.count <- data.prebiotics[,.N,by="prebiotic"]
 catalog.prebiotics <- data.table(readLines("data/prebiotic/prebiotics_tidy.csv"))
 setnames(catalog.prebiotics, c("prebiotic"))
 catalog.prebiotics.ranked <- unique(merge(catalog.prebiotics, data.prebiotics.count, by="prebiotic", all.x=T))
-catalog.prebiotics.ranked[N==NA,N:=0]
-setorder(catalog.prebiotics.ranked)
+catalog.prebiotics.ranked[is.na(N),N:=0]
+setorder(catalog.prebiotics.ranked, -N)
 
 data.bacteria.prebiotic <- data.sentences[,.(text, article_title, journal, bacteria, prebiotic)]
 data.bacteria.prebiotic$prebiotic <- str_replace_all(data.bacteria.prebiotic$prebiotic, ";noid", "")
