@@ -14,18 +14,18 @@ def main(article_data_sources, writers, sentence_finder, data_sources_to_skip=0,
 
         articles = article_data_source.get_articles()
         # todo: sort to be able to continue
-        sentences_titles_journals_tuple = ((sentence, article.title, article.journal) for article in articles
+        sentences_articles_tuples = ((sentence, article) for article in articles
                                            for sentence in get_sentences(article.text))
 
         constants.logger.info("start looping sentences with data source №%i %s" % (i + 1, str(article_data_source)))
         sentence_number = sentences_to_skip
         for _ in range(sentences_to_skip):
-            next(sentences_titles_journals_tuple)
+            next(sentences_articles_tuples)
         sentences_to_skip = 0
 
-        for sentence_text, article_title, article_journal in sentences_titles_journals_tuple:
+        for sentence_text, article in sentences_articles_tuples:
             try:
-                sentence = sentence_finder.get_sentence(sentence_text, article_title, article_journal)
+                sentence = sentence_finder.get_sentence(sentence_text, article)
             except Exception:
                 constants.logger.info(format_exc())
                 constants.logger.info("sentence with error: %s" % sentence_text)

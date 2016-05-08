@@ -29,7 +29,7 @@ from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
 from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
     gut_catalog_file_path, nutrients_file_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
     verb_ontollogy_path, diseases_csv_path, all_catalog_file_path, dbpedia_food_file_path, prebiotics_file_path, \
-    diets_file_path, mixed_food_file_path
+    diets_file_path, mixed_food_file_path, gut_catalog_top3_file_path
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
     all_bacteria_catalog.initialize()
 
-    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path, all_bacteria_catalog)
+    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_top3_file_path, all_bacteria_catalog)
     gut_bacteria_catalog.initialize()
 
     # nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
@@ -102,8 +102,8 @@ if __name__ == '__main__':
     lancaster_stemmer = LancasterStemmer()
     pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
-    article_data_sources = [#nxml_article_data_source,
-                            #libgen_article_data_source,
+    article_data_sources = [nxml_article_data_source,
+                            libgen_article_data_source,
                             medline_article_data_source]
 
     output_dir = get_output_dir_path()

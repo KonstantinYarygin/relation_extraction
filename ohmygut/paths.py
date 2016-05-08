@@ -13,6 +13,7 @@ stanford_models_jar_path = os.path.join(data_dir, "stanford_parser", "stanford-p
 stanford_lex_parser_path = os.path.join(data_dir, "stanford_parser", "englishPCFG.ser.gz")
 
 gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_bact_catalog.csv")
+gut_catalog_top3_file_path = os.path.join(data_dir, "bacteria", "gut_bact_catalog.csv")
 all_catalog_file_path = os.path.join(data_dir, "bacteria", "all_bact_catalog.csv")
 
 prebiotics_file_path = os.path.join(data_dir, "prebiotic", "prebiotics_tidy.csv")

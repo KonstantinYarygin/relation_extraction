@@ -1,6 +1,7 @@
 import unittest
 
 from ohmygut.core.analyzer import SentenceAnalyzer
+from ohmygut.core.article.article import Article
 from ohmygut.core.catalog.all_bacteria_catalog import ALL_BACTERIA_TAG
 from ohmygut.core.catalog.catalog import Catalog, EntityCollection, Entity
 from ohmygut.core.catalog.diseases_catalog import DISEASE_TAG
@@ -73,7 +74,7 @@ class TestCase(unittest.TestCase):
         text = "The name01 is the same as name11, but not name02, and name03 and name04 as well"
         title = "title"
         journal = "journal"
-        actual = target.get_sentence(text, title, journal)
+        actual = target.get_sentence(text, Article(title, "a text", journal, "123"))
         actual_collections = actual.entities_collections
         expected_collections = [EntityCollection([Entity("name01", "code01", "tag1"),
                                                   Entity("name11", "code11", "tag1")], "tag1"),

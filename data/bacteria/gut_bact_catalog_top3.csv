@@ -1,0 +1,898 @@
+class,id,name,rank
+scientific name,830,butyrivibrios,genus
+synonym,1678,bifidibacteria,genus
+scientific name,1678,bifidobacteria,genus
+scientific name,1730,eubacteria,genus
+scientific name,33024,phascolarctobacteria,genus
+misspelling,135858,catenabacteria,genus
+scientific name,135858,catenibacteria,genus
+scientific name,216851,faecalibacteria,genus
+scientific name,1508657,ruminiclostridia,genus
+synonym,816,capsulares,genus
+scientific name,158846,megamonads,genus
+scientific name,1263,ruminococci,genus
+synonym,1279,aurococci,genus
+scientific name,1279,staphylococci,genus
+scientific name,1301,streptococci,genus
+scientific name,1357,lactococci,genus
+scientific name,1578,lactobacilli,genus
+synonym,1578,paralactobacilli,genus
+scientific name,33042,coprococci,genus
+synonym,547,cloacae,genus
+misspelling,561,escherchiae,genus
+scientific name,561,escherichiae,genus
+synonym,816,ristellae,genus
+scientific name,838,prevotellae,genus
+scientific name,841,roseburiae,genus
+equivalent name,841,roseburyae,genus
+equivalent name,841,roseburyellae,genus
+synonym,1678,tissieriae,genus
+scientific name,102106,collinsellae,genus
+scientific name,189330,doreae,genus
+scientific name,239934,akkermansiae,genus
+scientific name,447020,adlercreutziae,genus
+scientific name,572511,blautiae,genus
+scientific name,990721,christensenellae,genus
+synonym,1470353,soleaferreae,genus
+scientific name,1501226,romboutsiae,genus
+scientific name,1506577,tyzzerellae,genus
+scientific name,1573534,faecalitaleae,genus
+scientific name,1573535,holdemanellae,genus
+scientific name,547,enterobacters,genus
+synonym,838,xylanibacters,genus
+scientific name,2172,methanobrevibacters,genus
+scientific name,39948,dialisters,genus
+scientific name,204475,gemmigers,genus
+scientific name,459786,oscillibacters,genus
+scientific name,1407607,fusicatenibacters,genus
+synonym,562,b. coli,species
+synonym,562,e. coli,species
+scientific name,821,b. vulgatus,species
+synonym,853,b. praussnitzii,species
+scientific name,853,f. prausnitzii,species
+scientific name,1264,r. albus,species
+scientific name,1296,s. sciuri,species
+scientific name,1343,s. vestibularis,species
+synonym,1358,b. lacti,species
+scientific name,1358,l. lactis,species
+synonym,1358,s. lactis,species
+scientific name,1624,l. salivarius,species
+misspelling,1624,l. salivarus,species
+scientific name,1680,b. adolescentis,species
+scientific name,1686,b. catenulatum,species
+synonym,1735,b. biformis,species
+synonym,1735,e. biforme,species
+scientific name,1735,h. biformis,species
+synonym,1735,p. biforme,species
+scientific name,2173,m. smithii,species
+synonym,29361,c. nexile,species
+scientific name,29361,t. nexilis,species
+scientific name,33043,c. eutactus,species
+synonym,39483,b. cylindroides,species
+misspelling,39483,e. cylindricoides,species
+synonym,39483,e. cylindroides,species
+scientific name,39483,f. cylindroides,species
+synonym,39483,p. cylindroides,species
+synonym,39483,r. cylindroides,species
+scientific name,39484,e. desmolans,species
+equivalent name,39485,e. eligens,species
+misspelling,39488,e. halii,species
+equivalent name,39488,e. hallii,species
+equivalent name,39492,e. siraeum,species
+scientific name,40518,r. bromii,species
+scientific name,40520,b. obeum,species
+misspelling,40520,e. obeum,species
+synonym,40520,r. obeum,species
+scientific name,45851,b. crossotus,species
+scientific name,47678,b. caccae,species
+synonym,74426,b. aerofaciens,species
+scientific name,74426,c. aerofaciens,species
+synonym,74426,e. aerofaciens,species
+synonym,74426,p. aerofaciens,species
+equivalent name,84026,c. methylpentosum,species
+scientific name,88431,d. longicatena,species
+scientific name,89014,b. luti,species
+synonym,89014,r. luti,species
+misspelling,100886,c. mitsuokai,species
+scientific name,165179,p. copri,species
+misspelling,166486,e. intestinalis,species
+scientific name,166486,r. intestinalis,species
+scientific name,216816,b. longum,species
+scientific name,239935,a. muciniphila,species
+equivalent name,288965,c. clariflavum,species
+scientific name,299767,e. ludwigii,species
+scientific name,301301,r. hominis,species
+misspelling,301302,r. faecalis,species
+scientific name,301302,r. faecis,species
+scientific name,310297,b. plebeius,species
+scientific name,328813,a. onderdonkii,species
+scientific name,351091,o. valericigenes,species
+scientific name,360807,r. inulinivorans,species
+scientific name,418240,b. wexlerae,species
+scientific name,437897,m. funiformis,species
+misspelling,446660,a. equolfaciens,species
+scientific name,446660,a. equolifaciens,species
+scientific name,487173,d. succinatiphilus,species
+scientific name,536633,b. glucerasea,species
+synonym,536633,b. glucerasei,species
+misspelling,536633,c. glucerasei,species
+scientific name,626937,c. minuta,species
+scientific name,626940,p. succinatutens,species
+misspelling,649756,a. coli,species
+scientific name,649756,a. hadrus,species
+synonym,649756,e. hadrum,species
+scientific name,745368,g. formicilis,species
+scientific name,1150298,f. saccharivorans,species
+synonym,1470354,s. massiliensis,species
+synonym,1470355,d. massiliensis,species
+synonym,543,enterobacteraceae,family
+synonym,543,"enterobacteraceae (ex lapage 1979) lapage 1982, fam. nov., nom. rev.",family
+scientific name,543,enterobacteriaceae,family
+synonym,543,"enterobacteriaceae (ex rahn 1937) ewing et al. 1980, fam. nov., nom. rev.",family
+synonym,543,enterobacteriaceae rahn 1937,family
+in-part,543,gamma-3 proteobacteria,family
+synonym,547,cloaca castellani and chalmers 1919,genus
+synonym,547,cloaca,genus
+scientific name,547,enterobacter,genus
+misspelling,561,escherchia,genus
+scientific name,561,escherichia,genus
+synonym,562,bacillus coli,species
+synonym,562,bacterium coli,species
+synonym,562,bacterium coli commune,species
+synonym,562,enterococcus coli,species
+misspelling,562,escherchia coli,species
+scientific name,562,escherichia coli,species
+includes,562,escherichia sp. mar,species
+equivalent name,562,escherichia/shigella coli,species
+misspelling,562,eschericia coli,species
+includes,562,bacterium 10a,species
+includes,562,bacterium e3,species
+scientific name,815,bacteroidaceae,family
+scientific name,816,bacteroides,genus
+synonym,816,capsularis,genus
+synonym,816,ristella,genus
+scientific name,821,bacteroides vulgatus,species
+scientific name,830,butyrivibrio,genus
+scientific name,838,prevotella,genus
+synonym,838,xylanibacter,genus
+scientific name,841,roseburia,genus
+equivalent name,841,roseburya,genus
+equivalent name,841,roseburyella,genus
+synonym,853,bacillus mucosus anaerobius,species
+synonym,853,bacteroides praussnitzii,species
+scientific name,853,faecalibacterium prausnitzii,species
+synonym,853,fusobacterium prausnitzii,species
+equivalent name,853,[fusobacterium] prausnitzii,species
+includes,853,butyrate-producing bacterium a2-165,species
+synonym,976,bcf group,phylum
+synonym,976,bacteroides-cytophaga-flexibacter group,phylum
+scientific name,976,bacteroidetes,phylum
+synonym,976,cfb group,phylum
+blast name,976,cfb group bacteria,phylum
+synonym,976,cytophaga-flexibacter-bacteroides phylum,phylum
+scientific name,1224,proteobacteria,phylum
+common name,1224,purple bacteria,phylum
+common name,1224,purple bacteria and relatives,phylum
+common name,1224,purple non-sulfur bacteria,phylum
+common name,1224,purple photosynthetic bacteria,phylum
+common name,1224,purple photosynthetic bacteria and relatives,phylum
+scientific name,1236,gammaproteobacteria,class
+synonym,1236,gammaproteobacteria garrity et al. 2005,class
+synonym,1236,proteobacteria gamma subdivision,class
+synonym,1236,"purple bacteria, gamma subdivision",class
+blast name,1236,g-proteobacteria,class
+synonym,1236,gamma proteobacteria,class
+synonym,1236,gamma subdivision,class
+synonym,1236,gamma subgroup,class
+synonym,1239,bacillus/clostridium group,phylum
+synonym,1239,clostridium group firmicutes,phylum
+synonym,1239,firmacutes,phylum
+scientific name,1239,firmicutes,phylum
+misspelling,1239,gram positive bacteria,phylum
+genbank common name,1239,gram-positive bacteria,phylum
+synonym,1239,low g+c firmicutes,phylum
+synonym,1239,clostridial firmicutes,phylum
+common name,1239,low g+c gram-positive bacteria,phylum
+common name,1239,low gc gram+,phylum
+scientific name,1263,ruminococcus,genus
+scientific name,1264,ruminococcus albus,species
+synonym,1279,aurococcus,genus
+scientific name,1279,staphylococcus,genus
+scientific name,1296,staphylococcus sciuri,species
+scientific name,1300,streptococcaceae,family
+scientific name,1301,streptococcus,genus
+scientific name,1343,streptococcus vestibularis,species
+scientific name,1357,lactococcus,genus
+genbank common name,1357,lactic streptococci,genus
+synonym,1358,bacterium lacti,species
+scientific name,1358,lactococcus lactis,species
+misnomer,1358,lactococcus lactis (lohnis) schleifer et al. 1986,species
+synonym,1358,streptococcus lactis,species
+scientific name,1385,bacillales,order
+synonym,1385,bacillus/staphylococcus group,order
+synonym,1537,clostridium lituseburense,genus
+synonym,1537,inflabilis litus-eburense,genus
+scientific name,1537,romboutsia lituseburensis,genus
+synonym,1537,[clostridium] lituseburense,genus
+scientific name,1578,lactobacillus,genus
+synonym,1578,paralactobacillus,genus
+scientific name,1624,lactobacillus salivarius,species
+includes,1624,lactobacillus salivarius subsp. salicinius,species
+includes,1624,lactobacillus salivarius subsp. salivarius,species
+misspelling,1624,lactobacillus salivarus,species
+synonym,1678,bifidibacterium,genus
+scientific name,1678,bifidobacterium,genus
+synonym,1678,tissieria,genus
+scientific name,1680,bifidobacterium adolescentis,species
+synonym,1680,bifidobacterium adolescentis reuter 1963,species
+scientific name,1686,bifidobacterium catenulatum,species
+scientific name,1730,eubacterium,genus
+synonym,1735,bacteroides biformis,species
+synonym,1735,eubacterium biforme,species
+scientific name,1735,holdemanella biformis,species
+synonym,1735,pseudobacterium biforme,species
+scientific name,1760,actinobacteria,class
+includes,1760,actinobacteridae,class
+synonym,1760,actinomycetes,class
+synonym,1760,high gc gram-positive bacteria,class
+genbank common name,1760,high g+c gram-positive bacteria,class
+blast name,1760,high gc gram+,class
+scientific name,2158,methanobacteriales,order
+scientific name,2159,methanobacteriaceae,family
+scientific name,2172,methanobrevibacter,genus
+scientific name,2173,methanobrevibacter smithii,species
+scientific name,28890,euryarchaeota,phylum
+blast name,28890,euryarchaeotes,phylum
+synonym,28890,not euryarchaeota cavalier-smith 2002,phylum
+synonym,29361,clostridium nexile,species
+scientific name,29361,tyzzerella nexilis,species
+scientific name,31953,bifidobacteriaceae,family
+synonym,31977,megasphaera group,family
+synonym,31977,selenomonadaceae,family
+synonym,31977,sporomusa subbranch,family
+scientific name,31977,veillonellaceae,family
+synonym,31977,cluster ix,family
+scientific name,33024,phascolarctobacterium,genus
+scientific name,33042,coprococcus,genus
+scientific name,33043,coprococcus eutactus,species
+synonym,33043,coprococcus eutactus holdeman and moore 1974,species
+scientific name,33958,lactobacillaceae,family
+synonym,39483,bacterium cylindroides,species
+synonym,39483,bacteroides cylindroides,species
+misspelling,39483,eubacterium cylindricoides,species
+synonym,39483,eubacterium cylindroides,species
+scientific name,39483,faecalitalea cylindroides,species
+synonym,39483,pseudobacterium cylindroides,species
+synonym,39483,ristella cylindroides,species
+scientific name,39484,eubacterium desmolans,species
+synonym,39484,eubacterium desmolans morris et al. 1986,species
+equivalent name,39485,eubacterium eligens,species
+scientific name,39485,[eubacterium] eligens,species
+misspelling,39488,eubacterium halii,species
+equivalent name,39488,eubacterium hallii,species
+scientific name,39488,[eubacterium] hallii,species
+equivalent name,39492,eubacterium siraeum,species
+scientific name,39492,[eubacterium] siraeum,species
+scientific name,39948,dialister,genus
+scientific name,40518,ruminococcus bromii,species
+scientific name,40520,blautia obeum,species
+misspelling,40520,eubacterium obeum,species
+synonym,40520,ruminococcus obeum,species
+equivalent name,40520,[ruminococcus] obeum,species
+scientific name,45851,butyrivibrio crossotus,species
+synonym,45851,butyrivibrio crossotus moore et al. 1976,species
+scientific name,47678,bacteroides caccae,species
+scientific name,48461,verrucomicrobiales,order
+synonym,48461,verrucosimicrobiales,order
+scientific name,51290,chlamydiae/verrucomicrobia group,superphylum
+equivalent name,51290,chlamydiales/verrucomicrobia group,superphylum
+scientific name,68336,bacteroidetes/chlorobi group,superphylum
+synonym,68336,cfb/chlorobi group,superphylum
+synonym,68336,cfb/green sulfur bacteria group,superphylum
+synonym,68336,cytophagales/green sulfur bacteria group,superphylum
+scientific name,74201,verrucomicrobia,phylum
+synonym,74426,bacteroides aerofaciens eggerth 1935,species
+synonym,74426,pseudobacterium aerofaciens (eggerth 1935) krasil'nikov 1949,species
+synonym,74426,bacteroides aerofaciens,species
+scientific name,74426,collinsella aerofaciens,species
+synonym,74426,collinsella aerofaciens (eggerth 1935) kageyama et al. 1999,species
+synonym,74426,eubacterium aerofaciens,species
+synonym,74426,eubacterium aerofaciens (eggerth 1935) prevot 1938 (approved lists 1980),species
+synonym,74426,pseudobacterium aerofaciens,species
+equivalent name,84026,clostridium methylpentosum,species
+scientific name,84026,[clostridium] methylpentosum,species
+scientific name,84107,coriobacteriaceae,family
+synonym,84998,coriobacteridae,class
+scientific name,84998,coriobacteriia,class
+includes,84999,'coriobacterineae',order
+scientific name,84999,coriobacteriales,order
+includes,84999,coriobacterineae,order
+scientific name,85004,bifidobacteriales,order
+scientific name,88431,dorea longicatena,species
+synonym,88431,dorea longicatena taras et al. 2002,species
+includes,88431,eubacterium sp. iii-35,species
+scientific name,89014,blautia luti,species
+synonym,89014,ruminococcus luti,species
+includes,89014,ruminococcus sp. bln9,species
+scientific name,90964,staphylococcaceae,family
+includes,90964,staphylococceae,family
+includes,90964,staphylococceae prevot 1940,family
+synonym,90964,staphylococcus group,family
+scientific name,91061,bacilli,class
+synonym,91061,bacillus/lactobacillus/streptococcus group,class
+synonym,91061,firmibacteria,class
+synonym,91347,'enterobacteriales',order
+synonym,91347,enterobacteriaceae and related endosymbionts,order
+synonym,91347,enterobacteriaceae group,order
+scientific name,91347,enterobacteriales,order
+blast name,91347,enterobacteria,order
+misspelling,100886,catenabacterium mitsuokai,species
+scientific name,100886,catenibacterium mitsuokai,species
+synonym,100886,catenibacterium mitsuokai kageyama and benno 2000,species
+scientific name,102106,collinsella,genus
+synonym,102106,collinsella kageyama et al. 1999 emend. kageyama and benno 2000,genus
+synonym,128827,erysipelothrix group,family
+synonym,128827,erysipelothrixaceae,family
+scientific name,128827,erysipelotrichaceae,family
+misspelling,135858,catenabacterium,genus
+scientific name,135858,catenibacterium,genus
+scientific name,158846,megamonas,genus
+scientific name,165179,prevotella copri,species
+includes,165179,prevotella sp. cb18,species
+includes,165179,prevotella sp. cb23,species
+includes,165179,prevotella sp. cb26,species
+includes,165179,prevotella sp. cb28,species
+includes,165179,prevotella sp. cb7,species
+misspelling,166486,eubacterium intestinalis,species
+scientific name,166486,roseburia intestinalis,species
+scientific name,171549,bacteroidales,order
+scientific name,171550,rikenellaceae,family
+scientific name,171552,prevotellaceae,family
+synonym,183925,archaeobacteria,class
+scientific name,183925,methanobacteria,class
+scientific name,186801,clostridia,class
+scientific name,186802,clostridiales,order
+scientific name,186803,lachnospiraceae,family
+scientific name,186804,peptostreptococcaceae,family
+scientific name,186806,eubacteriaceae,family
+scientific name,186826,lactobacillales,order
+scientific name,189330,dorea,genus
+scientific name,200643,bacteroidia,class
+synonym,201174,'actinobacteria',phylum
+synonym,201174,not actinobacteria cavalier-smith 2002,phylum
+scientific name,203494,verrucomicrobiae,class
+scientific name,204475,gemmiger,genus
+scientific name,207244,anaerostipes,genus
+scientific name,216572,oscillospiraceae,family
+scientific name,216816,bifidobacterium longum,species
+scientific name,216851,faecalibacterium,genus
+scientific name,239759,alistipes,genus
+scientific name,239934,akkermansia,genus
+scientific name,239935,akkermansia muciniphila,species
+equivalent name,288965,clostridium clariflavum,species
+misspelling,288965,clostridium sp. ebr-02e-0045,species
+includes,288965,clostridium sp. ebr45,species
+scientific name,288965,[clostridium] clariflavum,species
+scientific name,299767,enterobacter ludwigii,species
+includes,299767,pantoea sp. rce-5,species
+includes,299767,bacterium k9,species
+scientific name,301301,roseburia hominis,species
+misspelling,301302,roseburia faecalis,species
+scientific name,301302,roseburia faecis,species
+scientific name,310297,bacteroides plebeius,species
+scientific name,328813,alistipes onderdonkii,species
+includes,328813,alistipes sp. wal 8169,species
+includes,351091,clostridiales bacterium sjm18-20,species
+scientific name,351091,oscillibacter valericigenes,species
+scientific name,354276,enterobacter cloacae complex,species group
+scientific name,360807,roseburia inulinivorans,species
+includes,360807,butyrate-producing bacterium a2-194,species
+includes,360807,butyrate-producing bacterium l1-83,species
+scientific name,418240,blautia wexlerae,species
+scientific name,437897,megamonas funiformis,species
+misspelling,446660,adlercreutzia equolfaciens,species
+scientific name,446660,adlercreutzia equolifaciens,species
+includes,446660,equol-producing bacterium fjc-a10,species
+includes,446660,equol-producing bacterium fjc-b20,species
+includes,446660,equol-producing bacterium fjc-b9,species
+includes,446660,equol-producing bacterium fjc-d53,species
+scientific name,447020,adlercreutzia,genus
+scientific name,459786,oscillibacter,genus
+scientific name,487173,dialister succinatiphilus,species
+misspelling,526524,erysipelotrichi,class
+scientific name,526524,erysipelotrichia,class
+scientific name,526525,erysipelotrichales,order
+scientific name,536633,blautia glucerasea,species
+synonym,536633,blautia glucerasei,species
+misspelling,536633,clostridium glucerasei,species
+includes,536633,clostridium sp. hfth-1,species
+scientific name,541000,ruminococcaceae,family
+scientific name,572511,blautia,genus
+scientific name,592978,ruminococcus faecis,species
+includes,626937,catabacter sp. yit 12065,species
+scientific name,626937,christensenella minuta,species
+misspelling,626937,christensenia minuta,species
+includes,626940,phascolarctobacterium sp. yit 12068,species
+scientific name,626940,phascolarctobacterium succinatutens,species
+misspelling,649756,anaerostipes coli,species
+scientific name,649756,anaerostipes hadrus,species
+includes,649756,anaerostipes sp. 5/1/63faa,species
+misspelling,649756,anaerostipes sp. 5_1_63faa,species
+includes,649756,clostridiales bacterium ssc/2,species
+misspelling,649756,clostridiales sp. ssc/2,species
+synonym,649756,eubacterium hadrum,species
+includes,649756,butyrate-producing bacterium ss2/1,species
+includes,649756,butyrate-producing bacterium ssc/2,species
+scientific name,745368,gemmiger formicilis,species
+scientific name,909929,selenomonadales,order
+scientific name,909930,acidaminococcaceae,family
+scientific name,909932,negativicutes,class
+scientific name,990719,christensenellaceae,family
+scientific name,990721,christensenella,genus
+includes,1150298,clostridium sp. ht03-11,species
+includes,1150298,clostridium sp. ht03-14,species
+includes,1150298,clostridium sp. ht03-186,species
+includes,1150298,clostridium sp. ht03-22,species
+includes,1150298,clostridium sp. ko-38,species
+includes,1150298,clostridium sp. tt-111,species
+scientific name,1150298,fusicatenibacter saccharivorans,species
+scientific name,1407607,fusicatenibacter,genus
+scientific name,1470353,candidatus soleaferrea,genus
+synonym,1470353,soleaferrea,genus
+scientific name,1470354,candidatus soleaferrea massiliensis,species
+synonym,1470354,soleaferrea massiliensis,species
+scientific name,1470355,candidatus dorea massiliensis,species
+synonym,1470355,dorea massiliensis,species
+scientific name,1501226,romboutsia,genus
+scientific name,1506553,lachnoclostridium,species
+scientific name,1506577,tyzzerella,genus
+scientific name,1508657,ruminiclostridium,genus
+scientific name,1573534,faecalitalea,genus
+scientific name,1573535,holdemanella,genus
+scientific name,1643822,eggerthellales,order
+scientific name,1643826,eggerthellaceae,family
+scientific name,1647988,akkermansiaceae,family
+unknown,1000000000,lachnoclostridium hathewayi,unknown
+unknown,1000000001,anoxystipes fissicatena,unknown
+unknown,1000000002,anoxystipes,unknown
+scientific name,830,Butyrivibrios,genus
+synonym,1678,Bifidibacteria,genus
+scientific name,1678,Bifidobacteria,genus
+scientific name,1730,Eubacteria,genus
+scientific name,33024,Phascolarctobacteria,genus
+misspelling,135858,Catenabacteria,genus
+scientific name,135858,Catenibacteria,genus
+scientific name,216851,Faecalibacteria,genus
+scientific name,1508657,Ruminiclostridia,genus
+synonym,816,Capsulares,genus
+scientific name,158846,Megamonads,genus
+scientific name,1263,Ruminococci,genus
+synonym,1279,Aurococci,genus
+scientific name,1279,Staphylococci,genus
+scientific name,1301,Streptococci,genus
+scientific name,1357,Lactococci,genus
+scientific name,1578,Lactobacilli,genus
+synonym,1578,Paralactobacilli,genus
+scientific name,33042,Coprococci,genus
+synonym,547,Cloacae,genus
+misspelling,561,Escherchiae,genus
+scientific name,561,Escherichiae,genus
+synonym,816,Ristellae,genus
+scientific name,838,Prevotellae,genus
+scientific name,841,Roseburiae,genus
+equivalent name,841,Roseburyae,genus
+equivalent name,841,Roseburyellae,genus
+synonym,1678,Tissieriae,genus
+scientific name,102106,Collinsellae,genus
+scientific name,189330,Doreae,genus
+scientific name,239934,Akkermansiae,genus
+scientific name,447020,Adlercreutziae,genus
+scientific name,572511,Blautiae,genus
+scientific name,990721,Christensenellae,genus
+synonym,1470353,Soleaferreae,genus
+scientific name,1501226,Romboutsiae,genus
+scientific name,1506577,Tyzzerellae,genus
+scientific name,1573534,Faecalitaleae,genus
+scientific name,1573535,Holdemanellae,genus
+scientific name,547,Enterobacters,genus
+synonym,838,Xylanibacters,genus
+scientific name,2172,Methanobrevibacters,genus
+scientific name,39948,Dialisters,genus
+scientific name,204475,Gemmigers,genus
+scientific name,459786,Oscillibacters,genus
+scientific name,1407607,Fusicatenibacters,genus
+synonym,562,B. coli,species
+synonym,562,E. coli,species
+scientific name,821,B. vulgatus,species
+synonym,853,B. praussnitzii,species
+scientific name,853,F. prausnitzii,species
+scientific name,1264,R. albus,species
+scientific name,1296,S. sciuri,species
+scientific name,1343,S. vestibularis,species
+synonym,1358,B. lacti,species
+scientific name,1358,L. lactis,species
+synonym,1358,S. lactis,species
+scientific name,1624,L. salivarius,species
+misspelling,1624,L. salivarus,species
+scientific name,1680,B. adolescentis,species
+scientific name,1686,B. catenulatum,species
+synonym,1735,B. biformis,species
+synonym,1735,E. biforme,species
+scientific name,1735,H. biformis,species
+synonym,1735,P. biforme,species
+scientific name,2173,M. smithii,species
+synonym,29361,C. nexile,species
+scientific name,29361,T. nexilis,species
+scientific name,33043,C. eutactus,species
+synonym,39483,B. cylindroides,species
+misspelling,39483,E. cylindricoides,species
+synonym,39483,E. cylindroides,species
+scientific name,39483,F. cylindroides,species
+synonym,39483,P. cylindroides,species
+synonym,39483,R. cylindroides,species
+scientific name,39484,E. desmolans,species
+equivalent name,39485,E. eligens,species
+misspelling,39488,E. halii,species
+equivalent name,39488,E. hallii,species
+equivalent name,39492,E. siraeum,species
+scientific name,40518,R. bromii,species
+scientific name,40520,B. obeum,species
+misspelling,40520,E. obeum,species
+synonym,40520,R. obeum,species
+scientific name,45851,B. crossotus,species
+scientific name,47678,B. caccae,species
+synonym,74426,B. aerofaciens,species
+scientific name,74426,C. aerofaciens,species
+synonym,74426,E. aerofaciens,species
+synonym,74426,P. aerofaciens,species
+equivalent name,84026,C. methylpentosum,species
+scientific name,88431,D. longicatena,species
+scientific name,89014,B. luti,species
+synonym,89014,R. luti,species
+misspelling,100886,C. mitsuokai,species
+scientific name,165179,P. copri,species
+misspelling,166486,E. intestinalis,species
+scientific name,166486,R. intestinalis,species
+scientific name,216816,B. longum,species
+scientific name,239935,A. muciniphila,species
+equivalent name,288965,C. clariflavum,species
+scientific name,299767,E. ludwigii,species
+scientific name,301301,R. hominis,species
+misspelling,301302,R. faecalis,species
+scientific name,301302,R. faecis,species
+scientific name,310297,B. plebeius,species
+scientific name,328813,A. onderdonkii,species
+scientific name,351091,O. valericigenes,species
+scientific name,360807,R. inulinivorans,species
+scientific name,418240,B. wexlerae,species
+scientific name,437897,M. funiformis,species
+misspelling,446660,A. equolfaciens,species
+scientific name,446660,A. equolifaciens,species
+scientific name,487173,D. succinatiphilus,species
+scientific name,536633,B. glucerasea,species
+synonym,536633,B. glucerasei,species
+misspelling,536633,C. glucerasei,species
+scientific name,626937,C. minuta,species
+scientific name,626940,P. succinatutens,species
+misspelling,649756,A. coli,species
+scientific name,649756,A. hadrus,species
+synonym,649756,E. hadrum,species
+scientific name,745368,G. formicilis,species
+scientific name,1150298,F. saccharivorans,species
+synonym,1470354,S. massiliensis,species
+synonym,1470355,D. massiliensis,species
+synonym,543,Enterobacteraceae,family
+synonym,543,"Enterobacteraceae (ex Lapage 1979) Lapage 1982, fam. nov., nom. rev.",family
+scientific name,543,Enterobacteriaceae,family
+synonym,543,"Enterobacteriaceae (ex Rahn 1937) Ewing et al. 1980, fam. nov., nom. rev.",family
+synonym,543,Enterobacteriaceae Rahn 1937,family
+synonym,547,Cloaca Castellani and Chalmers 1919,genus
+synonym,547,Cloaca,genus
+scientific name,547,Enterobacter,genus
+misspelling,561,Escherchia,genus
+scientific name,561,Escherichia,genus
+synonym,562,Bacillus coli,species
+synonym,562,Bacterium coli,species
+synonym,562,Bacterium coli commune,species
+synonym,562,Enterococcus coli,species
+misspelling,562,Escherchia coli,species
+scientific name,562,Escherichia coli,species
+includes,562,Escherichia sp. MAR,species
+equivalent name,562,Escherichia/Shigella coli,species
+misspelling,562,Eschericia coli,species
+includes,562,bacterium E3,species
+scientific name,815,Bacteroidaceae,family
+scientific name,816,Bacteroides,genus
+synonym,816,Capsularis,genus
+synonym,816,Ristella,genus
+scientific name,821,Bacteroides vulgatus,species
+scientific name,830,Butyrivibrio,genus
+scientific name,838,Prevotella,genus
+synonym,838,Xylanibacter,genus
+scientific name,841,Roseburia,genus
+equivalent name,841,Roseburya,genus
+equivalent name,841,Roseburyella,genus
+synonym,853,Bacillus mucosus anaerobius,species
+synonym,853,Bacteroides praussnitzii,species
+scientific name,853,Faecalibacterium prausnitzii,species
+synonym,853,Fusobacterium prausnitzii,species
+equivalent name,853,[Fusobacterium] prausnitzii,species
+includes,853,butyrate-producing bacterium A2-165,species
+synonym,976,BCF group,phylum
+synonym,976,Bacteroides-Cytophaga-Flexibacter group,phylum
+scientific name,976,Bacteroidetes,phylum
+synonym,976,CFB group,phylum
+blast name,976,CFB group bacteria,phylum
+synonym,976,Cytophaga-Flexibacter-Bacteroides phylum,phylum
+scientific name,1224,Proteobacteria,phylum
+scientific name,1236,Gammaproteobacteria,class
+synonym,1236,Gammaproteobacteria Garrity et al. 2005,class
+synonym,1236,Proteobacteria gamma subdivision,class
+synonym,1236,"Purple bacteria, gamma subdivision",class
+synonym,1239,Bacillus/Clostridium group,phylum
+synonym,1239,Clostridium group firmicutes,phylum
+synonym,1239,Firmacutes,phylum
+scientific name,1239,Firmicutes,phylum
+misspelling,1239,Gram positive bacteria,phylum
+genbank common name,1239,Gram-positive bacteria,phylum
+synonym,1239,Low G+C firmicutes,phylum
+common name,1239,low G+C Gram-positive bacteria,phylum
+common name,1239,low GC Gram+,phylum
+scientific name,1263,Ruminococcus,genus
+scientific name,1264,Ruminococcus albus,species
+synonym,1279,Aurococcus,genus
+scientific name,1279,Staphylococcus,genus
+scientific name,1296,Staphylococcus sciuri,species
+scientific name,1300,Streptococcaceae,family
+scientific name,1301,Streptococcus,genus
+scientific name,1343,Streptococcus vestibularis,species
+scientific name,1357,Lactococcus,genus
+synonym,1358,Bacterium lacti,species
+scientific name,1358,Lactococcus lactis,species
+misnomer,1358,Lactococcus lactis (Lohnis) Schleifer et al. 1986,species
+synonym,1358,Streptococcus lactis,species
+scientific name,1385,Bacillales,order
+synonym,1385,Bacillus/Staphylococcus group,order
+synonym,1537,Clostridium lituseburense,genus
+synonym,1537,Inflabilis litus-eburense,genus
+scientific name,1537,Romboutsia lituseburensis,genus
+synonym,1537,[Clostridium] lituseburense,genus
+scientific name,1578,Lactobacillus,genus
+synonym,1578,Paralactobacillus,genus
+scientific name,1624,Lactobacillus salivarius,species
+includes,1624,Lactobacillus salivarius subsp. salicinius,species
+includes,1624,Lactobacillus salivarius subsp. salivarius,species
+misspelling,1624,Lactobacillus salivarus,species
+synonym,1678,Bifidibacterium,genus
+scientific name,1678,Bifidobacterium,genus
+synonym,1678,Tissieria,genus
+scientific name,1680,Bifidobacterium adolescentis,species
+synonym,1680,Bifidobacterium adolescentis Reuter 1963,species
+scientific name,1686,Bifidobacterium catenulatum,species
+scientific name,1730,Eubacterium,genus
+synonym,1735,Bacteroides biformis,species
+synonym,1735,Eubacterium biforme,species
+scientific name,1735,Holdemanella biformis,species
+synonym,1735,Pseudobacterium biforme,species
+scientific name,1760,Actinobacteria,class
+includes,1760,Actinobacteridae,class
+synonym,1760,Actinomycetes,class
+synonym,1760,High GC gram-positive bacteria,class
+genbank common name,1760,high G+C Gram-positive bacteria,class
+blast name,1760,high GC Gram+,class
+scientific name,2158,Methanobacteriales,order
+scientific name,2159,Methanobacteriaceae,family
+scientific name,2172,Methanobrevibacter,genus
+scientific name,2173,Methanobrevibacter smithii,species
+scientific name,28890,Euryarchaeota,phylum
+synonym,28890,not Euryarchaeota Cavalier-Smith 2002,phylum
+synonym,29361,Clostridium nexile,species
+scientific name,29361,Tyzzerella nexilis,species
+scientific name,31953,Bifidobacteriaceae,family
+synonym,31977,Megasphaera group,family
+synonym,31977,Selenomonadaceae,family
+synonym,31977,Sporomusa subbranch,family
+scientific name,31977,Veillonellaceae,family
+synonym,31977,cluster IX,family
+scientific name,33024,Phascolarctobacterium,genus
+scientific name,33042,Coprococcus,genus
+scientific name,33043,Coprococcus eutactus,species
+synonym,33043,Coprococcus eutactus Holdeman and Moore 1974,species
+scientific name,33958,Lactobacillaceae,family
+synonym,39483,Bacterium cylindroides,species
+synonym,39483,Bacteroides cylindroides,species
+misspelling,39483,Eubacterium cylindricoides,species
+synonym,39483,Eubacterium cylindroides,species
+scientific name,39483,Faecalitalea cylindroides,species
+synonym,39483,Pseudobacterium cylindroides,species
+synonym,39483,Ristella cylindroides,species
+scientific name,39484,Eubacterium desmolans,species
+synonym,39484,Eubacterium desmolans Morris et al. 1986,species
+equivalent name,39485,Eubacterium eligens,species
+scientific name,39485,[Eubacterium] eligens,species
+misspelling,39488,Eubacterium halii,species
+equivalent name,39488,Eubacterium hallii,species
+scientific name,39488,[Eubacterium] hallii,species
+equivalent name,39492,Eubacterium siraeum,species
+scientific name,39492,[Eubacterium] siraeum,species
+scientific name,39948,Dialister,genus
+scientific name,40518,Ruminococcus bromii,species
+scientific name,40520,Blautia obeum,species
+misspelling,40520,Eubacterium obeum,species
+synonym,40520,Ruminococcus obeum,species
+equivalent name,40520,[Ruminococcus] obeum,species
+scientific name,45851,Butyrivibrio crossotus,species
+synonym,45851,Butyrivibrio crossotus Moore et al. 1976,species
+scientific name,47678,Bacteroides caccae,species
+scientific name,48461,Verrucomicrobiales,order
+synonym,48461,Verrucosimicrobiales,order
+scientific name,51290,Chlamydiae/Verrucomicrobia group,superphylum
+equivalent name,51290,Chlamydiales/Verrucomicrobia group,superphylum
+scientific name,68336,Bacteroidetes/Chlorobi group,superphylum
+synonym,68336,CFB/Chlorobi group,superphylum
+synonym,68336,CFB/Green sulfur bacteria group,superphylum
+synonym,68336,Cytophagales/Green sulfur bacteria group,superphylum
+scientific name,74201,Verrucomicrobia,phylum
+synonym,74426,Bacteroides aerofaciens Eggerth 1935,species
+synonym,74426,Pseudobacterium aerofaciens (Eggerth 1935) Krasil'nikov 1949,species
+synonym,74426,Bacteroides aerofaciens,species
+scientific name,74426,Collinsella aerofaciens,species
+synonym,74426,Collinsella aerofaciens (Eggerth 1935) Kageyama et al. 1999,species
+synonym,74426,Eubacterium aerofaciens,species
+synonym,74426,Eubacterium aerofaciens (Eggerth 1935) Prevot 1938 (Approved Lists 1980),species
+synonym,74426,Pseudobacterium aerofaciens,species
+equivalent name,84026,Clostridium methylpentosum,species
+scientific name,84026,[Clostridium] methylpentosum,species
+scientific name,84107,Coriobacteriaceae,family
+synonym,84998,Coriobacteridae,class
+scientific name,84998,Coriobacteriia,class
+includes,84999,'Coriobacterineae',order
+scientific name,84999,Coriobacteriales,order
+includes,84999,Coriobacterineae,order
+scientific name,85004,Bifidobacteriales,order
+scientific name,88431,Dorea longicatena,species
+synonym,88431,Dorea longicatena Taras et al. 2002,species
+includes,88431,Eubacterium sp. III-35,species
+scientific name,89014,Blautia luti,species
+synonym,89014,Ruminococcus luti,species
+includes,89014,Ruminococcus sp. bln9,species
+scientific name,90964,Staphylococcaceae,family
+includes,90964,Staphylococceae,family
+includes,90964,Staphylococceae Prevot 1940,family
+synonym,90964,Staphylococcus group,family
+scientific name,91061,Bacilli,class
+synonym,91061,Bacillus/Lactobacillus/Streptococcus group,class
+synonym,91061,Firmibacteria,class
+synonym,91347,'Enterobacteriales',order
+synonym,91347,Enterobacteriaceae and related endosymbionts,order
+synonym,91347,Enterobacteriaceae group,order
+scientific name,91347,Enterobacteriales,order
+misspelling,100886,Catenabacterium mitsuokai,species
+scientific name,100886,Catenibacterium mitsuokai,species
+synonym,100886,Catenibacterium mitsuokai Kageyama and Benno 2000,species
+scientific name,102106,Collinsella,genus
+synonym,102106,Collinsella Kageyama et al. 1999 emend. Kageyama and Benno 2000,genus
+synonym,128827,Erysipelothrix group,family
+synonym,128827,Erysipelothrixaceae,family
+scientific name,128827,Erysipelotrichaceae,family
+misspelling,135858,Catenabacterium,genus
+scientific name,135858,Catenibacterium,genus
+scientific name,158846,Megamonas,genus
+scientific name,165179,Prevotella copri,species
+includes,165179,Prevotella sp. CB18,species
+includes,165179,Prevotella sp. CB23,species
+includes,165179,Prevotella sp. CB26,species
+includes,165179,Prevotella sp. CB28,species
+includes,165179,Prevotella sp. CB7,species
+misspelling,166486,Eubacterium intestinalis,species
+scientific name,166486,Roseburia intestinalis,species
+scientific name,171549,Bacteroidales,order
+scientific name,171550,Rikenellaceae,family
+scientific name,171552,Prevotellaceae,family
+synonym,183925,Archaeobacteria,class
+scientific name,183925,Methanobacteria,class
+scientific name,186801,Clostridia,class
+scientific name,186802,Clostridiales,order
+scientific name,186803,Lachnospiraceae,family
+scientific name,186804,Peptostreptococcaceae,family
+scientific name,186806,Eubacteriaceae,family
+scientific name,186826,Lactobacillales,order
+scientific name,189330,Dorea,genus
+scientific name,200643,Bacteroidia,class
+synonym,201174,'Actinobacteria',phylum
+synonym,201174,not Actinobacteria Cavalier-Smith 2002,phylum
+scientific name,203494,Verrucomicrobiae,class
+scientific name,204475,Gemmiger,genus
+scientific name,207244,Anaerostipes,genus
+scientific name,216572,Oscillospiraceae,family
+scientific name,216816,Bifidobacterium longum,species
+scientific name,216851,Faecalibacterium,genus
+scientific name,239759,Alistipes,genus
+scientific name,239934,Akkermansia,genus
+scientific name,239935,Akkermansia muciniphila,species
+equivalent name,288965,Clostridium clariflavum,species
+misspelling,288965,Clostridium sp. EBR-02E-0045,species
+includes,288965,Clostridium sp. EBR45,species
+scientific name,288965,[Clostridium] clariflavum,species
+scientific name,299767,Enterobacter ludwigii,species
+includes,299767,Pantoea sp. RCE-5,species
+includes,299767,bacterium K9,species
+scientific name,301301,Roseburia hominis,species
+misspelling,301302,Roseburia faecalis,species
+scientific name,301302,Roseburia faecis,species
+scientific name,310297,Bacteroides plebeius,species
+scientific name,328813,Alistipes onderdonkii,species
+includes,328813,Alistipes sp. WAL 8169,species
+includes,351091,Clostridiales bacterium Sjm18-20,species
+scientific name,351091,Oscillibacter valericigenes,species
+scientific name,354276,Enterobacter cloacae complex,species group
+scientific name,360807,Roseburia inulinivorans,species
+includes,360807,butyrate-producing bacterium A2-194,species
+includes,360807,butyrate-producing bacterium L1-83,species
+scientific name,418240,Blautia wexlerae,species
+scientific name,437897,Megamonas funiformis,species
+misspelling,446660,Adlercreutzia equolfaciens,species
+scientific name,446660,Adlercreutzia equolifaciens,species
+includes,446660,equol-producing bacterium FJC-A10,species
+includes,446660,equol-producing bacterium FJC-B20,species
+includes,446660,equol-producing bacterium FJC-B9,species
+includes,446660,equol-producing bacterium FJC-D53,species
+scientific name,447020,Adlercreutzia,genus
+scientific name,459786,Oscillibacter,genus
+scientific name,487173,Dialister succinatiphilus,species
+misspelling,526524,Erysipelotrichi,class
+scientific name,526524,Erysipelotrichia,class
+scientific name,526525,Erysipelotrichales,order
+scientific name,536633,Blautia glucerasea,species
+synonym,536633,Blautia glucerasei,species
+misspelling,536633,Clostridium glucerasei,species
+includes,536633,Clostridium sp. HFTH-1,species
+scientific name,541000,Ruminococcaceae,family
+scientific name,572511,Blautia,genus
+scientific name,592978,Ruminococcus faecis,species
+includes,626937,Catabacter sp. YIT 12065,species
+scientific name,626937,Christensenella minuta,species
+misspelling,626937,Christensenia minuta,species
+includes,626940,Phascolarctobacterium sp. YIT 12068,species
+scientific name,626940,Phascolarctobacterium succinatutens,species
+misspelling,649756,Anaerostipes coli,species
+scientific name,649756,Anaerostipes hadrus,species
+includes,649756,Anaerostipes sp. 5/1/63FAA,species
+misspelling,649756,Anaerostipes sp. 5_1_63FAA,species
+includes,649756,Clostridiales bacterium SSC/2,species
+misspelling,649756,Clostridiales sp. SSC/2,species
+synonym,649756,Eubacterium hadrum,species
+includes,649756,butyrate-producing bacterium SS2/1,species
+includes,649756,butyrate-producing bacterium SSC/2,species
+scientific name,745368,Gemmiger formicilis,species
+scientific name,909929,Selenomonadales,order
+scientific name,909930,Acidaminococcaceae,family
+scientific name,909932,Negativicutes,class
+scientific name,990719,Christensenellaceae,family
+scientific name,990721,Christensenella,genus
+includes,1150298,Clostridium sp. HT03-11,species
+includes,1150298,Clostridium sp. HT03-14,species
+includes,1150298,Clostridium sp. HT03-186,species
+includes,1150298,Clostridium sp. HT03-22,species
+includes,1150298,Clostridium sp. KO-38,species
+includes,1150298,Clostridium sp. TT-111,species
+scientific name,1150298,Fusicatenibacter saccharivorans,species
+scientific name,1407607,Fusicatenibacter,genus
+scientific name,1470353,Candidatus Soleaferrea,genus
+synonym,1470353,Soleaferrea,genus
+scientific name,1470354,Candidatus Soleaferrea massiliensis,species
+synonym,1470354,Soleaferrea massiliensis,species
+scientific name,1470355,Candidatus Dorea massiliensis,species
+synonym,1470355,Dorea massiliensis,species
+scientific name,1501226,Romboutsia,genus
+scientific name,1506553,Lachnoclostridium,species
+scientific name,1506577,Tyzzerella,genus
+scientific name,1508657,Ruminiclostridium,genus
+scientific name,1573534,Faecalitalea,genus
+scientific name,1573535,Holdemanella,genus
+scientific name,1643822,Eggerthellales,order
+scientific name,1643826,Eggerthellaceae,family
+scientific name,1647988,Akkermansiaceae,family
+unknown,1000000000,Lachnoclostridium hathewayi,unknown
+unknown,1000000001,Anoxystipes fissicatena,unknown
+unknown,1000000002,Anoxystipes,unknown

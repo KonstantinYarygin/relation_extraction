@@ -19,8 +19,8 @@ class SentenceFinder(object):
         self.sentence_parser = sentence_parser
         self.nlp = spacy.load('en')
 
-    def get_sentence(self, sentence_text, article_title, article_journal):
-        if not self.check_if_title(article_title):
+    def get_sentence(self, sentence_text, article):
+        if not self.check_if_title(article.title):
             return None
 
         if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
@@ -77,10 +77,9 @@ class SentenceFinder(object):
         paths = self.sentence_analyzer.analyze_sentence(parser_output, tags_in_sentence)
 
         sentence = Sentence(text=sentence_text,
-                            article_title=article_title,
+                            article=article,
                             entities_collections=entities_collections,
                             parser_output=parser_output,
-                            journal=article_journal,
                             shortest_paths=paths)
 
         return sentence

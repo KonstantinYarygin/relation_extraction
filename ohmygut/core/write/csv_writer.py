@@ -15,7 +15,7 @@ class CsvWriter(BaseWriter):
         super().__init__()
         self.tags = tags
         self.csv_path = csv_path
-        columns_part_1 = ['text', 'article_title', 'journal']
+        columns_part_1 = ['text', 'article_title', 'journal', 'pmc']
         columns_part_2_entities = []
         # order is important
         for tag in self.tags:
@@ -40,8 +40,9 @@ class CsvWriter(BaseWriter):
                 tag_to = path.tags[-1]
                 row = [
                     sentence.text,
-                    sentence.article_title,
-                    sentence.journal]
+                    sentence.article.title,
+                    sentence.article.journal,
+                    sentence.article.pmc]
 
                 # tags follow the same order as columns
                 for tag in self.tags:
