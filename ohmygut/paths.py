@@ -16,7 +16,7 @@ gut_catalog_file_path = os.path.join(data_dir, "bacteria", "gut_bact_catalog.csv
 all_catalog_file_path = os.path.join(data_dir, "bacteria", "all_bact_catalog.csv")
 
 prebiotics_file_path = os.path.join(data_dir, "prebiotic", "prebiotics_tidy.csv")
-diets_file_path = os.path.join(data_dir, "diets", "diets_tidy.csv")
+diets_file_path = os.path.join(data_dir, "diet", "diets_tidy.csv")
 
 nutrients_file_path = os.path.join(data_dir, "nutrients", "nutrients_catalog.csv")
 
