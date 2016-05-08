@@ -5,7 +5,6 @@ from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 PREBIOTIC_TAG = "PREBIOTIC"
-PREBIOTIC_COLLECTION = "PREBIOTIC_COLLECTION"
 
 
 class PrebioticsCatalog(Catalog):
@@ -30,6 +29,5 @@ class PrebioticsCatalog(Catalog):
     def find(self, sentence_text):
         prebiotic_names = self.__hash_tree.search(sentence_text)
 
-        entities = EntityCollection([Entity(name, 'noid', PREBIOTIC_TAG) for name in prebiotic_names],
-                                    PREBIOTIC_COLLECTION, PREBIOTIC_TAG)
+        entities = EntityCollection([Entity(name, 'noid', PREBIOTIC_TAG) for name in prebiotic_names], PREBIOTIC_TAG)
         return entities

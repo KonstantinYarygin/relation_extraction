@@ -39,8 +39,7 @@ def main(article_data_sources, writers, sentence_finder, data_sources_to_skip=0,
 
             sentence_number += 1
             constants.logger.info("memory usage: %f" % memory_usage_psutil())
-            constants.logger.info("sentence № %i, data source № %i\n%s" % (sentence_number, i+1, sentence))
-            constants.logger.info("=" * 80)
+            constants.logger.info("sentence № %i, data source № %i\n%s" % (sentence_number, i+1, sentence_text))
             constants.logger.info("=" * 80)
 
         total_sentence_number += sentence_number
