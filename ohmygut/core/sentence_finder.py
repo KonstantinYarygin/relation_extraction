@@ -20,6 +20,9 @@ class SentenceFinder(object):
         self.nlp = spacy.load('en')
 
     def get_sentence(self, sentence_text, article_title, article_journal):
+        if not self.check_if_title(article_title):
+            return None
+
         if len(sentence_text) > SENTENCE_LENGTH_THRESHOLD:
             return None
 
@@ -85,6 +88,21 @@ class SentenceFinder(object):
     def check_if_tags(self, tags_in_sentence):
         if not self.tags.issubset(tags_in_sentence):
             return False
-        if len(self.tags_optional) != 0 and not any(tag_optional in tags_in_sentence for tag_optional in self.tags_optional):
+        if len(self.tags_optional) != 0 and not any(
+                        tag_optional in tags_in_sentence for tag_optional in self.tags_optional):
+            return False
+        return True
+
+    def check_if_title(self, article_title):
+        if "horse" in article_title or \
+                        "pig" in article_title or \
+                        "livestock" in article_title or \
+                        "calve" in article_title or \
+                        "cattle" in article_title or \
+                        "Horse" in article_title or \
+                        "Pig" in article_title or \
+                        "Livestock" in article_title or \
+                        "Calve" in article_title or \
+                        "Cattle" in article_title:
             return False
         return True
