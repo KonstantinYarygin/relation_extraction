@@ -86,9 +86,9 @@ if __name__ == '__main__':
     analyzer = SentenceAnalyzer()
 
     tags_required = [BACTERIA_TAG]
-    tags_optional = [DISEASE_TAG]
+    tags_optional = []
     tags_to_exclude = [ALL_BACTERIA_TAG]
-    sentence_finder = SentenceFinder([gut_bacteria_catalog, diseases_catalog],
+    sentence_finder = SentenceFinder([gut_bacteria_catalog],
                                      spacy_sentence_parser, analyzer,
                                      tags_required, tags_optional, tags_to_exclude)
 
