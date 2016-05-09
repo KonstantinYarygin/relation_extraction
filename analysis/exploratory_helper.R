@@ -59,15 +59,17 @@ GetBacteria <- function(raw.sentences){
   data.bacteria
 }
 
-GetPrebiotics <- function(raw.sentences){
-  data.prebiotics <- raw.sentences[prebiotic != '',
-                                 .(unlist(llply(strsplit(unlist(strsplit(prebiotic, ', ')), ';'), 
-                                                .fun=function(x) x[1])),
-                                   unlist(llply(strsplit(unlist(strsplit(prebiotic, ', ')), ';'), 
-                                                .fun=function(x) x[2]))),
-                                 by=.(text, article_title, journal)]
-  setnames(data.prebiotics, c("text","article_title", "journal", "prebiotic","prebiotic_id"))
-  data.prebiotics
+GetEntityData <- function(raw.sentences, entity.name){
+  setnames(raw.sentences, entity.name, "object")
+  data.entity <- raw.sentences[object != '',
+                               .(unlist(llply(strsplit(unlist(strsplit(object, ', ')), ';'), 
+                                              .fun=function(x) x[1])),
+                                 unlist(llply(strsplit(unlist(strsplit(object, ', ')), ';'), 
+                                              .fun=function(x) x[2]))),
+                               by=.(text, article_title, journal)]
+  setnames(data.entity, c("text","article_title", "journal", entity.name, paste0(entity.name, "_id")))
+  setnames(raw.sentences, "object", entity.name)
+  data.entity
 }
 
 ParseRawSentences <- function(raw.sentences){

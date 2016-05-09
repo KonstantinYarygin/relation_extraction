@@ -3,8 +3,25 @@ library(rJava)
 library(xlsx)
 library(stringr)
 source('analysis/exploratory_helper.R')
-data.sentences <- fread('~/do/data/result/result_07May2016-22-08-56.csv')
+data.sentences <- unique(fread('~/do/data/result/result_09May2016-02-40-17-full-pool-preb-food-diet.csv', 
+                        sep='\t', colClasses = "character", select=1:8))
 
+GetWriteRankedCatalog <- function(data.sentences, entity.name, catalog.tidy.path){
+  data.entity <- GetEntityData(data.sentences, entity.name)
+  data.entity.count <- data.entity[,.N,by=entity.name]
+  
+  catalog.entity <- data.table(readLines(catalog.tidy.path))
+  setnames(catalog.entity, c(entity.name))
+  catalog.entity.ranked <- unique(merge(catalog.entity, data.entity.count, by=entity.name, all.x=T, all.y=T))
+  catalog.entity.ranked[is.na(N),N:=0]
+  setorder(catalog.entity.ranked, -N)
+  
+  write.xlsx(catalog.entity.ranked, file=paste0(entity.name, "-ranked.xlsx"))
+  catalog.entity.ranked
+}
+
+######
+# legacy code
 parsed <- GetBacteriaNutrientDiseaseFood(data.sentences)
 data.disease <- parsed$disease
 data.food <- parsed$food
@@ -28,23 +45,24 @@ catalog.food.count <- merge(catalog.food, data.food.count, by.x="word", by.y="fo
 catalog.food.count[is.na(N),N:=0]
 setnames(catalog.food.count, "N", "count")
 setorder(catalog.food.count, -count)
-
 write.xlsx(catalog.disease.collapsed, file="diseases-ranked.xlsx")
 write.xlsx(catalog.food.count, file="food-ranked.xlsx")
+###########
 
-## prebiotic
-data.sentences <- data.sentences[text!="text"]
+GetWriteRankedCatalog(data.sentences, "diet", "data/diet/diets_tidy.csv")
+GetWriteRankedCatalog(data.sentences, "prebiotic", "data/prebiotic/prebiotics_tidy.csv")
+GetWriteRankedCatalog(data.sentences, "food", "data/food/food_mixed_tidy.csv")
 
-data.prebiotics <- GetPrebiotics(data.sentences)
-data.prebiotics.count <- data.prebiotics[,.N,by="prebiotic"]
+data.bacteria <- GetEntityData(data.sentences, "bacteria")
+data.bacteria.count <- data.bacteria[,.N,by=bacteria_id]
+data.bacteria.unique <- data.bacteria[,.(bacteria, bacteria_id)]
+setkey(data.bacteria.unique, bacteria_id)
+data.bacteria.unique <- unique(data.bacteria.unique)
+data.bacteria.count <- merge(data.bacteria.count, data.bacteria.unique, by='bacteria_id')
+setorder(data.bacteria.count, -N)
+write.xlsx(data.bacteria.count, file=paste0("bacteria-ranked.xlsx"))
 
-catalog.prebiotics <- data.table(readLines("data/prebiotic/prebiotics_tidy.csv"))
-setnames(catalog.prebiotics, c("prebiotic"))
-catalog.prebiotics.ranked <- unique(merge(catalog.prebiotics, data.prebiotics.count, by="prebiotic", all.x=T))
-catalog.prebiotics.ranked[is.na(N),N:=0]
-setorder(catalog.prebiotics.ranked, -N)
-
-data.bacteria.prebiotic <- data.sentences[,.(text, article_title, journal, bacteria, prebiotic)]
-data.bacteria.prebiotic$prebiotic <- str_replace_all(data.bacteria.prebiotic$prebiotic, ";noid", "")
-write.xlsx(catalog.prebiotics.ranked, file="prebiotics-ranked.xlsx")
-write.xlsx(data.bacteria.prebiotic, file="prebiotics-sentences.xlsx")
+data.sentences$prebiotic <- str_replace_all(data.sentences$prebiotic, ";noid", "")
+data.sentences$diet <- str_replace_all(data.sentences$diet, ";noid", "")
+data.sentences$food <- str_replace_all(data.sentences$food, ";nogroup", "")
+write.xlsx(data.sentences, file=paste0("sentences-bact-prebiotic-food-diet.xlsx"))
