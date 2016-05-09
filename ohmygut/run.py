@@ -64,14 +64,14 @@ if __name__ == '__main__':
     all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
     all_bacteria_catalog.initialize()
 
-    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_top3_file_path, all_bacteria_catalog)
+    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path, all_bacteria_catalog)
     gut_bacteria_catalog.initialize()
 
     # nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
     # nutrients_catalog.initialize()
 
-    # diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
-    # diseases_catalog.initialize()
+    diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
+    diseases_catalog.initialize()
 
     prebiotics_catalog = PrebioticsCatalog(prebiotics_file_path)
     prebiotics_catalog.initialize()
@@ -86,9 +86,9 @@ if __name__ == '__main__':
     analyzer = SentenceAnalyzer()
 
     tags_required = [BACTERIA_TAG]
-    tags_optional = [PREBIOTIC_TAG, DIET_TAG, FOOD_TAG]
+    tags_optional = [DISEASE_TAG]
     tags_to_exclude = [ALL_BACTERIA_TAG]
-    sentence_finder = SentenceFinder([gut_bacteria_catalog, prebiotics_catalog, diets_catalog, mixed_food_catalog],
+    sentence_finder = SentenceFinder([gut_bacteria_catalog, diseases_catalog],
                                      spacy_sentence_parser, analyzer,
                                      tags_required, tags_optional, tags_to_exclude)
 
