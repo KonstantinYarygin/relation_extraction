@@ -19,6 +19,12 @@ class SentenceFinder(object):
         self.sentence_parser = sentence_parser
         self.nlp = spacy.load('en')
 
+        logger.info(
+            "search will start with catalogs: %s\nand tags req: %s\ntags opt: %s\ntags excl: %s" % (catalog_list,
+                                                                                                    tags_to_search,
+                                                                                                    tags_optional_to_search,
+                                                                                                    tags_to_exclude))
+
     def get_sentence(self, sentence_text, article):
         if not self.check_if_title(article.title):
             return None
