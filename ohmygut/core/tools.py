@@ -94,6 +94,7 @@ def remove_entity_overlapping(entity_collections, tokens_words):
                 sentence_words = tokens_words[begin:end]
                 if entity_words == sentence_words:
                     coordinates = (begin, end)
+                    # todo: this takes only first entity if several entities have same coordinates
                     if coordinates not in coordinates_tmp:
                         coordinates_tmp.append(coordinates)
                         entities_coordinates[entity.tag].append([entity, coordinates])
@@ -101,6 +102,7 @@ def remove_entity_overlapping(entity_collections, tokens_words):
 
     entities_coordinates_to_keep = {entity_tag: [] for entity_tag in entities_tags}
 
+    # todo: doesn't work properly if more than 2 word overlapping
     # now remove overlapping in each entity
     for entity_tag, entity_coordinates in entities_coordinates.items():
         # comparing each entity to each entity
