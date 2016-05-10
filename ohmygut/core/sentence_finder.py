@@ -45,6 +45,7 @@ class SentenceFinder(object):
         tokens = self.nlp(sentence_text)
         tokens_words = [token.orth_ for token in tokens]
 
+        # todo: check - if we found bacteria both in gut_catalog and all_bacteria_catalog - which we would keep?
         logger.info("entities before remove overlapping: %s" % str(entities_collections))
         entities_collections = remove_entity_overlapping(entities_collections, tokens_words)
         logger.info("entities after remove overlapping: %s" % str(entities_collections))

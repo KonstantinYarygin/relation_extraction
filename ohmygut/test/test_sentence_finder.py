@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import MagicMock
 
 from ohmygut.core.analyzer import SentenceAnalyzer
 from ohmygut.core.article.article import Article
@@ -30,12 +31,7 @@ class MockCatalog(Catalog):
         pass
 
     def find(self, sentence_text):
-        entities = []
-        for i in range(self.entities_number):
-            entities.append(Entity("name%i%i" % (i, self.name), "code%i%i" % (i, self.name), "tag%i" % self.name,
-                                   self.additional_tags))
-        return EntityCollection(entities,
-                                "tag%i" % self.name)
+        pass
 
     def get_list(self):
         pass
@@ -61,11 +57,16 @@ class TestCase(unittest.TestCase):
         self.assertTrue(target.check_if_tags([BACTERIA_TAG]))
         self.assertFalse(target.check_if_tags([FOOD_TAG, DISEASE_TAG]))
 
-    def test_get_sentence(self):
+    def test_get_sentence1(self):
         catalog1 = MockCatalog(1, 2)
+        catalog1.find = MagicMock(return_value=EntityCollection([Entity("name01", "code01", "tag1"),
+                                                                 Entity("name11", "code11", "tag1")], "tag1"))
         catalog2 = MockCatalog(2, 1)
+        catalog2.find = MagicMock(return_value=EntityCollection([Entity("name02", "code02", "tag2")], "tag2"))
         catalog3 = MockCatalog(3, 1)
+        catalog3.find = MagicMock(return_value=EntityCollection([Entity("name03", "code03", "tag3")], "tag3"))
         catalog4 = MockCatalog(4, 1, ["tag4add"])
+        catalog4.find = MagicMock(return_value=EntityCollection([Entity("name04", "code04", "tag4", ["tag4add"])], "tag4"))
         analyzer = SentenceAnalyzer()
         target = SentenceFinder(catalog_list=[catalog1, catalog2, catalog3, catalog4],
                                 sentence_parser=SpacySentenceParser(),
@@ -81,6 +82,55 @@ class TestCase(unittest.TestCase):
                                 EntityCollection([Entity("name02", "code02", "tag2")], "tag2")]
         self.assertCountEqual(actual_collections, expected_collections)
 
+    def test_get_sentence2(self):
+        catalog1 = MockCatalog(1, 2)
+        catalog1.find = MagicMock(return_value=EntityCollection([Entity("name01w1", "code01", "tag1"),
+                                                                 Entity("name01w1 name01w2", "code11", "tag1", ["tag4add"])], "tag1"))
+        catalog2 = MockCatalog(2, 1)
+        catalog2.find = MagicMock(return_value=EntityCollection([Entity("name02", "code02", "tag2")], "tag2"))
+        catalog3 = MockCatalog(3, 1)
+        catalog3.find = MagicMock(return_value=EntityCollection([Entity("name03", "code03", "tag3")], "tag3"))
+        catalog4 = MockCatalog(4, 1, ["tag4add"])
+        catalog4.find = MagicMock(return_value=EntityCollection([Entity("name04", "code04", "tag4", ["tag4add"])], "tag4"))
+
+        analyzer = SentenceAnalyzer()
+
+        target = SentenceFinder(catalog_list=[catalog1, catalog2, catalog3, catalog4],
+                                sentence_parser=SpacySentenceParser(),
+                                sentence_analyzer=analyzer, tags_to_search=["tag2"],
+                                tags_optional_to_search=["tag1", "tag3"], tags_to_exclude=["tag4add"])
+        text = "The name01w1 name01w2 is the same as name11, but not name02, and name03 and name04 as well"
+        title = "title"
+        journal = "journal"
+        actual = target.get_sentence(text, Article(title, "a text", journal, "123"))
+        actual_collections = actual.entities_collections
+        expected_collections = [EntityCollection([Entity("name02", "code02", "tag2")], "tag2"),
+                                EntityCollection([Entity("name03", "code03", "tag3")], "tag3")]
+        self.assertCountEqual(actual_collections, expected_collections)
+
+    def test_get_sentence3(self):
+        catalog1 = MockCatalog(1, 2)
+        catalog1.find = MagicMock(return_value=EntityCollection([Entity("name01w1", "code01", "tag1"),
+                                                                 Entity("name01w1 name01w2", "code11", "tag1", ["tag4add"])], "tag1"))
+        catalog2 = MockCatalog(2, 1)
+        catalog2.find = MagicMock(return_value=EntityCollection([Entity("name02", "code02", "tag2")], "tag2"))
+        catalog3 = MockCatalog(3, 1)
+        catalog3.find = MagicMock(return_value=EntityCollection([Entity("name03", "code03", "tag3")], "tag3"))
+        catalog4 = MockCatalog(4, 1, ["tag4add"])
+        catalog4.find = MagicMock(return_value=EntityCollection([Entity("name04", "code04", "tag4", ["tag4add"])], "tag4"))
+
+        analyzer = SentenceAnalyzer()
+        # case 2
+        target = SentenceFinder(catalog_list=[catalog1, catalog2, catalog3, catalog4],
+                                sentence_parser=SpacySentenceParser(),
+                                sentence_analyzer=analyzer, tags_to_search=["tag2"],
+                                tags_optional_to_search=["tag1"], tags_to_exclude=["tag3", "tag4add"])
+        text = "The name01w1 name01w2 is the same as name11, but not name02, and name03 and name04 as well"
+        title = "title"
+        journal = "journal"
+        actual = target.get_sentence(text, Article(title, "a text", journal, "123"))
+        expected = None
+        self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main()

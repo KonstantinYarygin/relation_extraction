@@ -102,15 +102,15 @@ def remove_entity_overlapping(entity_collections, tokens_words):
     entities_coordinates_to_keep = {entity_tag: [] for entity_tag in entities_tags}
 
     # now remove overlapping in each entity
-    for entity_tag, entities_coordinates in entities_coordinates.items():
+    for entity_tag, entity_coordinates in entities_coordinates.items():
         # comparing each entity to each entity
-        for i in range(len(entities_coordinates)):
-            if len(entities_coordinates) == 1:  # only one entity for tag
-                entities_coordinates_to_keep[entity_tag].append(entities_coordinates[0])
+        for i in range(len(entity_coordinates)):
+            if len(entity_coordinates) == 1:  # only one entity for tag
+                entities_coordinates_to_keep[entity_tag].append(entity_coordinates[0])
                 continue
-            for j in range(i + 1, len(entities_coordinates)):
-                entity_1_coordinates = entities_coordinates[i]
-                entity_2_coordinates = entities_coordinates[j]
+            for j in range(i + 1, len(entity_coordinates)):
+                entity_1_coordinates = entity_coordinates[i]
+                entity_2_coordinates = entity_coordinates[j]
                 entity_1_begin = entity_1_coordinates[1][0]  # [1] contains coords; [0] contains begin
                 entity_2_begin = entity_2_coordinates[1][0]
                 if entity_1_begin == entity_2_begin:
@@ -149,8 +149,8 @@ def remove_entity_overlapping(entity_collections, tokens_words):
 
     # now initializing new EntityCollections
     entities_collections_by_tag = {entity_tag: EntityCollection([], entity_tag) for entity_tag in entities_tags}
-    for entity_tag, entities_coordinates in entities_coordinates_to_keep.items():
-        for entity_and_coordinates in entities_coordinates:
+    for entity_tag, entity_coordinates in entities_coordinates_to_keep.items():
+        for entity_and_coordinates in entity_coordinates:
             entities_collections_by_tag[entity_tag].entities.append(entity_and_coordinates[0])
 
     entities_to_keep = list(entities_collections_by_tag.values())
