@@ -4,6 +4,23 @@ library(stringr)
 source("analysis/exploratory_helper.R")
 data <- unique(fread('~/do/data/result/result_09May2016-02-40-17-full-pool-preb-food-diet.csv', 
                      sep='\t', colClasses = "character", select=1:8))
+###
+data$text <- str_replace_all(data$text, ";", ",")
+data$article_title <- str_replace_all(data$article_title, ";", ",")
+data$journal <- str_replace_all(data$journal, ";", ",")
+data$prebiotic <-  str_replace_all(data$prebiotic, ";noid", "")
+data$diet <-  str_replace_all(data$diet, ";noid", "")
+data$food <-  str_replace_all(data$food, ";nogroup", "")
+###
+data.to.find <- fread('~/Downloads/Dietary associations - unparsed.tsv', sep='\t')
+data.to.find.sub <- data.to.find[,.(V1, V2, V3, V4)]
+data.to.find.sub$order <- 1:nrow(data.to.find.sub)
+setnames(data.to.find.sub, c("number", "text", "article_title", "journal", "order"))
+data.merged <- merge(data.to.find.sub, data, by=c("text", "article_title", "journal"), all.x = T)
+setcolorder(data.merged, c("order", "number", "text", "article_title", "journal", "pmc", "bacteria", "prebiotic", "diet", "food"))
+setorder(data.merged, order)
+write.xlsx(data.merged, "merged.xlsx")
+###
 
 data.bacteria <- GetBacteria(data)
 setkey(data.bacteria, text,article_title,journal)
