@@ -1,3 +1,5 @@
+library(plyr)
+
 GetHistPlots <- function(data.count, x.variable){
   setnames(data.count, x.variable, "object")
   plot1 <- ggplot(data.count[0:10], aes(x = reorder(object, -N), y = N)) + 
@@ -17,6 +19,7 @@ GetHistPlots <- function(data.count, x.variable){
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.border = element_blank())
+  setnames(data.count, "object", x.variable)
   return(list(plot1=plot1, plot2=plot2))
 }
 
@@ -45,14 +48,32 @@ MergePlotBactPairs <- function(data.bacteria, data.other, column.other){
   return(list(plot=plot, data.bacteria.other.count=data.bacteria.other.count))
 }
 
-GetBacteriaNutrientDiseaseFood <- function(raw.sentences){
+GetBacteria <- function(raw.sentences){
   data.bacteria <- raw.sentences[bacteria != '',
-                        .(unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
-                                       .fun=function(x) x[1])),
-                          unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
-                                       .fun=function(x) x[2]))),
-                        by=.(text, article_title, journal)]
+                                 .(unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                                .fun=function(x) x[1])),
+                                   unlist(llply(strsplit(unlist(strsplit(bacteria, ', ')), ';'), 
+                                                .fun=function(x) x[2]))),
+                                 by=.(text, article_title, journal)]
   setnames(data.bacteria, c("text","article_title", "journal", "bacteria","bacteria_code"))
+  data.bacteria
+}
+
+GetEntityData <- function(raw.sentences, entity.name){
+  setnames(raw.sentences, entity.name, "object")
+  data.entity <- raw.sentences[object != '',
+                               .(unlist(llply(strsplit(unlist(strsplit(object, ', ')), ';'), 
+                                              .fun=function(x) x[1])),
+                                 unlist(llply(strsplit(unlist(strsplit(object, ', ')), ';'), 
+                                              .fun=function(x) x[2]))),
+                               by=.(text, article_title, journal)]
+  setnames(data.entity, c("text","article_title", "journal", entity.name, paste0(entity.name, "_id")))
+  setnames(raw.sentences, "object", entity.name)
+  data.entity
+}
+
+ParseRawSentences <- function(raw.sentences){
+  data.bacteria <- GetBacteria(raw.sentences)
   
   data.nutrient <- raw.sentences[nutrients != '',
                                  .(unlist(llply(strsplit(unlist(strsplit(nutrients, ', ')), ';'), 

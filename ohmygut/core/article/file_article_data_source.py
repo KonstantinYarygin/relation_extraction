@@ -69,6 +69,19 @@ def get_article_journal(nxml):
     return journal
 
 
+def get_article_pmc(nxml):
+    # <article-id pub-id-type="pmc">3376865
+    pmc = ""
+    root = etree.XML(nxml)
+    for root_child in root.iter():
+        if root_child.tag == 'article-meta':
+            for element in root_child.iter():
+                if element.tag == 'article-id':
+                    if element.attrib['pub-id-type'] == "pmc":
+                        pmc = element.text
+    return pmc
+
+
 class NxmlFreeArticleDataSource(ArticleDataSource):
     def __str__(self):
         return "nxml free articles data source"
@@ -83,4 +96,5 @@ class NxmlFreeArticleDataSource(ArticleDataSource):
             text = get_article_text(nxml)
             title = get_article_title(nxml)
             journal = get_article_journal(nxml)
-            yield Article(title, text, journal)
+            pmc = get_article_pmc(nxml)
+            yield Article(title, text, journal, pmc)

@@ -2,8 +2,8 @@ from time import time
 
 import pandas as pd
 
-from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.catalog import Catalog
+from ohmygut.core.catalog.catalog import Entity, EntityCollection
 from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 

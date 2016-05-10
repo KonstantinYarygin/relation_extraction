@@ -14,15 +14,15 @@ class TestCase(unittest.TestCase):
                    'also M._tuberculosis is a propionic acid producer.'
         bacteria = EntityCollection([Entity('M._tuberculosis', '111', BACTERIA_TAG),
                                      Entity('M._tuberculosis', '111', BACTERIA_TAG)], tag=BACTERIA_TAG)
-        nutrients = EntityCollection([Entity('propionic', '123', NUTRIENT_TAG)], NUTRIENT_TAG)
+        nutrients = EntityCollection([Entity('propionic', '123', NUTRIENT_TAG)])
         diseases = EntityCollection([Entity('tuberculosis', 'a', DISEASE_TAG),
                                      Entity('tuberculosis', 'a', DISEASE_TAG),
                                      Entity('tuberculosis', 'a', DISEASE_TAG),
                                      Entity('chronic_obstructive_syndrome', 'a1', DISEASE_TAG),
-                                     Entity('obstructive_syndrome', 'b1', DISEASE_TAG)], DISEASE_TAG)
-        not_overlapped_collections = [EntityCollection([bacteria.entities[0], bacteria.entities[1]], BACTERIA_TAG),
-                                      EntityCollection([diseases.entities[1], diseases.entities[3]], DISEASE_TAG),
-                                      EntityCollection([nutrients.entities[0]], NUTRIENT_TAG)]
+                                     Entity('obstructive_syndrome', 'b1', DISEASE_TAG)])
+        not_overlapped_collections = [EntityCollection([bacteria.entities[0], bacteria.entities[1]]),
+                                      EntityCollection([diseases.entities[1], diseases.entities[3]]),
+                                      EntityCollection([nutrients.entities[0]])]
 
         parser_output = parser.parse_sentence(sentence, not_overlapped_collections[0].entities +
                                               not_overlapped_collections[1].entities +

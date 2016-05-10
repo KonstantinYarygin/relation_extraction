@@ -4,7 +4,7 @@ import pandas as pd
 
 from ohmygut.core.catalog.catalog import Catalog, Entity, EntityCollection
 from ohmygut.core.catalog.gut_bacteria_catalog import BACTERIA_TAG
-from ohmygut.core.constants import plural_dict, logger
+from ohmygut.core.constants import logger
 from ohmygut.core.hash_tree import HashTree
 
 ALL_BACTERIA_TAG = 'ALL_BACTERIA'
@@ -60,6 +60,7 @@ class AllBacteriaCatalog(Catalog):
         bact_names = self.__hash_tree.search(sentence_text)
         bact_ids = [self.__bact_id_dict[name] for name in bact_names]
         output_list = list(zip(bact_names, bact_ids))
+
         entities = EntityCollection([Entity(name,
                                             code,
                                             BACTERIA_TAG,

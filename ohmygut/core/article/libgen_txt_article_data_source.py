@@ -3,6 +3,8 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 import os
 import re
 
+from ohmygut.core.tools import remove_pmc_from_pmcid
+
 
 def get_libgen_articles(libgen_folder):
     with open(os.path.join(libgen_folder, 'pmc_metadata.tsv')) as f:
@@ -14,12 +16,13 @@ def get_libgen_articles(libgen_folder):
 
     for filename, filepath in zip(filenames, filepathes):
         PMC = filename.split('.')[0]
+        pmc_numbers = remove_pmc_from_pmcid(PMC)
         title, journal = metadata[PMC]
         with open(filepath) as f:
             file_lines = [line.strip('\n- ') for line in f.readlines()]
             text = ' '.join(file_lines)
             text = re.sub('\s+', ' ', text)
-        yield {'text': text, 'title': title, 'journal': journal}
+        yield {'text': text, 'title': title, 'journal': journal, 'pmc': pmc_numbers}
 
 
 class LibgenTxtArticleDataSource(ArticleDataSource):
@@ -36,4 +39,6 @@ class LibgenTxtArticleDataSource(ArticleDataSource):
             text = libgen_article['text']
             title = libgen_article['title']
             journal = libgen_article['journal']
-            yield Article(title, text, journal)
+            pmc = libgen_article['pmc']
+
+            yield Article(title, text, journal, pmc)

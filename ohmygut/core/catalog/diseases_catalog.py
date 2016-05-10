@@ -9,6 +9,7 @@ from ohmygut.core.hash_tree import HashTree
 
 DISEASE_TAG = 'DISEASE'
 
+
 class DiseasesCatalog(Catalog):
     def get_list(self):
         pass

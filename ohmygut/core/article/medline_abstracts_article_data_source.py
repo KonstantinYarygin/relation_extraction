@@ -1,7 +1,8 @@
-import os
 import re
+
 from ohmygut.core.article.article import Article
 from ohmygut.core.article.article_data_source import ArticleDataSource
+from ohmygut.core.tools import remove_pmc_from_pmcid
 
 
 def get_medline_records(medline_file):
@@ -47,4 +48,10 @@ class MedlineAbstractsArticleDataSource(ArticleDataSource):
                 journal = ''.join(medline_record['JT'])
             else:
                 journal = ''
-            yield Article(title, text, journal)
+            if 'PMC' in medline_record:
+                pmc = ''.join(medline_record['PMC'])
+                if len(pmc) > 0:
+                    pmc = remove_pmc_from_pmcid(pmc)
+            yield Article(title, text, journal, pmc)
+
+

@@ -34,6 +34,13 @@ class Entity(object):
     def __repr__(self):
         return "%s;%s" % (self.name, self.code)
 
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+                and self.__dict__ == other.__dict__)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class EntityCollection(object):
     def __init__(self, entities, tag):
@@ -47,4 +54,8 @@ class EntityCollection(object):
     def __repr__(self):
         return ("%s" % str(self.entities)).replace('[', '').replace(']', '')
 
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
+    def __ne__(self, other):
+        return not self.__eq__(other)

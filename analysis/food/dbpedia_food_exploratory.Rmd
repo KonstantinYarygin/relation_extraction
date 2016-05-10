@@ -1,0 +1,82 @@
+---
+title: "dbpedia food exploratory"
+author: "Vasilyev A."
+date: "April 29, 2016"
+output: html_document
+---
+```{r, echo=F}
+source('../exploratory_helper.R')
+library(data.table)
+library(ggplot2)
+data <- fread('food.csv')
+str(data)
+data$name <- tolower(data$name)
+data$type <- tolower(data$type)
+data$subject <- tolower(data$subject)
+```
+В этих данных у каждого продукта есть **тип** (type) и **тема** (subject). Типом может быть: животное, растение, эукраиот, место и т.д. Темой может быть: "Деревья в США", "Заменитель мяса", "Заменитель сахара" и т.д.
+
+Таким образом, и то и другое можно использовать как своего рода категорию продукта.
+
+Всего наименований продуктов:
+```{r, echo=F}
+length(unique(data$name))
+```
+
+Всего типов:
+```{r, echo=F}
+length(unique(data$type))
+```
+
+Всего тем:
+```{r, echo=F}
+length(unique(data$subject))
+```
+
+Самые популярные типы:
+
+```{r, echo=F}
+data.type.count <- unique(data[,.(name, type)])[,.N,by=type]
+histplots <- GetHistPlots(data.type.count, "type")
+histplots$plot1
+```
+
+Самые популярные темы:
+
+```{r, echo=F}
+data.subject.count <- unique(data[,.(name, subject)])[,.N,by=subject]
+histplots <- GetHistPlots(data.subject.count, "subject")
+histplots$plot1
+```
+
+Теперь посмотрим, сколько из топ-100 еды Антонины (https://docs.google.com/spreadsheets/d/1E5kc68obtCx0it96WcPHkWM3WImyuj52zee7Q9o4SeQ/edit#gid=0) здесь есть
+```{r, echo=F}
+data.top100 <- data.table(read.csv('top100food.txt', header=F, col.names = c("name")))
+data.top100$name <- tolower(data.top100$name)
+data$name <- tolower(data$name)
+
+merged <- merge(data.top100, data[,.(name, type, subject)], by="name")
+
+length(unique(merged$name))
+```
+
+Вот какая еда из топ-100 есть:
+```{r, echo=F}
+sort(unique(merged$name))
+```
+
+Вот какие типы у еды из топ-100:
+```{r, echo=F}
+sort(unique(merged$type))
+```
+
+Вот какие темы у еды из топ-100:
+```{r, echo=F}
+sort(unique(merged$subject))
+```
+
+Вот вообще все типы:
+```{r, echo=F}
+unique(data$type)
+```
+

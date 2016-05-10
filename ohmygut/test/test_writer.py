@@ -5,7 +5,7 @@ import pandas as pd
 import pickle
 
 from ohmygut.core.sentence import Sentence
-from ohmygut.core.write.csv_writer import CsvWriter, CSV_SEPARATOR, DO_INCLUDE_HEADER
+from ohmygut.core.write.csv_writer import CsvWriter, CSV_SEPARATOR, INCLUDE_HEADER
 from ohmygut.core.write.pkl_writer import PklWriter
 
 
@@ -22,7 +22,7 @@ class TestCase(unittest.TestCase):
                                   "bacteria #2", "nutrient #2", "disease #2", "food #2",
                                   "parser_output", "shortest_paths")
         target.write(test_sentence1)
-        if DO_INCLUDE_HEADER:
+        if INCLUDE_HEADER:
             header = 0
         else:
             header = None
