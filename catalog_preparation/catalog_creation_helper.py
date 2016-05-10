@@ -50,20 +50,20 @@ def generate_excessive_dictionary_bact(df_names):
     return df_names_full
 
 
-def clear_ids_by_rank_bact(ids, ncbi_nodes):
+def clear_ids_by_rank_bact(ids, ncbi_nodes, rank_ex=RANK_EXCLUSIONS):
     ids_types = ncbi_nodes[ncbi_nodes['id'].isin(ids)]['rank'].values
-    ids = ids[~np.in1d(ids_types, RANK_EXCLUSIONS)]
+    ids = ids[~np.in1d(ids_types, rank_ex)]
     ids_types = ncbi_nodes[ncbi_nodes['id'].isin(ids)]['rank'].values
     return pd.DataFrame({'id': ids, 'rank': ids_types})
 
 
-def get_bind_ids_bact(ids, ncbi_nodes, is_get_child_id=False):
+def get_bind_ids_bact(ids, ncbi_nodes, is_get_child_id=False, rank_ex=RANK_EXCLUSIONS):
     if is_get_child_id:
         bind_ids = np.unique(ncbi_nodes[ncbi_nodes['parent_id'].isin(ids)]['id'].values)
     else:
         bind_ids = np.unique(ncbi_nodes[ncbi_nodes['id'].isin(ids)]['parent_id'].values)
     binded_types = ncbi_nodes[ncbi_nodes['id'].isin(bind_ids)]['rank'].values
-    bind_ids = bind_ids[~np.in1d(binded_types, RANK_EXCLUSIONS)]
+    bind_ids = bind_ids[~np.in1d(binded_types, rank_ex)]
     new_ids = np.array(bind_ids)
     while len(bind_ids) != 0:
         if is_get_child_id:
@@ -71,7 +71,7 @@ def get_bind_ids_bact(ids, ncbi_nodes, is_get_child_id=False):
         else:
             bind_ids = np.unique(ncbi_nodes[ncbi_nodes['id'].isin(bind_ids)]['parent_id'].values)
         binded_types = ncbi_nodes[ncbi_nodes['id'].isin(bind_ids)]['rank'].values
-        bind_ids = bind_ids[~np.in1d(binded_types, RANK_EXCLUSIONS)]
+        bind_ids = bind_ids[~np.in1d(binded_types, rank_ex)]
         new_ids = np.append(new_ids, bind_ids)
     new_ids = np.unique(new_ids)
     ranks = ncbi_nodes[ncbi_nodes['id'].isin(new_ids)]['rank'].values
