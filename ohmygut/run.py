@@ -10,13 +10,13 @@ from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAb
 from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
 from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
 from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
-from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
+# from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
 from ohmygut.core.main import main
 from ohmygut.core.pattern_finder import PatternFinder
 from ohmygut.core.sentence_processing import SentenceParser
-from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
-from ohmygut.core.write.log_writer import LogWriter
-from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
+# from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
+# from ohmygut.core.write.log_writer import LogWriter
+# from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -32,8 +32,6 @@ stanford_dependency_parser = StanfordDependencyParser(
 
 sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
 
-food_catalog = UsdaFoodCatalog(os.path.join(script_dir, '../data/food/food.tsv'))
-food_catalog.initialize()
 
 bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
 bacteria_catalog.initialize()
@@ -55,19 +53,16 @@ with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
 lancaster_stemmer = LancasterStemmer()
 pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
 
-article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
+# article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
+article_data_sources = [nxml_article_data_source]
 
-output_dir = get_output_dir_path()
-csv_path = get_csv_path()
-csv_writer = CsvWriter(csv_path)
-pkl_writer = PklWriter(output_dir)
-log_writer = LogWriter()
+# output_dir = get_output_dir_path()
+# csv_path = get_csv_path()
+# csv_writer = CsvWriter(csv_path)
+# pkl_writer = PklWriter(output_dir)
+# log_writer = LogWriter()
 
-
-# test
-# test
-# test
 main(article_data_sources,
-     bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
+     bacteria_catalog, nutrients_catalog, diseases_catalog,
+     sentence_parser, stanford_tokenizer, pattern_finder, #writers=[csv_writer, pkl_writer, log_writer],
      do_parse=False, do_analyze=False)

@@ -1,7 +1,7 @@
 class Sentence(object):
 
     def __init__(self, text, article_title, journal,
-                 bacteria, nutrients, diseases, food,
+                 bacteria, nutrients, diseases,
                  parser_output, shortest_paths):
         super().__init__()
         self.shortest_paths = shortest_paths
@@ -12,12 +12,10 @@ class Sentence(object):
         self.diseases = diseases
         self.nutrients = nutrients
         self.bacteria = bacteria
-        self.food = food
 
     def __repr__(self):
         out = self.text + '\n'
         out += 'diseases: ' + str(self.diseases) + '\n'
         out += 'nutrients: ' + str(self.nutrients) + '\n'
         out += 'bacteria: ' + str(self.bacteria) + '\n'
-        out += 'food: ' + str(self.food) + '\n'
         return out
