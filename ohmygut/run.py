@@ -64,7 +64,9 @@ pkl_writer = PklWriter(output_dir)
 log_writer = LogWriter()
 
 
-
+# test
+# test
+# test
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
      sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
