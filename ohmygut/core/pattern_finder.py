@@ -17,14 +17,29 @@ class PatternFinder(object):
         else:
             return ind
 
-    def find_bindings(self, sentence_graph, sentence_words, graph_index, types=False):
+    def find_bindings(self, sentence_graph, sentence_words, graph_index, mode='w'):
+        """
+        modes:
+            i: indicies
+            w: words
+            t: types
+        """
         graph = sentence_graph.to_undirected()
-        ind_connected = list(graph[graph_index].keys())
-        if types:
-            connections = [(sentence_words[i], graph[graph_index][i]['rel']) for i in ind_connected]
+        indicies = list(graph[graph_index].keys())
+        types = [graph[graph_index][i]['rel'] for i in indicies]
+        words = [sentence_words[i] for i in indicies]
+        ret = []
+        for char in mode:
+            if char == 'i':
+                ret.append(indicies)
+            elif char == 't':
+                ret.append(types)
+            elif char == 'w':
+                ret.append(words)
+        if len(ret) == 1:
+            return ret[0]
         else:
-            connections = [sentence_words[i] for i in ind_connected]
-        return connections
+            return zip(*ret)
 
     def find_patterns(self, path, sentence_graph=None, sentence_words=None):
         [trigger_stem_ids, triggers] = self.find_words(path.words, self.__verb_list, return_value=True)
@@ -60,7 +75,7 @@ class PatternFinder(object):
 
             if pattern_verb:
                 pattern_type, trigger, trigger_type = pattern_verb
-                nutr_binds = self.find_bindings(sentence_graph, sentence_words, path.nodes_indexes[nutr_id], types=True)
+                nutr_binds = self.find_bindings(sentence_graph, sentence_words, path.nodes_indexes[nutr_id], mode='wt')
 
                 if trigger_type == 'metabolize_general':
                     if ('to', 'case') in nutr_binds or \
@@ -71,10 +86,32 @@ class PatternFinder(object):
                     if ('from', 'case') in nutr_binds:
                         trigger_type = 'metabolize_general'
                         trigger = trigger + ' from'
-                pattern_verb = [pattern_type, trigger, trigger_type]
+
+                negation = self.is_negation(sentence_graph, sentence_words, path, trigger_id)
+
+                pattern_verb = [pattern_type, trigger, trigger_type, negation]
                 patterns_verbs.append(pattern_verb)
 
         return patterns_verbs
+
+    def is_negation(self, sentence_graph, sentence_words, path, trigger_id):
+        path_words_stems = [self.__stemmer.stem(word) for word in path.words]
+        if 'lack' in path_words_stems:
+            return 'negation'
+
+        trigger_binds_types = self.find_bindings(sentence_graph, sentence_words, path.nodes_indexes[trigger_id], mode='t')
+        if 'neg' in trigger_binds_types:
+            return 'negation'
+
+        secondary_verbs_stems = {'abl', 'detect'}
+        trigger_binds = self.find_bindings(sentence_graph, sentence_words, path.nodes_indexes[trigger_id], mode='iw')
+        secondary_indices = [index for index, word in trigger_binds if self.__stemmer.stem(word) in secondary_verbs_stems]
+        secondary_binds_types = [type for index in secondary_indices for type in self.find_bindings(sentence_graph, sentence_words, index, mode='t')]
+        if 'neg' in secondary_binds_types:
+            return 'negation'
+
+
+        return 'statement'
 
     def is_pattern_1(self, trigger_id, nutr_id, trigger_tag, trigger_edge_aft):
         dist_condition = abs(trigger_id - nutr_id) == 1
