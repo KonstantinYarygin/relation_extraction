@@ -34,16 +34,15 @@ def analyze_sentence(bacteria, nutrients, diseases, parser_output, tokenizer, pa
     disease_names = [name for name, doid_id in diseases]
     nutrient_names = [name for name, idname in nutrients]
 
-    merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, food_names, parser_output)
+    merge_nodes(tokenizer, bacterial_names, disease_names, nutrient_names, parser_output)
 
     bacteria_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'BACTERIUM']
     nutrients_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'NUTRIENT']
     diseases_nodes_ids = [id for id, tag in parser_output.tags.items() if tag == 'DISEASE']
 
-    tag_nodeids_tuples = zip(('BACTERIUM', 'NUTRIENT', 'DISEASE', 'FOOD'),
-                             (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids, food_nodes_ids)
+    tag_nodeids_tuples = zip(('BACTERIUM', 'NUTRIENT', 'DISEASE'),
+                             (bacteria_nodes_ids, nutrients_nodes_ids, diseases_nodes_ids)
                              )
-
     shortest_pathes = {}
     for entity_1, entity_2 in combinations(tag_nodeids_tuples, 2):
         tag_1, nodes_ids_1 = entity_1
