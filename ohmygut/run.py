@@ -65,4 +65,4 @@ article_data_sources = [nxml_article_data_source]
 main(article_data_sources,
      bacteria_catalog, nutrients_catalog, diseases_catalog,
      sentence_parser, stanford_tokenizer, pattern_finder, #writers=[csv_writer, pkl_writer, log_writer],
-     do_parse=False, do_analyze=False)
+     do_parse=True, do_analyze=True)
