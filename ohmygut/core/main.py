@@ -5,6 +5,7 @@ from ohmygut.core.analyzer import analyze_sentence
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.sentence import Sentence
 from ohmygut.core.tools import get_sentences, remove_entity_overlapping, check_if_more_than_one_list_not_empty
+import pickle
 import sys
 
 def main(article_data_sources,
@@ -37,16 +38,19 @@ def main(article_data_sources,
                 continue
             if not sentence:
                 continue
-            print(sentence)
-            sys.exit()
 
-            for writer in writers:
-                writer.write(sentence)
+            if sentence.diseases and sentence.bacteria:
+                sentence_number += 1
+                with open('dis_bact/sentence_%d.pkl' % sentence_number, 'wb') as f:
+                    pickle.dump(sentence, f)
 
-            sentence_number += 1
+
+            # for writer in writers:
+            #     writer.write(sentence)
+
             # constants.logger.info("sentence № %i\n%s" % (sentence_number, sentence))
             # constants.logger.info("=" * 80)
-            sentences.append(sentence)
+            # sentences.append(sentence)
 
 
         # constants.logger.info("finish looping sentences with %s\n" % str(article_data_source))
@@ -82,8 +86,6 @@ def find_sentence(sentence_text, article_title, article_journal,
         # todo: no need to be object?
         parser_output = sentence_parser.parse_sentence(sentence_text)
         if not parser_output:
-            print('not parser_output')
-            sys.exit()
             return None
     else:
         parser_output = ''
