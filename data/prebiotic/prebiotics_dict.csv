@@ -1,0 +1,36 @@
+name	synonims	translation	id	contains
+Betaglucan	beta-glucan, beta glucan	Бета-глюкан	1	орехи, отруби, семена, бурый рис, зерновые, фрукты, грибы, ракообразные, овёс, отруби, фасоль, ячмень, лён, ягоды, соя, бананы, апельсины, яблоки, морковь
+Cellulose		Целлюлоза	2	орехи, отруби, семена, бурый рис, зерновые, фрукты
+Chitin		Хитин	3	грибы, ракообразные
+Hemicellulose	hemi cellulose, hemi-cellulose, polyose	Гемицеллюлоза	4	зерновые, отруби, бобовые
+Hexose		Гексоза	5	зерновые, ячмень
+Pentose		Пентоза	6	рожь, овёс
+Lignin		Лигнин	7	фасоль, зерновые
+Xanthan gum	Xantan gum	Ксантановая камедь	8	загустители
+Resistant starch	RS, type 2 resistant starch, type 1 resistant starch,  type 3 resistant starch, type 4 resistant starch, resistant starch diet, RS diet, starch RS4	Устойчивый крахмал	9	кукуруза, ячмень, пшеница, бобовые, бананы
+Inulin	Inuline, artichoke inulin	Инулин	10	корни тапинамбура, агава, цикорий
+Polyuronide	poly-uronide, poly uronide	Полиуронид	11	яблоки, айва, овощи, запеченые яблоки, водоросли
+Pectin		Пектин	12	яблоки, айва, овощи, запеченые яблоки
+Alginic acid	alginate acid, algin, alginate	Альгиновая кислота	13	водоросли
+Raffinose		Раффиноза	14	бобовые
+Xylose	Xilose	Ксилоза	15	рожь
+Polydextrose		Полидекстроза	16	
+Lactulose		Лактулоза	17	
+Oligofructose	oligo-fructose, oligo fructose, olygofructose, olygo-fructose, olygo fructose	Олигофруктоза	18	лук, артишок, цикорий, лук-порей, чеснок, овсяные хлопья, ячмень, рожь
+Psyllium	ispaghula	Псиллиум	19	
+Dextrin	Wheat dextrin	Декстрин	20	картофель, зерновые
+GOS	GOS juice, galactooligosaccharide, galacto-oligosaccharide, galacto oligosaccharide	Галактоолигосахариды	21	чечевица, горох, бобовые, молоко, кефир, соя, чеснок, бананы, отруби
+TGOS	TOS, transgalactooligosaccharide, trans-galactooligosaccharide, trans galactooligosaccharide, trans-galacto-oligosaccharide, trans galacto oligosaccharide	Транс-галактоолигосахариды	24	чечевица, горох, бобовые, молоко, кефир, соя, чеснок, бананы, отруби
+FOS	fructooligosaccharide, fructo-oligosaccharide, fructo oligosaccharide	Фруктоолигосахариды	22	цикорий, инжир, помидоры, овсяная и пшеничная крупы, ржаной хлеб
+XOS	Xylosoligosaccharide, xylo-oligosaccharide, xylo oligosaccharide	Ксилоолигосахариды	23	злаки, отруби, вино
+Larch arabinogalactan	LAG, Larch arabinogalactin	Лиственничный арабиногалактан	25	морковь, редис, груши, кукуруза, зерновые, помидоры
+Oligofructose-Enriched Inulin	OEI, oligofructose enriched inulin	Обогащенный олигофруктозой инулин	27	цикорий, агава, бананы, пшеница, лук, спаржа, рожь, ячмень
+Mannan-oligosaccharide	Mannan Oligosaccharide, MOS, mannanoligosaccharide	Маннановые олигосахариды	28
+GOS-lu	lactulose galactooligosaccharide, lactulose galacto-oligosaccharide, lactulose galacto oligosaccharide	Лактулозные галактоолигосахариды	29	
+GOS-la	lactose galactooligosaccharide, lactose galacto-oligosaccharide, lactose galacto oligosaccharide	Лактозные галактоолигосахариды	30	
+Nondigestible oligosaccharide	nondigestible oligosaccharides, NDO, non-digestible oligosaccharides	Неперевариваемые олигосахариды	31	злаковые, отруби, вино, ксилитол, соя, корни тапинамбура, агава, цикорий, лук, крахмал, мисо, бобовые, овёс
+Pyrodextrin	Pirodextrin	Пиродекстрин	32	картофель, кукуруза
+Arabinoxylan	Arabinoxilan	Арабиноксилан	33	злаки, рис, отруби
+Fiber	Fibre, high dietary fiber, high dietary fibre, high fiber diet, high-fiber fruit, high-fibre fruit	Волокна	34	
+isomalto-oligosaccharides	IMO	Изомальтоолигосахариды	35	
+soya-oligosaccharides	SOS	Соевые олигосахариды	36	
