@@ -12,7 +12,7 @@ class TestCase(unittest.TestCase):
         target = DbpediaFoodCatalog(os.path.join(test_resource_dir, "test_dbpedia_food_data.csv"))
         target.initialize()
         test_sentence = "Acid is whether good or bad"
-        expected = EntityCollection([Entity("Acid", "nogroup", FOOD_TAG)])
+        expected = EntityCollection([Entity("Acid", "nogroup", FOOD_TAG)], FOOD_TAG)
         actual = target.find(test_sentence)
 
         self.assertCountEqual(expected.entities, actual.entities)

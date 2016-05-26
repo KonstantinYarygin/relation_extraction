@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 
 from analysis.obo import Parser
@@ -29,6 +31,10 @@ def parse_obo(obo_path):
             groups = ['NA']
 
         names = [name] + synonyms
+
+        # apostrophe1_names = [name.replace('\'', '’') for name in names if '\'' in name]
+        # apostrophe2_names = [name.replace('’', '\'') for name in names if '’' in name]
+        names = [re.sub('[’\']', '', name) for name in names]
 
         for disease_name in names:
             for group in groups:

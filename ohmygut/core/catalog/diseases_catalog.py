@@ -45,6 +45,7 @@ class DiseasesCatalog(Catalog):
         returns:
             list of nutrient_names
         """
+        sentence_text = re.sub('[’\']', '', sentence_text)
         diseases_names = self.hash_tree.search(sentence_text)
         entities = EntityCollection([Entity(name,
                                             self.disease_dictionary[name],
