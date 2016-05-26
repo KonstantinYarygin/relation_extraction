@@ -17,7 +17,14 @@ class ShortestPath():
         out += str(self.edge_rels) + '\n'
         return out
 
-
+def prune_graph(parser_output):
+    prunning_relations = {'parataxis', 'advcl'}
+    G = parser_output.nx_graph
+    edges_to_prune =  [(i, j) for i, j in G.edges() if G[i][j]['rel'] in prunning_relations]
+    edges_to_prune += [(i, j) for i, j in G.edges() if G[i][j]['rel'] == 'conj' and
+                            parser_output.tags[i].startswith('V') and
+                            parser_output.tags[j].startswith('V')]
+    G.remove_edges_from(edges_to_prune)
 
 def search_shortest_path(parser_output, source_node_id, target_node_id, undirected=True):
     if undirected:
