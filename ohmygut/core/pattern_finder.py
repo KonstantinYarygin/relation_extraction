@@ -103,7 +103,7 @@ class PatternFinder(object):
         if 'neg' in trigger_binds_types:
             return 'negation'
 
-        secondary_verbs_stems = {'abl', 'detect'}
+        secondary_verbs_stems = {'abl', 'detect', 'can'}
         trigger_binds = self.find_bindings(sentence_graph, sentence_words, path.nodes_indexes[trigger_id], mode='iw')
         secondary_indices = [index for index, word in trigger_binds if self.__stemmer.stem(word) in secondary_verbs_stems]
         secondary_binds_types = [type for index in secondary_indices for type in self.find_bindings(sentence_graph, sentence_words, index, mode='t')]
