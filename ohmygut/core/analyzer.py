@@ -10,6 +10,13 @@ class ShortestPath():
         self.words = words
         self.edge_rels = edge_rels
         self.type = None
+    def __str__(self):
+        out = ''
+        out += str(self.words) + '\n'
+        out += str(self.tags) + '\n'
+        out += str(self.edge_rels) + '\n'
+        return out
+
 
 
 def search_shortest_path(parser_output, source_node_id, target_node_id, undirected=True):
