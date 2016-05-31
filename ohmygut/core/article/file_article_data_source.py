@@ -42,6 +42,7 @@ def get_article_text(article_nxml):
     full_text = full_text.replace(' )', ')')
     full_text = full_text.replace(' ;', ';')
     full_text = full_text.replace(' ,', ',')
+    full_text = full_text.replace('’', '\'') # for Crohn's disease
     full_text = full_text.replace('\n', ' ')
     full_text = re.sub('\s?\([^\d\w]+\)', '', full_text)
     full_text = re.sub('\s?\[[^\d\w]+\]', '', full_text)
