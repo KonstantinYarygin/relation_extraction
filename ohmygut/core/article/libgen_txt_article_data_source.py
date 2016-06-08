@@ -19,6 +19,7 @@ def get_libgen_articles(libgen_folder):
             file_lines = [line.strip('\n- ') for line in f.readlines()]
             text = ' '.join(file_lines)
             text = re.sub('\s+', ' ', text)
+            text = text.replace('’', '\'') # for Crohn's disease
         yield {'text': text, 'title': title, 'journal': journal}
 
 
