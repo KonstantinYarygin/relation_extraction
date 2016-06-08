@@ -93,8 +93,8 @@ class PatternFinder(object):
             'fraction', 'portion', 'percentage', 'carriage', 'number'}
         qual_neg = {'reduce', 'lower', 'diminish', 'decreased',
             'less', 'smaller'}
-        qual_pos = {'increase', 'high', 'greater', 'enhanced',
-            'elevated', 'higher', 'larger'} #, 'more', 'much'}
+        qual_pos = {'increase', 'greater', 'enhanced', 'elevated',
+            'higher', 'larger'}
         trigger_stems = {self.__stemmer.stem(trigger) for trigger in triggers}
         qual_neg_stems = {self.__stemmer.stem(qual) for qual in qual_neg}
         qual_pos_stems = {self.__stemmer.stem(qual) for qual in qual_pos}
