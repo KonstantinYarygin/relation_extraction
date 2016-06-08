@@ -40,12 +40,13 @@ def get_article_text(article_nxml):
     full_text_chunks = [chunk.strip() for chunk in full_text_chunks if chunk and len(chunk) != 1]
     full_text = ' '.join(full_text_chunks)
     full_text = full_text.replace(' )', ')')
-    full_text = full_text.replace(' ;', ';')
-    full_text = full_text.replace(' ,', ',')
+    full_text = full_text.replace('( ', '(')
     full_text = full_text.replace('’', '\'') # for Crohn's disease
     full_text = full_text.replace('\n', ' ')
-    full_text = re.sub('\s?\([^\d\w]+\)', '', full_text)
-    full_text = re.sub('\s?\[[^\d\w]+\]', '', full_text)
+    full_text = re.sub(r'\s+([\,\.\;\:])', r'\1', full_text)
+    full_text = re.sub('\s?\([^\d\w]*\)', '', full_text)
+    full_text = re.sub('\s?\[[^\d\w]*\]', '', full_text)
+    full_text = re.sub('\,{2,}', '', full_text)
     return full_text
 
 
