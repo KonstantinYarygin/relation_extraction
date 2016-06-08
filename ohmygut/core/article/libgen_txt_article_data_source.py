@@ -17,9 +17,15 @@ def get_libgen_articles(libgen_folder):
         title, journal = metadata[PMC]
         with open(filepath) as f:
             file_lines = [line.strip('\n- ') for line in f.readlines()]
-            text = ' '.join(file_lines)
-            text = re.sub('\s+', ' ', text)
-            text = text.replace('’', '\'') # for Crohn's disease
+        text = ' '.join(file_lines)
+        text = re.sub('\s+', ' ', text)
+        text = text.replace('’', '\'') # for Crohn's disease
+        text = re.sub(r'\([^\(\)]*(fig\.|figure|tbl\.|table)[^\(\)]*\)', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\[[\d\,\-\–\s]+\]', '', text)
+        text = re.sub(r'\([\d\,\-\–\s]+\)', '', text)
+        text = re.sub(r'\s+([\,\.\;\:])', r'\1', text)
+        text = re.sub(r'\s?\([^\d\w]*\)', '', text)
+        text = re.sub(r'\s?\[[^\d\w]*\]', '', text)
         yield {'text': text, 'title': title, 'journal': journal}
 
 
