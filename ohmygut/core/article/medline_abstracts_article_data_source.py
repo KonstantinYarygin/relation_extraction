@@ -47,4 +47,5 @@ class MedlineAbstractsArticleDataSource(ArticleDataSource):
                 journal = ''.join(medline_record['JT'])
             else:
                 journal = ''
+            text = text.replace('’', '\'') # for Crohn's disease
             yield Article(title, text, journal)
