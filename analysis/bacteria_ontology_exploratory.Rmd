@@ -1,0 +1,46 @@
+---
+title: "Bacteria ontology exploratory"
+output: html_document
+---
+
+```{r}
+library(data.table)
+library(igraph)
+data <- fread("../data/bacteria/gut_catalog.csv")
+data.tax <- data.table(rank=c("life", "domain", "kingdom", 
+                              "superphylum", "phylum", "subphylum", 
+                              "class", "order", "family", 
+                              "genus", "species", "species group"))
+data.tax$ord <- 1:nrow(data.tax)
+```
+
+Сколько ассоциаций к каждому таксономическому уровню
+```{r}
+data.unique <- unique(data[,.(id,rank)])
+data.byrank <- data.unique[,.N,by=rank]
+data.byrank <- merge(data.byrank, data.tax, by="rank", all.x=T)
+setorder(data.byrank, ord)
+data.byrank[,.(rank, N)]
+```
+
+Таксономическое дерево
+```{r}
+nodes.dump <- read.csv("../data/bacteria/nodes.dmp", sep="|")
+nodes.dump.ids <- data.table(cbind(nodes.dump$X1, nodes.dump$X1.1))
+setnames(nodes.dump.ids, c("child", "parent"))
+data <- merge(data, nodes.dump.ids, by.x="id", by.y="child")
+
+parent.child <- unique(data[,.(id, name, parent)])
+parent.child <- merge(parent.child.str, data, by.x="parent", by.y = "id")
+parent.child <- unique(parent.child.str.child[,.(name.y, name.x)])
+setnames(parent.child, c("parent", "child"))
+
+graph <- graph.data.frame(parent.child, directed = F)
+layout <- layout.reingold.tilford(graph, circular=T)
+png("ring.png", width=1000, height=1000)
+plot.igraph(graph, vertex.size=3, layout=layout.kamada.kawai, vertex.label.cex=1)
+dev.off()
+
+```
+
+

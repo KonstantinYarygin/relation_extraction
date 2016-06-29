@@ -5,8 +5,8 @@ Plant protein	Plant protein;Plant polypeptide
 Gluten	Gluten
 Casein	Casein
 MB	Myoglobin
-A2 beta-casein	A2 beta-casein;A2 β-casein;A2 type of β-casein;A2 type of beta-casein 
-A1 beta-casein	A1 beta-casein;A1 β-casein;A1 type of β-casein;A1 type of beta-casein 
+A2 beta-casein	A2 beta-casein;A2 β-casein;A2 type of β-casein;A2 type of beta-casein
+A1 beta-casein	A1 beta-casein;A1 β-casein;A1 type of β-casein;A1 type of beta-casein
 IGF-1	Insulin-Like Growth Factor 1;IGF-1,Insulin-Like Growth Factor I,Somatomedin C
 Trp,W	Tryptophan;Tryptan;2-Amino-3-(1H-indol-3-yl)propanoic acid
 Thr,T	Threonine;2-Amino-3-hydroxybutanoic acid
@@ -257,7 +257,7 @@ Beta-sitosterol	Beta-sitosterol;Β-Sitosterol;β-Sitosterin;Beta-sitosterin;17-(
 Daidzein	Daidzein;Daidzeol;Isoaurostatin;7-Hydroxy-3-(4-hydroxyphenyl) chromen-4-one;4',7-Dihydroxyisoflavone
 Genistein	Genistein;5,7-Dihydroxy-3-(4-hydroxyphenyl)chromen-4-one;4',5,7-Trihydroxyisoflavone
 Glycitein	Glycitein;7-Hydroxy-3-(4-hydroxyphenyl)-6-methoxy-4-chromenone;4',7-Dihydroxy-6-methoxyisoflavone
-Soy isoflavones	Soy isoflavones;daidzin;daidzein;genistin;genistein;glycitin;glycitein 
+Soy isoflavones	Soy isoflavones;daidzin;daidzein;genistin;genistein;glycitin;glycitein
 Apigenin	Apigenine;Apigenine;Chamomile;Apigenol;Spigenin;Versulin;4',5,7-Trihydroxyflavone;C.I. Natural Yellow 1;5,7-Dihydroxy-2-(4-hydroxyphenyl)-4H-1-benzopyran-4-one
 Biochanin A	Biochanin A;5,7-dihydroxy-3-(4-methoxyphenyl)chromen-4-one;4'-Methylgenistein;Genistein 4-methyl ether;5,7-Dihydroxy-4'-methoxyisoflavone
 Formononetin	Formononetin;Biochanin B;Formononetol;7-hydroxy-3-(4-methoxyphenyl)chromen-4-one;7-Hydroxy-4'-methoxyisoflavone;4'-O-methyldaidzein
@@ -313,7 +313,7 @@ Peonidin	Peonidin;2-(4-Hydroxy-3-methoxyphenyl)chromenylium-3,5,7-triol
 (-)-Epicatechin	(-)-Epicatechin;L-epicatechin;Epicatechol;(-)-epicatechol;L-acacatechin;L-epicatechol;Epi-catechin;(2R,3R)-(-)-epicatechin;2,3-cis-epicatechin
 ECG	(-)-Epicatechin 3-gallate;(-)-Epicatechin gallate;(-)-Epicatechin-3-O-gallate;[(2R,3R)-2-(3,4-dihydroxyphenyl)-5,7-dihydroxy-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate
 EGCG	(-)-Epigallocatechin 3-gallate;(-)-Epigallocatechin gallate;[(2R,3R)-5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)chroman-3-yl] 3,4,5-trihydroxybenzoate;(2R,3R)-5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-1-benzopyran-3-yl 3,4,5-trihydroxybenzoate
-(+)-Gallocatechin	(+)-Gallocatechin;(+)-Gallocatechol 
+(+)-Gallocatechin	(+)-Gallocatechin;(+)-Gallocatechol
 GCG	(+)-Gallocatechin 3-gallate;(+)-Gallocatechin gallate;(2S,3R)-2-(3,4,5-Trihydroxyphenyl)-3,4-dihydro-1(2H)-benzopyran-3,5,7-triol 3-(3,4,5-trihydroxybenzoate)
 4′-O-methylepicatechin	4′-O-methylepicatechin
 TF	Theaflavin;TF1;3,4,5-Trihydroxy-1,8-bis[(2R,3R)-3,5,7-trihydroxy-2-chromanyl]-6-benzo[7]annulenone
@@ -405,7 +405,6 @@ Sarafloxacin	Sarafloxacin;6-fluoro-1-(4-fluorophenyl)-4-oxo-7-piperazin-1-ylquin
 Enrofloxacin	Enrofloxacin;1-cyclopropyl-7-(4-ethylpiperazin-1-yl)-6-fluoro-4-oxo-1,4-dihydroquinoline-3-carboxylic acid
 Difloxacin	Difloxacin;6-fluoro-1-(4-fluorophenyl)-7-(4-methylpiperazin-1-yl)- 4-oxoquinoline-3-carboxylic acid
 Marbofloxacin	Marbofloxacin;9-fluoro-2,3-dihydro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-7H-pyridol(3,2,1-ij)(4,2,1)benzoxadiazin-6 carboxylic acid
-Chloramphenicol	Chloramphenicol;2,2-dichloro-N-[1,3-dihydroxy-1-(4-nitrophenyl)propan-2-yl]acetamide
 Acrylamide	Acrylamide;Acrylic amide;Prop-2-enamide
 Malachite green	Malachite green;Aniline green;4-{[4-(dimethylamino)phenyl](phenyl)methylidene}-N,N-dimethylcyclohexa-2,5-dien-1-iminium chloride
 Gentian violet	Gentian violet;Crystal violet;Methyl violet 10B;Hexamethyl pararosaniline chloride;Pyoctanin;Pyoctanine;Tris(4-(dimethylamino)phenyl)methylium chloride

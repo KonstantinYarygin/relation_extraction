@@ -1,0 +1,43 @@
+```{r}
+library(data.table)
+library(ggplot2)
+data <- fread('../data/diseases/diseases.csv')
+```
+
+# Структура, head, tail
+```{r}
+str(data)
+head(data, 5)
+tail(data, 5)
+```
+
+Подцепим имена групп
+```{r}
+data <- merge(data, unique(data[,.(id, name)]), by.x = 'group', by.y = 'id', all.x = TRUE)
+setnames(data, c("group", "id", "name", "obsolete", "groupname"))
+```
+
+# Сколько болезней в каждой группе
+```{r}
+data.count <- data[,.N,by=groupname]
+setorder(data.count, -N)
+```
+
+Количество болезней без группы. Интересно что у всех болезней без группы `obsolete = true`
+```{r}
+data.count[is.na(groupname)]$N
+```
+
+Количество по группам (исключаем те что без группы)
+```{r}
+ggplot(data.count[!is.na(groupname)][0:10], aes(x = reorder(groupname, -N), y = N)) + 
+    geom_bar(stat="identity") + 
+    theme_bw() + 
+    xlab('groupname') + 
+    ylab('count') + 
+    theme(text = element_text(size=13), 
+          axis.text.x = element_text(angle=10, vjust=1))
+```
+
+
+

@@ -1,0 +1,2167 @@
+idname	name
+Animal protein	Animal protein
+Animal protein	Animal polypeptide
+Plant protein	Plant protein
+Plant protein	Plant polypeptide
+Gluten	Gluten
+Casein	Casein
+MB	Myoglobin
+A2 beta-casein	A2 beta-casein
+A2 beta-casein	A2 β-casein
+A2 beta-casein	A2 type of β-casein
+A2 beta-casein	A2 type of beta-casein
+A1 beta-casein	A1 beta-casein
+A1 beta-casein	A1 β-casein
+A1 beta-casein	A1 type of β-casein
+A1 beta-casein	A1 type of beta-casein
+IGF-1	Insulin-Like Growth Factor 1
+IGF-1	IGF-1,Insulin-Like Growth Factor I,Somatomedin C
+Trp,W	Tryptophan
+Trp,W	Tryptan
+Trp,W	2-Amino-3-(1H-indol-3-yl)propanoic acid
+Thr,T	Threonine
+Thr,T	2-Amino-3-hydroxybutanoic acid
+Ile,I	Isoleucine
+Ile,I	2-Amino-3-methylpentanoic acid
+Leu,L	Leucine
+Leu,L	2-Amino-4-methylpentanoic acid
+Lys,K	Lysine
+Lys,K	2,6-Diaminohexanoic acid
+Lys,K	2,6-Diammoniohexanoic acid
+Met,M	Methionine
+Met,M	2-amino-4-(methylthio)butanoic acid
+Cys,C	Cysteine
+Cys,C	2-Amino-3-sulfhydrylpropanoic acid
+Tau	Taurine
+Tau	Ethanesulfonic acid
+Tau	tauric acid
+Tau	2-aminoethanesulfonic acid
+Phe,F	Phenylalanine
+Phe,F	2-Amino-3-phenylpropanoic acid
+Tyr,Y	Tyrosine
+Tyr,Y	4-hydroxyphenylalanine
+Tyr,Y	2-Amino-3-(4-hydroxyphenyl)propanoic acid
+Val,V	Valine
+Val,V	2-amino-3-methylbutanoic acid
+Arg,R	Arginine
+Arg,R	2-Amino-5-guanidinopentanoic acid
+His,H	Histidine
+His,H	2-Amino-3-(1H-imidazol-4-yl)propanoic acid
+Ala,A	Alanine
+Ala,A	2-Aminopropanoic acid
+Asp,D	Aspartic acid
+Asp,D	Aspartate
+Asp,D	Aminosuccinic acid
+Asp,D	Asparagic acid
+Asp,D	Asparaginic acid
+Asp,D	2-Aminobutanedioic acid
+Glu,E	Glutamic acid
+Glu,E	Glutamate
+Glu,E	2-Aminopentanedioic acid
+Glu,E	2-Aminoglutaric acid
+Gly,G	Glycine
+Gly,G	Aminoethanoic acid
+Gly,G	Aminoacetic acid
+Pro,P	Proline
+Pro,P	Pyrrolidine-2-carboxylic acid
+Ser,S	Serine
+Ser,S	2-Amino-3-hydroxypropanoic acid
+Hyp	Hydroxyproline
+Hyp	4-Hydroxypyrrolidine-2-carboxylic acid
+NAC	N-acetylcysteine
+NAC	Acetylcysteine
+NAC	N-acetyl-L-cysteine
+NAC	2-Acetamido-3-sulfanylpropanoic acid
+GSH	Glutathione
+GSH	γ-L-Glutamyl-L-cysteinylglycine
+GSH	2-Amino-4-{[(1R)-1-[(carboxymethyl)carbamoyl]-2-sulfanylethyl]carbamoyl}butanoic acid
+GH	Growth hormone
+GH	Somatotropin
+GH	Somatropin
+GH	Pituitary growth hormone
+P4	Progesterone
+P4	Pregn-4-ene-3,20-dione
+Testosterone	Testosterone
+Testosterone	(8R,9S,10R,13S,14S,17S)-17-hydroxy-10,13-dimethyl-1,2,6,7,8,9,11,12,14,15,16,17-dodecahydrocyclopenta[a]phenanthren-3-one
+E1	Estrone
+E1	Oestrone
+E1	(8R,9S,13S,14S)-3-hydroxy-13-methyl-6,7,8,9,11,12,13,14,15,16-decahydrocyclopenta[a]phenanthren-17-one
+E3	Estriol
+E3	Oestriol
+βЕ2	17β-estradiol
+βЕ2	17beta-estradiol
+βЕ2	(8R,9S,13S,14S,17S)-13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta[a]phenanthrene-3,17-diol
+αЕ2	17α-estradiol
+αЕ2	17alpha-estradiol
+αЕ2	(8R,9S,13S,14S,17S)-13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta[a]phenanthrene-3,17-diol
+DHEA	Dehydroepiandrosterone
+DHEA	Dehydroepiandrostenedione
+DHEA	Didehydroepiandrosterone
+DHEA	Androstenolone
+DHEA	Prasterone
+DHEA	3β-hydroxyandrost-5-en-17-one
+DHEA	5-androsten-3β-ol-17-one
+Zeranol	Zeranol
+Zeranol	α-Zearalanol
+Zeranol	(3S,7R)-7,14,16-Trihydroxy-3-methyl-3,4,5,6,7,8,9,10,11,12-decahydro-1H-2-benzoxacyclotetradecin-1-one
+MGA	Melengestrol acetate
+MGA	Melengestrol
+MGA	17-hydroxy-6-methyl-16-methylenepregna-4,6-diene-3,20-dione acetate
+TBA	Trenbolone acetate
+TBA	Trenbolone
+TBA	17β-Hydroxyestra-4,9,11-trien-3-one
+Cholesterol	Cholesterol
+C4:0	Butanoic acid
+C4:0	Butyric acid
+C4:0	1-Propanecarboxylic acid
+C4:0	Propanecarboxylic acid
+C6:0	Hexanoic acid
+C6:0	Caproic acid
+C8:0	Octanoic acid
+C8:0	Caprylic acid
+C10:0	Decanoic acid
+C10:0	Capric acid
+C10:0	Decylic acid
+C12:0	Dodecanoic acid
+C12:0	Lauric acid
+C12:0	Dodecylic acid
+C12:0	Dodecoic acid
+C12:0	Laurostearic acid
+C12:0	Vulvic acid
+C12:0	1-Undecanecarboxylic acid
+C12:0	Duodecylic acid
+C13:0	Tridecanoic acid
+C13:0	Tridecylic acid
+C14:0	Tetradecanoic acid
+C14:0	Myristic acid
+C15:0	Pentadecanoic acid
+C15:0	Pentadecylic acid
+C16:0	Hexadecanoic acid
+C16:0	Palmitic acid
+C16:0	Palmic acid
+C17:0	Heptadecanoic acid
+C17:0	Margaric acid
+C17:0	Heptadecylic acid
+C18:0	Octadecanoic acid
+C18:0	Stearic acid
+C20:0	Eicosanoic acid
+C20:0	Arachidic acid
+C22:0	Docosanoic acid
+C22:0	Behenic acid
+C24:0	Tetracosanoic acid
+C24:0	Lignoceric acid
+C14:1	Tetradecenoic acid
+C14:1	Myristoleic acid
+C14:1	Myristolenic acid
+C14:1	Oleomyristic acid
+C14:1	Tetradec-9-enoic acid
+C14:1	9-Tetradecenoic acid
+C15:1	Pentadecenoic acid
+C15:1	14-Pentadecenoic acid
+C16:1	Hexadecenoic acid
+C16:1	Hexadec-9-enoic acid
+C16:1 cis-9	Palmitoleic acid
+C16:1 cis-9	(9Z)-Hexadec-9-enoic acid
+C16:1 cis-9	cis-9-Hexadecenoic acid
+C16:1 trans-9	trans-Palmitoleic acid
+C16:1 trans-9	(9E)-Hexadec-9-enoic acid
+C16:1 trans-9	trans-9-Hexadecenoic acid
+C17:1	Heptadecenoic acid
+C17:1	10-Heptadecenoic acid
+C18:1	Octadecenoic acid
+C18:1	Octadec-9-enoic acid
+C18:1 cis-9	Oleic acid
+C18:1 cis-9	(9Z)-Octadec-9-enoic acid
+C18:1 cis-9	cis-9-Octadecenoic acid
+C18:1 trans-9	Elaidic acid
+C18:1 trans-9	trans-Oleic acid
+C18:1 trans-9	(E)-Oleic acid
+C18:1 trans-9	(9E)-Octadec-9-enoic acid
+C18:1 trans-9	trans-9-Octadecenoic acid
+C18:1 trans-11	Vaccenic acid
+C18:1 trans-11	(11E)-Octadec-11-enoic acid
+C18:1 trans-11	trans-11-Octadecenoic acid
+C20:1	Eicosenoic acid
+C20:1	Gadoleic acid
+C20:1	9-Icosenoic acid
+C22:1	Docosenoic acid
+C22:1	Docos-13-enoic acid
+C22:1 cis-13	Erucic acid
+C22:1 cis-13	(13Z)-Docos-13-enoic acid
+C22:1 cis-13	cis-13-Docosenoic acid
+C22:1 trans-13	Brassidic acid
+C22:1 trans-13	(13E)-Docos-13-enoic acid
+C22:1 trans-13	trans-13-Docosenoic acid
+C24:1 cis-15	Nervonic acid
+C24:1 cis-15	cis-Tetracosenoic acid
+C24:1 cis-15	(Z)-Tetracos-15-enoic acid
+C24:1 cis-15	cis-15-Tetracosenoic acid
+C18:2	Octadecadienoic acid
+C18:2	9,12-Octadecadienoic acid
+C18:2 i	Rumenic acid
+C18:2 i	Bovinic acid
+C18:2 i	C9-T11 acid
+C18:2 i	(9Z,11E)-Octadeca-9,11-dienoic acid
+C18:2 trans-9,trans-12	Linolelaidic acid
+C18:2 trans-9,trans-12	(9E,12E)-octadeca-9,12-dienoic acid
+C18:2 trans-9,trans-12	trans,trans-9,12-octadecadienoic acid
+C18:2 CLAs	Conjugated linoleic acids
+C18:2 n-6	Linoleic acid
+C18:2 n-6	(9Z,12Z)-9,12-Octadecadienoic acid
+C18:2 n-6	all-cis-9,12-octadecadienoic acid
+C18:3	Octadecatrienoic acid
+C18:3	Linolenic acid
+C18:3	9,12,15-Octadecatrienoic acid
+C18:3 n-3	Alpha-linolenic acid
+C18:3 n-3	ALA
+C18:3 n-3	α-linolenic acid
+C18:3 n-3	(9Z,12Z,15Z)-9,12,15-Octadecatrienoic acid
+C18:3 n-3	cis,cis,cis-9,12,15-Octadecatrienoic acid,all-cis-9,12,15-octadecatrienoic acid
+C18:3 n-6	Gamma-linolenic acid
+C18:3 n-6	GLA
+C18:3 n-6	γ-Linolenic acid
+C18:3 n-6	Gamolenic acid
+C18:3 n-6	all-cis-6,9,12-octadecatrienoic acid
+C18:3 cis-6,trans-10,cis-12 	cis-6,trans-10,cis-12-octadecatrienoic acid
+C18:3 cis-6,trans-8,cis-12	cis-6,trans-8,cis-12-octadecatrienoic acid
+C18:4 n-3 (Conjugated)	Octadecatetraenoic acid
+C18:4 n-3 (Conjugated)	Parinaric acid
+C18:4 n-3 (Conjugated)	octadeca-9,11,13,15-tetraenoic acid
+C18:4 n-3	Stearidonic acid
+C18:4 n-3	Moroctic acid
+C18:4 n-3	(6Z,9Z,12Z,15Z)-6,9,12,15-octadecatetraenoic acid
+C18:4 n-3	all-cis-6,9,12,15,-octadecatetraenoic acid
+С20:2 n-6	Eicosadienoic acid
+С20:2 n-6	all-cis-11,14-eicosadienoic acid
+C20:3	Eicosatrienoic acid
+C20:3 n-3	Eicosatrienoic acid
+C20:3 n-3	ETE
+C20:3 n-3	all-cis-11,14,17-eicosatrienoic acid
+C20:3 n-6	Dihomo-gamma-linolenic acid
+C20:3 n-6	DGLA
+C20:3 n-6	all-cis-8,11,14-eicosatrienoic acid
+C20:4 n-3	Eicosapentaenoic acid
+C20:4 n-6	Arachidonic acid
+C20:4 n-6	AA
+C20:4 n-6	all-cis-5,8,11,14-eicosatetraenoic acid
+C20:5 n-3	Eicosapentaenoic acid
+C20:5 n-3	EPA
+C20:5 n-3	Timnodonic acid
+C20:5 n-3	all-cis-5,8,11,14,17-eicosapentaenoic acid
+C21:5 n-3	Heneicosapentaenoic acid
+C21:5 n-3	HPA
+C21:5 n-3	all-cis-6,9,12,15,18-heneicosapentaenoic acid
+C22:4 n-6	Docosatetraenoic acid
+C22:4 n-6	Adrenic acid
+C22:4 n-6	7Z,10Z,13Z,16Z-docosatetraenoic acid
+C22:4 n-6	all-cis-7,10,13,16-docosatetraenoic acid
+C22:5 n-3	Docosapentaenoic acid
+C22:5 n-3	DPA
+C22:5 n-3	Clupanodonic acid
+C22:5 n-3	all-cis-7,10,13,16,19-docosapentaenoic acid
+C22:6 n-3	Docosahexaenoic acid
+C22:6 n-3	DHA
+C22:6 n-3	Cervonic acid
+C22:6 n-3	all-cis-4,7,10,13,16,19-docosahexaenoic acid
+Alpha-lipoic acid	Alpha-lipoic acid
+Alpha-lipoic acid	α-lipoic acid
+Alpha-lipoic acid	ALA
+Alpha-lipoic acid	Thioctic acid
+Alpha-lipoic acid	(R)-5-(1,2-dithiolan-3-yl)pentanoic acid
+Alpha-lipoic acid	6,8-Dithiooctanoic acid
+C16:3 n-3	Hexadecatrienoic acid
+C16:3 n-3	all-cis 7,10,13-hexadecatrienoic acid
+C24:5 n-3	Tetracosapentaenoic acid
+C24:5 n-3	all-cis-9,12,15,18,21-tetracosapentaenoic acid
+C24:6 n-3	Tetracosahexaenoic acid
+C24:6 n-3	Nisinic acid
+C24:6 n-3	(7Z’',10Z,13Z,16Z,19Z'’)-docosa-7,10,13,16,19-pentaenoic acid
+C24:6 n-3	all-cis-6,9,12,15,18,21-tetracosahexaenoic acid
+C22:2 n-6	Docosadienoic acid
+C22:2 n-6	all-cis-13,16-docosadienoic acid
+C22:5 n-6	Docosapentaenoic acid
+C22:5 n-6	Osbond acid
+C22:5 n-6	all-cis-4,7,10,13,16-docosapentaenoic acid
+C24:4 n-6	Tetracosatetraenoic acid
+C24:4 n-6	all-cis-9,12,15,18-tetracosatetraenoic acid
+C24:5 n-6	Tetracosapentaenoic acid
+C24:5 n-6	all-cis-6,9,12,15,18-tetracosapentaenoic acid
+C16:1 trans-5	trans-5-hexadecenoic acid
+C16:1 trans-6	trans-6-hexadecenoic acid
+C16:1 trans-7	trans-7-hexadecenoic acid
+C16:1 trans-8	trans-8-hexadecenoic acid
+C16:1 trans-10	trans-10-hexadecenoic acid
+C16:1 trans-11	trans-11-hexadecenoic acid
+C16:1 trans-12	trans-12-hexadecenoic acid
+C16:1 trans-13	trans-13-hexadecenoic acid
+C16:1 trans-14	trans-14-hexadecenoic acid
+C16:1 trans-15	trans-15-hexadecenoic acid
+C18:1 trans-6	trans-6-octadecenoic acid
+C18:1 trans-7	trans-7-octadecenoic acid
+C18:1 trans-8	trans-8-octadecenoic acid
+C18:1 trans-10	trans-10-octadecenoic acid
+C18:1 trans-12	trans-12-octadecenoic acid
+C18:1 trans-13	trans-13-octadecenoic acid
+C18:1 trans-14	trans-14-octadecenoic acid
+C18:1 trans-15	trans-15-octadecenoic acid
+C18:1 trans-16	trans-16-octadecenoic acid
+C18:2 trans-9,trans-13	trans-9,trans-13-octadecadienoic acid
+C18:2 trans-9,trans-15	trans-9,trans-15-octadecadienoic acid
+C18:2 trans-9,trans-16	trans-9,trans-16-octadecadienoic acid
+C18:2 trans-10,trans-15	trans-10,trans-15-octadecadienoic acid
+C18:2 trans-10,trans-16	trans-10,trans-16-octadecadienoic acid
+C18:2 trans-11,trans-15	trans-11,trans-15-octadecadienoic acid
+C18:2 trans-11,trans-16	trans-11,trans-16-octadecadienoic acid
+C18:2 trans-12,trans-16	trans-12,trans-16-octadecadienoic acid
+Starch	Starch
+Starch	Amylum
+Amylose	Amylose
+Amylopectin	Amylopectin
+Sucrose	Sucrose
+Sucrose	Saccharose
+Sucrose	Table sugar
+Sucrose	Sugar
+Glucose	Glucose
+Glucose	Dextrose
+Glucose	Grape sugar
+Glucose	2,3,4,5,6-Pentahydroxyhexanal
+Fructose	Fructose
+Fructose	Levulose
+Fructose	Fruit sugar
+Fructose	1,3,4,5,6-Pentahydroxy-2-hexanone
+Lactose	Lactose
+Lactose	Milk sugar
+Lactose	β-D-galactopyranosyl-(1→4)-D-glucose
+Lactose	4-O-β-D-galactopyranosyl-D-glucose
+Maltose	Maltose
+Maltose	Maltobiose
+Maltose	Malt sugar
+Maltose	2-(hydroxymethyl)-6-[4,5,6-trihydroxy-2-(hydroxymethyl)oxan-3-yl]oxyox ane-3,4,5-triol
+Maltose	4-O-α-D-Glucopyranosyl-D-glucose
+Galactose	Galactose
+Galactose	6-(hydroxymethyl)oxane-2,3,4,5-tetrol
+Trehalose	Trehalose
+Trehalose	Mycose
+Trehalose	Tremalose
+Trehalose	(2R,3S,4S,5R,6R)-2-(Hydroxymethyl)-6-[(2R,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxane-3,4,5-triol
+Trehalose	α-D-glucopyranosyl-(1→1)-α-D-glucopyranoside
+Isomaltulose	Isomaltulose
+Isomaltulose	Palatinose
+Isomaltulose	6-O-α-D-Glucopyranosyl-D-fructose
+Cellulose	Cellulose
+Chitin	Chitin
+Chitin	2-(acetylamino)-2-deoxy-D-glucose
+Chitosan	Chitosan
+Chitosan	Poliglusam
+Chitosan	Deacetylchitin
+Chitosan	Poly-(D)glucosamine
+GluP	Glucan phosphate
+PGG	Betafectin
+WGP-glucan	WGP-glucan
+Zymocel	Zymocel
+Zymozan	Zymozan
+Barley β-glucan	Barley β-glucan
+Oat β-glucan	Oat β-glucan
+Wheat β-glucan	Wheat β-glucan
+Rye β-glucan	Rye β-glucan
+Rice β-glucan	Rice β-glucan
+Curdlan	Curdlan
+LAM	Laminarin
+LAM	Laminaran
+Cereal b-glucans	Cereal b-glucans
+Alginate	Alginate
+Alginate	Alginic acid
+Alginate	Algin
+Carrageenan	Carrageenan
+Carrageenan	Carrageenin
+Cassia gum	Cassia gum
+Cellulose gum	Carboxymethyl cellulose
+Cellulose gum	Carmellose
+Gellan gum	Gellan gum
+Guar gum	Guar gum
+Guar gum	Guaran
+HPC	Hydroxypropyl cellulose
+Konjac gum	Konjac gum
+LBG	Locust bean gum
+LBG	Carob bean gum
+LBG	Carob gum
+LBG	Carobin
+Methylcellulose	Methylcellulose
+Methylcellulose	Methyl cellulose
+MCC	Microcrystalline cellulose
+Xanthan gum	Xanthan gum
+Xyloglucan	Xyloglucan
+Glucuronoxylan	Glucuronoxylan
+Glucuronoarabinoxylan	Glucuronoarabinoxylan
+Glucomannan	Glucomannan
+Galactoglucomannan	Galactoglucomannan
+Inulin	Inulin
+Oligofructose	Oligofructose
+Oligofructose	Oligofructan
+GF2	1-kestose
+GF3	Nystose
+GF4	1F-β-fructofuranosylnystose
+Lignin	Lignin
+Pectin	Pectin
+Polydextrose	Polydextrose
+Resistant starch	Resistant starch
+GI	Glycemic index
+GI	Glycaemic index
+GL	Glycemic load
+Ethyl alcohol	Ethyl alcohol
+Ethyl alcohol	Ethanol
+Ethyl alcohol	Drinking alcohol
+Ethyl alcohol	Alcohol
+Ethyl alcohol	Grain alcohol
+Ethyl alcohol	Ethane monoxide
+Ethyl alcohol	EtOH
+Ethyl alcohol	Ethylic alcohol
+Ethyl alcohol	Ethyl hydrate
+Ethyl alcohol	Ethyl hydroxide
+Ethyl alcohol	Ethylol
+Ethyl alcohol	Hydroxyethane
+Ethyl alcohol	Methylcarbinol
+Ca	Calcium
+Fe	Iron
+Mg	Magnesium
+P	Phosphorus
+K	Potassium
+Na	Sodium
+Na:K	Sodium-to-potassium ratio
+Na:K	Sodium:potassium ratio
+Ca:P	Calcium-to-phosphorus ratio
+Ca:P	Calcium:phosphorus ratio
+Zn	Zinc
+Cu	Copper
+F	Fluoride
+Mn	Manganese
+Se	Selenium
+Cr(III)	Chrome (III)
+Cr(III)	Chromium (III)
+Cr(VI)	Chrome (IV)
+Cr(VI)	Chromium (III)
+B	Boron
+Mo	Molybdenum
+Co	Cobalt
+I	Iodine
+Li	Lithium
+Si	Silicon
+Al	Aluminium
+Al	Aluminum
+Vitamin A, IU	Vitamin A
+Vitamin A, IU	IU
+Vitamin A, RAE	Vitamin A
+Vitamin A, RAE	RAE
+Retinol	Retinol
+Retinol	(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohex-1-enyl)nona-2,4,6,8-tetraen-1-ol
+Beta-carotene	Beta-carotene
+Beta-carotene	Beta-carotin
+Beta-carotene	β-Carotin
+Beta-carotene	β-Carotene
+Beta-carotene	Betacarotene
+Beta-carotene	Provitamin A
+Beta-carotene	1,3,3-Trimethyl-2-[3,7,12,16-tetramethyl-18-(2,6,6-trimethylcyclohex-1-en-1-yl)octadeca-1,3,5,7,9,11,13,15,17-nonaen-1-yl]cyclohex-1-ene
+Alpha-carotene	Alpha-carotene
+Alpha-carotene	Α-Carotene
+Alpha-carotene	α-Carotin
+Alpha-carotene	Alpha-carotin
+Beta-cryptoxanthin	Beta-cryptoxanthin
+Beta-cryptoxanthin	β-Cryptoxanthin
+Beta-cryptoxanthin	Cryptoxanthol
+Beta-cryptoxanthin	Caricaxanthin
+Beta-cryptoxanthin	Hydroxy-β-carotene
+Beta-cryptoxanthin	(R)-3,5,5-Trimethyl-4-[3,7,12,16-tetramethyl-18-(2,6,6-trimethylcyclohex-1-enyl)-octadeca-1,3,5,7,9,11,13,15,17-nonaenyl]-cyclohex-3-enol
+Beta-cryptoxanthin	(3R)-β,β-Caroten-3-ol,(R)-all-trans-β-Caroten-3-ol
+Lycopene	Lycopene
+Lycopene	ψ,ψ-Carotene
+Lycopene	(6E,8E,10E,12E,14E,16E,18E,20E,22E,24E,26E)-2,6,10,14,19,23,27,31-Octamethyldotriaconta-2,6,8,10,12,14,16,18,20,22,24,26,30-tridecaene
+Lutein + zeaxanthin	Lutein + zeaxanthin
+Vitamin E	Vitamin E
+Vitamin E	Alpha-tocopherol
+Vitamin E	α-Tocopherol
+Vitamin E	(2R)-2,5,7,8-Tetramethyl-2-[(4R,8R)-(4,8,12-trimethyltridecyl)]-6-chromanol
+Beta-tocopherol	Beta-tocopherol
+Beta-tocopherol	β-Tocopherol
+Beta-tocopherol	(2R)-2,5,8-Trimethyl-2-[(4R,8R)-(4,8,12-trimethyltridecyl)]-3,4-dihydrochromen-6-ol
+Gamma-tocopherol	Gamma-tocopherol
+Gamma-tocopherol	γ-Tocopherol
+Gamma-tocopherol	(2R)-2,7,8-Trimethyl-2-[(4R,8R)-4,8,12-trimethyltridecyl]-6-chromanol
+Delta-tocopherol	Delta-tocopherol
+Delta-tocopherol	δ-Tocopherol
+Delta-tocopherol	(2R)-2,8-Dimethyl-2-[(4R,8R)-4,8,12-trimethyltridecyl]-6-chromanol
+Alpha-tocotrienol	Alpha-tocotrienol
+Alpha-tocotrienol	α-Tocotrienol
+Alpha-tocotrienol	(2R)-2,5,7,8-tetramethyl-2-[(3E,7E)-4,8,12-trimethyltrideca-3,7,11-trienyl]-3,4-dihydrochromen-6-ol
+Beta-tocotrienol	Beta-tocotrienol
+Beta-tocotrienol	β-Tocotrienol
+Beta-tocotrienol	(2R)-2,5,8-trimethyl-2-[(3E,7E)-4,8,12-trimethyltrideca-3,7,11-trienyl]-3,4-dihydrochromen-6-ol
+Gamma-tocotrienol	Gamma-tocotrienol
+Gamma-tocotrienol	γ-Tocotrienol
+Gamma-tocotrienol	(R)-γ-Tocotrienol
+Gamma-tocotrienol	[R-(E,E)]-3,4-Dihydro-2,7,8-trimethyl-2-(4,8,12-trimethyl-3,7,11-tridecatrienyl)-2H-1-benzopyran-6-ol
+Delta-tocotrienol	Delta-tocotrienol
+Delta-tocotrienol	δ-Tocotrienol
+Vitamin D	Vitamin D
+Vitamin D2	Vitamin D2
+Vitamin D2	Ergocalciferol
+Vitamin D2	Viosterol
+Vitamin D2	(3β,5Z,7E,22E)-9,10-secoergosta-5,7,10(19),22-tetraen-3-ol
+Vitamin D2	Vitamin D-2
+Vitamin D3	Vitamin D3
+Vitamin D3	Cholecalciferol
+Vitamin D3	Toxiferol
+Vitamin D3	Activated 7-dehydrocholesterol
+Vitamin D3	3β,5Z,7E)-9,10-secocholesta-5,7,10(19)-trien-3-ol
+Vitamin D3	Vitamin D-3
+Vitamin C, total ascorbic acid	Vitamin C
+Vitamin C, total ascorbic acid	total ascorbic acid
+Vitamin C, total ascorbic acid	L-ascorbic acid
+Vitamin C, total ascorbic acid	Ascorbate
+Vitamin C, total ascorbic acid	Ascorbic acid
+Vitamin C, total ascorbic acid	(R)-3,4-dihydroxy-5-((S)-1,2-dihydroxyethyl)furan-2(5H)-one
+Vitamin C, total ascorbic acid	2-oxo-L-threo-hexono-1,4-lactone-2,3-enediol
+DHA	Dehydroascorbic acid
+DHA	(5R)-5-[(1S)-1,2-dihydroxyethyl]furan-2,3,4(5H)-trione
+Thiamin	Thiamin
+Thiamin	Thiamine
+Thiamin	Vitamin B1
+Thiamin	Aneurine
+Thiamin	3-((4-Amino-2-methyl-5-pyrimidinyl)methyl)-5-(2-hydroxyethyl)-4-methylthiazolium
+Thiamin	 chloride
+Thiamin	Vitamin B-1
+Riboflavin	Riboflavin
+Riboflavin	Vitamin B2
+Riboflavin	7,8-Dimethyl-10-[(2S,3S,4R)-2,3,4,5-tetrahydroxypentyl]benzo[g]pteridine-2,4-dione
+Niacin	Niacin
+Niacin	Vitamin B3
+Niacin	Nicotinic acid
+Niacin	Pyridine-3-carboxylic acid
+Niacin	Vitamin B-3
+Pantothenic acid	Pantothenic acid
+Pantothenic acid	Pantothenate
+Pantothenic acid	Vitamin B5
+Pantothenic acid	3-[(2R)-(2,4-Dihydroxy-3,3-dimethylbutanoyl)amino]propanoic acid
+Vitamin B6	Vitamin B6
+Vitamin B6	Pyridoxine
+Vitamin B6	Pyridoxal
+Vitamin B6	Pyridoxamine
+Vitamin B6	Vitamin B-6
+H4 folate	Tetrahydrofolate
+H4 folate	Tetrahydrofolic acid
+H4 folate	(2S)-2-{[4-({[(6R)-2-amino-4-oxo-1,4,5,6,7,8-hexahydropteridin-6-yl]methyl}amino)phenyl]formamido}pentanedioic acid
+5-MTHF	5-Methyltetrahydrofolate
+5-MTHF	Levomefolic acid
+5-MTHF	L-methylfolate
+5-MTHF	(6S)-5-methyltetrahydrofolate
+5-MTHF	(6S)-5-MTHF
+5-MTHF	5-Methyltetrahydrofolic acid
+5-MTHF	(2S)-2-[ [4-[(2-Amino-5-methyl-4-oxo-1,6,7,8-tetrahydropteridin-6-yl) methylamino]benzoyl]amino]pentanedioic acid
+5-CHO-THF	5-Formyltetrahydrofolate
+5-CHO-THF	Folinic acid
+5-CHO-THF	Leucovorin
+5-CHO-THF	Citrovorum factor
+5-CHO-THF	5-Formyltetrahydrofolic acid
+5-CHO-THF	(2S)-2-{[4-[(2-amino-5-formyl-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl)methylamino] benzoyl]amino}pentanedioic acid
+10-CHO-THF	10-Formyltetrahydrofolate
+10-CHO-THF	10-Formyltetrahydrofolic acid
+10-CHO-THF	(2S)-2-{[4-[(2-amino-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl) methyl(formyl)amino]benzoyl]amino}pentanedioic acid
+5,10-CH=THF	5,10-Methenyltetrahydrofolate
+5,10-CH=THF	5,10-Methenyltetrahydrofolic acid
+5,10-CH=THF	N-[4-(3-amino-1-oxo-1,4,5,6,6a
+5,10-CH=THF	7-hexahydroimidazo[1,5-f]pteridin-8(9H)-yl)benzoyl]-L-glutamic acid
+Vitamin B12	Vitamin B12
+Vitamin B12	Cobalamin
+Vitamin B12	α-(5,6-dimethylbenzimidazolyl)cobamidcyanide
+Vitamin B12	Vitamin B-12
+Choline	Choline
+Choline	Bilineurine
+Choline	2-Hydroxy-N,N,N-trimethylethanamonium
+Choline	(2-Hydroxyethyl)trimethylammonium
+Phosphocholine	Phosphocholine
+Phosphocholine	Choline phosphate
+PC	Phosphatidylcholine
+GPC	Glycerophosphocholine
+GPC	L-Alpha glycerylphosphorylcholine
+GPC	Alpha-GPC
+GPC	Choline alfoscerate
+GPC	[(2R)-2,3-Dihydroxypropyl] 2-trimethylazaniumylethyl phosphate
+SPH	Sphingomyelin
+Folic acid	Folic acid
+Folic acid	Folate
+Folic acid	Vitamin M,Vitamin B9,Vitamin Bc
+Folic acid	Folacin
+Folic acid	Pteroyl-L-glutamic acid
+Folic acid	Pteroyl-L-glutamate
+Folic acid	(2S)-2-[[4-[(2-amino-4-oxo-1H-pteridin-6-yl)methylamino]benzoyl]amino]pentanedioic acid
+Folic acid	Vitamin B-9
+DFE	Dietary folate equivalent
+DFE	Folate
+DFE	DFE
+Betaine	Betaine
+Vitamin K	Vitamin K
+Vitamin K	Phylloquinone
+Vitamin K	Phytomenadione
+Vitamin K	Phytonadione
+Vitamin K	2-methyl-3-[(2E)-3,7,11,15-tetramethylhexadec-2-en-1-yl]naphthoquinone
+MK4	Menaquinone-4
+MK4	Menatetrenone
+MK4	2-methyl-3-[(2Z,6E,10E)-3,7,11,15-tetramethylhexadeca-2,6,10,14-tetraen-1-yl]naphthoquinone
+Dihydrophylloquinone	Dihydrophylloquinone
+Stigmasterol	Stigmasterol
+Stigmasterol	Wulzen anti-stiffness factor
+Stigmasterol	Stigmasterin
+Stigmasterol	(3S,8S,9S,10R,13R,14S,17R)-17-[(E,2R,5S)-5-ethyl-6-methylhept-3-en-2-yl]-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta[a]phenanthren-3-ol
+Campesterol	Campesterol
+Campesterol	Campestanol
+Campesterol	(3S,8S,9S,10R,13R,14S,17R)-17-[(2R,5R)-5,6-dimethylheptan-2-yl]-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta[a]phenanthren-3-ol
+Campesterol	(24R)-Ergost-5-en-3β-ol
+Beta-sitosterol	Beta-sitosterol
+Beta-sitosterol	Β-Sitosterol
+Beta-sitosterol	β-Sitosterin
+Beta-sitosterol	Beta-sitosterin
+Beta-sitosterol	17-(5-Ethyl-6-methylheptan-2-yl)-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta[a]phenanthren-3-ol
+Beta-sitosterol	22,23-Dihydrostigmasterol
+Beta-sitosterol	Stigmast-5-en-3-ol
+Daidzein	Daidzein
+Daidzein	Daidzeol
+Daidzein	Isoaurostatin
+Daidzein	7-Hydroxy-3-(4-hydroxyphenyl) chromen-4-one
+Daidzein	4',7-Dihydroxyisoflavone
+Genistein	Genistein
+Genistein	5,7-Dihydroxy-3-(4-hydroxyphenyl)chromen-4-one
+Genistein	4',5,7-Trihydroxyisoflavone
+Glycitein	Glycitein
+Glycitein	7-Hydroxy-3-(4-hydroxyphenyl)-6-methoxy-4-chromenone
+Glycitein	4',7-Dihydroxy-6-methoxyisoflavone
+Soy isoflavones	Soy isoflavones
+Soy isoflavones	daidzin
+Soy isoflavones	daidzein
+Soy isoflavones	genistin
+Soy isoflavones	genistein
+Soy isoflavones	glycitin
+Soy isoflavones	glycitein
+Apigenin	Apigenine
+Apigenin	Chamomile
+Apigenin	Apigenol
+Apigenin	Spigenin
+Apigenin	Versulin
+Apigenin	4',5,7-Trihydroxyflavone
+Apigenin	C.I. Natural Yellow 1
+Apigenin	5,7-Dihydroxy-2-(4-hydroxyphenyl)-4H-1-benzopyran-4-one
+Biochanin A	Biochanin A
+Biochanin A	5,7-dihydroxy-3-(4-methoxyphenyl)chromen-4-one
+Biochanin A	4'-Methylgenistein
+Biochanin A	Genistein 4-methyl ether
+Biochanin A	5,7-Dihydroxy-4'-methoxyisoflavone
+Formononetin	Formononetin
+Formononetin	Biochanin B
+Formononetin	Formononetol
+Formononetin	7-hydroxy-3-(4-methoxyphenyl)chromen-4-one
+Formononetin	7-Hydroxy-4'-methoxyisoflavone
+Formononetin	4'-O-methyldaidzein
+Coumestrol	Coumestrol
+Coumestrol	3,9-Dihydroxy-6-benzofurano[3,2-c]chromenone
+Genistin	Genistin
+Cyanidin	Cyanidin
+Cyanidin	Cyanidine
+Cyanidin	2-(3,4-Dihydroxyphenyl) chromenylium-3,5,7-triol
+Afzelechin	Afzelechin
+Afzelechin	Epiafzelechin
+Afzelechin	(2R,3R)-2-(4-hydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol
+Afzelechin	3,5,7,4'-Tetrahydroxyflavan
+Afzelechin	3,4',5,7-Flavantetrol
+Procyanidin А2	Procyanidin dimer А2
+Procyanidin А2	Procyanidin A2
+Procyanidin А2	Procyanidol A2
+Procyanidin А2	Proanthocyanidin A-2
+Procyanidin А2	(+)-Proanthocyanidin A2
+Procyanidin А2	(2R,3R,8S,14R,15R)-2,8-bis(3,4-dihydroxyphenyl)-2,3,4,14-tetrahydro-8,14-methanobenzo[7,8][1,3]dioxocino[4,5-h]chromene-3,5,11,13,15-pentaol
+Procyanidin А2	Epicatechin-(2β→7,4β→8)-epicatechin
+Procyanidin B1	Procyanidin dimer B1
+Procyanidin B1	Procyanidin B1
+Procyanidin B1	(2R,2ʼR,3R,3ʼS,4R)-2,2ʼ-bis(3,4-dihydroxyphenyl)-3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B1	epicatechin-(4β→8)-catechin
+Procyanidin B2	Procyanidin dimer B2
+Procyanidin B2	Procyanidin B2
+Procyanidin B2	(2R,2ʼR,3R,3ʼR,4R)-2,2ʼ-bis(3,4-dihydroxyphenyl)-3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B2	(−)-Epicatechin-(4β→8)-(−)-epicatechin
+Procyanidin B3	Procyanidin dimer B3
+Procyanidin B3	Procyanidin B3
+Procyanidin B3	(2R,2ʼR,3S,3ʼS,4S)-2,2ʼ-bis(3,4-dihydroxyphenyl)-3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B3	catechin-(4α→8)-catechin
+Procyanidin B4	Procyanidin dimer B4
+Procyanidin B4	Procyanidin B4
+Procyanidin B4	catechin-(4α→8)-epicatechin
+Procyanidin B1-3-O-gallate	Procyanidin dimer B1-3-O-gallate
+Procyanidin B1-3-O-gallate	Procyanidin B1-3-O-gallate
+Procyanidin B2-3′-O-gallate	Procyanidin dimer B2-3′-O-gallate
+Procyanidin B2-3′-O-gallate	Procyanidin B2-3′-O-gallate
+Procyanidin B2-3-O-gallate	Procyanidin dimer B2-3-O-gallate
+Procyanidin B2-3-O-gallate	Procyanidin B2-3-O-gallate
+Ent-epiafzelechin-3-O-p-hydroxybenzoate-(4α→8,2α→O→7)-epiafzelechin	Ent-epiafzelechin-3-O-p-hydroxybenzoate-(4α→8,2α→O→7)-epiafzelechin
+Procyanidin B2-3,3″-di-O-gallate	Procyanidin B2-3,3″-di-O-gallate
+Procyanidin C1	Procyanidin trimer C1
+Procyanidin C1	Procyanidin C1
+Procyanidin C1	(2R,2ʼR,2ʼʼR,3R,3ʼR,3ʼʼR,4R,4ʼS)-2,2ʼ,2ʼʼ-tris(3,4-dihydroxyphenyl)-3,3ʼ,3ʼʼ,4,4ʼ,4ʼʼ-hexahydro-2H,2ʼH,2ʼʼH-4,8ʼ:4ʼ,8ʼʼ-terchromene-3,3ʼ,3ʼʼ,5,5ʼ,5ʼʼ,7,7ʼ,7ʼʼ-nonol
+Procyanidin C1	epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin
+Procyanidin T2	Procyanidin trimer T2
+Procyanidin T2	Procyanidin T2
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin	Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin	Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin	Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin	Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-catechin	Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-catechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin	Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-[epicatechin-(4β→8)]-epicatechin	Epicatechin-(4β→8)-epicatechin-(4β→6)-[epicatechin-(4β→8)]-epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin	Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin	Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin
+Epicatechin (4β,8)4-pentamer	[Epicatechin-(4β→8)]4-epicatechin
+Chebulinic acid	Chebulinic acid
+Chebulinic acid	1,3,6-Tri-O-galloyl-2,4-chebuloyl-β-D-glucopyranoside
+Chebulagic acid	Chebulagic acid
+Phlorofucofuroeckol A	Phlorofucofuroeckol A
+Phlorofucofuroeckol A	4,9-bis(3,5-dihydroxyphenoxy)-[1]benzofuro[3,2-a]oxanthrene-1,3,6,10,12-pentol
+Dieckol	Dieckol
+Dieckol	4-[4-[6-(3,5-dihydroxyphenoxy)-4,7,9-trihydroxydibenzo-p-dioxin-2-yl]oxy-3,5-dihydroxyphenoxy]dibenzo-p-dioxin-1,3,6,8-tetrol
+Granatin A	Granatin A
+Punicalagin	Punicalagin
+Punicalagin	2,3-(S)-hexahydroxydiphenoyl-4,6-(S,S)-gallagyl-D-glucose
+Punicalin	Punicalin
+Punicalin	4,6-(S,S)-Gallagyl-D-glucose
+Castalagin	Castalagin
+Vescalagin	Vescalagin
+Grandinin	Grandinin
+Roburin E	Roburin E
+Ellagic acid	Ellagic acid
+Ellagic acid	2,3,7,8-Tetrahydroxy-chromeno[5,4,3-cde]chromene-5,10-dione
+Ellagic acid	4,4′,5,5′,6,6′-Hexahydroxydiphenic acid 2,6,2′,6′-dilactone
+Pt	Petunidin
+Pt	Petunidine
+Pt	Petunidin chloride
+Pt	Petunidol
+Pt	Myrtillidin
+Pt	2-(3,4-dihydroxy-5-methoxyphenyl)-3,5,7-trihydroxychromenylium
+Delphinidin	Delphinidin
+Delphinidin	Delphinidine
+Delphinidin	2-(3,4,5-Trihydroxyphenyl)chromenylium-3,5,7-triol
+Malvidin	Malvidin
+Malvidin	3,5,7-trihydroxy-2-(4-hydroxy- 3,5-dimethoxyphenyl)chromenium
+Pelargonidin	Pelargonidin
+Pelargonidin	2-(4-Hydroxyphenyl)chromenylium-3,5,7-triol
+Peonidin	Peonidin
+Peonidin	2-(4-Hydroxy-3-methoxyphenyl)chromenylium-3,5,7-triol
+(+)-Catechin	(+)-Catechin
+(+)-Catechin	Cianidanol
+(+)-Catechin	Cyanidanol
+(+)-Catechin	D-Catechin
+(+)-Catechin	Catechinic acid
+(+)-Catechin	Catechuic acid
+(+)-Catechin	Cianidol
+(+)-Catechin	Dexcyanidanol
+(+)-Catechin	(2R,3S)-2-(3,4-dihydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol
+(+)-Catechin	(2R,3S)-Catechin
+(+)-Catechin	2,3-trans-catechin
+(+)-Catechin	3,3',4',5,7–flavanpentol
+(-)-Epigallocatechin	(-)-Epigallocatechin
+(-)-Epicatechin	(-)-Epicatechin
+(-)-Epicatechin	L-epicatechin
+(-)-Epicatechin	Epicatechol
+(-)-Epicatechin	(-)-epicatechol
+(-)-Epicatechin	L-acacatechin
+(-)-Epicatechin	L-epicatechol
+(-)-Epicatechin	Epi-catechin
+(-)-Epicatechin	(2R,3R)-(-)-epicatechin
+(-)-Epicatechin	2,3-cis-epicatechin
+ECG	(-)-Epicatechin 3-gallate
+ECG	(-)-Epicatechin gallate
+ECG	(-)-Epicatechin-3-O-gallate
+ECG	[(2R,3R)-2-(3,4-dihydroxyphenyl)-5,7-dihydroxy-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate
+EGCG	(-)-Epigallocatechin 3-gallate
+EGCG	(-)-Epigallocatechin gallate
+EGCG	[(2R,3R)-5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)chroman-3-yl] 3,4,5-trihydroxybenzoate
+EGCG	(2R,3R)-5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-1-benzopyran-3-yl 3,4,5-trihydroxybenzoate
+(+)-Gallocatechin	(+)-Gallocatechin
+(+)-Gallocatechin	(+)-Gallocatechol
+GCG	(+)-Gallocatechin 3-gallate
+GCG	(+)-Gallocatechin gallate
+GCG	(2S,3R)-2-(3,4,5-Trihydroxyphenyl)-3,4-dihydro-1(2H)-benzopyran-3,5,7-triol 3-(3,4,5-trihydroxybenzoate)
+4′-O-methylepicatechin	4′-O-methylepicatechin
+TF	Theaflavin
+TF	TF1
+TF	3,4,5-Trihydroxy-1,8-bis[(2R,3R)-3,5,7-trihydroxy-2-chromanyl]-6-benzo[7]annulenone
+TFDG	theaflavin-3,3′-digallate
+TFDG	TF3
+TFDG	[(2R,3R)-2-[8-[(2R,3R)-5,7-dihydroxy-3-(3,4,5-trihydroxybenzoyl)oxy-3,4-dihydro-2H-chromen-2-yl]-3,4,5-trihydroxy-6-oxobenzo[7]annulen-1-yl]-5,7-dihydroxy-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate
+TF2B	theaflavin-3-gallate
+TF2B	[(2R,3R)-5,7-dihydroxy-2-[3,4,5-trihydroxy-6-oxo-8-[(2R,3R)-3,5,7-trihydroxychroman-2-yl]benzo[7]-annulen-1-yl]chroman-3-yl]3,4,5-trihydroxybenzoate
+TF2A	theaflavin-3′-gallate
+Thearubigins	Thearubigins
+Eriodictyol	Eriodictyol
+Eriodictyol	Eriodictiol
+Eriodictyol	(2S)-2-(3,4-Dihydroxyphenyl)-5,7-dihydroxy-4-chromanone
+Hesperetin	Hesperetin
+Hesperetin	(S)-2,3-Dihydro-5,7-dihydroxy-2-(3-hydroxy-4-methoxyphenyl)-4H-1-benzopyran-4-one
+Naringenin	Naringenin
+Naringenin	5,7-dihydroxy-2-(4-hydroxyphenyl)chroman-4-one
+Apigenin	Apigenin
+Luteolin	Luteolin
+Luteolin	Luteolol
+Luteolin	Digitoflavone
+Luteolin	Luteoline
+Luteolin	2-(3,4-Dihydroxyphenyl)- 5,7-dihydroxy-4-chromenone
+Isorhamnetin	Isorhamnetin
+Isorhamnetin	3-methylquercetin
+Isorhamnetin	3-Methylquercetin
+Isorhamnetin	Isorhamnetol
+Isorhamnetin	Isorhamentin
+Isorhamnetin	Isorhamnetine
+Isorhamnetin	Iso-rhamnetin
+Isorhamnetin	3'-Methoxyquercetin
+Isorhamnetin	3,5,7-trihydroxy-2-(4-hydroxy-3-methoxyphenyl)chromen-4-one
+Kaempferol	Kaempferol
+Kaempferol	Kaempherol
+Kaempferol	Robigenin
+Kaempferol	Pelargidenolon
+Kaempferol	Rhamnolutein
+Kaempferol	Rhamnolutin
+Kaempferol	Populnetin
+Kaempferol	Trifolitin
+Kaempferol	Kempferol
+Kaempferol	Swartziol
+Kaempferol	3,5,7-Trihydroxy-2-(4-hydroxyphenyl)-4H-chromen-4-one
+Kaempferol	3,5,7-trihydroxy-2-(4-hydroxyphenyl)-4H-1-benzopyran-4-one
+Myricetin	Myricetin
+Myricetin	Cannabiscetin
+Myricetin	Myricetol
+Myricetin	Myricitin
+Myricetin	3,5,7-Trihydroxy-2-(3,4,5-trihydroxyphenyl)-4-chromenone
+Quercetin	Quercetin
+Quercetin	Sophoretin
+Quercetin	Meletin
+Quercetin	Quercetine
+Quercetin	Xanthaurine
+Quercetin	Quercetol
+Quercetin	Quercitin
+Quercetin	Quertine
+Quercetin	Flavin meletin
+Quercetin	2-(3,4-dihydroxyphenyl)-3,5,7-trihydroxy-4H-chromen-4-one
+Quercetin-3-O-glucoside	Quercetin-3-O-glucoside
+Quercetin-3-O-glucoside	Isoquercetin
+Quercetin-3-O-glucoside	Isoquercitrin
+Quercetin-3-O-glucoside	Isoquercitroside
+Quercetin-3-O-glucoside	Isoquercitin
+Quercetin-3-O-glucoside	Trifoliin
+Quercetin-3-O-glucoside	Isotrifolin
+Quercetin-3-O-glucoside	Trifoliin A,Isohyperoside
+Quercetin-3-O-glucoside	Isotrifoliin
+Quercetin-3-O-glucoside	Quercetin-3-glucoside
+Quercetin-3-O-glucoside	Quercetin 3-O-β-D-glucopyranoside
+Quercetin-3-O-glucoside	2-(3,4-Dihydroxyphenyl)-5,7-dihydroxy-3-[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxychromen-4-one
+TF-3	Theaflavin-3,3'-digallate
+TF-3	Theaflavin digallate
+TF-3	TFDG
+TF-3	[1-[(2R,3R)-3,5-Dihydroxy-7-(3,4,5-trihydroxybenzoyl)oxychroman-2-yl]-3,5-dihydroxy-6-oxo-8-[(3R)-3,5,7-trihydroxychroman-2-yl]benzo[7]annulen-4-yl] 3,4,5-trihydroxybenzoate
+TF-2B	Theaflavin-3'-gallate
+TF-2B	Theaflavin-3'-monogallate
+TF-2A	Theaflavin-3-gallate
+TF-2A	Theaflavin-3-monogallate
+L-carnitine	L-carnitine
+L-carnitine	3-Hydroxy-4-(trimethylazaniumyl)butanoate
+ALCAR	Acetyl-L-carnitine
+ALCAR	Acetylcarnitine
+ALCAR	(R)-3-Acetyloxy-4-trimethylammonio-butanoate
+Curcumin	Curcumin
+Curcumin	Diferuloylmethane
+Curcumin	(1E,6E)-1,7-Bis(4-hydroxy-3-methoxyphenyl)-1,6-heptadiene-3,5-dione
+Hydroxytyrosol	Hydroxytyrosol
+Hydroxytyrosol	3-Hydroxytyrosol
+Hydroxytyrosol	4-(2-Hydroxyethyl)-1,2-benzenediol
+Hydroxytyrosol	3,4-dihydroxyphenylethanol
+Hydroxytyrosol	Dihydroxyphenylethanol
+Hydroxytyrosol	2-(3,4-Di-hydroxyphenyl)-ethanol
+Hydroxytyrosol	3,4-dihydroxyphenolethanol
+Melatonin	Melatonin
+Melatonin	N-[2-(5-methoxy-1H-indol-3-yl)ethyl] acetamide
+Melatonin	N-acetyl-5-methoxy tryptamine
+Oleocanthal	Oleocanthal
+Oleocanthal	2-(4-hydroxyphenyl)ethyl (3S,4E)-4-formyl-3-(2-oxoethyl)hex-4-enoate
+Oleuropein	Oleuropein
+Oleuropein	(4S,5E,6S)-4-[2-[2-(3,4-dihydroxyphenyl)ethoxy]-2-oxoethyl]-5-ethylidene-6-[[(2S,3R,4S,5S,6R)-3,4,5-trihydroxy-6-(hydroxymethyl)-2-tetrahydropyranyl]oxy]-4H-pyran-3-с\carboxylic acid
+Oleuropein	methyl ester
+Resveratrol	Resveratrol
+Resveratrol	3,5,4'-trihydroxy-trans-stilbene
+Resveratrol	3,4',5-Stilbenetriol
+Tyrosol	Tyrosol
+Tyrosol	4-(2-Hydroxyethyl)phenol
+Tyrosol	p-Hydroxyphenethyl alcohol
+Tyrosol	2-(4-Hydroxyphenyl)ethanol
+Tyrosol	4-Hydroxyphenylethanol
+CoQ10	Ubiquinone
+CoQ10	Coenzyme Q
+CoQ10	Coenzyme Q10
+CoQ10	Ubidecarenone
+CoQ10	2-[(2E,6E,10E,14E,18E,22E,26E,30E,34E)-3,7,11,15,19,23,27,31,35,39-Decamethyltetraconta-2,6,10,14,18,22,26,30,34,38-decaenyl]-5,6-dimethoxy-3-methylcyclohexa-2,5-diene-1,4-dione
+Caffeine	Caffeine
+Caffeine	1,3,7-Trimethylpurine-2,6-dione
+Theobromine	Theobromine
+Theobromine	Xantheose
+Theobromine	3,7-dimethyl-1H-purine-2,6-dione
+PGG	1,2,3,4,6-Penta-O-Galloyl-b-D-Glucose
+PGG	1,2,3,4,6-Pentagalloyl glucose
+PGG	[(2S,3R,4S,5R,6R)-2,3,5-Tris[(3,4,5-trihydroxybenzoyl)oxy]-6-[(3,4,5-trihydroxybenzoyl)oxymethyl]oxan-4-yl] 3,4,5-trihydroxybenzoate
+PGG	1,2,3,4,6-Penta-O-galloyl-β-D-glucose
+PGG	1,2,3,4,6-Pentakis-O-galloyl-beta-D-glucose,beta-Penta-O-galloyl-glucose
+PGG	1,2,3,4,6-Penta-O-galloyl-beta-D-glucose
+Baicalein	Baicalein
+Baicalein	5,6,7-trihydroxyflavone
+Baicalein	5,6,7-Trihydroxy-2-phenyl-chromen-4-one
+Beauveriolide I	Beauveriolide I
+Beauveriolide I	cyclo-((r)-beta-hydroxynonanoyl-L-phenylalanyl-alanyl-D-leucyl)
+Berberine	Berberine
+Berberine	Umbellatine
+Berberine	5,6-dihydro-9,10-dimethoxybenzo[g]-1,3-benzodioxolo[5,6-a]quinolizinium
+Caffeic acid	Caffeic acid
+Caffeic acid	3-(3,4-Dihydroxyphenyl)-2-propenoic acid
+Caffeic acid	3,4-Dihydroxy-cinnamic acid
+Caffeic acid	3,4-Dihydroxy-trans-cinnamate
+Caffeic acid	3,4-Dihydroxybenzeneacrylicacid
+Chicoric Acid	Chicoric Acid
+Chicoric Acid	(2R,3R)-2,3-bis{[(E)-3-(3,4-dihydroxyphenyl)prop-2-enoyl]oxy}butanedioic acid
+Chicoric Acid	2R,3R-O-dicaffeoyltartaric acid
+D-Glucosamine	D-Glucosamine
+D-Glucosamine	Chitosamine
+D-Glucosamine	(3R,4R,5S)-3-Amino-6-(hydroxymethyl)oxane-2,4,5-triol
+D-Glucosamine	2-Amino-2-deoxy-glucose
+Ferulsinaic acid	Ferulsinaic acid
+Fisetin	Fisetin
+Fisetin	5-Deoxyquercetin
+Fisetin	2-(3,4-dihydroxyphenyl)-3,7-dihydroxychromen-4-one
+Fisetin	3,7,3′,4′-tetrahydroxyflavone
+Gallic acid	Gallic acid
+Gallic acid	Gallate
+Gallic acid	3,4,5-Trihydroxybenzoic acid
+Gallic acid	3,4,5-Trihydroxybenzoate
+Indirubin	Indirubin
+Juglone	Juglone
+Juglone	Regianin
+Juglone	Nucin
+Juglone	5-hydroxy-1,4-naphthalenedione
+Juglone	5-Hydroxy-1,4-naphthoquinone
+Juglone	5-Hydroxy-p-naphthoquinone
+Juglone	5-hydroxynaphthoquinone
+Kinetin	Kinetin
+Kinetin	N6-furfuryladenine
+L-Theanine	L-Theanine
+L-Theanine	L-γ-glutamylethylamide
+L-Theanine	(2S)-2-ammonio-5-(ethylamino)-5-oxopentanoate
+L-Theanine	N-ethyl-L-glutamine
+Naphthazarin	Naphthazarin
+Naphthazarin	Dihydroxynaphthoquinone
+Naphthazarin	5,8-dihydroxynaphthalene-1,4-dione
+Naphthazarin	5,8-dihydroxy-1,4-naphthoquinone
+NDGA	Nordihydroguaiaretic acid
+NDGA	4,4'-(2,3-Dimethylbutane-1,4-diyl)dibenzene-1,2-diol
+Oxaloacetic Acid	Oxaloacetic Acid
+Oxaloacetic Acid	Oxalacetic acid
+Oxaloacetic Acid	Oxobutanedioic acid
+Oxaloacetic Acid	2-Oxosuccinic acid
+Oxaloacetic Acid	Ketosuccinic acid
+D-pinitol	D-pinitol
+D-pinitol	Inzitol
+D-pinitol	D-(+)-Pinitol
+D-pinitol	(+)-Pinitol
+D-pinitol	Sennitol
+D-pinitol	Pinnitol
+D-pinitol	(1S,2S,4S,5R)-6-methoxycyclohexane-1,2,3,4,5-pentol
+D-pinitol	3-O-Methyl-D-chiro-inositol
+D-pinitol	D-(+)-chiro-Inositol
+Polydatin	Polydatin
+Polydatin	Piceid
+Polydatin	2-[3-Hydroxy-5-[(E)-2-(4-hydroxyphenyl)ethenyl]phenoxy]-6-(hydroxymethyl)oxane-3,4,5-triol
+Polydatin	Resveratrol 3-beta-mono-D-glucoside
+Polydatin	3,5,4'-trihydroxystilbene-3-O-β-D-glucopyranoside
+Rapamycin	Rapamycin
+Rapamycin	Sirolimus
+Rosmarinic acid	Rosmarinic acid
+Rosmarinic acid	(2''R'')-2-[[(2''E'')-3-(3,4-Dihydroxyphenyl)-1-oxo-2-propenyl]]oxy]-3-(3,4-dihydroxyphenyl)propanoic acid
+Royalactin	Royalactin
+Spermidine	Spermidine
+Tannic acid	Tannic acid
+Tannic acid	Gallotannic acid
+Tannic acid	Digallic acid
+Tannic acid	Gallotannin
+Tannic acid	Tannimum
+Tannic acid	Quercitannin
+Tannic acid	Oak bark tannin
+Tannic acid	Quercotannic acid
+Tannic acid	Querci-tannic acid
+Tannic acid	Querco-tannic acid
+Tannic acid	2,3-dihydroxy-5-({[(2R,3R,4S,5R,6R)-3,4,5,6-tetrakis({3,4-dihydroxy-5-[(3,4,5-trihydroxyphenyl)carbonyloxy]phenyl}carbonyloxy)oxan-2-yl]methoxy}carbonyl)phenyl 3,4,5-trihydroxybenzoate
+Ursolic acid	Ursolic acid
+Ursolic acid	Urson
+Ursolic acid	Prunol
+Ursolic acid	Malol
+Ursolic acid	(1S,2R,4aS,6aR,6aS,6bR,8aR,10S,12aR,14bS)-10-hydroxy-1,2,6a
+Ursolic acid	6b
+Ursolic acid	9,9,12a-heptamethyl-2,3,4,5,6,6a
+Ursolic acid	7,8,8a
+Ursolic acid	10,11,12,13,14b-tetradecahydro-1H-picene-4a-carboxylic acid
+Ursolic acid	3-beta-3-hydroxy-urs-12-ene-28-oic-acid
+Hg	Mercury
+Hg	Quicksilver
+Hg	Hydrargyrum
+aflatoxin B1	aflatoxin B1
+aflatoxin B2	aflatoxin B2
+aflatoxin G1	aflatoxin G1
+aflatoxin G2	aflatoxin G2
+aflatoxin M1	aflatoxin M1
+aflatoxin M1	4-Hydroxyaflatoxin B1
+aflatoxin M2	aflatoxin M2
+Aldicarb	Aldicarb
+Aldicarb	Temik
+Aldicarb	2-Methyl-2-(methylthio)propanal O-(N-methylcarbamoyl)oxime
+Chlormequat	Chlormequat
+Chlormequat	Chlorocholine
+Chlormequat	Chlorcholine
+Chlormequat	2-Chloro-N,N,N-trimethylethanaminium
+Trifluralin	Trifluralin
+Trifluralin	2,6-Dinitro-N,N-dipropyl-4-(trifluoromethyl)aniline
+Pirimiphos-methyl	Pirimiphos-methyl
+Pirimiphos-methyl	Pirimifos-methyl
+Pirimiphos-methyl	O-[2-(Diethylamino)-6-methylpyrimidin-4-yl] O,O-dimethyl phosphorothioate
+Carbendazim	Carbendazim
+Carbendazim	Mercarzole
+Carbendazim	Carbendazole
+Carbendazim	Methyl 1H-benzimidazol-2-ylcarbamate
+Chlorothalonil	Chlorothalonil
+Chlorothalonil	Daconil
+Chlorothalonil	Hydroxychlorothalonil
+Chlorothalonil	Bravo
+Chlorothalonil	2,4,5,6-tetrachloroisophthalonitrile
+Vinclozolin	Vinclozolin
+Vinclozolin	Ronilan
+Vinclozolin	(RS)-3-(3,5-Dichlorophenyl)-5-methyl- 5-vinyloxazolidine-2,4-dione
+Chlorpyrifos	Chlorpyrifos
+Chlorpyrifos	Lorsban
+Chlorpyrifos	Dursban
+Chlorpyrifos	O,O-diethyl O-3,5,6-trichloropyridin-2-yl phosphorothioate
+Cd	Cadmium
+Ni	Nickel
+Acrolein	Acrolein
+Acrolein	Propenal
+Acrolein	Acraldehyde
+Acrolein	Acrylic aldehyde
+Acrolein	Allyl Aldehyde
+Acrolein	Acrylaldehyde
+Acrolein	Ethylene Aldehyde
+Acrolein	Prop-2-enal
+NDMA	N-Nitrosodimethylamine
+NDMA	Dimethylnitrosamine
+NDMA	DMN
+NDMA	N,N-Dimethylnitrosamine
+NDEA	N-Nitrosodiethylamine
+NDEA	Diethylnitrosamide
+NDEA	Diethylnitrosamine
+NDEA	N,N-diethylnitrosamine
+NDEA	N-ethyl-N-nitrosoethanamine
+NDEA	DANA
+NDEA	DENA
+NDEA	DEN
+NDPA	N-Nitrosodipropylamine
+NDPA	Dipropylnitrosamine
+NDPA	N,N-dipropylnitrosamine
+NDPA	N-nitroso(di-n-propyl)amine
+NDPA	N-nitrosodipropylamine
+NDPA	DPNA
+NDBA	N-Nitrosodibutylamine
+NDBA	Dibutylnitrosamine
+NDBA	N,N-dibutylnitrosamine
+NDBA	N-nitrosodi-n-butylamine
+NDBA	Nitrosodibutylamine
+NPIP	N-Nitrosopiperidine
+N-Nitrosopyrrolidine	N-Nitrosopyrrolidine
+Nitrofuran	Nitrofuran
+Melamine	Melamine
+Melamine	Cyanurotriamide
+Melamine	Cyanurotriamine
+Melamine	Cyanuramide
+Melamine	1,3,5-Triazine-2,4,6-triamine
+Cyanuric acid	Cyanuric acid
+Cyanuric acid	S-Triazinetriol
+Cyanuric acid	s-Triazinetrione
+Cyanuric acid	Tricarbimide
+Cyanuric acid	Isocyanuric acid
+Cyanuric acid	Pseudocyanuric acid
+Cyanuric acid	1,3,5-Triazinane-2,4,6-trione
+Cyanuric acid	1,3,5-Triazinetriol
+Cyanuric acid	1,3,5-Triazine-2,4,6(1H,3H,5H)-trione
+Flumequine	Flumequine
+Flumequine	9-Fluoro-5-methyl-1-oxo-6,7-dihydro-1H,5H-pyrido[3,2,1-ij]quinoline-2-carboxylic acid
+Danofloxacin	Danofloxacin
+Danofloxacin	1-Cyclopropyl-6-fluoro-7-[(1S,4S)-3-methyl-3,6-diazabicyclo[2.2.1]heptan-6-yl]-4-oxoquinoline-3-carboxylic acid
+Sarafloxacin	Sarafloxacin
+Sarafloxacin	6-fluoro-1-(4-fluorophenyl)-4-oxo-7-piperazin-1-ylquinoline-3-carboxylic acid
+Enrofloxacin	Enrofloxacin
+Enrofloxacin	1-cyclopropyl-7-(4-ethylpiperazin-1-yl)-6-fluoro-4-oxo-1,4-dihydroquinoline-3-carboxylic acid
+Difloxacin	Difloxacin
+Difloxacin	6-fluoro-1-(4-fluorophenyl)-7-(4-methylpiperazin-1-yl)- 4-oxoquinoline-3-carboxylic acid
+Marbofloxacin	Marbofloxacin
+Marbofloxacin	9-fluoro-2,3-dihydro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-7H-pyridol(3,2,1-ij)(4,2,1)benzoxadiazin-6 carboxylic acid
+Acrylamide	Acrylamide
+Acrylamide	Acrylic amide
+Acrylamide	Prop-2-enamide
+Malachite green	Malachite green
+Malachite green	Aniline green
+Malachite green	4-{[4-(dimethylamino)phenyl](phenyl)methylidene}-N,N-dimethylcyclohexa-2,5-dien-1-iminium chloride
+Gentian violet	Gentian violet
+Gentian violet	Crystal violet
+Gentian violet	Methyl violet 10B
+Gentian violet	Hexamethyl pararosaniline chloride
+Gentian violet	Pyoctanin
+Gentian violet	Pyoctanine
+Gentian violet	Tris(4-(dimethylamino)phenyl)methylium chloride
+CGA	Fucoidan
+CGA	Chlorogenic acid
+CGA	(1S,3R,4R,5R)-3-{[(2E)-3-(3,4-dihydroxyphenyl)prop-2-enoyl]oxy}-1,4,5-trihydroxycyclohexanecarboxylic acid
+Carbohydrate	Carbohydrate
+Carbohydrate	Sugars
+Total lipids	Total lipids
+Total lipids	Lipid
+Total lipids	Fat
+Fiber	Fiber
+Cystine	Cystine
+Fatty acids	Fatty acids
+Phytosterols	Phytosterols
+IGF-1	Insulin-like growth factor 1
+IGF-1	Igf-1, insulin-like growth factor i, somatomedin c
+Trp,W	2-amino-3- (1h-indol-3-yl) propanoic acid
+Thr,T	2-amino-3-hydroxybutanoic acid
+Ile,I	2-amino-3-methylpentanoic acid
+Leu,L	2-amino-4-methylpentanoic acid
+Lys,K	2,6-diaminohexanoic acid
+Lys,K	2,6-diammoniohexanoic acid
+Met,M	2-amino-4- (methylthio) butanoic acid
+Cys,C	2-amino-3-sulfhydrylpropanoic acid
+Tau	Tauric acid
+Phe,F	2-amino-3-phenylpropanoic acid
+Tyr,Y	2-amino-3- (4-hydroxyphenyl) propanoic acid
+Arg,R	2-amino-5-guanidinopentanoic acid
+His,H	2-amino-3- (1h-imidazol-4-yl) propanoic acid
+Ala,A	2-aminopropanoic acid
+Asp,D	2-aminobutanedioic acid
+Glu,E	2-aminopentanedioic acid
+Glu,E	2-aminoglutaric acid
+Ser,S	2-amino-3-hydroxypropanoic acid
+Hyp	4-hydroxypyrrolidine-2-carboxylic acid
+NAC	N-acetyl-l-cysteine
+NAC	2-acetamido-3-sulfanylpropanoic acid
+GSH	Γ-l-glutamyl-l-cysteinylglycine
+GSH	2-amino-4- { [ (1r) -1- [ (carboxymethyl) carbamoyl ] -2-sulfanylethyl ] carbamoyl } butanoic acid
+Testosterone	(8r,9s,10r,13s,14s,17s) -17-hydroxy-10,13-dimethyl-1,2,6,7,8,9,11,12,14,15,16,17-dodecahydrocyclopenta [ a ] phenanthren-3-one
+E1	(8r,9s,13s,14s) -3-hydroxy-13-methyl-6,7,8,9,11,12,13,14,15,16-decahydrocyclopenta [ a ] phenanthren-17-one
+βЕ2	(8r,9s,13s,14s,17s) -13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta [ a ] phenanthrene-3,17-diol
+αЕ2	(8r,9s,13s,14s,17s) -13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta [ a ] phenanthrene-3,17-diol
+Zeranol	Α-zearalanol
+Zeranol	(3s,7r) -7,14,16-trihydroxy-3-methyl-3,4,5,6,7,8,9,10,11,12-decahydro-1h-2-benzoxacyclotetradecin-1-one
+TBA	17β-hydroxyestra-4,9,11-trien-3-one
+C4:0	1-propanecarboxylic acid
+C12:0	1-undecanecarboxylic acid
+C14:1	9-tetradecenoic acid
+C15:1	14-pentadecenoic acid
+C16:1 cis-9	(9z) -hexadec-9-enoic acid
+C16:1 cis-9	Cis-9-hexadecenoic acid
+C16:1 trans-9	Trans-palmitoleic acid
+C16:1 trans-9	(9e) -hexadec-9-enoic acid
+C16:1 trans-9	Trans-9-hexadecenoic acid
+C17:1	10-heptadecenoic acid
+C18:1 cis-9	(9z) -octadec-9-enoic acid
+C18:1 cis-9	Cis-9-octadecenoic acid
+C18:1 trans-9	Trans-oleic acid
+C18:1 trans-9	(e) -oleic acid
+C18:1 trans-9	(9e) -octadec-9-enoic acid
+C18:1 trans-9	Trans-9-octadecenoic acid
+C18:1 trans-11	(11e) -octadec-11-enoic acid
+C18:1 trans-11	Trans-11-octadecenoic acid
+C20:1	9-icosenoic acid
+C22:1 cis-13	(13z) -docos-13-enoic acid
+C22:1 cis-13	Cis-13-docosenoic acid
+C22:1 trans-13	(13e) -docos-13-enoic acid
+C22:1 trans-13	Trans-13-docosenoic acid
+C24:1 cis-15	Cis-tetracosenoic acid
+C24:1 cis-15	(z) -tetracos-15-enoic acid
+C24:1 cis-15	Cis-15-tetracosenoic acid
+C18:2	9,12-octadecadienoic acid
+C18:2 i	C9-t11 acid
+C18:2 i	(9z,11e) -octadeca-9,11-dienoic acid
+C18:2 trans-9,trans-12	(9e,12e) -octadeca-9,12-dienoic acid
+C18:2 trans-9,trans-12	Trans, trans-9,12-octadecadienoic acid
+C18:2 n-6	(9z,12z) -9,12-octadecadienoic acid
+C18:2 n-6	All-cis-9,12-octadecadienoic acid
+C18:3	9,12,15-octadecatrienoic acid
+C18:3 n-3	Α-linolenic acid
+C18:3 n-3	(9z,12z,15z) -9,12,15-octadecatrienoic acid
+C18:3 n-3	Cis, cis, cis-9,12,15-octadecatrienoic acid, all-cis-9,12,15-octadecatrienoic acid
+C18:3 n-6	Γ-linolenic acid
+C18:3 n-6	All-cis-6,9,12-octadecatrienoic acid
+C18:3 cis-6,trans-10,cis-12 	Cis-6, trans-10, cis-12-octadecatrienoic acid
+C18:3 cis-6,trans-8,cis-12	Cis-6, trans-8, cis-12-octadecatrienoic acid
+C18:4 n-3 (Conjugated)	Octadeca-9,11,13,15-tetraenoic acid
+C18:4 n-3	(6z,9z,12z,15z) -6,9,12,15-octadecatetraenoic acid
+C18:4 n-3	All-cis-6,9,12,15, -octadecatetraenoic acid
+С20:2 n-6	All-cis-11,14-eicosadienoic acid
+C20:3 n-3	All-cis-11,14,17-eicosatrienoic acid
+C20:3 n-6	All-cis-8,11,14-eicosatrienoic acid
+C20:4 n-6	All-cis-5,8,11,14-eicosatetraenoic acid
+C20:5 n-3	All-cis-5,8,11,14,17-eicosapentaenoic acid
+C21:5 n-3	All-cis-6,9,12,15,18-heneicosapentaenoic acid
+C22:4 n-6	7z,10z,13z,16z-docosatetraenoic acid
+C22:4 n-6	All-cis-7,10,13,16-docosatetraenoic acid
+C22:5 n-3	All-cis-7,10,13,16,19-docosapentaenoic acid
+C22:6 n-3	All-cis-4,7,10,13,16,19-docosahexaenoic acid
+Alpha-lipoic acid	Α-lipoic acid
+Alpha-lipoic acid	(r) -5- (1,2-dithiolan-3-yl) pentanoic acid
+Alpha-lipoic acid	6,8-dithiooctanoic acid
+C16:3 n-3	All-cis 7,10,13-hexadecatrienoic acid
+C24:5 n-3	All-cis-9,12,15,18,21-tetracosapentaenoic acid
+C24:6 n-3	(7z’',10z,13z,16z,19z'’) -docosa-7,10,13,16,19-pentaenoic acid
+C24:6 n-3	All-cis-6,9,12,15,18,21-tetracosahexaenoic acid
+C22:2 n-6	All-cis-13,16-docosadienoic acid
+C22:5 n-6	All-cis-4,7,10,13,16-docosapentaenoic acid
+C24:4 n-6	All-cis-9,12,15,18-tetracosatetraenoic acid
+C24:5 n-6	All-cis-6,9,12,15,18-tetracosapentaenoic acid
+C16:1 trans-5	Trans-5-hexadecenoic acid
+C16:1 trans-6	Trans-6-hexadecenoic acid
+C16:1 trans-7	Trans-7-hexadecenoic acid
+C16:1 trans-8	Trans-8-hexadecenoic acid
+C16:1 trans-10	Trans-10-hexadecenoic acid
+C16:1 trans-11	Trans-11-hexadecenoic acid
+C16:1 trans-12	Trans-12-hexadecenoic acid
+C16:1 trans-13	Trans-13-hexadecenoic acid
+C16:1 trans-14	Trans-14-hexadecenoic acid
+C16:1 trans-15	Trans-15-hexadecenoic acid
+C18:1 trans-6	Trans-6-octadecenoic acid
+C18:1 trans-7	Trans-7-octadecenoic acid
+C18:1 trans-8	Trans-8-octadecenoic acid
+C18:1 trans-10	Trans-10-octadecenoic acid
+C18:1 trans-12	Trans-12-octadecenoic acid
+C18:1 trans-13	Trans-13-octadecenoic acid
+C18:1 trans-14	Trans-14-octadecenoic acid
+C18:1 trans-15	Trans-15-octadecenoic acid
+C18:1 trans-16	Trans-16-octadecenoic acid
+C18:2 trans-9,trans-13	Trans-9, trans-13-octadecadienoic acid
+C18:2 trans-9,trans-15	Trans-9, trans-15-octadecadienoic acid
+C18:2 trans-9,trans-16	Trans-9, trans-16-octadecadienoic acid
+C18:2 trans-10,trans-15	Trans-10, trans-15-octadecadienoic acid
+C18:2 trans-10,trans-16	Trans-10, trans-16-octadecadienoic acid
+C18:2 trans-11,trans-15	Trans-11, trans-15-octadecadienoic acid
+C18:2 trans-11,trans-16	Trans-11, trans-16-octadecadienoic acid
+C18:2 trans-12,trans-16	Trans-12, trans-16-octadecadienoic acid
+Glucose	2,3,4,5,6-pentahydroxyhexanal
+Fructose	1,3,4,5,6-pentahydroxy-2-hexanone
+Lactose	Β-d-galactopyranosyl- (1→4) -d-glucose
+Lactose	4-o-β-d-galactopyranosyl-d-glucose
+Maltose	2- (hydroxymethyl) -6- [ 4,5,6-trihydroxy-2- (hydroxymethyl) oxan-3-yl ] oxyox ane-3,4,5-triol
+Maltose	4-o-α-d-glucopyranosyl-d-glucose
+Galactose	6- (hydroxymethyl) oxane-2,3,4,5-tetrol
+Trehalose	(2r,3s,4s,5r,6r) -2- (hydroxymethyl) -6- [ (2r,3r,4s,5s,6r) -3,4,5-trihydroxy-6- (hydroxymethyl) oxan-2-yl ] oxyoxane-3,4,5-triol
+Trehalose	Α-d-glucopyranosyl- (1→1) -α-d-glucopyranoside
+Isomaltulose	6-o-α-d-glucopyranosyl-d-fructose
+Chitin	2- (acetylamino) -2-deoxy-d-glucose
+Chitosan	Poly- (d) glucosamine
+WGP-glucan	Wgp-glucan
+GF4	1f-β-fructofuranosylnystose
+Ethyl alcohol	Etoh
+Na:K	Sodium: potassium ratio
+Ca:P	Calcium: phosphorus ratio
+Cr(III)	Chrome (iii)
+Cr(III)	Chromium (iii)
+Cr(VI)	Chrome (iv)
+Cr(VI)	Chromium (iii)
+Vitamin A, IU	Vitamin a
+Vitamin A, RAE	Vitamin a
+Retinol	(2e,4e,6e,8e) -3,7-dimethyl-9- (2,6,6-trimethylcyclohex-1-enyl) nona-2,4,6,8-tetraen-1-ol
+Beta-carotene	Β-carotin
+Beta-carotene	Β-carotene
+Beta-carotene	Provitamin a
+Beta-carotene	1,3,3-trimethyl-2- [ 3,7,12,16-tetramethyl-18- (2,6,6-trimethylcyclohex-1-en-1-yl) octadeca-1,3,5,7,9,11,13,15,17-nonaen-1-yl ] cyclohex-1-ene
+Alpha-carotene	Α-carotene
+Alpha-carotene	Α-carotin
+Beta-cryptoxanthin	Β-cryptoxanthin
+Beta-cryptoxanthin	(r) -3,5,5-trimethyl-4- [ 3,7,12,16-tetramethyl-18- (2,6,6-trimethylcyclohex-1-enyl) -octadeca-1,3,5,7,9,11,13,15,17-nonaenyl ] -cyclohex-3-enol
+Beta-cryptoxanthin	(3r) -β, β-caroten-3-ol, (r) -all-trans-β-caroten-3-ol
+Lycopene	Ψ, ψ-carotene
+Lycopene	(6e,8e,10e,12e,14e,16e,18e,20e,22e,24e,26e) -2,6,10,14,19,23,27,31-octamethyldotriaconta-2,6,8,10,12,14,16,18,20,22,24,26,30-tridecaene
+Vitamin E	Vitamin e
+Vitamin E	Α-tocopherol
+Vitamin E	(2r) -2,5,7,8-tetramethyl-2- [ (4r,8r) - (4,8,12-trimethyltridecyl) ] -6-chromanol
+Beta-tocopherol	Β-tocopherol
+Beta-tocopherol	(2r) -2,5,8-trimethyl-2- [ (4r,8r) - (4,8,12-trimethyltridecyl) ] -3,4-dihydrochromen-6-ol
+Gamma-tocopherol	Γ-tocopherol
+Gamma-tocopherol	(2r) -2,7,8-trimethyl-2- [ (4r,8r) -4,8,12-trimethyltridecyl ] -6-chromanol
+Delta-tocopherol	Δ-tocopherol
+Delta-tocopherol	(2r) -2,8-dimethyl-2- [ (4r,8r) -4,8,12-trimethyltridecyl ] -6-chromanol
+Alpha-tocotrienol	Α-tocotrienol
+Alpha-tocotrienol	(2r) -2,5,7,8-tetramethyl-2- [ (3e,7e) -4,8,12-trimethyltrideca-3,7,11-trienyl ] -3,4-dihydrochromen-6-ol
+Beta-tocotrienol	Β-tocotrienol
+Beta-tocotrienol	(2r) -2,5,8-trimethyl-2- [ (3e,7e) -4,8,12-trimethyltrideca-3,7,11-trienyl ] -3,4-dihydrochromen-6-ol
+Gamma-tocotrienol	Γ-tocotrienol
+Gamma-tocotrienol	(r) -γ-tocotrienol
+Gamma-tocotrienol	[ r- (e, e) ] -3,4-dihydro-2,7,8-trimethyl-2- (4,8,12-trimethyl-3,7,11-tridecatrienyl) -2h-1-benzopyran-6-ol
+Delta-tocotrienol	Δ-tocotrienol
+Vitamin D	Vitamin d
+Vitamin D2	Vitamin d2
+Vitamin D2	(3β,5z,7e,22e) -9,10-secoergosta-5,7,10 (19) ,22-tetraen-3-ol
+Vitamin D2	Vitamin d-2
+Vitamin D3	Vitamin d3
+Vitamin D3	3β,5z,7e) -9,10-secocholesta-5,7,10 (19) -trien-3-ol
+Vitamin D3	Vitamin d-3
+Vitamin C, total ascorbic acid	Vitamin c
+Vitamin C, total ascorbic acid	Total ascorbic acid
+Vitamin C, total ascorbic acid	(r) -3,4-dihydroxy-5- ((s) -1,2-dihydroxyethyl) furan-2 (5h) -one
+Vitamin C, total ascorbic acid	2-oxo-l-threo-hexono-1,4-lactone-2,3-enediol
+DHA	(5r) -5- [ (1s) -1,2-dihydroxyethyl ] furan-2,3,4 (5h) -trione
+Thiamin	Vitamin b1
+Thiamin	3- ((4-amino-2-methyl-5-pyrimidinyl) methyl) -5- (2-hydroxyethyl) -4-methylthiazolium
+Thiamin	Chloride
+Thiamin	Vitamin b-1
+Riboflavin	Vitamin b2
+Riboflavin	7,8-dimethyl-10- [ (2s,3s,4r) -2,3,4,5-tetrahydroxypentyl ] benzo [ g ] pteridine-2,4-dione
+Niacin	Vitamin b3
+Niacin	Vitamin b-3
+Pantothenic acid	Vitamin b5
+Pantothenic acid	3- [ (2r) - (2,4-dihydroxy-3,3-dimethylbutanoyl) amino ] propanoic acid
+Vitamin B6	Vitamin b6
+Vitamin B6	Vitamin b-6
+H4 folate	(2s) -2- { [ 4- ({ [ (6r) -2-amino-4-oxo-1,4,5,6,7,8-hexahydropteridin-6-yl ] methyl } amino) phenyl ] formamido } pentanedioic acid
+5-MTHF	5-methyltetrahydrofolate
+5-MTHF	(6s) -5-methyltetrahydrofolate
+5-MTHF	5-methyltetrahydrofolic acid
+5-MTHF	(2s) -2- [ [ 4- [ (2-amino-5-methyl-4-oxo-1,6,7,8-tetrahydropteridin-6-yl) methylamino ] benzoyl ] amino ] pentanedioic acid
+5-CHO-THF	5-formyltetrahydrofolate
+5-CHO-THF	5-formyltetrahydrofolic acid
+5-CHO-THF	(2s) -2- { [ 4- [ (2-amino-5-formyl-4-oxo-5,6,7,8-tetrahydro-1h-pteridin-6-yl) methylamino ] benzoyl ] amino } pentanedioic acid
+10-CHO-THF	10-formyltetrahydrofolate
+10-CHO-THF	10-formyltetrahydrofolic acid
+10-CHO-THF	(2s) -2- { [ 4- [ (2-amino-4-oxo-5,6,7,8-tetrahydro-1h-pteridin-6-yl) methyl (formyl) amino ] benzoyl ] amino } pentanedioic acid
+5,10-CH=THF	5,10-methenyltetrahydrofolate
+5,10-CH=THF	5,10-methenyltetrahydrofolic acid
+5,10-CH=THF	N- [ 4- (3-amino-1-oxo-1,4,5,6,6a
+5,10-CH=THF	7-hexahydroimidazo [ 1,5-f ] pteridin-8 (9h) -yl) benzoyl ] -l-glutamic acid
+Vitamin B12	Vitamin b12
+Vitamin B12	Α- (5,6-dimethylbenzimidazolyl) cobamidcyanide
+Vitamin B12	Vitamin b-12
+Choline	2-hydroxy-n, n, n-trimethylethanamonium
+Choline	(2-hydroxyethyl) trimethylammonium
+GPC	L-alpha glycerylphosphorylcholine
+GPC	Alpha-gpc
+GPC	[ (2r) -2,3-dihydroxypropyl ] 2-trimethylazaniumylethyl phosphate
+Folic acid	Vitamin m, vitamin b9, vitamin bc
+Folic acid	Pteroyl-l-glutamic acid
+Folic acid	Pteroyl-l-glutamate
+Folic acid	(2s) -2- [ [ 4- [ (2-amino-4-oxo-1h-pteridin-6-yl) methylamino ] benzoyl ] amino ] pentanedioic acid
+Folic acid	Vitamin b-9
+Vitamin K	Vitamin k
+Vitamin K	2-methyl-3- [ (2e) -3,7,11,15-tetramethylhexadec-2-en-1-yl ] naphthoquinone
+MK4	2-methyl-3- [ (2z,6e,10e) -3,7,11,15-tetramethylhexadeca-2,6,10,14-tetraen-1-yl ] naphthoquinone
+Stigmasterol	(3s,8s,9s,10r,13r,14s,17r) -17- [ (e,2r,5s) -5-ethyl-6-methylhept-3-en-2-yl ] -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1h-cyclopenta [ a ] phenanthren-3-ol
+Campesterol	(3s,8s,9s,10r,13r,14s,17r) -17- [ (2r,5r) -5,6-dimethylheptan-2-yl ] -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1h-cyclopenta [ a ] phenanthren-3-ol
+Campesterol	(24r) -ergost-5-en-3β-ol
+Beta-sitosterol	Β-sitosterol
+Beta-sitosterol	Β-sitosterin
+Beta-sitosterol	17- (5-ethyl-6-methylheptan-2-yl) -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1h-cyclopenta [ a ] phenanthren-3-ol
+Beta-sitosterol	22,23-dihydrostigmasterol
+Daidzein	7-hydroxy-3- (4-hydroxyphenyl) chromen-4-one
+Daidzein	4',7-dihydroxyisoflavone
+Genistein	5,7-dihydroxy-3- (4-hydroxyphenyl) chromen-4-one
+Genistein	4',5,7-trihydroxyisoflavone
+Glycitein	7-hydroxy-3- (4-hydroxyphenyl) -6-methoxy-4-chromenone
+Glycitein	4',7-dihydroxy-6-methoxyisoflavone
+Soy isoflavones	Daidzin
+Soy isoflavones	Daidzein
+Soy isoflavones	Genistin
+Soy isoflavones	Genistein
+Soy isoflavones	Glycitin
+Soy isoflavones	Glycitein
+Apigenin	4',5,7-trihydroxyflavone
+Apigenin	C.i. natural yellow 1
+Apigenin	5,7-dihydroxy-2- (4-hydroxyphenyl) -4h-1-benzopyran-4-one
+Biochanin A	Biochanin a
+Biochanin A	5,7-dihydroxy-3- (4-methoxyphenyl) chromen-4-one
+Biochanin A	4'-methylgenistein
+Biochanin A	5,7-dihydroxy-4'-methoxyisoflavone
+Formononetin	Biochanin b
+Formononetin	7-hydroxy-3- (4-methoxyphenyl) chromen-4-one
+Formononetin	7-hydroxy-4'-methoxyisoflavone
+Formononetin	4'-o-methyldaidzein
+Coumestrol	3,9-dihydroxy-6-benzofurano [ 3,2-c ] chromenone
+Cyanidin	2- (3,4-dihydroxyphenyl) chromenylium-3,5,7-triol
+Afzelechin	(2r,3r) -2- (4-hydroxyphenyl) -3,4-dihydro-2h-chromene-3,5,7-triol
+Afzelechin	3,5,7,4'-tetrahydroxyflavan
+Afzelechin	3,4',5,7-flavantetrol
+Procyanidin А2	Procyanidin dimer а2
+Procyanidin А2	Procyanidin a2
+Procyanidin А2	Procyanidol a2
+Procyanidin А2	Proanthocyanidin a-2
+Procyanidin А2	(+) -proanthocyanidin a2
+Procyanidin А2	(2r,3r,8s,14r,15r) -2,8-bis (3,4-dihydroxyphenyl) -2,3,4,14-tetrahydro-8,14-methanobenzo [ 7,8 ] [ 1,3 ] dioxocino [ 4,5-h ] chromene-3,5,11,13,15-pentaol
+Procyanidin А2	Epicatechin- (2β→7,4β→8) -epicatechin
+Procyanidin B1	Procyanidin dimer b1
+Procyanidin B1	Procyanidin b1
+Procyanidin B1	(2r,2ʼr,3r,3ʼs,4r) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2h,2ʼh-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B1	Epicatechin- (4β→8) -catechin
+Procyanidin B2	Procyanidin dimer b2
+Procyanidin B2	Procyanidin b2
+Procyanidin B2	(2r,2ʼr,3r,3ʼr,4r) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2h,2ʼh-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B2	(−) -epicatechin- (4β→8) - (−) -epicatechin
+Procyanidin B3	Procyanidin dimer b3
+Procyanidin B3	Procyanidin b3
+Procyanidin B3	(2r,2ʼr,3s,3ʼs,4s) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2h,2ʼh-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B3	Catechin- (4α→8) -catechin
+Procyanidin B4	Procyanidin dimer b4
+Procyanidin B4	Procyanidin b4
+Procyanidin B4	Catechin- (4α→8) -epicatechin
+Procyanidin B1-3-O-gallate	Procyanidin dimer b1-3-o-gallate
+Procyanidin B1-3-O-gallate	Procyanidin b1-3-o-gallate
+Procyanidin B2-3′-O-gallate	Procyanidin dimer b2-3′-o-gallate
+Procyanidin B2-3′-O-gallate	Procyanidin b2-3′-o-gallate
+Procyanidin B2-3-O-gallate	Procyanidin dimer b2-3-o-gallate
+Procyanidin B2-3-O-gallate	Procyanidin b2-3-o-gallate
+Ent-epiafzelechin-3-O-p-hydroxybenzoate-(4α→8,2α→O→7)-epiafzelechin	Ent-epiafzelechin-3-o-p-hydroxybenzoate- (4α→8,2α→o→7) -epiafzelechin
+Procyanidin B2-3,3″-di-O-gallate	Procyanidin b2-3,3″-di-o-gallate
+Procyanidin C1	Procyanidin trimer c1
+Procyanidin C1	Procyanidin c1
+Procyanidin C1	(2r,2ʼr,2ʼʼr,3r,3ʼr,3ʼʼr,4r,4ʼs) -2,2ʼ,2ʼʼ-tris (3,4-dihydroxyphenyl) -3,3ʼ,3ʼʼ,4,4ʼ,4ʼʼ-hexahydro-2h,2ʼh,2ʼʼh-4,8ʼ:4ʼ,8ʼʼ-terchromene-3,3ʼ,3ʼʼ,5,5ʼ,5ʼʼ,7,7ʼ,7ʼʼ-nonol
+Procyanidin C1	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin
+Procyanidin T2	Procyanidin trimer t2
+Procyanidin T2	Procyanidin t2
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin- (4β→6) -epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin	Epicatechin- (4β→6) -epicatechin- (4β→8) -epicatechin- (4β→8) -catechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin	Epicatechin- (4β→6) -epicatechin- (4β→8) -epicatechin- (4β→6) -catechin
+Epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin	Epicatechin- (4β→6) -epicatechin- (4β→8) -epicatechin- (4β→6) -epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→8)-catechin	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→8) -catechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-catechin	Epicatechin- (4β→8) -epicatechin- (4β→6) -epicatechin- (4β→8) -catechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin-(4β→8)-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→6) -epicatechin- (4β→8) -epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→6)-[epicatechin-(4β→8)]-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→6) - [ epicatechin- (4β→8) ] -epicatechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-catechin	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→6) -catechin
+Epicatechin-(4β→8)-epicatechin-(4β→8)-epicatechin-(4β→6)-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→8) -epicatechin- (4β→6) -epicatechin
+Epicatechin (4β,8)4-pentamer	[ epicatechin- (4β→8) ] 4-epicatechin
+Chebulinic acid	1,3,6-tri-o-galloyl-2,4-chebuloyl-β-d-glucopyranoside
+Phlorofucofuroeckol A	Phlorofucofuroeckol a
+Phlorofucofuroeckol A	4,9-bis (3,5-dihydroxyphenoxy) - [ 1 ] benzofuro [ 3,2-a ] oxanthrene-1,3,6,10,12-pentol
+Dieckol	4- [ 4- [ 6- (3,5-dihydroxyphenoxy) -4,7,9-trihydroxydibenzo-p-dioxin-2-yl ] oxy-3,5-dihydroxyphenoxy ] dibenzo-p-dioxin-1,3,6,8-tetrol
+Granatin A	Granatin a
+Punicalagin	2,3- (s) -hexahydroxydiphenoyl-4,6- (s, s) -gallagyl-d-glucose
+Punicalin	4,6- (s, s) -gallagyl-d-glucose
+Roburin E	Roburin e
+Ellagic acid	2,3,7,8-tetrahydroxy-chromeno [ 5,4,3-cde ] chromene-5,10-dione
+Ellagic acid	4,4′,5,5′,6,6′-hexahydroxydiphenic acid 2,6,2′,6′-dilactone
+Pt	2- (3,4-dihydroxy-5-methoxyphenyl) -3,5,7-trihydroxychromenylium
+Delphinidin	2- (3,4,5-trihydroxyphenyl) chromenylium-3,5,7-triol
+Malvidin	3,5,7-trihydroxy-2- (4-hydroxy- 3,5-dimethoxyphenyl) chromenium
+Pelargonidin	2- (4-hydroxyphenyl) chromenylium-3,5,7-triol
+Peonidin	2- (4-hydroxy-3-methoxyphenyl) chromenylium-3,5,7-triol
+(+)-Catechin	(+) -catechin
+(+)-Catechin	D-catechin
+(+)-Catechin	(2r,3s) -2- (3,4-dihydroxyphenyl) -3,4-dihydro-2h-chromene-3,5,7-triol
+(+)-Catechin	(2r,3s) -catechin
+(-)-Epigallocatechin	(-) -epigallocatechin
+(-)-Epicatechin	(-) -epicatechin
+(-)-Epicatechin	(-) -epicatechol
+(-)-Epicatechin	(2r,3r) - (-) -epicatechin
+ECG	(-) -epicatechin 3-gallate
+ECG	(-) -epicatechin gallate
+ECG	(-) -epicatechin-3-o-gallate
+ECG	[ (2r,3r) -2- (3,4-dihydroxyphenyl) -5,7-dihydroxy-3,4-dihydro-2h-chromen-3-yl ] 3,4,5-trihydroxybenzoate
+EGCG	(-) -epigallocatechin 3-gallate
+EGCG	(-) -epigallocatechin gallate
+EGCG	[ (2r,3r) -5,7-dihydroxy-2- (3,4,5-trihydroxyphenyl) chroman-3-yl ] 3,4,5-trihydroxybenzoate
+EGCG	(2r,3r) -5,7-dihydroxy-2- (3,4,5-trihydroxyphenyl) -3,4-dihydro-2h-1-benzopyran-3-yl 3,4,5-trihydroxybenzoate
+(+)-Gallocatechin	(+) -gallocatechin
+(+)-Gallocatechin	(+) -gallocatechol
+GCG	(+) -gallocatechin 3-gallate
+GCG	(+) -gallocatechin gallate
+GCG	(2s,3r) -2- (3,4,5-trihydroxyphenyl) -3,4-dihydro-1 (2h) -benzopyran-3,5,7-triol 3- (3,4,5-trihydroxybenzoate)
+4′-O-methylepicatechin	4′-o-methylepicatechin
+TF	3,4,5-trihydroxy-1,8-bis [ (2r,3r) -3,5,7-trihydroxy-2-chromanyl ] -6-benzo [ 7 ] annulenone
+TFDG	Theaflavin-3,3′-digallate
+TFDG	[ (2r,3r) -2- [ 8- [ (2r,3r) -5,7-dihydroxy-3- (3,4,5-trihydroxybenzoyl) oxy-3,4-dihydro-2h-chromen-2-yl ] -3,4,5-trihydroxy-6-oxobenzo [ 7 ] annulen-1-yl ] -5,7-dihydroxy-3,4-dihydro-2h-chromen-3-yl ] 3,4,5-trihydroxybenzoate
+TF2B	Theaflavin-3-gallate
+TF2B	[ (2r,3r) -5,7-dihydroxy-2- [ 3,4,5-trihydroxy-6-oxo-8- [ (2r,3r) -3,5,7-trihydroxychroman-2-yl ] benzo [ 7 ] -annulen-1-yl ] chroman-3-yl ] 3,4,5-trihydroxybenzoate
+TF2A	Theaflavin-3′-gallate
+Eriodictyol	(2s) -2- (3,4-dihydroxyphenyl) -5,7-dihydroxy-4-chromanone
+Hesperetin	(s) -2,3-dihydro-5,7-dihydroxy-2- (3-hydroxy-4-methoxyphenyl) -4h-1-benzopyran-4-one
+Naringenin	5,7-dihydroxy-2- (4-hydroxyphenyl) chroman-4-one
+Luteolin	2- (3,4-dihydroxyphenyl) - 5,7-dihydroxy-4-chromenone
+Isorhamnetin	3'-methoxyquercetin
+Isorhamnetin	3,5,7-trihydroxy-2- (4-hydroxy-3-methoxyphenyl) chromen-4-one
+Kaempferol	3,5,7-trihydroxy-2- (4-hydroxyphenyl) -4h-chromen-4-one
+Kaempferol	3,5,7-trihydroxy-2- (4-hydroxyphenyl) -4h-1-benzopyran-4-one
+Myricetin	3,5,7-trihydroxy-2- (3,4,5-trihydroxyphenyl) -4-chromenone
+Quercetin	2- (3,4-dihydroxyphenyl) -3,5,7-trihydroxy-4h-chromen-4-one
+Quercetin-3-O-glucoside	Quercetin-3-o-glucoside
+Quercetin-3-O-glucoside	Trifoliin a, isohyperoside
+Quercetin-3-O-glucoside	Quercetin 3-o-β-d-glucopyranoside
+Quercetin-3-O-glucoside	2- (3,4-dihydroxyphenyl) -5,7-dihydroxy-3- [ (2s,3r,4s,5s,6r) -3,4,5-trihydroxy-6- (hydroxymethyl) oxan-2-yl ] oxychromen-4-one
+TF-3	[ 1- [ (2r,3r) -3,5-dihydroxy-7- (3,4,5-trihydroxybenzoyl) oxychroman-2-yl ] -3,5-dihydroxy-6-oxo-8- [ (3r) -3,5,7-trihydroxychroman-2-yl ] benzo [ 7 ] annulen-4-yl ] 3,4,5-trihydroxybenzoate
+L-carnitine	3-hydroxy-4- (trimethylazaniumyl) butanoate
+ALCAR	Acetyl-l-carnitine
+ALCAR	(r) -3-acetyloxy-4-trimethylammonio-butanoate
+Curcumin	(1e,6e) -1,7-bis (4-hydroxy-3-methoxyphenyl) -1,6-heptadiene-3,5-dione
+Hydroxytyrosol	3-hydroxytyrosol
+Hydroxytyrosol	4- (2-hydroxyethyl) -1,2-benzenediol
+Hydroxytyrosol	2- (3,4-di-hydroxyphenyl) -ethanol
+Melatonin	N- [ 2- (5-methoxy-1h-indol-3-yl) ethyl ] acetamide
+Oleocanthal	2- (4-hydroxyphenyl) ethyl (3s,4e) -4-formyl-3- (2-oxoethyl) hex-4-enoate
+Oleuropein	(4s,5e,6s) -4- [ 2- [ 2- (3,4-dihydroxyphenyl) ethoxy ] -2-oxoethyl ] -5-ethylidene-6- [ [ (2s,3r,4s,5s,6r) -3,4,5-trihydroxy-6- (hydroxymethyl) -2-tetrahydropyranyl ] oxy ] -4h-pyran-3-с\carboxylic acid
+Oleuropein	Methyl ester
+Resveratrol	3,4',5-stilbenetriol
+Tyrosol	4- (2-hydroxyethyl) phenol
+Tyrosol	P-hydroxyphenethyl alcohol
+Tyrosol	2- (4-hydroxyphenyl) ethanol
+Tyrosol	4-hydroxyphenylethanol
+CoQ10	Coenzyme q
+CoQ10	Coenzyme q10
+CoQ10	2- [ (2e,6e,10e,14e,18e,22e,26e,30e,34e) -3,7,11,15,19,23,27,31,35,39-decamethyltetraconta-2,6,10,14,18,22,26,30,34,38-decaenyl ] -5,6-dimethoxy-3-methylcyclohexa-2,5-diene-1,4-dione
+Caffeine	1,3,7-trimethylpurine-2,6-dione
+Theobromine	3,7-dimethyl-1h-purine-2,6-dione
+PGG	1,2,3,4,6-penta-o-galloyl-b-d-glucose
+PGG	1,2,3,4,6-pentagalloyl glucose
+PGG	[ (2s,3r,4s,5r,6r) -2,3,5-tris [ (3,4,5-trihydroxybenzoyl) oxy ] -6- [ (3,4,5-trihydroxybenzoyl) oxymethyl ] oxan-4-yl ] 3,4,5-trihydroxybenzoate
+PGG	1,2,3,4,6-penta-o-galloyl-β-d-glucose
+PGG	1,2,3,4,6-pentakis-o-galloyl-beta-d-glucose, beta-penta-o-galloyl-glucose
+PGG	1,2,3,4,6-penta-o-galloyl-beta-d-glucose
+Baicalein	5,6,7-trihydroxy-2-phenyl-chromen-4-one
+Beauveriolide I	Beauveriolide i
+Beauveriolide I	Cyclo- ((r) -beta-hydroxynonanoyl-l-phenylalanyl-alanyl-d-leucyl)
+Berberine	5,6-dihydro-9,10-dimethoxybenzo [ g ] -1,3-benzodioxolo [ 5,6-a ] quinolizinium
+Caffeic acid	3- (3,4-dihydroxyphenyl) -2-propenoic acid
+Caffeic acid	3,4-dihydroxy-cinnamic acid
+Caffeic acid	3,4-dihydroxy-trans-cinnamate
+Caffeic acid	3,4-dihydroxybenzeneacrylicacid
+Chicoric Acid	Chicoric acid
+Chicoric Acid	(2r,3r) -2,3-bis { [ (e) -3- (3,4-dihydroxyphenyl) prop-2-enoyl ] oxy } butanedioic acid
+Chicoric Acid	2r,3r-o-dicaffeoyltartaric acid
+D-Glucosamine	D-glucosamine
+D-Glucosamine	(3r,4r,5s) -3-amino-6- (hydroxymethyl) oxane-2,4,5-triol
+D-Glucosamine	2-amino-2-deoxy-glucose
+Fisetin	5-deoxyquercetin
+Fisetin	2- (3,4-dihydroxyphenyl) -3,7-dihydroxychromen-4-one
+Gallic acid	3,4,5-trihydroxybenzoic acid
+Gallic acid	3,4,5-trihydroxybenzoate
+Juglone	5-hydroxy-1,4-naphthoquinone
+Juglone	5-hydroxy-p-naphthoquinone
+L-Theanine	L-theanine
+L-Theanine	(2s) -2-ammonio-5- (ethylamino) -5-oxopentanoate
+L-Theanine	N-ethyl-l-glutamine
+NDGA	4,4'- (2,3-dimethylbutane-1,4-diyl) dibenzene-1,2-diol
+Oxaloacetic Acid	Oxaloacetic acid
+Oxaloacetic Acid	2-oxosuccinic acid
+D-pinitol	D- (+) -pinitol
+D-pinitol	(+) -pinitol
+D-pinitol	(1s,2s,4s,5r) -6-methoxycyclohexane-1,2,3,4,5-pentol
+D-pinitol	3-o-methyl-d-chiro-inositol
+D-pinitol	D- (+) -chiro-inositol
+Polydatin	2- [ 3-hydroxy-5- [ (e) -2- (4-hydroxyphenyl) ethenyl ] phenoxy ] -6- (hydroxymethyl) oxane-3,4,5-triol
+Polydatin	Resveratrol 3-beta-mono-d-glucoside
+Polydatin	3,5,4'-trihydroxystilbene-3-o-β-d-glucopyranoside
+Rosmarinic acid	(2'' r'') -2- [ [ (2'' e'') -3- (3,4-dihydroxyphenyl) -1-oxo-2-propenyl ] ] oxy ] -3- (3,4-dihydroxyphenyl) propanoic acid
+Tannic acid	2,3-dihydroxy-5- ({ [ (2r,3r,4s,5r,6r) -3,4,5,6-tetrakis ({ 3,4-dihydroxy-5- [ (3,4,5-trihydroxyphenyl) carbonyloxy ] phenyl } carbonyloxy) oxan-2-yl ] methoxy } carbonyl) phenyl 3,4,5-trihydroxybenzoate
+Ursolic acid	(1s,2r,4as,6ar,6as,6br,8ar,10s,12ar,14bs) -10-hydroxy-1,2,6a
+Ursolic acid	10,11,12,13,14b-tetradecahydro-1h-picene-4a-carboxylic acid
+aflatoxin B1	Aflatoxin b1
+aflatoxin B2	Aflatoxin b2
+aflatoxin G1	Aflatoxin g1
+aflatoxin G2	Aflatoxin g2
+aflatoxin M1	Aflatoxin m1
+aflatoxin M1	4-hydroxyaflatoxin b1
+aflatoxin M2	Aflatoxin m2
+Aldicarb	2-methyl-2- (methylthio) propanal o- (n-methylcarbamoyl) oxime
+Chlormequat	2-chloro-n, n, n-trimethylethanaminium
+Trifluralin	2,6-dinitro-n, n-dipropyl-4- (trifluoromethyl) aniline
+Pirimiphos-methyl	O- [ 2- (diethylamino) -6-methylpyrimidin-4-yl ] o, o-dimethyl phosphorothioate
+Carbendazim	Methyl 1h-benzimidazol-2-ylcarbamate
+Vinclozolin	(rs) -3- (3,5-dichlorophenyl) -5-methyl- 5-vinyloxazolidine-2,4-dione
+Chlorpyrifos	O, o-diethyl o-3,5,6-trichloropyridin-2-yl phosphorothioate
+Acrolein	Allyl aldehyde
+Acrolein	Ethylene aldehyde
+NDMA	N-nitrosodimethylamine
+NDMA	N, n-dimethylnitrosamine
+NDEA	N-nitrosodiethylamine
+NDEA	N, n-diethylnitrosamine
+NDEA	N-ethyl-n-nitrosoethanamine
+NDPA	N, n-dipropylnitrosamine
+NDPA	N-nitroso (di-n-propyl) amine
+NDBA	N-nitrosodibutylamine
+NDBA	N, n-dibutylnitrosamine
+NPIP	N-nitrosopiperidine
+N-Nitrosopyrrolidine	N-nitrosopyrrolidine
+Melamine	1,3,5-triazine-2,4,6-triamine
+Cyanuric acid	S-triazinetriol
+Cyanuric acid	S-triazinetrione
+Cyanuric acid	1,3,5-triazinane-2,4,6-trione
+Cyanuric acid	1,3,5-triazinetriol
+Cyanuric acid	1,3,5-triazine-2,4,6 (1h,3h,5h) -trione
+Flumequine	9-fluoro-5-methyl-1-oxo-6,7-dihydro-1h,5h-pyrido [ 3,2,1-ij ] quinoline-2-carboxylic acid
+Danofloxacin	1-cyclopropyl-6-fluoro-7- [ (1s,4s) -3-methyl-3,6-diazabicyclo [ 2.2.1 ] heptan-6-yl ] -4-oxoquinoline-3-carboxylic acid
+Sarafloxacin	6-fluoro-1- (4-fluorophenyl) -4-oxo-7-piperazin-1-ylquinoline-3-carboxylic acid
+Enrofloxacin	1-cyclopropyl-7- (4-ethylpiperazin-1-yl) -6-fluoro-4-oxo-1,4-dihydroquinoline-3-carboxylic acid
+Difloxacin	6-fluoro-1- (4-fluorophenyl) -7- (4-methylpiperazin-1-yl) - 4-oxoquinoline-3-carboxylic acid
+Marbofloxacin	9-fluoro-2,3-dihydro-3-methyl-10- (4-methyl-1-piperazinyl) -7-oxo-7h-pyridol (3,2,1-ij) (4,2,1) benzoxadiazin-6 carboxylic acid
+Malachite green	4- { [ 4- (dimethylamino) phenyl ] (phenyl) methylidene } -n, n-dimethylcyclohexa-2,5-dien-1-iminium chloride
+Gentian violet	Methyl violet 10b
+Gentian violet	Tris (4- (dimethylamino) phenyl) methylium chloride
+CGA	(1s,3r,4r,5r) -3- { [ (2e) -3- (3,4-dihydroxyphenyl) prop-2-enoyl ] oxy } -1,4,5-trihydroxycyclohexanecarboxylic acid
+Animal protein	Animal Protein
+Animal protein	Animal Polypeptide
+Plant protein	Plant Protein
+Plant protein	Plant Polypeptide
+A2 beta-casein	A2 Beta-casein
+A2 beta-casein	A2 Β-casein
+A2 beta-casein	A2 Type Of Β-casein
+A2 beta-casein	A2 Type Of Beta-casein
+A1 beta-casein	A1 Beta-casein
+A1 beta-casein	A1 Β-casein
+A1 beta-casein	A1 Type Of Β-casein
+A1 beta-casein	A1 Type Of Beta-casein
+IGF-1	IGF-1, Insulin-Like Growth Factor I, Somatomedin C
+Trp,W	2-Amino-3- (1H-indol-3-yl) Propanoic Acid
+Thr,T	2-Amino-3-hydroxybutanoic Acid
+Ile,I	2-Amino-3-methylpentanoic Acid
+Leu,L	2-Amino-4-methylpentanoic Acid
+Lys,K	2,6-Diaminohexanoic Acid
+Lys,K	2,6-Diammoniohexanoic Acid
+Met,M	2-amino-4- (Methylthio) Butanoic Acid
+Cys,C	2-Amino-3-sulfhydrylpropanoic Acid
+Tau	Ethanesulfonic Acid
+Tau	Tauric Acid
+Tau	2-aminoethanesulfonic Acid
+Phe,F	2-Amino-3-phenylpropanoic Acid
+Tyr,Y	2-Amino-3- (4-hydroxyphenyl) Propanoic Acid
+Val,V	2-amino-3-methylbutanoic Acid
+Arg,R	2-Amino-5-guanidinopentanoic Acid
+His,H	2-Amino-3- (1H-imidazol-4-yl) Propanoic Acid
+Ala,A	2-Aminopropanoic Acid
+Asp,D	Aspartic Acid
+Asp,D	Aminosuccinic Acid
+Asp,D	Asparagic Acid
+Asp,D	Asparaginic Acid
+Asp,D	2-Aminobutanedioic Acid
+Glu,E	Glutamic Acid
+Glu,E	2-Aminopentanedioic Acid
+Glu,E	2-Aminoglutaric Acid
+Gly,G	Aminoethanoic Acid
+Gly,G	Aminoacetic Acid
+Pro,P	Pyrrolidine-2-carboxylic Acid
+Ser,S	2-Amino-3-hydroxypropanoic Acid
+Hyp	4-Hydroxypyrrolidine-2-carboxylic Acid
+NAC	2-Acetamido-3-sulfanylpropanoic Acid
+GSH	Γ-L-Glutamyl-L-cysteinylglycine
+GSH	2-Amino-4- { [ (1R) -1- [ (Carboxymethyl) Carbamoyl ] -2-sulfanylethyl ] Carbamoyl } Butanoic Acid
+GH	Growth Hormone
+GH	Pituitary Growth Hormone
+Testosterone	(8R,9S,10R,13S,14S,17S) -17-hydroxy-10,13-dimethyl-1,2,6,7,8,9,11,12,14,15,16,17-dodecahydrocyclopenta [ A ] Phenanthren-3-one
+E1	(8R,9S,13S,14S) -3-hydroxy-13-methyl-6,7,8,9,11,12,13,14,15,16-decahydrocyclopenta [ A ] Phenanthren-17-one
+βЕ2	(8R,9S,13S,14S,17S) -13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta [ A ] Phenanthrene-3,17-diol
+αЕ2	(8R,9S,13S,14S,17S) -13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta [ A ] Phenanthrene-3,17-diol
+Zeranol	Α-Zearalanol
+Zeranol	(3S,7R) -7,14,16-Trihydroxy-3-methyl-3,4,5,6,7,8,9,10,11,12-decahydro-1H-2-benzoxacyclotetradecin-1-one
+MGA	Melengestrol Acetate
+MGA	17-hydroxy-6-methyl-16-methylenepregna-4,6-diene-3,20-dione Acetate
+TBA	Trenbolone Acetate
+C4:0	Butanoic Acid
+C4:0	Butyric Acid
+C4:0	1-Propanecarboxylic Acid
+C4:0	Propanecarboxylic Acid
+C6:0	Hexanoic Acid
+C6:0	Caproic Acid
+C8:0	Octanoic Acid
+C8:0	Caprylic Acid
+C10:0	Decanoic Acid
+C10:0	Capric Acid
+C10:0	Decylic Acid
+C12:0	Dodecanoic Acid
+C12:0	Lauric Acid
+C12:0	Dodecylic Acid
+C12:0	Dodecoic Acid
+C12:0	Laurostearic Acid
+C12:0	Vulvic Acid
+C12:0	1-Undecanecarboxylic Acid
+C12:0	Duodecylic Acid
+C13:0	Tridecanoic Acid
+C13:0	Tridecylic Acid
+C14:0	Tetradecanoic Acid
+C14:0	Myristic Acid
+C15:0	Pentadecanoic Acid
+C15:0	Pentadecylic Acid
+C16:0	Hexadecanoic Acid
+C16:0	Palmitic Acid
+C16:0	Palmic Acid
+C17:0	Heptadecanoic Acid
+C17:0	Margaric Acid
+C17:0	Heptadecylic Acid
+C18:0	Octadecanoic Acid
+C18:0	Stearic Acid
+C20:0	Eicosanoic Acid
+C20:0	Arachidic Acid
+C22:0	Docosanoic Acid
+C22:0	Behenic Acid
+C24:0	Tetracosanoic Acid
+C24:0	Lignoceric Acid
+C14:1	Tetradecenoic Acid
+C14:1	Myristoleic Acid
+C14:1	Myristolenic Acid
+C14:1	Oleomyristic Acid
+C14:1	Tetradec-9-enoic Acid
+C14:1	9-Tetradecenoic Acid
+C15:1	Pentadecenoic Acid
+C15:1	14-Pentadecenoic Acid
+C16:1	Hexadecenoic Acid
+C16:1	Hexadec-9-enoic Acid
+C16:1 cis-9	Palmitoleic Acid
+C16:1 cis-9	(9Z) -Hexadec-9-enoic Acid
+C16:1 cis-9	Cis-9-Hexadecenoic Acid
+C16:1 trans-9	Trans-Palmitoleic Acid
+C16:1 trans-9	(9E) -Hexadec-9-enoic Acid
+C16:1 trans-9	Trans-9-Hexadecenoic Acid
+C17:1	Heptadecenoic Acid
+C17:1	10-Heptadecenoic Acid
+C18:1	Octadecenoic Acid
+C18:1	Octadec-9-enoic Acid
+C18:1 cis-9	Oleic Acid
+C18:1 cis-9	(9Z) -Octadec-9-enoic Acid
+C18:1 cis-9	Cis-9-Octadecenoic Acid
+C18:1 trans-9	Elaidic Acid
+C18:1 trans-9	Trans-Oleic Acid
+C18:1 trans-9	(E) -Oleic Acid
+C18:1 trans-9	(9E) -Octadec-9-enoic Acid
+C18:1 trans-9	Trans-9-Octadecenoic Acid
+C18:1 trans-11	Vaccenic Acid
+C18:1 trans-11	(11E) -Octadec-11-enoic Acid
+C18:1 trans-11	Trans-11-Octadecenoic Acid
+C20:1	Eicosenoic Acid
+C20:1	Gadoleic Acid
+C20:1	9-Icosenoic Acid
+C22:1	Docosenoic Acid
+C22:1	Docos-13-enoic Acid
+C22:1 cis-13	Erucic Acid
+C22:1 cis-13	(13Z) -Docos-13-enoic Acid
+C22:1 cis-13	Cis-13-Docosenoic Acid
+C22:1 trans-13	Brassidic Acid
+C22:1 trans-13	(13E) -Docos-13-enoic Acid
+C22:1 trans-13	Trans-13-Docosenoic Acid
+C24:1 cis-15	Nervonic Acid
+C24:1 cis-15	Cis-Tetracosenoic Acid
+C24:1 cis-15	(Z) -Tetracos-15-enoic Acid
+C24:1 cis-15	Cis-15-Tetracosenoic Acid
+C18:2	Octadecadienoic Acid
+C18:2	9,12-Octadecadienoic Acid
+C18:2 i	Rumenic Acid
+C18:2 i	Bovinic Acid
+C18:2 i	C9-T11 Acid
+C18:2 i	(9Z,11E) -Octadeca-9,11-dienoic Acid
+C18:2 trans-9,trans-12	Linolelaidic Acid
+C18:2 trans-9,trans-12	(9E,12E) -octadeca-9,12-dienoic Acid
+C18:2 trans-9,trans-12	Trans, Trans-9,12-octadecadienoic Acid
+C18:2 CLAs	Conjugated Linoleic Acids
+C18:2 n-6	Linoleic Acid
+C18:2 n-6	(9Z,12Z) -9,12-Octadecadienoic Acid
+C18:2 n-6	All-cis-9,12-octadecadienoic Acid
+C18:3	Octadecatrienoic Acid
+C18:3	Linolenic Acid
+C18:3	9,12,15-Octadecatrienoic Acid
+C18:3 n-3	Alpha-linolenic Acid
+C18:3 n-3	Α-linolenic Acid
+C18:3 n-3	(9Z,12Z,15Z) -9,12,15-Octadecatrienoic Acid
+C18:3 n-3	Cis, Cis, Cis-9,12,15-Octadecatrienoic Acid, All-cis-9,12,15-octadecatrienoic Acid
+C18:3 n-6	Gamma-linolenic Acid
+C18:3 n-6	Γ-Linolenic Acid
+C18:3 n-6	Gamolenic Acid
+C18:3 n-6	All-cis-6,9,12-octadecatrienoic Acid
+C18:3 cis-6,trans-10,cis-12 	Cis-6, Trans-10, Cis-12-octadecatrienoic Acid
+C18:3 cis-6,trans-8,cis-12	Cis-6, Trans-8, Cis-12-octadecatrienoic Acid
+C18:4 n-3 (Conjugated)	Octadecatetraenoic Acid
+C18:4 n-3 (Conjugated)	Parinaric Acid
+C18:4 n-3 (Conjugated)	Octadeca-9,11,13,15-tetraenoic Acid
+C18:4 n-3	Stearidonic Acid
+C18:4 n-3	Moroctic Acid
+C18:4 n-3	(6Z,9Z,12Z,15Z) -6,9,12,15-octadecatetraenoic Acid
+C18:4 n-3	All-cis-6,9,12,15, -octadecatetraenoic Acid
+С20:2 n-6	Eicosadienoic Acid
+С20:2 n-6	All-cis-11,14-eicosadienoic Acid
+C20:3	Eicosatrienoic Acid
+C20:3 n-3	Eicosatrienoic Acid
+C20:3 n-3	All-cis-11,14,17-eicosatrienoic Acid
+C20:3 n-6	Dihomo-gamma-linolenic Acid
+C20:3 n-6	All-cis-8,11,14-eicosatrienoic Acid
+C20:4 n-3	Eicosapentaenoic Acid
+C20:4 n-6	Arachidonic Acid
+C20:4 n-6	All-cis-5,8,11,14-eicosatetraenoic Acid
+C20:5 n-3	Eicosapentaenoic Acid
+C20:5 n-3	Timnodonic Acid
+C20:5 n-3	All-cis-5,8,11,14,17-eicosapentaenoic Acid
+C21:5 n-3	Heneicosapentaenoic Acid
+C21:5 n-3	All-cis-6,9,12,15,18-heneicosapentaenoic Acid
+C22:4 n-6	Docosatetraenoic Acid
+C22:4 n-6	Adrenic Acid
+C22:4 n-6	7Z,10Z,13Z,16Z-docosatetraenoic Acid
+C22:4 n-6	All-cis-7,10,13,16-docosatetraenoic Acid
+C22:5 n-3	Docosapentaenoic Acid
+C22:5 n-3	Clupanodonic Acid
+C22:5 n-3	All-cis-7,10,13,16,19-docosapentaenoic Acid
+C22:6 n-3	Docosahexaenoic Acid
+C22:6 n-3	Cervonic Acid
+C22:6 n-3	All-cis-4,7,10,13,16,19-docosahexaenoic Acid
+Alpha-lipoic acid	Alpha-lipoic Acid
+Alpha-lipoic acid	Α-lipoic Acid
+Alpha-lipoic acid	Thioctic Acid
+Alpha-lipoic acid	(R) -5- (1,2-dithiolan-3-yl) Pentanoic Acid
+Alpha-lipoic acid	6,8-Dithiooctanoic Acid
+C16:3 n-3	Hexadecatrienoic Acid
+C16:3 n-3	All-cis 7,10,13-hexadecatrienoic Acid
+C24:5 n-3	Tetracosapentaenoic Acid
+C24:5 n-3	All-cis-9,12,15,18,21-tetracosapentaenoic Acid
+C24:6 n-3	Tetracosahexaenoic Acid
+C24:6 n-3	Nisinic Acid
+C24:6 n-3	(7Z’',10Z,13Z,16Z,19Z'’) -docosa-7,10,13,16,19-pentaenoic Acid
+C24:6 n-3	All-cis-6,9,12,15,18,21-tetracosahexaenoic Acid
+C22:2 n-6	Docosadienoic Acid
+C22:2 n-6	All-cis-13,16-docosadienoic Acid
+C22:5 n-6	Docosapentaenoic Acid
+C22:5 n-6	Osbond Acid
+C22:5 n-6	All-cis-4,7,10,13,16-docosapentaenoic Acid
+C24:4 n-6	Tetracosatetraenoic Acid
+C24:4 n-6	All-cis-9,12,15,18-tetracosatetraenoic Acid
+C24:5 n-6	Tetracosapentaenoic Acid
+C24:5 n-6	All-cis-6,9,12,15,18-tetracosapentaenoic Acid
+C16:1 trans-5	Trans-5-hexadecenoic Acid
+C16:1 trans-6	Trans-6-hexadecenoic Acid
+C16:1 trans-7	Trans-7-hexadecenoic Acid
+C16:1 trans-8	Trans-8-hexadecenoic Acid
+C16:1 trans-10	Trans-10-hexadecenoic Acid
+C16:1 trans-11	Trans-11-hexadecenoic Acid
+C16:1 trans-12	Trans-12-hexadecenoic Acid
+C16:1 trans-13	Trans-13-hexadecenoic Acid
+C16:1 trans-14	Trans-14-hexadecenoic Acid
+C16:1 trans-15	Trans-15-hexadecenoic Acid
+C18:1 trans-6	Trans-6-octadecenoic Acid
+C18:1 trans-7	Trans-7-octadecenoic Acid
+C18:1 trans-8	Trans-8-octadecenoic Acid
+C18:1 trans-10	Trans-10-octadecenoic Acid
+C18:1 trans-12	Trans-12-octadecenoic Acid
+C18:1 trans-13	Trans-13-octadecenoic Acid
+C18:1 trans-14	Trans-14-octadecenoic Acid
+C18:1 trans-15	Trans-15-octadecenoic Acid
+C18:1 trans-16	Trans-16-octadecenoic Acid
+C18:2 trans-9,trans-13	Trans-9, Trans-13-octadecadienoic Acid
+C18:2 trans-9,trans-15	Trans-9, Trans-15-octadecadienoic Acid
+C18:2 trans-9,trans-16	Trans-9, Trans-16-octadecadienoic Acid
+C18:2 trans-10,trans-15	Trans-10, Trans-15-octadecadienoic Acid
+C18:2 trans-10,trans-16	Trans-10, Trans-16-octadecadienoic Acid
+C18:2 trans-11,trans-15	Trans-11, Trans-15-octadecadienoic Acid
+C18:2 trans-11,trans-16	Trans-11, Trans-16-octadecadienoic Acid
+C18:2 trans-12,trans-16	Trans-12, Trans-16-octadecadienoic Acid
+Sucrose	Table Sugar
+Glucose	Grape Sugar
+Fructose	Fruit Sugar
+Lactose	Milk Sugar
+Lactose	Β-D-galactopyranosyl- (1→4) -D-glucose
+Maltose	Malt Sugar
+Maltose	2- (Hydroxymethyl) -6- [ 4,5,6-trihydroxy-2- (Hydroxymethyl) Oxan-3-yl ] Oxyox Ane-3,4,5-triol
+Galactose	6- (Hydroxymethyl) Oxane-2,3,4,5-tetrol
+Trehalose	(2R,3S,4S,5R,6R) -2- (Hydroxymethyl) -6- [ (2R,3R,4S,5S,6R) -3,4,5-trihydroxy-6- (Hydroxymethyl) Oxan-2-yl ] Oxyoxane-3,4,5-triol
+Trehalose	Α-D-glucopyranosyl- (1→1) -α-D-glucopyranoside
+Chitin	2- (Acetylamino) -2-deoxy-D-glucose
+Chitosan	Poly- (D) Glucosamine
+GluP	Glucan Phosphate
+Barley β-glucan	Barley Β-glucan
+Oat β-glucan	Oat Β-glucan
+Wheat β-glucan	Wheat Β-glucan
+Rye β-glucan	Rye Β-glucan
+Rice β-glucan	Rice Β-glucan
+Cereal b-glucans	Cereal B-glucans
+Alginate	Alginic Acid
+Cassia gum	Cassia Gum
+Cellulose gum	Carboxymethyl Cellulose
+Gellan gum	Gellan Gum
+Guar gum	Guar Gum
+HPC	Hydroxypropyl Cellulose
+Konjac gum	Konjac Gum
+LBG	Locust Bean Gum
+LBG	Carob Bean Gum
+LBG	Carob Gum
+Methylcellulose	Methyl Cellulose
+MCC	Microcrystalline Cellulose
+Xanthan gum	Xanthan Gum
+Resistant starch	Resistant Starch
+GI	Glycemic Index
+GI	Glycaemic Index
+GL	Glycemic Load
+Ethyl alcohol	Ethyl Alcohol
+Ethyl alcohol	Drinking Alcohol
+Ethyl alcohol	Grain Alcohol
+Ethyl alcohol	Ethane Monoxide
+Ethyl alcohol	Ethylic Alcohol
+Ethyl alcohol	Ethyl Hydrate
+Ethyl alcohol	Ethyl Hydroxide
+Na:K	Sodium-to-potassium Ratio
+Na:K	Sodium: Potassium Ratio
+Ca:P	Calcium-to-phosphorus Ratio
+Ca:P	Calcium: Phosphorus Ratio
+Retinol	(2E,4E,6E,8E) -3,7-dimethyl-9- (2,6,6-trimethylcyclohex-1-enyl) Nona-2,4,6,8-tetraen-1-ol
+Beta-carotene	Β-Carotin
+Beta-carotene	Β-Carotene
+Beta-carotene	1,3,3-Trimethyl-2- [ 3,7,12,16-tetramethyl-18- (2,6,6-trimethylcyclohex-1-en-1-yl) Octadeca-1,3,5,7,9,11,13,15,17-nonaen-1-yl ] Cyclohex-1-ene
+Alpha-carotene	Α-Carotin
+Beta-cryptoxanthin	Β-Cryptoxanthin
+Beta-cryptoxanthin	(R) -3,5,5-Trimethyl-4- [ 3,7,12,16-tetramethyl-18- (2,6,6-trimethylcyclohex-1-enyl) -octadeca-1,3,5,7,9,11,13,15,17-nonaenyl ] -cyclohex-3-enol
+Beta-cryptoxanthin	(3R) -β, Β-Caroten-3-ol, (R) -all-trans-β-Caroten-3-ol
+Lycopene	Ψ, Ψ-Carotene
+Lycopene	(6E,8E,10E,12E,14E,16E,18E,20E,22E,24E,26E) -2,6,10,14,19,23,27,31-Octamethyldotriaconta-2,6,8,10,12,14,16,18,20,22,24,26,30-tridecaene
+Lutein + zeaxanthin	Lutein + Zeaxanthin
+Vitamin E	Α-Tocopherol
+Vitamin E	(2R) -2,5,7,8-Tetramethyl-2- [ (4R,8R) - (4,8,12-trimethyltridecyl) ] -6-chromanol
+Beta-tocopherol	Β-Tocopherol
+Beta-tocopherol	(2R) -2,5,8-Trimethyl-2- [ (4R,8R) - (4,8,12-trimethyltridecyl) ] -3,4-dihydrochromen-6-ol
+Gamma-tocopherol	Γ-Tocopherol
+Gamma-tocopherol	(2R) -2,7,8-Trimethyl-2- [ (4R,8R) -4,8,12-trimethyltridecyl ] -6-chromanol
+Delta-tocopherol	Δ-Tocopherol
+Delta-tocopherol	(2R) -2,8-Dimethyl-2- [ (4R,8R) -4,8,12-trimethyltridecyl ] -6-chromanol
+Alpha-tocotrienol	Α-Tocotrienol
+Alpha-tocotrienol	(2R) -2,5,7,8-tetramethyl-2- [ (3E,7E) -4,8,12-trimethyltrideca-3,7,11-trienyl ] -3,4-dihydrochromen-6-ol
+Beta-tocotrienol	Β-Tocotrienol
+Beta-tocotrienol	(2R) -2,5,8-trimethyl-2- [ (3E,7E) -4,8,12-trimethyltrideca-3,7,11-trienyl ] -3,4-dihydrochromen-6-ol
+Gamma-tocotrienol	Γ-Tocotrienol
+Gamma-tocotrienol	(R) -γ-Tocotrienol
+Gamma-tocotrienol	[ R- (E, E) ] -3,4-Dihydro-2,7,8-trimethyl-2- (4,8,12-trimethyl-3,7,11-tridecatrienyl) -2H-1-benzopyran-6-ol
+Delta-tocotrienol	Δ-Tocotrienol
+Vitamin D2	(3β,5Z,7E,22E) -9,10-secoergosta-5,7,10 (19) ,22-tetraen-3-ol
+Vitamin D3	3β,5Z,7E) -9,10-secocholesta-5,7,10 (19) -trien-3-ol
+Vitamin C, total ascorbic acid	Total Ascorbic Acid
+Vitamin C, total ascorbic acid	L-ascorbic Acid
+Vitamin C, total ascorbic acid	Ascorbic Acid
+Vitamin C, total ascorbic acid	(R) -3,4-dihydroxy-5- ((S) -1,2-dihydroxyethyl) Furan-2 (5H) -one
+DHA	Dehydroascorbic Acid
+DHA	(5R) -5- [ (1S) -1,2-dihydroxyethyl ] Furan-2,3,4 (5H) -trione
+Thiamin	3- ((4-Amino-2-methyl-5-pyrimidinyl) Methyl) -5- (2-hydroxyethyl) -4-methylthiazolium
+Riboflavin	7,8-Dimethyl-10- [ (2S,3S,4R) -2,3,4,5-tetrahydroxypentyl ] Benzo [ G ] Pteridine-2,4-dione
+Niacin	Nicotinic Acid
+Niacin	Pyridine-3-carboxylic Acid
+Pantothenic acid	Pantothenic Acid
+Pantothenic acid	3- [ (2R) - (2,4-Dihydroxy-3,3-dimethylbutanoyl) Amino ] Propanoic Acid
+H4 folate	Tetrahydrofolic Acid
+H4 folate	(2S) -2- { [ 4- ({ [ (6R) -2-amino-4-oxo-1,4,5,6,7,8-hexahydropteridin-6-yl ] Methyl } Amino) Phenyl ] Formamido } Pentanedioic Acid
+5-MTHF	Levomefolic Acid
+5-MTHF	(6S) -5-methyltetrahydrofolate
+5-MTHF	5-Methyltetrahydrofolic Acid
+5-MTHF	(2S) -2- [ [ 4- [ (2-Amino-5-methyl-4-oxo-1,6,7,8-tetrahydropteridin-6-yl) Methylamino ] Benzoyl ] Amino ] Pentanedioic Acid
+5-CHO-THF	Folinic Acid
+5-CHO-THF	Citrovorum Factor
+5-CHO-THF	5-Formyltetrahydrofolic Acid
+5-CHO-THF	(2S) -2- { [ 4- [ (2-amino-5-formyl-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl) Methylamino ] Benzoyl ] Amino } Pentanedioic Acid
+10-CHO-THF	10-Formyltetrahydrofolic Acid
+10-CHO-THF	(2S) -2- { [ 4- [ (2-amino-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl) Methyl (Formyl) Amino ] Benzoyl ] Amino } Pentanedioic Acid
+5,10-CH=THF	5,10-Methenyltetrahydrofolic Acid
+5,10-CH=THF	7-hexahydroimidazo [ 1,5-f ] Pteridin-8 (9H) -yl) Benzoyl ] -L-glutamic Acid
+Vitamin B12	Α- (5,6-dimethylbenzimidazolyl) Cobamidcyanide
+Choline	2-Hydroxy-N, N, N-trimethylethanamonium
+Choline	(2-Hydroxyethyl) Trimethylammonium
+Phosphocholine	Choline Phosphate
+GPC	L-Alpha Glycerylphosphorylcholine
+GPC	Choline Alfoscerate
+GPC	[ (2R) -2,3-Dihydroxypropyl ] 2-trimethylazaniumylethyl Phosphate
+Folic acid	Folic Acid
+Folic acid	Vitamin M, Vitamin B9, Vitamin Bc
+Folic acid	Pteroyl-L-glutamic Acid
+Folic acid	(2S) -2- [ [ 4- [ (2-amino-4-oxo-1H-pteridin-6-yl) Methylamino ] Benzoyl ] Amino ] Pentanedioic Acid
+DFE	Dietary Folate Equivalent
+Vitamin K	2-methyl-3- [ (2E) -3,7,11,15-tetramethylhexadec-2-en-1-yl ] Naphthoquinone
+MK4	2-methyl-3- [ (2Z,6E,10E) -3,7,11,15-tetramethylhexadeca-2,6,10,14-tetraen-1-yl ] Naphthoquinone
+Stigmasterol	Wulzen Anti-stiffness Factor
+Stigmasterol	(3S,8S,9S,10R,13R,14S,17R) -17- [ (E,2R,5S) -5-ethyl-6-methylhept-3-en-2-yl ] -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta [ A ] Phenanthren-3-ol
+Campesterol	(3S,8S,9S,10R,13R,14S,17R) -17- [ (2R,5R) -5,6-dimethylheptan-2-yl ] -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta [ A ] Phenanthren-3-ol
+Campesterol	(24R) -Ergost-5-en-3β-ol
+Beta-sitosterol	Β-Sitosterin
+Beta-sitosterol	17- (5-Ethyl-6-methylheptan-2-yl) -10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta [ A ] Phenanthren-3-ol
+Daidzein	7-Hydroxy-3- (4-hydroxyphenyl) Chromen-4-one
+Genistein	5,7-Dihydroxy-3- (4-hydroxyphenyl) Chromen-4-one
+Glycitein	7-Hydroxy-3- (4-hydroxyphenyl) -6-methoxy-4-chromenone
+Soy isoflavones	Soy Isoflavones
+Apigenin	5,7-Dihydroxy-2- (4-hydroxyphenyl) -4H-1-benzopyran-4-one
+Biochanin A	5,7-dihydroxy-3- (4-methoxyphenyl) Chromen-4-one
+Biochanin A	Genistein 4-methyl Ether
+Formononetin	7-hydroxy-3- (4-methoxyphenyl) Chromen-4-one
+Coumestrol	3,9-Dihydroxy-6-benzofurano [ 3,2-c ] Chromenone
+Cyanidin	2- (3,4-Dihydroxyphenyl) Chromenylium-3,5,7-triol
+Afzelechin	(2R,3R) -2- (4-hydroxyphenyl) -3,4-dihydro-2H-chromene-3,5,7-triol
+Procyanidin А2	Procyanidin Dimer А2
+Procyanidin А2	(+) -Proanthocyanidin A2
+Procyanidin А2	(2R,3R,8S,14R,15R) -2,8-bis (3,4-dihydroxyphenyl) -2,3,4,14-tetrahydro-8,14-methanobenzo [ 7,8 ] [ 1,3 ] Dioxocino [ 4,5-h ] Chromene-3,5,11,13,15-pentaol
+Procyanidin B1	Procyanidin Dimer B1
+Procyanidin B1	(2R,2ʼR,3R,3ʼS,4R) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B2	Procyanidin Dimer B2
+Procyanidin B2	(2R,2ʼR,3R,3ʼR,4R) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B2	(−) -Epicatechin- (4β→8) - (−) -epicatechin
+Procyanidin B3	Procyanidin Dimer B3
+Procyanidin B3	(2R,2ʼR,3S,3ʼS,4S) -2,2ʼ-bis (3,4-dihydroxyphenyl) -3,3ʼ,4,4ʼ-tetrahydro-2H,2ʼH-4,8ʼ-bichromene-3,3ʼ,5,5ʼ,7,7ʼ-hexol
+Procyanidin B4	Procyanidin Dimer B4
+Procyanidin B1-3-O-gallate	Procyanidin Dimer B1-3-O-gallate
+Procyanidin B2-3′-O-gallate	Procyanidin Dimer B2-3′-O-gallate
+Procyanidin B2-3-O-gallate	Procyanidin Dimer B2-3-O-gallate
+Ent-epiafzelechin-3-O-p-hydroxybenzoate-(4α→8,2α→O→7)-epiafzelechin	Ent-epiafzelechin-3-O-p-hydroxybenzoate- (4α→8,2α→O→7) -epiafzelechin
+Procyanidin C1	Procyanidin Trimer C1
+Procyanidin C1	(2R,2ʼR,2ʼʼR,3R,3ʼR,3ʼʼR,4R,4ʼS) -2,2ʼ,2ʼʼ-tris (3,4-dihydroxyphenyl) -3,3ʼ,3ʼʼ,4,4ʼ,4ʼʼ-hexahydro-2H,2ʼH,2ʼʼH-4,8ʼ:4ʼ,8ʼʼ-terchromene-3,3ʼ,3ʼʼ,5,5ʼ,5ʼʼ,7,7ʼ,7ʼʼ-nonol
+Procyanidin T2	Procyanidin Trimer T2
+Epicatechin-(4β→8)-epicatechin-(4β→6)-[epicatechin-(4β→8)]-epicatechin	Epicatechin- (4β→8) -epicatechin- (4β→6) - [ Epicatechin- (4β→8) ] -epicatechin
+Epicatechin (4β,8)4-pentamer	[ Epicatechin- (4β→8) ] 4-epicatechin
+Chebulinic acid	Chebulinic Acid
+Chebulagic acid	Chebulagic Acid
+Phlorofucofuroeckol A	4,9-bis (3,5-dihydroxyphenoxy) - [ 1 ] Benzofuro [ 3,2-a ] Oxanthrene-1,3,6,10,12-pentol
+Dieckol	4- [ 4- [ 6- (3,5-dihydroxyphenoxy) -4,7,9-trihydroxydibenzo-p-dioxin-2-yl ] Oxy-3,5-dihydroxyphenoxy ] Dibenzo-p-dioxin-1,3,6,8-tetrol
+Punicalagin	2,3- (S) -hexahydroxydiphenoyl-4,6- (S, S) -gallagyl-D-glucose
+Punicalin	4,6- (S, S) -Gallagyl-D-glucose
+Ellagic acid	Ellagic Acid
+Ellagic acid	2,3,7,8-Tetrahydroxy-chromeno [ 5,4,3-cde ] Chromene-5,10-dione
+Ellagic acid	4,4′,5,5′,6,6′-Hexahydroxydiphenic Acid 2,6,2′,6′-dilactone
+Pt	Petunidin Chloride
+Delphinidin	2- (3,4,5-Trihydroxyphenyl) Chromenylium-3,5,7-triol
+Malvidin	3,5,7-trihydroxy-2- (4-hydroxy- 3,5-dimethoxyphenyl) Chromenium
+Pelargonidin	2- (4-Hydroxyphenyl) Chromenylium-3,5,7-triol
+Peonidin	2- (4-Hydroxy-3-methoxyphenyl) Chromenylium-3,5,7-triol
+(+)-Catechin	(+) -Catechin
+(+)-Catechin	Catechinic Acid
+(+)-Catechin	Catechuic Acid
+(+)-Catechin	(2R,3S) -2- (3,4-dihydroxyphenyl) -3,4-dihydro-2H-chromene-3,5,7-triol
+(+)-Catechin	(2R,3S) -Catechin
+(-)-Epigallocatechin	(-) -Epigallocatechin
+(-)-Epicatechin	(-) -Epicatechin
+(-)-Epicatechin	(2R,3R) - (-) -epicatechin
+ECG	(-) -Epicatechin 3-gallate
+ECG	(-) -Epicatechin Gallate
+ECG	(-) -Epicatechin-3-O-gallate
+ECG	[ (2R,3R) -2- (3,4-dihydroxyphenyl) -5,7-dihydroxy-3,4-dihydro-2H-chromen-3-yl ] 3,4,5-trihydroxybenzoate
+EGCG	(-) -Epigallocatechin 3-gallate
+EGCG	(-) -Epigallocatechin Gallate
+EGCG	[ (2R,3R) -5,7-dihydroxy-2- (3,4,5-trihydroxyphenyl) Chroman-3-yl ] 3,4,5-trihydroxybenzoate
+EGCG	(2R,3R) -5,7-dihydroxy-2- (3,4,5-trihydroxyphenyl) -3,4-dihydro-2H-1-benzopyran-3-yl 3,4,5-trihydroxybenzoate
+(+)-Gallocatechin	(+) -Gallocatechin
+(+)-Gallocatechin	(+) -Gallocatechol
+GCG	(+) -Gallocatechin 3-gallate
+GCG	(+) -Gallocatechin Gallate
+GCG	(2S,3R) -2- (3,4,5-Trihydroxyphenyl) -3,4-dihydro-1 (2H) -benzopyran-3,5,7-triol 3- (3,4,5-trihydroxybenzoate)
+TF	3,4,5-Trihydroxy-1,8-bis [ (2R,3R) -3,5,7-trihydroxy-2-chromanyl ] -6-benzo [ 7 ] Annulenone
+TFDG	[ (2R,3R) -2- [ 8- [ (2R,3R) -5,7-dihydroxy-3- (3,4,5-trihydroxybenzoyl) Oxy-3,4-dihydro-2H-chromen-2-yl ] -3,4,5-trihydroxy-6-oxobenzo [ 7 ] Annulen-1-yl ] -5,7-dihydroxy-3,4-dihydro-2H-chromen-3-yl ] 3,4,5-trihydroxybenzoate
+TF2B	[ (2R,3R) -5,7-dihydroxy-2- [ 3,4,5-trihydroxy-6-oxo-8- [ (2R,3R) -3,5,7-trihydroxychroman-2-yl ] Benzo [ 7 ] -annulen-1-yl ] Chroman-3-yl ] 3,4,5-trihydroxybenzoate
+Eriodictyol	(2S) -2- (3,4-Dihydroxyphenyl) -5,7-dihydroxy-4-chromanone
+Hesperetin	(S) -2,3-Dihydro-5,7-dihydroxy-2- (3-hydroxy-4-methoxyphenyl) -4H-1-benzopyran-4-one
+Naringenin	5,7-dihydroxy-2- (4-hydroxyphenyl) Chroman-4-one
+Luteolin	2- (3,4-Dihydroxyphenyl) - 5,7-dihydroxy-4-chromenone
+Isorhamnetin	3,5,7-trihydroxy-2- (4-hydroxy-3-methoxyphenyl) Chromen-4-one
+Kaempferol	3,5,7-Trihydroxy-2- (4-hydroxyphenyl) -4H-chromen-4-one
+Kaempferol	3,5,7-trihydroxy-2- (4-hydroxyphenyl) -4H-1-benzopyran-4-one
+Myricetin	3,5,7-Trihydroxy-2- (3,4,5-trihydroxyphenyl) -4-chromenone
+Quercetin	Flavin Meletin
+Quercetin	2- (3,4-dihydroxyphenyl) -3,5,7-trihydroxy-4H-chromen-4-one
+Quercetin-3-O-glucoside	Trifoliin A, Isohyperoside
+Quercetin-3-O-glucoside	2- (3,4-Dihydroxyphenyl) -5,7-dihydroxy-3- [ (2S,3R,4S,5S,6R) -3,4,5-trihydroxy-6- (Hydroxymethyl) Oxan-2-yl ] Oxychromen-4-one
+TF-3	Theaflavin Digallate
+TF-3	[ 1- [ (2R,3R) -3,5-Dihydroxy-7- (3,4,5-trihydroxybenzoyl) Oxychroman-2-yl ] -3,5-dihydroxy-6-oxo-8- [ (3R) -3,5,7-trihydroxychroman-2-yl ] Benzo [ 7 ] Annulen-4-yl ] 3,4,5-trihydroxybenzoate
+L-carnitine	3-Hydroxy-4- (Trimethylazaniumyl) Butanoate
+ALCAR	(R) -3-Acetyloxy-4-trimethylammonio-butanoate
+Curcumin	(1E,6E) -1,7-Bis (4-hydroxy-3-methoxyphenyl) -1,6-heptadiene-3,5-dione
+Hydroxytyrosol	4- (2-Hydroxyethyl) -1,2-benzenediol
+Hydroxytyrosol	2- (3,4-Di-hydroxyphenyl) -ethanol
+Melatonin	N- [ 2- (5-methoxy-1H-indol-3-yl) Ethyl ] Acetamide
+Melatonin	N-acetyl-5-methoxy Tryptamine
+Oleocanthal	2- (4-hydroxyphenyl) Ethyl (3S,4E) -4-formyl-3- (2-oxoethyl) Hex-4-enoate
+Oleuropein	(4S,5E,6S) -4- [ 2- [ 2- (3,4-dihydroxyphenyl) Ethoxy ] -2-oxoethyl ] -5-ethylidene-6- [ [ (2S,3R,4S,5S,6R) -3,4,5-trihydroxy-6- (Hydroxymethyl) -2-tetrahydropyranyl ] Oxy ] -4H-pyran-3-с\carboxylic Acid
+Oleuropein	Methyl Ester
+Tyrosol	4- (2-Hydroxyethyl) Phenol
+Tyrosol	P-Hydroxyphenethyl Alcohol
+Tyrosol	2- (4-Hydroxyphenyl) Ethanol
+CoQ10	2- [ (2E,6E,10E,14E,18E,22E,26E,30E,34E) -3,7,11,15,19,23,27,31,35,39-Decamethyltetraconta-2,6,10,14,18,22,26,30,34,38-decaenyl ] -5,6-dimethoxy-3-methylcyclohexa-2,5-diene-1,4-dione
+PGG	1,2,3,4,6-Pentagalloyl Glucose
+PGG	[ (2S,3R,4S,5R,6R) -2,3,5-Tris [ (3,4,5-trihydroxybenzoyl) Oxy ] -6- [ (3,4,5-trihydroxybenzoyl) Oxymethyl ] Oxan-4-yl ] 3,4,5-trihydroxybenzoate
+PGG	1,2,3,4,6-Pentakis-O-galloyl-beta-D-glucose, Beta-Penta-O-galloyl-glucose
+Beauveriolide I	Cyclo- ((R) -beta-hydroxynonanoyl-L-phenylalanyl-alanyl-D-leucyl)
+Berberine	5,6-dihydro-9,10-dimethoxybenzo [ G ] -1,3-benzodioxolo [ 5,6-a ] Quinolizinium
+Caffeic acid	Caffeic Acid
+Caffeic acid	3- (3,4-Dihydroxyphenyl) -2-propenoic Acid
+Caffeic acid	3,4-Dihydroxy-cinnamic Acid
+Chicoric Acid	(2R,3R) -2,3-bis { [ (E) -3- (3,4-dihydroxyphenyl) Prop-2-enoyl ] Oxy } Butanedioic Acid
+Chicoric Acid	2R,3R-O-dicaffeoyltartaric Acid
+D-Glucosamine	(3R,4R,5S) -3-Amino-6- (Hydroxymethyl) Oxane-2,4,5-triol
+Ferulsinaic acid	Ferulsinaic Acid
+Gallic acid	Gallic Acid
+Gallic acid	3,4,5-Trihydroxybenzoic Acid
+L-Theanine	(2S) -2-ammonio-5- (Ethylamino) -5-oxopentanoate
+NDGA	Nordihydroguaiaretic Acid
+NDGA	4,4'- (2,3-Dimethylbutane-1,4-diyl) Dibenzene-1,2-diol
+Oxaloacetic Acid	Oxalacetic Acid
+Oxaloacetic Acid	Oxobutanedioic Acid
+Oxaloacetic Acid	2-Oxosuccinic Acid
+Oxaloacetic Acid	Ketosuccinic Acid
+D-pinitol	D- (+) -Pinitol
+D-pinitol	(+) -Pinitol
+D-pinitol	(1S,2S,4S,5R) -6-methoxycyclohexane-1,2,3,4,5-pentol
+D-pinitol	D- (+) -chiro-Inositol
+Polydatin	2- [ 3-Hydroxy-5- [ (E) -2- (4-hydroxyphenyl) Ethenyl ] Phenoxy ] -6- (Hydroxymethyl) Oxane-3,4,5-triol
+Rosmarinic acid	Rosmarinic Acid
+Rosmarinic acid	(2'' R'') -2- [ [ (2'' E'') -3- (3,4-Dihydroxyphenyl) -1-oxo-2-propenyl ] ] Oxy ] -3- (3,4-dihydroxyphenyl) Propanoic Acid
+Tannic acid	Tannic Acid
+Tannic acid	Gallotannic Acid
+Tannic acid	Digallic Acid
+Tannic acid	Oak Bark Tannin
+Tannic acid	Quercotannic Acid
+Tannic acid	Querci-tannic Acid
+Tannic acid	Querco-tannic Acid
+Tannic acid	2,3-dihydroxy-5- ({ [ (2R,3R,4S,5R,6R) -3,4,5,6-tetrakis ({ 3,4-dihydroxy-5- [ (3,4,5-trihydroxyphenyl) Carbonyloxy ] Phenyl } Carbonyloxy) Oxan-2-yl ] Methoxy } Carbonyl) Phenyl 3,4,5-trihydroxybenzoate
+Ursolic acid	Ursolic Acid
+Ursolic acid	(1S,2R,4aS,6aR,6aS,6bR,8aR,10S,12aR,14bS) -10-hydroxy-1,2,6a
+Ursolic acid	10,11,12,13,14b-tetradecahydro-1H-picene-4a-carboxylic Acid
+aflatoxin B1	Aflatoxin B1
+aflatoxin B2	Aflatoxin B2
+aflatoxin G1	Aflatoxin G1
+aflatoxin G2	Aflatoxin G2
+aflatoxin M1	Aflatoxin M1
+aflatoxin M2	Aflatoxin M2
+Aldicarb	2-Methyl-2- (Methylthio) Propanal O- (N-methylcarbamoyl) Oxime
+Chlormequat	2-Chloro-N, N, N-trimethylethanaminium
+Trifluralin	2,6-Dinitro-N, N-dipropyl-4- (Trifluoromethyl) Aniline
+Pirimiphos-methyl	O- [ 2- (Diethylamino) -6-methylpyrimidin-4-yl ] O, O-dimethyl Phosphorothioate
+Vinclozolin	(RS) -3- (3,5-Dichlorophenyl) -5-methyl- 5-vinyloxazolidine-2,4-dione
+Chlorpyrifos	O, O-diethyl O-3,5,6-trichloropyridin-2-yl Phosphorothioate
+Acrolein	Acrylic Aldehyde
+NDMA	N, N-Dimethylnitrosamine
+NDEA	N, N-diethylnitrosamine
+NDPA	N, N-dipropylnitrosamine
+NDPA	N-nitroso (Di-n-propyl) Amine
+NDBA	N, N-dibutylnitrosamine
+Cyanuric acid	Cyanuric Acid
+Cyanuric acid	S-Triazinetrione
+Cyanuric acid	Isocyanuric Acid
+Cyanuric acid	Pseudocyanuric Acid
+Cyanuric acid	1,3,5-Triazine-2,4,6 (1H,3H,5H) -trione
+Flumequine	9-Fluoro-5-methyl-1-oxo-6,7-dihydro-1H,5H-pyrido [ 3,2,1-ij ] Quinoline-2-carboxylic Acid
+Danofloxacin	1-Cyclopropyl-6-fluoro-7- [ (1S,4S) -3-methyl-3,6-diazabicyclo [ 2.2.1 ] Heptan-6-yl ] -4-oxoquinoline-3-carboxylic Acid
+Sarafloxacin	6-fluoro-1- (4-fluorophenyl) -4-oxo-7-piperazin-1-ylquinoline-3-carboxylic Acid
+Enrofloxacin	1-cyclopropyl-7- (4-ethylpiperazin-1-yl) -6-fluoro-4-oxo-1,4-dihydroquinoline-3-carboxylic Acid
+Difloxacin	6-fluoro-1- (4-fluorophenyl) -7- (4-methylpiperazin-1-yl) - 4-oxoquinoline-3-carboxylic Acid
+Marbofloxacin	9-fluoro-2,3-dihydro-3-methyl-10- (4-methyl-1-piperazinyl) -7-oxo-7H-pyridol (3,2,1-ij) (4,2,1) Benzoxadiazin-6 Carboxylic Acid
+Acrylamide	Acrylic Amide
+Malachite green	Malachite Green
+Malachite green	Aniline Green
+Malachite green	4- { [ 4- (Dimethylamino) Phenyl ] (Phenyl) Methylidene } -N, N-dimethylcyclohexa-2,5-dien-1-iminium Chloride
+Gentian violet	Gentian Violet
+Gentian violet	Crystal Violet
+Gentian violet	Methyl Violet 10B
+Gentian violet	Hexamethyl Pararosaniline Chloride
+Gentian violet	Tris (4- (Dimethylamino) Phenyl) Methylium Chloride
+CGA	Chlorogenic Acid
+CGA	(1S,3R,4R,5R) -3- { [ (2E) -3- (3,4-dihydroxyphenyl) Prop-2-enoyl ] Oxy } -1,4,5-trihydroxycyclohexanecarboxylic Acid
+Total lipids	Total Lipids
+Fatty acids	Fatty Acids

@@ -7,7 +7,7 @@ from ohmygut.core.article.article_data_source import ArticleDataSource
 from ohmygut.core.catalog.catalog import Catalog
 from ohmygut.core.constants import SENTENCE_LENGTH_THRESHOLD
 from ohmygut.core.main import main, find_sentence
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import StanfordSentenceParser
 
 
 class MockCatalog(Catalog):
@@ -39,19 +39,19 @@ class TestCase(unittest.TestCase):
         nutrients_catalog = MockCatalog("b")
         diseases_catalog = MockCatalog("c")
         food_catalog = MockCatalog("d")
-        sentence_parser = SentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
+        sentence_parser = StanfordSentenceParser(stanford_dependency_parser=None, stanford_tokenizer=False)
         sentence_parser.parse_sentence = MagicMock()
         sentence_parser.parse_sentence.return_value = ["yeah"]
         constants.logger.info("asdasd")
-        main(article_data_sources, bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog, sentence_parser,
+        main(article_data_sources, sentence_parser,
              tokenizer=None, pattern_finder=None, writers=[])
 
     def test_find_sentence_very_long(self):
         sentence_text = "a very long" * SENTENCE_LENGTH_THRESHOLD * 2
         expected = None
-        actual = find_sentence(sentence_text, article_title='', article_journal='',
-                               bacteria_catalog=None, nutrients_catalog=None, diseases_catalog=None, food_catalog=None,
-                               tokenizer=None, sentence_parser=None, pattern_finder=None)
+        actual = find_sentence(sentence_text, article_title='', article_journal='', bacteria_catalog=None,
+                               nutrients_catalog=None, diseases_catalog=None, food_catalog=None, tokenizer=None,
+                               sentence_parser=None, sentence_analyzer=None)
 
         self.assertEqual(actual, expected)
 

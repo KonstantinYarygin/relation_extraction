@@ -1,71 +1,116 @@
+import argparse
 import os
 
 from nltk.parse.stanford import StanfordDependencyParser
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import StanfordTokenizer
 
+from ohmygut.core.analyzer import DoNothingSentenceAnalyzer, SentenceAnalyzer
 from ohmygut.core.article.file_article_data_source import NxmlFreeArticleDataSource
 from ohmygut.core.article.libgen_txt_article_data_source import LibgenTxtArticleDataSource
 from ohmygut.core.article.medline_abstracts_article_data_source import MedlineAbstractsArticleDataSource
-from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog
-from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog
-from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov
-from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog
+from ohmygut.core.catalog.all_bacteria_catalog import AllBacteriaCatalog, ALL_BACTERIA_TAG
+from ohmygut.core.catalog.dbpedia_food_catalog import DbpediaFoodCatalog
+from ohmygut.core.catalog.diets_catalog import DietsCatalog, DIET_TAG
+from ohmygut.core.catalog.diseases_catalog import DiseasesCatalog, DISEASE_TAG
+from ohmygut.core.catalog.do_nothing_catalog import DoNothingCatalog
+from ohmygut.core.catalog.gut_bacteria_catalog import GutBacteriaCatalog, BACTERIA_TAG
+from ohmygut.core.catalog.mixed_food_catalog import MixedFoodCatalog
+from ohmygut.core.catalog.nutrients_catalog import NutrientsCatalogNikogosov, NUTRIENT_TAG
+from ohmygut.core.catalog.prebiotics_catalog import PrebioticsCatalog, PREBIOTIC_TAG
+from ohmygut.core.catalog.usda_food_catalog import UsdaFoodCatalog, FOOD_TAG
 from ohmygut.core.main import main
+from ohmygut.core.sentence_finder import SentenceFinder
 from ohmygut.core.pattern_finder import PatternFinder
-from ohmygut.core.sentence_processing import SentenceParser
+from ohmygut.core.sentence_processing import SpacySentenceParser, DoNothingParser
 from ohmygut.core.write.csv_writer import CsvWriter, get_csv_path
 from ohmygut.core.write.log_writer import LogWriter
 from ohmygut.core.write.pkl_writer import PklWriter, get_output_dir_path
+from ohmygut.paths import stanford_jar_path, stanford_models_jar_path, stanford_lex_parser_path, food_file_path, \
+    gut_catalog_file_path, nutrients_file_path, nxml_articles_dir, abstracts_dir, libgen_texts_dir, \
+    verb_ontollogy_path, diseases_csv_path, all_catalog_file_path, dbpedia_food_file_path, prebiotics_file_path, \
+    diets_file_path, mixed_food_file_path, gut_catalog_top3_file_path
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-dss', action='store', help='number of data sources to skip', default=0)
+    parser.add_argument('-ss', action='store', help='number of sentences to skip', default=0)
 
-stanford_tokenizer = StanfordTokenizer(
-    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar')
-)
+    args = parser.parse_args()
+    data_sources_to_skip_number = int(args.dss)
+    sentences_to_skip_number = int(args.ss)
 
-stanford_dependency_parser = StanfordDependencyParser(
-    path_to_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser.jar'),
-    path_to_models_jar=os.path.join(script_dir, '../stanford_parser/stanford-parser-3.5.2-models.jar'),
-    model_path=os.path.join(script_dir, '../stanford_parser/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz'),
-)
+    script_dir = os.path.dirname(os.path.realpath(__file__))
 
-sentence_parser = SentenceParser(stanford_dependency_parser, stanford_tokenizer)
+    stanford_tokenizer = StanfordTokenizer(
+        path_to_jar=stanford_jar_path
+    )
 
-food_catalog = UsdaFoodCatalog(os.path.join(script_dir, '../data/food/food.tsv'))
-food_catalog.initialize()
+    stanford_dependency_parser = StanfordDependencyParser(
+        path_to_jar=stanford_jar_path,
+        path_to_models_jar=stanford_models_jar_path,
+        model_path=stanford_lex_parser_path,
+    )
 
-bacteria_catalog = GutBacteriaCatalog(os.path.join(script_dir, '../data/bacteria/gut_catalog.csv'))
-bacteria_catalog.initialize()
+    # food_catalog = UsdaFoodCatalog(food_file_path)
+    # food_catalog.initialize()
 
-nutrients_catalog = NutrientsCatalogNikogosov(
-    path=os.path.join(script_dir, '../data/nutrients/nikogosov_nutrients_normalized.tsv'))
-nutrients_catalog.initialize()
+    # dbpedia_food_catalog = DbpediaFoodCatalog(dbpedia_food_file_path)
+    # dbpedia_food_catalog.initialize()
 
-diseases_catalog = DiseasesCatalog(doid_path=os.path.join(script_dir, '../data/diseases/doid.obo'))
-diseases_catalog.initialize()
+    mixed_food_catalog = MixedFoodCatalog(mixed_food_file_path)
+    mixed_food_catalog.initialize()
 
-nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=os.path.join(script_dir, '../article_data/texts/'))
-medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=os.path.join(script_dir, '../article_data/abstracts/gut_microbiota.medline.txt'))
-libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=os.path.join(script_dir, '../article_data/libgen/'))
+    all_bacteria_catalog = AllBacteriaCatalog(all_catalog_file_path)
+    all_bacteria_catalog.initialize()
 
-with open(os.path.join(script_dir, '../data/verb_ontology.json')) as f:
-    verb_ontology = eval(''.join(f.readlines()))
+    gut_bacteria_catalog = GutBacteriaCatalog(gut_catalog_file_path, all_bacteria_catalog)
+    gut_bacteria_catalog.initialize()
 
-lancaster_stemmer = LancasterStemmer()
-pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
+    # nutrients_catalog = NutrientsCatalogNikogosov(path=nutrients_file_path)
+    # nutrients_catalog.initialize()
 
-article_data_sources = [nxml_article_data_source, libgen_article_data_source, medline_article_data_source]
+    diseases_catalog = DiseasesCatalog(diseases_csv_path=diseases_csv_path)
+    diseases_catalog.initialize()
 
-output_dir = get_output_dir_path()
-csv_path = get_csv_path()
-csv_writer = CsvWriter(csv_path)
-pkl_writer = PklWriter(output_dir)
-log_writer = LogWriter()
+    prebiotics_catalog = PrebioticsCatalog(prebiotics_file_path)
+    prebiotics_catalog.initialize()
 
+    diets_catalog = DietsCatalog(diets_file_path)
+    diets_catalog.initialize()
 
+    spacy_sentence_parser = SpacySentenceParser()
+    do_nothing_parser = DoNothingParser()
 
-main(article_data_sources,
-     bacteria_catalog, nutrients_catalog, diseases_catalog, food_catalog,
-     sentence_parser, stanford_tokenizer, pattern_finder, writers=[csv_writer, pkl_writer, log_writer],
-     do_parse=False, do_analyze=False)
+    do_nothing_analyzer = DoNothingSentenceAnalyzer()
+    analyzer = SentenceAnalyzer()
+
+    tags_required = [BACTERIA_TAG]
+    tags_optional = [FOOD_TAG, DIET_TAG, PREBIOTIC_TAG]
+    tags_to_exclude = [ALL_BACTERIA_TAG]
+    sentence_finder = SentenceFinder([gut_bacteria_catalog, mixed_food_catalog, prebiotics_catalog, diets_catalog],
+                                     spacy_sentence_parser, analyzer,
+                                     tags_required, tags_optional, tags_to_exclude)
+
+    nxml_article_data_source = NxmlFreeArticleDataSource(articles_folder=nxml_articles_dir)
+    medline_article_data_source = MedlineAbstractsArticleDataSource(medline_file=abstracts_dir)
+    libgen_article_data_source = LibgenTxtArticleDataSource(libgen_folder=libgen_texts_dir)
+
+    with open(verb_ontollogy_path) as f:
+        verb_ontology = eval(''.join(f.readlines()))
+
+    lancaster_stemmer = LancasterStemmer()
+    pattern_finder = PatternFinder(verb_ontology, lancaster_stemmer)
+
+    article_data_sources = [nxml_article_data_source,
+                            libgen_article_data_source,
+                            medline_article_data_source]
+
+    output_dir = get_output_dir_path()
+    csv_path = get_csv_path()
+    csv_writer = CsvWriter(csv_path, tags_required + tags_optional)
+    pkl_writer = PklWriter(output_dir)
+    log_writer = LogWriter()
+
+    main(article_data_sources, writers=[csv_writer], sentence_finder=sentence_finder,
+         data_sources_to_skip=data_sources_to_skip_number, sentences_to_skip=sentences_to_skip_number)

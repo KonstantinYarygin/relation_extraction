@@ -1,0 +1,726 @@
+id,name,translation,type
+1.0,simple sugar,Простые сахара,synonim
+1.0,simple sugars,Простые сахара,synonim
+1.0,Simple sugar,Простые сахара,synonim
+1.0,Simple sugars,Простые сахара,synonim
+1.0,SIMPLE SUGAR,Простые сахара,synonim
+1.0,SIMPLE SUGARS,Простые сахара,synonim
+4.0,high protein diet,Белки,synonim
+4.0,high protein diets,Белки,synonim
+4.0,High protein diet,Белки,synonim
+4.0,High protein diets,Белки,synonim
+4.0,HIGH PROTEIN DIET,Белки,synonim
+4.0,HIGH PROTEIN DIETS,Белки,synonim
+4.0,protein-rich diet,Белки,synonim
+4.0,protein-rich diets,Белки,synonim
+4.0,Protein-rich diet,Белки,synonim
+4.0,Protein-rich diets,Белки,synonim
+4.0,PROTEIN-RICH DIET,Белки,synonim
+4.0,PROTEIN-RICH DIETS,Белки,synonim
+6.0,corn starches,Кукурузный крахмал,synonim
+6.0,corn starchess,Кукурузный крахмал,synonim
+6.0,Corn starches,Кукурузный крахмал,synonim
+6.0,Corn starchess,Кукурузный крахмал,synonim
+6.0,CORN STARCHES,Кукурузный крахмал,synonim
+6.0,CORN STARCHESS,Кукурузный крахмал,synonim
+7.0,starches,Крахмал,synonim
+7.0,starch,Крахмал,synonim
+7.0,Starches,Крахмал,synonim
+7.0,Starch,Крахмал,synonim
+7.0,STARCHES,Крахмал,synonim
+7.0,STARCH,Крахмал,synonim
+7.0,high starch diet,Крахмал,synonim
+7.0,high starch diets,Крахмал,synonim
+7.0,High starch diet,Крахмал,synonim
+7.0,High starch diets,Крахмал,synonim
+7.0,HIGH STARCH DIET,Крахмал,synonim
+7.0,HIGH STARCH DIETS,Крахмал,synonim
+8.0,fat,Жиры,synonim
+8.0,fats,Жиры,synonim
+8.0,Fat,Жиры,synonim
+8.0,Fats,Жиры,synonim
+8.0,FAT,Жиры,synonim
+8.0,FATS,Жиры,synonim
+8.0,saturated fat,Жиры,synonim
+8.0,saturated fats,Жиры,synonim
+8.0,Saturated fat,Жиры,synonim
+8.0,Saturated fats,Жиры,synonim
+8.0,SATURATED FAT,Жиры,synonim
+8.0,SATURATED FATS,Жиры,synonim
+8.0,high fat diet,Жиры,synonim
+8.0,high fat diets,Жиры,synonim
+8.0,High fat diet,Жиры,synonim
+8.0,High fat diets,Жиры,synonim
+8.0,HIGH FAT DIET,Жиры,synonim
+8.0,HIGH FAT DIETS,Жиры,synonim
+8.0,fat diet,Жиры,synonim
+8.0,fat diets,Жиры,synonim
+8.0,Fat diet,Жиры,synonim
+8.0,Fat diets,Жиры,synonim
+8.0,FAT DIET,Жиры,synonim
+8.0,FAT DIETS,Жиры,synonim
+15.0,fructan substrate,Фруктоза,synonim
+15.0,fructan substrates,Фруктоза,synonim
+15.0,Fructan substrate,Фруктоза,synonim
+15.0,Fructan substrates,Фруктоза,synonim
+15.0,FRUCTAN SUBSTRATE,Фруктоза,synonim
+15.0,FRUCTAN SUBSTRATES,Фруктоза,synonim
+18.0,red meat,Мясо,synonim
+18.0,red meats,Мясо,synonim
+18.0,Red meat,Мясо,synonim
+18.0,Red meats,Мясо,synonim
+18.0,RED MEAT,Мясо,synonim
+18.0,RED MEATS,Мясо,synonim
+26.0,fermented sausage,Сосиски,synonim
+26.0,fermented sausages,Сосиски,synonim
+26.0,Fermented sausage,Сосиски,synonim
+26.0,Fermented sausages,Сосиски,synonim
+26.0,FERMENTED SAUSAGE,Сосиски,synonim
+26.0,FERMENTED SAUSAGES,Сосиски,synonim
+26.0,sausages,Сосиски,synonim
+26.0,sausage,Сосиски,synonim
+26.0,Sausages,Сосиски,synonim
+26.0,Sausage,Сосиски,synonim
+26.0,SAUSAGES,Сосиски,synonim
+26.0,SAUSAGE,Сосиски,synonim
+28.0,Cheddar cheese,Сыр,synonim
+28.0,Cheddar cheeses,Сыр,synonim
+28.0,cheddar cheese,Сыр,synonim
+28.0,cheddar cheeses,Сыр,synonim
+28.0,CHEDDAR CHEESE,Сыр,synonim
+28.0,CHEDDAR CHEESES,Сыр,synonim
+28.0,cheeses(from pasteurized milk),Сыр,synonim
+28.0,cheeses(from pasteurized milk)s,Сыр,synonim
+28.0,Cheeses(from pasteurized milk),Сыр,synonim
+28.0,Cheeses(from pasteurized milk)s,Сыр,synonim
+28.0,CHEESES(FROM PASTEURIZED MILK),Сыр,synonim
+28.0,CHEESES(FROM PASTEURIZED MILK)S,Сыр,synonim
+31.0,dairy product,Молочные продукты,synonim
+31.0,dairy products,Молочные продукты,synonim
+31.0,Dairy product,Молочные продукты,synonim
+31.0,Dairy products,Молочные продукты,synonim
+31.0,DAIRY PRODUCT,Молочные продукты,synonim
+31.0,DAIRY PRODUCTS,Молочные продукты,synonim
+31.0,dairy productss,Молочные продукты,synonim
+31.0,Dairy productss,Молочные продукты,synonim
+31.0,DAIRY PRODUCTSS,Молочные продукты,synonim
+31.0,milk,Молочные продукты,synonim
+31.0,milks,Молочные продукты,synonim
+31.0,Milk,Молочные продукты,synonim
+31.0,Milks,Молочные продукты,synonim
+31.0,MILK,Молочные продукты,synonim
+31.0,MILKS,Молочные продукты,synonim
+31.0,casein,Молочные продукты,synonim
+31.0,caseins,Молочные продукты,synonim
+31.0,Casein,Молочные продукты,synonim
+31.0,Caseins,Молочные продукты,synonim
+31.0,CASEIN,Молочные продукты,synonim
+31.0,CASEINS,Молочные продукты,synonim
+31.0,bovine milk,Молочные продукты,synonim
+31.0,bovine milks,Молочные продукты,synonim
+31.0,Bovine milk,Молочные продукты,synonim
+31.0,Bovine milks,Молочные продукты,synonim
+31.0,BOVINE MILK,Молочные продукты,synonim
+31.0,BOVINE MILKS,Молочные продукты,synonim
+38.0,vegetable- based diet,Овощи,synonim
+38.0,vegetable- based diets,Овощи,synonim
+38.0,Vegetable- based diet,Овощи,synonim
+38.0,Vegetable- based diets,Овощи,synonim
+38.0,VEGETABLE- BASED DIET,Овощи,synonim
+38.0,VEGETABLE- BASED DIETS,Овощи,synonim
+39.0,vegetarian,Вегетарианская диета,synonim
+39.0,vegetarians,Вегетарианская диета,synonim
+39.0,Vegetarian,Вегетарианская диета,synonim
+39.0,Vegetarians,Вегетарианская диета,synonim
+39.0,VEGETARIAN,Вегетарианская диета,synonim
+39.0,VEGETARIANS,Вегетарианская диета,synonim
+41.0,lactate,Лактоза,synonim
+41.0,lactates,Лактоза,synonim
+41.0,Lactate,Лактоза,synonim
+41.0,Lactates,Лактоза,synonim
+41.0,LACTATE,Лактоза,synonim
+41.0,LACTATES,Лактоза,synonim
+63.0,high-cocoa flavanol,Какао,synonim
+63.0,high-cocoa flavanols,Какао,synonim
+63.0,High-cocoa flavanol,Какао,synonim
+63.0,High-cocoa flavanols,Какао,synonim
+63.0,HIGH-COCOA FLAVANOL,Какао,synonim
+63.0,HIGH-COCOA FLAVANOLS,Какао,synonim
+63.0,high-cocoa flavanol (HCF),Какао,synonim
+63.0,high-cocoa flavanol (HCF)s,Какао,synonim
+63.0,high-cocoa flavanol (hcf),Какао,synonim
+63.0,high-cocoa flavanol (hcf)s,Какао,synonim
+63.0,High-cocoa flavanol (hcf),Какао,synonim
+63.0,High-cocoa flavanol (hcf)s,Какао,synonim
+63.0,HIGH-COCOA FLAVANOL (HCF),Какао,synonim
+63.0,HIGH-COCOA FLAVANOL (HCF)S,Какао,synonim
+63.0,HCF,Какао,synonim
+63.0,HCFS,Какао,synonim
+63.0,hcf,Какао,synonim
+63.0,hcfs,Какао,synonim
+63.0,Hcf,Какао,synonim
+63.0,Hcfs,Какао,synonim
+64.0,kefir,Кисломолочный продукты,synonim
+64.0,kefirs,Кисломолочный продукты,synonim
+64.0,Kefir,Кисломолочный продукты,synonim
+64.0,Kefirs,Кисломолочный продукты,synonim
+64.0,KEFIR,Кисломолочный продукты,synonim
+64.0,KEFIRS,Кисломолочный продукты,synonim
+74.0,olive,Оливки,synonim
+74.0,olives,Оливки,synonim
+74.0,Olive,Оливки,synonim
+74.0,Olives,Оливки,synonim
+74.0,OLIVE,Оливки,synonim
+74.0,OLIVES,Оливки,synonim
+78.0,soymilk,Соевые продукты,synonim
+78.0,soymilks,Соевые продукты,synonim
+78.0,Soymilk,Соевые продукты,synonim
+78.0,Soymilks,Соевые продукты,synonim
+78.0,SOYMILK,Соевые продукты,synonim
+78.0,SOYMILKS,Соевые продукты,synonim
+78.0,miso,Соевые продукты,synonim
+78.0,misoes,Соевые продукты,synonim
+78.0,Miso,Соевые продукты,synonim
+78.0,Misoes,Соевые продукты,synonim
+78.0,MISO,Соевые продукты,synonim
+78.0,MISOES,Соевые продукты,synonim
+78.0,soy sauce,Соевые продукты,synonim
+78.0,soy sauces,Соевые продукты,synonim
+78.0,Soy sauce,Соевые продукты,synonim
+78.0,Soy sauces,Соевые продукты,synonim
+78.0,SOY SAUCE,Соевые продукты,synonim
+78.0,SOY SAUCES,Соевые продукты,synonim
+82.0,fermented fish,Ферментированные продукты,synonim
+82.0,Fermented fish,Ферментированные продукты,synonim
+82.0,FERMENTED FISH,Ферментированные продукты,synonim
+93.0,omnivore diet,Гастрономическая диета,synonim
+93.0,omnivore diets,Гастрономическая диета,synonim
+93.0,Omnivore diet,Гастрономическая диета,synonim
+93.0,Omnivore diets,Гастрономическая диета,synonim
+93.0,OMNIVORE DIET,Гастрономическая диета,synonim
+93.0,OMNIVORE DIETS,Гастрономическая диета,synonim
+96.0,animal glycoproteins and proteoglycans,Углеводы и белки животного происхождения,synonim
+96.0,animal glycoproteins and proteoglycanss,Углеводы и белки животного происхождения,synonim
+96.0,Animal glycoproteins and proteoglycans,Углеводы и белки животного происхождения,synonim
+96.0,Animal glycoproteins and proteoglycanss,Углеводы и белки животного происхождения,synonim
+96.0,ANIMAL GLYCOPROTEINS AND PROTEOGLYCANS,Углеводы и белки животного происхождения,synonim
+96.0,ANIMAL GLYCOPROTEINS AND PROTEOGLYCANSS,Углеводы и белки животного происхождения,synonim
+1.0,sugar,Простые сахара,sci_name
+1.0,sugars,Простые сахара,sci_name
+1.0,Sugar,Простые сахара,sci_name
+1.0,Sugars,Простые сахара,sci_name
+1.0,SUGAR,Простые сахара,sci_name
+1.0,SUGARS,Простые сахара,sci_name
+2.0,fasting,Голодание,sci_name
+2.0,fastings,Голодание,sci_name
+2.0,Fasting,Голодание,sci_name
+2.0,Fastings,Голодание,sci_name
+2.0,FASTING,Голодание,sci_name
+2.0,FASTINGS,Голодание,sci_name
+3.0,artichoke,Артишоки,sci_name
+3.0,artichokes,Артишоки,sci_name
+3.0,Artichoke,Артишоки,sci_name
+3.0,Artichokes,Артишоки,sci_name
+3.0,ARTICHOKE,Артишоки,sci_name
+3.0,ARTICHOKES,Артишоки,sci_name
+4.0,protein,Белки,sci_name
+4.0,proteins,Белки,sci_name
+4.0,Protein,Белки,sci_name
+4.0,Proteins,Белки,sci_name
+4.0,PROTEIN,Белки,sci_name
+4.0,PROTEINS,Белки,sci_name
+5.0,fish oil,Рыбий жир,sci_name
+5.0,fish oils,Рыбий жир,sci_name
+5.0,Fish oil,Рыбий жир,sci_name
+5.0,Fish oils,Рыбий жир,sci_name
+5.0,FISH OIL,Рыбий жир,sci_name
+5.0,FISH OILS,Рыбий жир,sci_name
+6.0,corn starch,Кукурузный крахмал,sci_name
+6.0,corn starches,Кукурузный крахмал,sci_name
+6.0,Corn starch,Кукурузный крахмал,sci_name
+6.0,Corn starches,Кукурузный крахмал,sci_name
+6.0,CORN STARCH,Кукурузный крахмал,sci_name
+6.0,CORN STARCHES,Кукурузный крахмал,sci_name
+7.0,starch,Крахмал,sci_name
+7.0,starches,Крахмал,sci_name
+7.0,Starch,Крахмал,sci_name
+7.0,Starches,Крахмал,sci_name
+7.0,STARCH,Крахмал,sci_name
+7.0,STARCHES,Крахмал,sci_name
+8.0,lipid,Жиры,sci_name
+8.0,lipids,Жиры,sci_name
+8.0,Lipid,Жиры,sci_name
+8.0,Lipids,Жиры,sci_name
+8.0,LIPID,Жиры,sci_name
+8.0,LIPIDS,Жиры,sci_name
+9.0,gluten,Глютен,sci_name
+9.0,glutens,Глютен,sci_name
+9.0,Gluten,Глютен,sci_name
+9.0,Glutens,Глютен,sci_name
+9.0,GLUTEN,Глютен,sci_name
+9.0,GLUTENS,Глютен,sci_name
+10.0,poultry,Мясо птицы,sci_name
+10.0,poultries,Мясо птицы,sci_name
+10.0,Poultry,Мясо птицы,sci_name
+10.0,Poultries,Мясо птицы,sci_name
+10.0,POULTRY,Мясо птицы,sci_name
+10.0,POULTRIES,Мясо птицы,sci_name
+11.0,corn oil,Кукурузное масло,sci_name
+11.0,corn oils,Кукурузное масло,sci_name
+11.0,Corn oil,Кукурузное масло,sci_name
+11.0,Corn oils,Кукурузное масло,sci_name
+11.0,CORN OIL,Кукурузное масло,sci_name
+11.0,CORN OILS,Кукурузное масло,sci_name
+12.0,red wine,Красное вино,sci_name
+12.0,red wines,Красное вино,sci_name
+12.0,Red wine,Красное вино,sci_name
+12.0,Red wines,Красное вино,sci_name
+12.0,RED WINE,Красное вино,sci_name
+12.0,RED WINES,Красное вино,sci_name
+13.0,wine,Вино,sci_name
+13.0,wines,Вино,sci_name
+13.0,Wine,Вино,sci_name
+13.0,Wines,Вино,sci_name
+13.0,WINE,Вино,sci_name
+13.0,WINES,Вино,sci_name
+14.0,fruit,Фрукты,sci_name
+14.0,fruits,Фрукты,sci_name
+14.0,Fruit,Фрукты,sci_name
+14.0,Fruits,Фрукты,sci_name
+14.0,FRUIT,Фрукты,sci_name
+14.0,FRUITS,Фрукты,sci_name
+15.0,fructose,Фруктоза,sci_name
+15.0,fructoses,Фруктоза,sci_name
+15.0,Fructose,Фруктоза,sci_name
+15.0,Fructoses,Фруктоза,sci_name
+15.0,FRUCTOSE,Фруктоза,sci_name
+15.0,FRUCTOSES,Фруктоза,sci_name
+16.0,citrus,Цитрусовые,sci_name
+16.0,citruses,Цитрусовые,sci_name
+16.0,Citrus,Цитрусовые,sci_name
+16.0,Citruses,Цитрусовые,sci_name
+16.0,CITRUS,Цитрусовые,sci_name
+16.0,CITRUSES,Цитрусовые,sci_name
+17.0,whole grain,Цельнозерновые продукты,sci_name
+17.0,whole grains,Цельнозерновые продукты,sci_name
+17.0,Whole grain,Цельнозерновые продукты,sci_name
+17.0,Whole grains,Цельнозерновые продукты,sci_name
+17.0,WHOLE GRAIN,Цельнозерновые продукты,sci_name
+17.0,WHOLE GRAINS,Цельнозерновые продукты,sci_name
+18.0,meat,Мясо,sci_name
+18.0,meats,Мясо,sci_name
+18.0,Meat,Мясо,sci_name
+18.0,Meats,Мясо,sci_name
+18.0,MEAT,Мясо,sci_name
+18.0,MEATS,Мясо,sci_name
+19.0,sucrose,Сахароза,sci_name
+19.0,sucroses,Сахароза,sci_name
+19.0,Sucrose,Сахароза,sci_name
+19.0,Sucroses,Сахароза,sci_name
+19.0,SUCROSE,Сахароза,sci_name
+19.0,SUCROSES,Сахароза,sci_name
+20.0,oat,Овёс,sci_name
+20.0,oats,Овёс,sci_name
+20.0,Oat,Овёс,sci_name
+20.0,Oats,Овёс,sci_name
+20.0,OAT,Овёс,sci_name
+20.0,OATS,Овёс,sci_name
+21.0,konjac,Коньяк,sci_name
+21.0,konjacs,Коньяк,sci_name
+21.0,Konjac,Коньяк,sci_name
+21.0,Konjacs,Коньяк,sci_name
+21.0,KONJAC,Коньяк,sci_name
+21.0,KONJACS,Коньяк,sci_name
+22.0,bread,Хлеб,sci_name
+22.0,breads,Хлеб,sci_name
+22.0,Bread,Хлеб,sci_name
+22.0,Breads,Хлеб,sci_name
+22.0,BREAD,Хлеб,sci_name
+22.0,BREADS,Хлеб,sci_name
+25.0,whey,Молочная сыворотка,sci_name
+25.0,wheys,Молочная сыворотка,sci_name
+25.0,Whey,Молочная сыворотка,sci_name
+25.0,Wheys,Молочная сыворотка,sci_name
+25.0,WHEY,Молочная сыворотка,sci_name
+25.0,WHEYS,Молочная сыворотка,sci_name
+26.0,sausage,Сосиски,sci_name
+26.0,sausages,Сосиски,sci_name
+26.0,Sausage,Сосиски,sci_name
+26.0,Sausages,Сосиски,sci_name
+26.0,SAUSAGE,Сосиски,sci_name
+26.0,SAUSAGES,Сосиски,sci_name
+27.0,apple,Яблоко,sci_name
+27.0,apples,Яблоко,sci_name
+27.0,Apple,Яблоко,sci_name
+27.0,Apples,Яблоко,sci_name
+27.0,APPLE,Яблоко,sci_name
+27.0,APPLES,Яблоко,sci_name
+28.0,cheese,Сыр,sci_name
+28.0,cheeses,Сыр,sci_name
+28.0,Cheese,Сыр,sci_name
+28.0,Cheeses,Сыр,sci_name
+28.0,CHEESE,Сыр,sci_name
+28.0,CHEESES,Сыр,sci_name
+29.0,mayonnaise,Майонез,sci_name
+29.0,mayonnaises,Майонез,sci_name
+29.0,Mayonnaise,Майонез,sci_name
+29.0,Mayonnaises,Майонез,sci_name
+29.0,MAYONNAISE,Майонез,sci_name
+29.0,MAYONNAISES,Майонез,sci_name
+31.0,dairy,Молочные продукты,sci_name
+31.0,dairies,Молочные продукты,sci_name
+31.0,Dairy,Молочные продукты,sci_name
+31.0,Dairies,Молочные продукты,sci_name
+31.0,DAIRY,Молочные продукты,sci_name
+31.0,DAIRIES,Молочные продукты,sci_name
+32.0,honey,Мёд,sci_name
+32.0,honeys,Мёд,sci_name
+32.0,Honey,Мёд,sci_name
+32.0,Honeys,Мёд,sci_name
+32.0,HONEY,Мёд,sci_name
+32.0,HONEYS,Мёд,sci_name
+33.0,yogurt,Йогурт,sci_name
+33.0,yogurts,Йогурт,sci_name
+33.0,Yogurt,Йогурт,sci_name
+33.0,Yogurts,Йогурт,sci_name
+33.0,YOGURT,Йогурт,sci_name
+33.0,YOGURTS,Йогурт,sci_name
+34.0,olive oil,Оливковое масло,sci_name
+34.0,olive oils,Оливковое масло,sci_name
+34.0,Olive oil,Оливковое масло,sci_name
+34.0,Olive oils,Оливковое масло,sci_name
+34.0,OLIVE OIL,Оливковое масло,sci_name
+34.0,OLIVE OILS,Оливковое масло,sci_name
+35.0,blueberry,Черника,sci_name
+35.0,blueberries,Черника,sci_name
+35.0,Blueberry,Черника,sci_name
+35.0,Blueberries,Черника,sci_name
+35.0,BLUEBERRY,Черника,sci_name
+35.0,BLUEBERRIES,Черника,sci_name
+36.0,maltose,Мальтоза,sci_name
+36.0,maltoses,Мальтоза,sci_name
+36.0,Maltose,Мальтоза,sci_name
+36.0,Maltoses,Мальтоза,sci_name
+36.0,MALTOSE,Мальтоза,sci_name
+36.0,MALTOSES,Мальтоза,sci_name
+37.0,berrie,Ягоды,sci_name
+37.0,berries,Ягоды,sci_name
+37.0,Berrie,Ягоды,sci_name
+37.0,Berries,Ягоды,sci_name
+37.0,BERRIE,Ягоды,sci_name
+37.0,BERRIES,Ягоды,sci_name
+38.0,vegetable,Овощи,sci_name
+38.0,vegetables,Овощи,sci_name
+38.0,Vegetable,Овощи,sci_name
+38.0,Vegetables,Овощи,sci_name
+38.0,VEGETABLE,Овощи,sci_name
+38.0,VEGETABLES,Овощи,sci_name
+39.0,vegetarian diet,Вегетарианская диета,sci_name
+39.0,vegetarian diets,Вегетарианская диета,sci_name
+39.0,Vegetarian diet,Вегетарианская диета,sci_name
+39.0,Vegetarian diets,Вегетарианская диета,sci_name
+39.0,VEGETARIAN DIET,Вегетарианская диета,sci_name
+39.0,VEGETARIAN DIETS,Вегетарианская диета,sci_name
+40.0,Vegan,Строгая вегетарианская диета,sci_name
+40.0,Vegans,Строгая вегетарианская диета,sci_name
+40.0,vegan,Строгая вегетарианская диета,sci_name
+40.0,vegans,Строгая вегетарианская диета,sci_name
+40.0,VEGAN,Строгая вегетарианская диета,sci_name
+40.0,VEGANS,Строгая вегетарианская диета,sci_name
+41.0,lactose,Лактоза,sci_name
+41.0,lactoses,Лактоза,sci_name
+41.0,Lactose,Лактоза,sci_name
+41.0,Lactoses,Лактоза,sci_name
+41.0,LACTOSE,Лактоза,sci_name
+41.0,LACTOSES,Лактоза,sci_name
+42.0,onion,Лук,sci_name
+42.0,onions,Лук,sci_name
+42.0,Onion,Лук,sci_name
+42.0,Onions,Лук,sci_name
+42.0,ONION,Лук,sci_name
+42.0,ONIONS,Лук,sci_name
+43.0,grapefruit,Грейпфрут,sci_name
+43.0,grapefruits,Грейпфрут,sci_name
+43.0,Grapefruit,Грейпфрут,sci_name
+43.0,Grapefruits,Грейпфрут,sci_name
+43.0,GRAPEFRUIT,Грейпфрут,sci_name
+43.0,GRAPEFRUITS,Грейпфрут,sci_name
+44.0,endive,Эндивий,sci_name
+44.0,endives,Эндивий,sci_name
+44.0,Endive,Эндивий,sci_name
+44.0,Endives,Эндивий,sci_name
+44.0,ENDIVE,Эндивий,sci_name
+44.0,ENDIVES,Эндивий,sci_name
+45.0,tomato,Помидоры,sci_name
+45.0,tomatoes,Помидоры,sci_name
+45.0,Tomato,Помидоры,sci_name
+45.0,Tomatoes,Помидоры,sci_name
+45.0,TOMATO,Помидоры,sci_name
+45.0,TOMATOES,Помидоры,sci_name
+46.0,carrot,Морковь,sci_name
+46.0,carrots,Морковь,sci_name
+46.0,Carrot,Морковь,sci_name
+46.0,Carrots,Морковь,sci_name
+46.0,CARROT,Морковь,sci_name
+46.0,CARROTS,Морковь,sci_name
+47.0,pepper,Красный перец,sci_name
+47.0,peppers,Красный перец,sci_name
+47.0,Pepper,Красный перец,sci_name
+47.0,Peppers,Красный перец,sci_name
+47.0,PEPPER,Красный перец,sci_name
+47.0,PEPPERS,Красный перец,sci_name
+48.0,rye flour,Ржаная мука,sci_name
+48.0,rye flours,Ржаная мука,sci_name
+48.0,Rye flour,Ржаная мука,sci_name
+48.0,Rye flours,Ржаная мука,sci_name
+48.0,RYE FLOUR,Ржаная мука,sci_name
+48.0,RYE FLOURS,Ржаная мука,sci_name
+49.0,barley,Ячмень,sci_name
+49.0,barleys,Ячмень,sci_name
+49.0,Barley,Ячмень,sci_name
+49.0,Barleys,Ячмень,sci_name
+49.0,BARLEY,Ячмень,sci_name
+49.0,BARLEYS,Ячмень,sci_name
+50.0,almond,Миндаль,sci_name
+50.0,almonds,Миндаль,sci_name
+50.0,Almond,Миндаль,sci_name
+50.0,Almonds,Миндаль,sci_name
+50.0,ALMOND,Миндаль,sci_name
+50.0,ALMONDS,Миндаль,sci_name
+51.0,banana,Бананы,sci_name
+51.0,bananas,Бананы,sci_name
+51.0,Banana,Бананы,sci_name
+51.0,Bananas,Бананы,sci_name
+51.0,BANANA,Бананы,sci_name
+51.0,BANANAS,Бананы,sci_name
+52.0,garlic,Чеснок,sci_name
+52.0,garlics,Чеснок,sci_name
+52.0,Garlic,Чеснок,sci_name
+52.0,Garlics,Чеснок,sci_name
+52.0,GARLIC,Чеснок,sci_name
+52.0,GARLICS,Чеснок,sci_name
+53.0,breast milk,Грудное молоко,sci_name
+53.0,breast milks,Грудное молоко,sci_name
+53.0,Breast milk,Грудное молоко,sci_name
+53.0,Breast milks,Грудное молоко,sci_name
+53.0,BREAST MILK,Грудное молоко,sci_name
+53.0,BREAST MILKS,Грудное молоко,sci_name
+54.0,wheat,Пшеница,sci_name
+54.0,wheats,Пшеница,sci_name
+54.0,Wheat,Пшеница,sci_name
+54.0,Wheats,Пшеница,sci_name
+54.0,WHEAT,Пшеница,sci_name
+54.0,WHEATS,Пшеница,sci_name
+55.0,bean,Фасоль,sci_name
+55.0,beans,Фасоль,sci_name
+55.0,Bean,Фасоль,sci_name
+55.0,Beans,Фасоль,sci_name
+55.0,BEAN,Фасоль,sci_name
+55.0,BEANS,Фасоль,sci_name
+56.0,pea,Бобовые,sci_name
+56.0,peas,Бобовые,sci_name
+56.0,Pea,Бобовые,sci_name
+56.0,Peas,Бобовые,sci_name
+56.0,PEA,Бобовые,sci_name
+56.0,PEAS,Бобовые,sci_name
+57.0,buttermilk,Пахта,sci_name
+57.0,buttermilks,Пахта,sci_name
+57.0,Buttermilk,Пахта,sci_name
+57.0,Buttermilks,Пахта,sci_name
+57.0,BUTTERMILK,Пахта,sci_name
+57.0,BUTTERMILKS,Пахта,sci_name
+58.0,fucose,Фукоза,sci_name
+58.0,fucoses,Фукоза,sci_name
+58.0,Fucose,Фукоза,sci_name
+58.0,Fucoses,Фукоза,sci_name
+58.0,FUCOSE,Фукоза,sci_name
+58.0,FUCOSES,Фукоза,sci_name
+59.0,Black tea,Черный чай,sci_name
+59.0,Black teas,Черный чай,sci_name
+59.0,black tea,Черный чай,sci_name
+59.0,black teas,Черный чай,sci_name
+59.0,BLACK TEA,Черный чай,sci_name
+59.0,BLACK TEAS,Черный чай,sci_name
+60.0,animal fat,Животные жиры,sci_name
+60.0,animal fats,Животные жиры,sci_name
+60.0,Animal fat,Животные жиры,sci_name
+60.0,Animal fats,Животные жиры,sci_name
+60.0,ANIMAL FAT,Животные жиры,sci_name
+60.0,ANIMAL FATS,Животные жиры,sci_name
+63.0,cocoa,Какао,sci_name
+63.0,cocoas,Какао,sci_name
+63.0,Cocoa,Какао,sci_name
+63.0,Cocoas,Какао,sci_name
+63.0,COCOA,Какао,sci_name
+63.0,COCOAS,Какао,sci_name
+64.0,fermented milk products,Кисломолочный продукты,sci_name
+64.0,fermented milk productss,Кисломолочный продукты,sci_name
+64.0,Fermented milk products,Кисломолочный продукты,sci_name
+64.0,Fermented milk productss,Кисломолочный продукты,sci_name
+64.0,FERMENTED MILK PRODUCTS,Кисломолочный продукты,sci_name
+64.0,FERMENTED MILK PRODUCTSS,Кисломолочный продукты,sci_name
+65.0,Green tea,Зеленый чай,sci_name
+65.0,Green teas,Зеленый чай,sci_name
+65.0,green tea,Зеленый чай,sci_name
+65.0,green teas,Зеленый чай,sci_name
+65.0,GREEN TEA,Зеленый чай,sci_name
+65.0,GREEN TEAS,Зеленый чай,sci_name
+66.0,juice,Соки,sci_name
+66.0,juices,Соки,sci_name
+66.0,Juice,Соки,sci_name
+66.0,Juices,Соки,sci_name
+66.0,JUICE,Соки,sci_name
+66.0,JUICES,Соки,sci_name
+67.0,pomegranate,Гранат,sci_name
+67.0,pomegranates,Гранат,sci_name
+67.0,Pomegranate,Гранат,sci_name
+67.0,Pomegranates,Гранат,sci_name
+67.0,POMEGRANATE,Гранат,sci_name
+67.0,POMEGRANATES,Гранат,sci_name
+68.0,tapioca,Тапиока,sci_name
+68.0,tapiocas,Тапиока,sci_name
+68.0,Tapioca,Тапиока,sci_name
+68.0,Tapiocas,Тапиока,sci_name
+68.0,TAPIOCA,Тапиока,sci_name
+68.0,TAPIOCAS,Тапиока,sci_name
+70.0,wheat germ,Пророщенная пшеница,sci_name
+70.0,wheat germs,Пророщенная пшеница,sci_name
+70.0,Wheat germ,Пророщенная пшеница,sci_name
+70.0,Wheat germs,Пророщенная пшеница,sci_name
+70.0,WHEAT GERM,Пророщенная пшеница,sci_name
+70.0,WHEAT GERMS,Пророщенная пшеница,sci_name
+71.0,wheat bran,Зерновые отруби,sci_name
+71.0,wheat brans,Зерновые отруби,sci_name
+71.0,Wheat bran,Зерновые отруби,sci_name
+71.0,Wheat brans,Зерновые отруби,sci_name
+71.0,WHEAT BRAN,Зерновые отруби,sci_name
+71.0,WHEAT BRANS,Зерновые отруби,sci_name
+72.0,flax oil,Льняное масло,sci_name
+72.0,flax oils,Льняное масло,sci_name
+72.0,Flax oil,Льняное масло,sci_name
+72.0,Flax oils,Льняное масло,sci_name
+72.0,FLAX OIL,Льняное масло,sci_name
+72.0,FLAX OILS,Льняное масло,sci_name
+74.0,processed olives,Оливки,sci_name
+74.0,processed olivess,Оливки,sci_name
+74.0,Processed olives,Оливки,sci_name
+74.0,Processed olivess,Оливки,sci_name
+74.0,PROCESSED OLIVES,Оливки,sci_name
+74.0,PROCESSED OLIVESS,Оливки,sci_name
+75.0,western diet,Западный тип диеты,sci_name
+75.0,western diets,Западный тип диеты,sci_name
+75.0,Western diet,Западный тип диеты,sci_name
+75.0,Western diets,Западный тип диеты,sci_name
+75.0,WESTERN DIET,Западный тип диеты,sci_name
+75.0,WESTERN DIETS,Западный тип диеты,sci_name
+76.0,cereals,Зерновые,sci_name
+76.0,cereal,Зерновые,sci_name
+76.0,Cereals,Зерновые,sci_name
+76.0,Cereal,Зерновые,sci_name
+76.0,CEREALS,Зерновые,sci_name
+76.0,CEREAL,Зерновые,sci_name
+77.0,germinated barley,Пророщенный ячмень,sci_name
+77.0,germinated barleys,Пророщенный ячмень,sci_name
+77.0,Germinated barley,Пророщенный ячмень,sci_name
+77.0,Germinated barleys,Пророщенный ячмень,sci_name
+77.0,GERMINATED BARLEY,Пророщенный ячмень,sci_name
+77.0,GERMINATED BARLEYS,Пророщенный ячмень,sci_name
+78.0,soybean,Соевые продукты,sci_name
+78.0,soybeans,Соевые продукты,sci_name
+78.0,Soybean,Соевые продукты,sci_name
+78.0,Soybeans,Соевые продукты,sci_name
+78.0,SOYBEAN,Соевые продукты,sci_name
+78.0,SOYBEANS,Соевые продукты,sci_name
+79.0,tea,Чай,sci_name
+79.0,teas,Чай,sci_name
+79.0,Tea,Чай,sci_name
+79.0,Teas,Чай,sci_name
+79.0,TEA,Чай,sci_name
+79.0,TEAS,Чай,sci_name
+80.0,cereal grain,Цельнозерновые,sci_name
+80.0,cereal grains,Цельнозерновые,sci_name
+80.0,Cereal grain,Цельнозерновые,sci_name
+80.0,Cereal grains,Цельнозерновые,sci_name
+80.0,CEREAL GRAIN,Цельнозерновые,sci_name
+80.0,CEREAL GRAINS,Цельнозерновые,sci_name
+81.0,rice bran,Рисовые отруби,sci_name
+81.0,rice brans,Рисовые отруби,sci_name
+81.0,Rice bran,Рисовые отруби,sci_name
+81.0,Rice brans,Рисовые отруби,sci_name
+81.0,RICE BRAN,Рисовые отруби,sci_name
+81.0,RICE BRANS,Рисовые отруби,sci_name
+82.0,fermented food,Ферментированные продукты,sci_name
+82.0,fermented foods,Ферментированные продукты,sci_name
+82.0,Fermented food,Ферментированные продукты,sci_name
+82.0,Fermented foods,Ферментированные продукты,sci_name
+82.0,FERMENTED FOOD,Ферментированные продукты,sci_name
+82.0,FERMENTED FOODS,Ферментированные продукты,sci_name
+83.0,fish,Мясо рыбы,sci_name
+83.0,Fish,Мясо рыбы,sci_name
+83.0,FISH,Мясо рыбы,sci_name
+86.0,spice,Пряности,sci_name
+86.0,spices,Пряности,sci_name
+86.0,Spice,Пряности,sci_name
+86.0,Spices,Пряности,sci_name
+86.0,SPICE,Пряности,sci_name
+86.0,SPICES,Пряности,sci_name
+88.0,oil,Масло,sci_name
+88.0,oils,Масло,sci_name
+88.0,Oil,Масло,sci_name
+88.0,Oils,Масло,sci_name
+88.0,OIL,Масло,sci_name
+88.0,OILS,Масло,sci_name
+89.0,egg,Яйца,sci_name
+89.0,eggs,Яйца,sci_name
+89.0,Egg,Яйца,sci_name
+89.0,Eggs,Яйца,sci_name
+89.0,EGG,Яйца,sci_name
+89.0,EGGS,Яйца,sci_name
+90.0,corn,Кукуруза,sci_name
+90.0,corns,Кукуруза,sci_name
+90.0,Corn,Кукуруза,sci_name
+90.0,Corns,Кукуруза,sci_name
+90.0,CORN,Кукуруза,sci_name
+90.0,CORNS,Кукуруза,sci_name
+91.0,fruit,Фрукты,sci_name
+91.0,fruits,Фрукты,sci_name
+91.0,Fruit,Фрукты,sci_name
+91.0,Fruits,Фрукты,sci_name
+91.0,FRUIT,Фрукты,sci_name
+91.0,FRUITS,Фрукты,sci_name
+93.0,omni-vore diet,Гастрономическая диета,sci_name
+93.0,omni-vore diets,Гастрономическая диета,sci_name
+93.0,Omni-vore diet,Гастрономическая диета,sci_name
+93.0,Omni-vore diets,Гастрономическая диета,sci_name
+93.0,OMNI-VORE DIET,Гастрономическая диета,sci_name
+93.0,OMNI-VORE DIETS,Гастрономическая диета,sci_name
+94.0,animal protein,Животные белки,sci_name
+94.0,animal proteins,Животные белки,sci_name
+94.0,Animal protein,Животные белки,sci_name
+94.0,Animal proteins,Животные белки,sci_name
+94.0,ANIMAL PROTEIN,Животные белки,sci_name
+94.0,ANIMAL PROTEINS,Животные белки,sci_name
+95.0,cholesterol diet,Холестериновая диета,sci_name
+95.0,cholesterol diets,Холестериновая диета,sci_name
+95.0,Cholesterol diet,Холестериновая диета,sci_name
+95.0,Cholesterol diets,Холестериновая диета,sci_name
+95.0,CHOLESTEROL DIET,Холестериновая диета,sci_name
+95.0,CHOLESTEROL DIETS,Холестериновая диета,sci_name
+96.0,animal glycans and proteins,Углеводы и белки животного происхождения,sci_name
+96.0,animal glycans and proteinss,Углеводы и белки животного происхождения,sci_name
+96.0,Animal glycans and proteins,Углеводы и белки животного происхождения,sci_name
+96.0,Animal glycans and proteinss,Углеводы и белки животного происхождения,sci_name
+96.0,ANIMAL GLYCANS AND PROTEINS,Углеводы и белки животного происхождения,sci_name
+96.0,ANIMAL GLYCANS AND PROTEINSS,Углеводы и белки животного происхождения,sci_name
+97.0,durum wheat,Твердые сорта пшеницы,sci_name
+97.0,durum wheats,Твердые сорта пшеницы,sci_name
+97.0,Durum wheat,Твердые сорта пшеницы,sci_name
+97.0,Durum wheats,Твердые сорта пшеницы,sci_name
+97.0,DURUM WHEAT,Твердые сорта пшеницы,sci_name
+97.0,DURUM WHEATS,Твердые сорта пшеницы,sci_name
+98.0,coffee,Кофе,sci_name
+98.0,coffees,Кофе,sci_name
+98.0,Coffee,Кофе,sci_name
+98.0,Coffees,Кофе,sci_name
+98.0,COFFEE,Кофе,sci_name
+98.0,COFFEES,Кофе,sci_name

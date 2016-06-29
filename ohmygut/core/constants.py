@@ -29,9 +29,9 @@ setup_logging()
 logger = logging.getLogger(base_logger_name)
 pattern_logger = logging.getLogger("pattern_logger")
 large_pattern_logger = logging.getLogger("large_pattern_logger")
-google_search_nutrient_logger = logging.getLogger("google_search_nutrient_logger")
+google_search_logger = logging.getLogger("google_search_logger")
 
-CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym']
+CLASS_EXCLUSIONS = ['type material', 'genbank acronym', 'acronym', 'authority']
 RANK_EXCLUSIONS = ['superkingdom', 'kingdom']
 
 CHUNK_SIZE = 10000
@@ -46,4 +46,4 @@ RESULT_DIR_NAME = "result"
 if not os.path.exists(RESULT_DIR_NAME):
         os.mkdir(RESULT_DIR_NAME)
 
-SENTENCE_LENGTH_THRESHOLD = 400
+SENTENCE_LENGTH_THRESHOLD = 10000
